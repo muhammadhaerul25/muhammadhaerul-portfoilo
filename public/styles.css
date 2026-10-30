@@ -2583,46 +2583,48 @@ img {
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 22px;
+  align-items: stretch;
 }
 
 .cert-card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
-  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+  height: 100%;
+  box-sizing: border-box;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease);
   position: relative;
   overflow: hidden;
 }
 
 [data-theme="dark"] .cert-card {
-  background: #17181c;
+  background: #16181d;
   border-color: rgba(255, 255, 255, 0.08);
 }
 
 .cert-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-strong);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+  border-color: rgba(37, 99, 235, 0.35);
 }
 
 .cert-card-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .cert-issuer-badge {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 .cert-issuer-icon {
@@ -2644,6 +2646,7 @@ img {
 .cert-issuer-meta {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .cert-issuer-name {
@@ -2651,6 +2654,10 @@ img {
   font-weight: 700;
   color: var(--text-tertiary);
   letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
 }
 
 .cert-date {
@@ -2661,17 +2668,20 @@ img {
   display: inline-flex;
   align-items: center;
   line-height: 1.2;
+  width: fit-content;
+  margin-top: 2px;
 }
 
 .cert-category-pill {
   font-size: 11px;
   font-weight: 700;
-  padding: 3px 9px;
+  padding: 4px 10px;
   border-radius: 20px;
   background: var(--surface-2);
   color: var(--text-secondary);
   border: 1px solid var(--border);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 [data-theme="dark"] .cert-category-pill {
@@ -2682,32 +2692,159 @@ img {
 .cert-card-mid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  flex: 1 1 auto;
 }
 
 .cert-title {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 700;
   color: var(--text);
-  line-height: 1.35;
+  line-height: 1.38;
   letter-spacing: -0.01em;
+  margin: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Digital Credential Seal Badge (When no image is uploaded) */
+.cert-card-badge-preview {
+  margin: 12px 0 10px 0;
+  border-radius: 12px;
+  border: 1.5px dashed rgba(37, 99, 235, 0.28);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.04) 0%, rgba(99, 102, 241, 0.06) 50%, rgba(16, 185, 129, 0.04) 100%);
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 16px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: all .25s ease;
+}
+
+.cert-card-badge-preview.has-link {
+  cursor: pointer;
+}
+
+.cert-card-badge-preview:hover {
+  border-color: var(--blue);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(99, 102, 241, 0.09) 50%, rgba(16, 185, 129, 0.06) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.1);
+}
+
+[data-theme="dark"] .cert-card-badge-preview {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.09) 0%, rgba(99, 102, 241, 0.08) 50%, rgba(16, 185, 129, 0.06) 100%);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+[data-theme="dark"] .cert-card-badge-preview:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.14) 50%, rgba(16, 185, 129, 0.1) 100%);
+}
+
+.cert-badge-graphic {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cert-badge-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--accent, #2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+.cert-badge-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cert-badge-status {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #059669;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cert-badge-issuer-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.cert-badge-meta-label {
+  font-size: 10.5px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.cert-badge-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(37, 99, 235, 0.2);
+  font-size: 11px;
+}
+
+.cert-badge-id {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.cert-badge-action-link {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .cert-tags-row {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 .cert-tag {
   font-size: 11px;
-  font-weight: 500;
-  padding: 3px 8.5px;
-  border-radius: 6px;
-  background: var(--bg);
+  font-weight: 600;
+  padding: 3.5px 9px;
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   color: var(--text-secondary);
+  transition: all .15s ease;
+}
+
+.cert-tag:hover {
+  border-color: rgba(37, 99, 235, 0.3);
+  color: var(--text);
 }
 
 .cert-card-bottom {
@@ -2716,6 +2853,7 @@ img {
   justify-content: space-between;
   gap: 10px;
   padding-top: 14px;
+  margin-top: 14px;
   border-top: 1px solid var(--border);
   font-size: 12px;
 }

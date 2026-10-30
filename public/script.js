@@ -843,8 +843,16 @@
 
   function getInitials(name) {
     if (!name) return 'MH';
-    const p = name.trim().split(/\s+/);
-    return p.length >= 2 ? (p[0][0] + p[1][0]).toUpperCase() : p[0].slice(0, 2).toUpperCase();
+    const clean = name.replace(/[-–—/|&()]/g, ' ').trim();
+    const words = clean.split(/\s+/).filter(Boolean);
+    if (!words.length) return 'MH';
+    if (words[0].length >= 2 && words[0] === words[0].toUpperCase()) {
+      return words[0].slice(0, 2);
+    }
+    if (words.length >= 2) {
+      return (words[0][0] + words[1][0]).toUpperCase();
+    }
+    return words[0].slice(0, 2).toUpperCase();
   }
 
   function escapeHtml(str) {
@@ -2334,6 +2342,50 @@
     certGrid.innerHTML = visibleCerts.map(cert => {
       const skills = Array.isArray(cert.skills) ? cert.skills : [];
       const accent = cert.accent_color || 'var(--blue)';
+      const isId = isIndonesian();
+      const hasPreview = Boolean(cert.image_url);
+
+      const mediaHtml = hasPreview ? `
+        <div class="cert-card-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate">
+          <img src="${escapeHtml(cert.image_url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'" decoding="async">
+          <span class="cert-zoom-hint">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            ${isId ? 'Perbesar' : 'View Full'}
+          </span>
+        </div>
+      ` : `
+        <div class="cert-card-badge-preview ${cert.credential_url ? 'has-link' : ''}" ${cert.credential_url ? `onclick="window.open('${escapeHtml(cert.credential_url)}', '_blank')"` : ''} title="${cert.credential_url ? 'Click to verify credential online' : 'Official Verified Credential'}">
+          <div class="cert-badge-graphic">
+            <div class="cert-badge-icon-wrap" style="--accent:${escapeHtml(accent)}">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              </svg>
+            </div>
+            <div class="cert-badge-body">
+              <span class="cert-badge-status">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                ${isId ? 'Kredensial Resmi' : 'Official Credential'}
+              </span>
+              <strong class="cert-badge-issuer-title">${escapeHtml(cert.issuer)}</strong>
+              <span class="cert-badge-meta-label">${isId ? 'Kompetensi Terdaftar' : 'Certified Competency'}</span>
+            </div>
+          </div>
+          <div class="cert-badge-foot">
+            <span class="cert-badge-id">${cert.credential_id ? '#' + escapeHtml(cert.credential_id) : (isId ? 'ID Terdaftar' : 'Verified ID')}</span>
+            ${cert.credential_url ? `
+              <span class="cert-badge-action-link">
+                <span>${isId ? 'Verifikasi' : 'Verify'}</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </span>
+            ` : `
+              <span class="cert-badge-action-link" style="opacity:0.8;">
+                <span>${isId ? 'Tercatat' : 'On Record'}</span>
+              </span>
+            `}
+          </div>
+        </div>
+      `;
 
       return `
         <div class="cert-card reveal in-view">
@@ -2349,15 +2401,7 @@
           </div>
           <div class="cert-card-mid">
             <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
-            ${cert.image_url ? `
-              <div class="cert-card-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate">
-                <img src="${escapeHtml(cert.image_url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'" decoding="async">
-                <span class="cert-zoom-hint">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                  ${isIndonesian() ? 'Perbesar' : 'View Full'}
-                </span>
-              </div>
-            ` : ''}
+            ${mediaHtml}
             ${skills.length ? `
               <div class="cert-tags-row">
                 ${skills.map(s => `<span class="cert-tag">${escapeHtml(s)}</span>`).join('')}
@@ -2367,17 +2411,17 @@
           <div class="cert-card-bottom">
             <span class="cert-status-tag">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              ${isIndonesian() ? 'Kredensial Terverifikasi' : 'Credential Verified'}
+              ${isId ? 'Kredensial Terverifikasi' : 'Credential Verified'}
             </span>
             ${cert.credential_url ? `
               <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none; color:inherit;">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                ${isIndonesian() ? 'Lihat Kredensial' : 'View Credential'}
+                ${isId ? 'Lihat Kredensial' : 'View Credential'}
               </a>
             ` : `
               <span class="cert-doc-hint">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                ${isIndonesian() ? 'Sertifikat Terdaftar' : 'Certificate on Record'}
+                ${isId ? 'Sertifikat Terdaftar' : 'Certificate on Record'}
               </span>
             `}
           </div>
