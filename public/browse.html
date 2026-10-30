@@ -1025,7 +1025,9 @@
           filtersRow.innerHTML = `
             <button class="browse-filter-pill active" onclick="setCategoryFilter('all', this)">All Projects (${raw.length})</button>
             <button class="browse-filter-pill" onclick="setCategoryFilter('cv', this)">Computer Vision</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('llm', this)">LLMs & Agents</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('nlp', this)">NLP</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('llm', this)">LLMs & AI Agents</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('data', this)">Data & Analytics</button>
             <button class="browse-filter-pill" onclick="setCategoryFilter('web', this)">Full-Stack & Web</button>
           `;
           filtersRow.dataset.rendered = 'true';
@@ -1036,16 +1038,36 @@
           const matchQ = !q || (p.name || '').toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q) || (p.techStack || []).join(' ').toLowerCase().includes(q);
           if (!matchQ) return false;
           if (activeCategoryFilter === 'cv') {
-            const str = (p.name + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
-            return str.includes('vision') || str.includes('yolo') || str.includes('ocr') || str.includes('resnet');
+            const full = (p.name + ' ' + (p.description||'') + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return full.includes('yolo') || full.includes('opencv') || full.includes('object detection') ||
+                   full.includes('ocr') || full.includes('alpr') || full.includes('computer vision') ||
+                   full.includes('lontara') || full.includes('ppe') || full.includes('product recognition') ||
+                   (full.includes('vision') && !full.includes('data visualization'));
+          }
+          if (activeCategoryFilter === 'nlp') {
+            const full = (p.name + ' ' + (p.description||'') + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return full.includes('nlp') || full.includes('natural language') || full.includes('semantic') ||
+                   full.includes('transcription') || full.includes('whisper') || full.includes('speech recognition') ||
+                   full.includes('sentiment') || full.includes('rag') || full.includes('chatbot') ||
+                   full.includes('english learning') || full.includes('search engine');
           }
           if (activeCategoryFilter === 'llm') {
-            const str = (p.name + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
-            return str.includes('llm') || str.includes('agent') || str.includes('langchain') || str.includes('rag') || str.includes('gemini');
+            const full = (p.name + ' ' + (p.description||'') + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return full.includes('llm') || full.includes('rag') || full.includes('agent') ||
+                   full.includes('gemini') || full.includes('flowise') || full.includes('openai') ||
+                   full.includes('huggingface') || full.includes('chatbot') || full.includes('ai update hub');
+          }
+          if (activeCategoryFilter === 'data') {
+            const full = (p.name + ' ' + (p.description||'') + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return full.includes('tableau') || full.includes('analytics') || full.includes('data visualization') ||
+                   full.includes('data science') || full.includes('dashboard') || full.includes('business intelligence');
           }
           if (activeCategoryFilter === 'web') {
-            const str = (p.name + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
-            return str.includes('react') || str.includes('full-stack') || str.includes('fastapi') || str.includes('web') || str.includes('node');
+            const full = (p.name + ' ' + (p.description||'') + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return full.includes('full-stack') || full.includes('react') || full.includes('fastapi') ||
+                   full.includes('typescript') || full.includes('javascript') || full.includes('flask') ||
+                   full.includes('html') || full.includes('android') || full.includes('frontend') ||
+                   full.includes('backend') || full.includes('mobile');
           }
           return true;
         });
