@@ -1464,7 +1464,8 @@
   function isRecommendationRecord(f) {
     if (!f) return false;
     const src = (f.source || '').toLowerCase();
-    return src.includes('recommendation') || src.includes('linkedin');
+    const email = (f.email || '').toLowerCase();
+    return src.includes('recommendation') || src.includes('linkedin') || email.includes('screenesia') || f.id === 32;
   }
 
   function getWorkshopFeedbacks() {
@@ -1510,7 +1511,9 @@
     recGrid.innerHTML = recommendations.map(f => {
       const avatarBg = getAvatarColor(f.nama_lengkap);
       const initials = getInitials(f.nama_lengkap);
-      const cleanName = formatName(f.nama_lengkap);
+      const displayName = f.nama_lengkap ? f.nama_lengkap.trim() : 'Engineering Colleague';
+      let companyText = (f.source || '').replace(/^LinkedIn Recommendation\s*[·•-]?\s*/i, '').trim();
+      if (!companyText) companyText = 'Infomedia Nusantara / SCREENESIA';
       const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jul 2026';
 
       const pesan = f.pesan_kesan ? f.pesan_kesan.trim() : '';
@@ -1541,16 +1544,20 @@
           </svg>
 
           <div>
-            <div class="t-card-head">
+            <div class="t-card-head rec-card-head">
               <div class="t-user-info">
-                <div class="t-avatar" style="background:${avatarBg};">${escapeHtml(initials)}</div>
-                <div class="t-user-names">
-                  <div class="t-name">${escapeHtml(cleanName)}</div>
-                  <div class="t-source">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="color:#0A66C2; flex-shrink:0;">
+                <div class="t-avatar-wrap">
+                  <div class="t-avatar" style="background:${avatarBg};">${escapeHtml(initials)}</div>
+                  <span class="t-avatar-network-badge" title="Verified LinkedIn Recommendation">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
                     </svg>
-                    <span>${escapeHtml(f.source || 'LinkedIn Recommendation')}</span>
+                  </span>
+                </div>
+                <div class="t-user-names">
+                  <div class="t-name rec-name">${escapeHtml(displayName)}</div>
+                  <div class="t-source rec-company" title="${escapeHtml(companyText)}">
+                    <span>${escapeHtml(companyText)}</span>
                   </div>
                 </div>
               </div>
