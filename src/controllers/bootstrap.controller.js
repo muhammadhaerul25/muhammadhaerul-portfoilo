@@ -98,21 +98,30 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
         }
     } catch(e) {}
 
+    const hidden = settings.hiddenItems || {};
+    const filterVisible = (items, key) => {
+        if (!Array.isArray(items)) return [];
+        const hiddenList = hidden[key] || [];
+        if (!hiddenList.length) return items;
+        const hiddenSet = new Set(hiddenList.map(String));
+        return items.filter(it => !hiddenSet.has(String(it.id)));
+    };
+
     const payload = {
         success: true,
         timestamp: new Date().toISOString(),
         data: {
-            projects: sortedProjects,
-            talks,
+            projects: filterVisible(sortedProjects, 'projects'),
+            talks: filterVisible(talks, 'talks'),
             feedbacks,
-            experiences,
-            educations,
-            skills,
-            certifications,
-            awards,
-            gallery,
-            publications,
-            blogs,
+            experiences: filterVisible(experiences, 'experiences'),
+            educations: filterVisible(educations, 'educations'),
+            skills: filterVisible(skills, 'skills'),
+            certifications: filterVisible(certifications, 'certifications'),
+            awards: filterVisible(awards, 'awards'),
+            gallery: filterVisible(gallery, 'gallery'),
+            publications: filterVisible(publications, 'publications'),
+            blogs: filterVisible(blogs, 'blogs'),
             settings
         }
     };

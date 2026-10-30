@@ -10,6 +10,9 @@ router.get('/', settingsController.getSettings);
 // Protected endpoint to update site settings (Admin only)
 router.put('/', requireAdminAuth, settingsController.updateSettings);
 
+// Protected endpoint to toggle individual item visibility on portfolio
+router.post('/toggle-item-visibility', requireAdminAuth, settingsController.toggleItemVisibility);
+
 // Protected upload endpoint for cropped avatar and favicon
 router.post('/upload', requireAdminAuth, uploadTalkMedia.single('file'), async (req, res) => {
     try {

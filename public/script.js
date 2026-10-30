@@ -1161,6 +1161,21 @@
         slideUrl = t.slides[0].url || (t.slides[0].label && t.slides[0].label.startsWith('http') ? t.slides[0].label : '');
       }
 
+      let certUrl = '';
+      if (t.gallery && Array.isArray(t.gallery) && t.gallery.length && t.gallery[0]) {
+        certUrl = t.gallery[0];
+      } else if (t.slides && Array.isArray(t.slides)) {
+        const cSlide = t.slides.find(s => s.type === 'certificate' || (s.label && s.label.toLowerCase().includes('cert')));
+        if (cSlide) certUrl = cSlide.url;
+      }
+
+      const certBtn = certUrl ? `
+        <button type="button" class="p-btn-action" onclick="window.openLightbox('${escapeHtml(certUrl)}', '${escapeHtml(t.event)} — Certificate Proof')" style="font-size:12px; gap:4px; display:inline-flex; align-items:center;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Certificate
+        </button>
+      ` : '';
+
       const slidesBtn = slideUrl ? `
         <a href="${escapeHtml(slideUrl)}" target="_blank" rel="noopener" class="p-btn-action primary" style="font-size:12px;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -1195,9 +1210,9 @@
                   ${escapeHtml(t.place)}
                 </p>
               ` : ''}
-              <div class="talk-topics-row">${topicsHtml}</div>
             </div>
             <div class="talk-card-actions">
+              ${certBtn}
               ${slidesBtn}
               <button type="button" class="p-btn-action" onclick="window.openTalkModal('${t.id}')">
                 Details
@@ -2024,22 +2039,49 @@
     if (certSection) certSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Render Awards Grid Dynamically
-  function renderAwards(awards = liveAwards) {
-    const awardsGrid = document.getElementById('awards-grid');
-    if (!awardsGrid || !awards || !awards.length) return;
+  // Render Awards Grid Dynamically with 3x3 (9 items) Pagination
+  const AWARDS_PER_PAGE = 9;
+  let currentAwardPage = 1;
 
-    awardsGrid.innerHTML = awards.map(aw => {
+  function renderAwards(awardsOrPage = liveAwards, page = currentAwardPage) {
+    if (typeof awardsOrPage === 'number') {
+      page = awardsOrPage;
+    } else if (Array.isArray(awardsOrPage) && awardsOrPage.length) {
+      liveAwards = awardsOrPage;
+    }
+
+    const awardsGrid = document.getElementById('awards-grid');
+    const items = (Array.isArray(liveAwards) && liveAwards.length) ? liveAwards : [];
+    if (!awardsGrid || !items.length) return;
+
+    const paginationWrap = document.getElementById('awardsPaginationWrap');
+    const paginationInfo = document.getElementById('awardsPaginationInfo');
+    const paginationControls = document.getElementById('awardsPaginationControls');
+
+    const totalAwards = items.length;
+    const totalPages = Math.ceil(totalAwards / AWARDS_PER_PAGE) || 1;
+
+    let targetPage = typeof page === 'number' && !isNaN(page) ? page : currentAwardPage;
+    if (targetPage > totalPages) targetPage = totalPages;
+    if (targetPage < 1) targetPage = 1;
+    currentAwardPage = targetPage;
+
+    const startIndex = (currentAwardPage - 1) * AWARDS_PER_PAGE;
+    const endIndex = Math.min(startIndex + AWARDS_PER_PAGE, totalAwards);
+    const displayedAwards = items.slice(startIndex, endIndex);
+
+    awardsGrid.innerHTML = displayedAwards.map(aw => {
       const color = aw.badge_color || 'blue';
-      const chips = Array.isArray(aw.chips) ? aw.chips : [];
       const hasImage = Boolean(aw.image_url);
 
       return `
         <article class="award-card accent-${escapeHtml(color)} reveal in-view">
           <div class="award-insignia-banner ${hasImage ? 'has-cert-img' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:zoom-in;" title="Click to view full certificate proof"` : ''}>
-            <span class="award-badge-pill ${escapeHtml(color)}">
-              ${escapeHtml(aw.badge_text || '🏆 Honor & Award')}
-            </span>
+            ${!hasImage ? `
+              <span class="award-badge-pill ${escapeHtml(color)}">
+                ${escapeHtml(aw.badge_text || '🏆 Honor & Award')}
+              </span>
+            ` : ''}
             ${hasImage ? `
               <img src="${escapeHtml(aw.image_url)}" alt="${escapeHtml(aw.title)}" class="award-cert-img" loading="lazy" />
               <div class="award-cert-overlay">
@@ -2067,15 +2109,16 @@
 
           <div class="award-card-body">
             <div>
-              <div class="award-meta-row">
-                <span class="award-issuer">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                  ${escapeHtml(aw.issuer)}
-                </span>
-                ${aw.metric_tag ? `<span class="award-metric-tag ${escapeHtml(color)}">${escapeHtml(aw.metric_tag)}</span>` : ''}
+              ${aw.metric_tag ? `
+                <div class="award-badge-top-wrap" style="margin-bottom: 8px;">
+                  <span class="award-metric-tag ${escapeHtml(color)}">${escapeHtml(aw.metric_tag)}</span>
+                </div>
+              ` : ''}
+              <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">${escapeHtml(aw.title)}</h3>
+              <div class="award-issuer-row" style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px; font-size: 0.83rem; color: var(--ink-muted); font-weight: 500;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0; opacity:0.8;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <span>${escapeHtml(aw.issuer)}</span>
               </div>
-              <h3 class="award-title">${escapeHtml(aw.title)}</h3>
-              ${aw.description ? `<p class="award-desc">${escapeHtml(aw.description)}</p>` : ''}
             </div>
 
             <div class="award-doc-slot ${hasImage ? 'has-action' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:pointer;" title="Click to view full certificate proof"` : ''}>
@@ -2097,7 +2140,55 @@
         </article>
       `;
     }).join('');
+
+    // Update Awards Pagination UI
+    if (paginationWrap && paginationInfo && paginationControls) {
+      if (totalAwards <= AWARDS_PER_PAGE) {
+        paginationWrap.style.display = totalAwards > 0 ? 'flex' : 'none';
+        paginationInfo.innerHTML = `Showing all <strong>${totalAwards}</strong> honors &amp; awards`;
+        paginationControls.innerHTML = '';
+      } else {
+        paginationWrap.style.display = 'flex';
+        paginationInfo.innerHTML = `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalAwards}</strong> honors &amp; awards`;
+
+        let controlsHtml = '';
+        const prevDisabled = currentAwardPage === 1 ? 'disabled' : '';
+        controlsHtml += `
+          <button type="button" class="p-page-btn" onclick="window.changeAwardPage(${currentAwardPage - 1})" ${prevDisabled} aria-label="Previous Page">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+          const activeClass = i === currentAwardPage ? 'active' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeAwardPage(${i})">
+              ${i}
+            </button>
+          `;
+        }
+
+        const nextDisabled = currentAwardPage === totalPages ? 'disabled' : '';
+        controlsHtml += `
+          <button type="button" class="p-page-btn" onclick="window.changeAwardPage(${currentAwardPage + 1})" ${nextDisabled} aria-label="Next Page">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        `;
+
+        paginationControls.innerHTML = controlsHtml;
+      }
+    }
   }
+
+  window.changeAwardPage = function(page) {
+    const totalAwards = (liveAwards || []).length;
+    const totalPages = Math.ceil(totalAwards / AWARDS_PER_PAGE) || 1;
+    if (page < 1 || page > totalPages) return;
+    currentAwardPage = page;
+    renderAwards(liveAwards, page);
+    const aSection = document.getElementById('awards');
+    if (aSection) aSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   // Update Hero Stats Banner with live database data
   function updateHeroStats(triggerAnimation = false) {
@@ -2313,6 +2404,14 @@
       slideUrl = t.slides[0].url || (t.slides[0].label && t.slides[0].label.startsWith('http') ? t.slides[0].label : '');
     }
 
+    let certUrl = '';
+    if (t.gallery && Array.isArray(t.gallery) && t.gallery.length && t.gallery[0]) {
+      certUrl = t.gallery[0];
+    } else if (t.slides && Array.isArray(t.slides)) {
+      const cSlide = t.slides.find(s => s.type === 'certificate' || (s.label && s.label.toLowerCase().includes('cert')));
+      if (cSlide) certUrl = cSlide.url;
+    }
+
     bodyEl.innerHTML = `
       <div style="display:flex; flex-direction:column; gap:18px;">
         <div style="border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border); max-height:280px; cursor:pointer;" onclick="window.openLightbox('${escapeHtml(posterImg)}', '${escapeHtml(t.event)}')">
@@ -2334,6 +2433,21 @@
           </div>
         </div>
 
+        ${certUrl ? `
+          <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <div style="display:flex; align-items:center; gap:12px; min-width:0;">
+              <img src="${escapeHtml(certUrl)}" style="width:70px; height:50px; object-fit:contain; border-radius:6px; border:1px solid var(--border); background:rgba(0,0,0,0.05); cursor:pointer; flex-shrink:0;" onclick="window.openLightbox('${escapeHtml(certUrl)}', '${escapeHtml(t.event)} — Speaker Certificate')" alt="Speaker Certificate" />
+              <div style="min-width:0;">
+                <strong style="font-size:13.5px; color:var(--text); display:block;">Speaker Certificate</strong>
+                <span style="font-size:11.5px; color:var(--text-tertiary);">Official speaker recognition</span>
+              </div>
+            </div>
+            <button type="button" class="p-btn-action primary" onclick="window.openLightbox('${escapeHtml(certUrl)}', '${escapeHtml(t.event)} — Speaker Certificate')" style="font-size:12px; flex-shrink:0;">
+              View Certificate Proof
+            </button>
+          </div>
+        ` : ''}
+
         ${t.topics && t.topics.length ? `
           <div>
             <h4 style="font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-tertiary); font-family:var(--font-mono); margin-bottom:8px;">Topics Delivered</h4>
@@ -2344,6 +2458,12 @@
     `;
 
     footEl.innerHTML = `
+      ${certUrl ? `
+        <button type="button" class="p-btn-action" onclick="window.openLightbox('${escapeHtml(certUrl)}', '${escapeHtml(t.event)} — Speaker Certificate')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Speaker Certificate
+        </button>
+      ` : ''}
       ${slideUrl ? `
         <a href="${escapeHtml(slideUrl)}" target="_blank" rel="noopener" class="p-btn-action primary">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -2643,16 +2763,29 @@
       const accent = p.accent_color || 'var(--blue)';
       const publisher = p.publisher || 'Open Publication';
       const link = p.link ? escapeHtml(p.link) : '';
+      const pubLower = (publisher + ' ' + (p.title || '')).toLowerCase();
+
+      let pubLogoHtml = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+      `;
+
+      if (pubLower.includes('hasanuddin') || pubLower.includes('unhas')) {
+        pubLogoHtml = `<img src="/assets/images/unhas-logo.png" alt="Hasanuddin University" style="width:24px; height:24px; object-fit:contain;" />`;
+      } else if (pubLower.includes('pypi') || pubLower.includes('python')) {
+        pubLogoHtml = `<img src="/assets/images/pypi.svg" alt="Python Package Index (PyPI)" style="width:20px; height:20px; object-fit:contain;" />`;
+      } else if (pubLower.includes('medium')) {
+        pubLogoHtml = `<img src="/assets/images/medium.svg" alt="Medium" style="width:20px; height:20px; object-fit:contain; filter: var(--medium-logo-filter, none);" />`;
+      }
 
       return `
         <article class="publication-card reveal in-view" ${link ? `onclick="window.open('${link}','_blank','noopener')"` : ''} style="${link ? 'cursor:pointer;' : ''}">
           <div class="pub-card-top">
             <div class="pub-badge-wrap">
               <span class="pub-icon" style="--accent:${escapeHtml(accent)}">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                </svg>
+                ${pubLogoHtml}
               </span>
               <div class="pub-meta-col">
                 <span class="pub-publisher">${escapeHtml(publisher)}</span>
@@ -3011,6 +3144,29 @@
         if (settings.hero.ctaPrimaryUrl) {
           const ctaBtn = document.getElementById('hero-cta-btn') || heroSec.querySelector('.hero-cta a');
           if (ctaBtn) ctaBtn.href = settings.hero.ctaPrimaryUrl;
+        }
+      }
+
+      if (settings.theme) {
+        const themeToggleEl = document.getElementById('themeToggle');
+        if (themeToggleEl) {
+          if (settings.theme.enabled === false) {
+            themeToggleEl.style.display = 'none';
+          } else {
+            themeToggleEl.style.display = '';
+          }
+        }
+
+        if (!localStorage.getItem('mh-theme')) {
+          const mode = settings.theme.defaultMode;
+          if (mode === 'dark') {
+            root.setAttribute('data-theme', 'dark');
+          } else if (mode === 'light') {
+            root.setAttribute('data-theme', 'light');
+          } else if (mode === 'auto') {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+          }
         }
       }
 

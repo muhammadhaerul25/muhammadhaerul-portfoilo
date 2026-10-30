@@ -24,6 +24,17 @@ async function main() {
             sort_order: 1
         },
         {
+            title: 'Top 10 Semifinalist (Machine Learning) — BPJS Kesehatan Healthkathon 2022',
+            issuer: 'BPJS Kesehatan',
+            metric_tag: 'Top 10 Semifinalist',
+            badge_text: '🏅 Top 10 ML Semifinalist',
+            badge_color: 'purple',
+            description: 'Recognized as Top 10 Semifinalist in the Machine Learning Category at BPJS Kesehatan Healthkathon 2022, competing nationally to engineer predictive healthcare intelligence solutions.',
+            chips: ['Machine Learning', 'Healthkathon 2022', 'Top 10 National', 'BPJS Kesehatan'],
+            image_url: '/assets/images/awards/award_img_1.jpg',
+            sort_order: 2
+        },
+        {
             title: 'Top 20 AI Talent Hub Indonesia 2025',
             issuer: 'Universitas Indonesia X PT Pertamina (Persero)',
             metric_tag: 'Top 20 Finalist',
@@ -32,17 +43,6 @@ async function main() {
             description: 'Selected as Top 20 in the AI Talent Hub Indonesia 2025 program, organized by Direktorat Inovasi dan Riset Berdampak Tinggi Universitas Indonesia in collaboration with PT Pertamina (Persero).',
             chips: [],
             image_url: '/assets/images/awards/award_img_4.jpg',
-            sort_order: 2
-        },
-        {
-            title: 'Semifinalist Machine Learning — BPJS Kesehatan Healthkathon 2022',
-            issuer: 'BPJS Kesehatan',
-            metric_tag: 'Top ML Semifinalist',
-            badge_text: '🥈 ML Semifinalist',
-            badge_color: 'purple',
-            description: 'Recognized as Semifinalist in the Machine Learning Category at BPJS Kesehatan Healthkathon 2022, competing nationally to engineer predictive healthcare intelligence solutions.',
-            chips: ['Machine Learning', 'Healthkathon 2022', 'National Competition', 'BPJS Kesehatan'],
-            image_url: '/assets/images/awards/award_img_1.jpg',
             sort_order: 3
         },
         {
@@ -54,7 +54,7 @@ async function main() {
             description: 'Competed in the Open The Gate Hack 2025 competition organized by PT Bahana Security Sistem (BSS Parking), developing next-generation intelligent access control & automation architectures.',
             chips: ['Open The Gate Hack', 'BSS Parking', 'Smart Access', 'Hackathon'],
             image_url: '/assets/images/awards/award_img_3.jpg',
-            sort_order: 4
+            sort_order: 5
         }
     ];
 

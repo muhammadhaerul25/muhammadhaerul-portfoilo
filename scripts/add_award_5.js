@@ -40,28 +40,28 @@ async function main() {
         });
     }
 
-    // Now organize sort orders:
+    // Now organize sort orders by achievement level:
     // 1: Makassar Hackathon (2nd Place Winner)
-    // 2: AI Talent Hub 2025 (UI X Pertamina)
-    // 3: Kompetisi Website Budaya Nusantara (aksarahub.id)
-    // 4: BPJS Kesehatan Healthkathon 2022
-    // 5: Open The Gate Hack 2025 (BSS Parking)
+    // 2: BPJS Kesehatan Healthkathon 2022 (Top 10 Semifinalist)
+    // 3: AI Talent Hub 2025 (Top 20 Finalist)
+    // 4: Kompetisi Website Budaya Nusantara (aksarahub.id) (Achievement Award)
+    // 5: Open The Gate Hack 2025 (Competitor & Finalist)
     // 6: Outstanding Student (UNHAS)
-    // 7: Bank Indonesia Scholarship (GenBI)
-    // 8: Graduated Cumlaude (UNHAS)
+    // 7: Graduated Cumlaude (UNHAS)
+    // 8: Bank Indonesia Scholarship (GenBI)
 
     const allAwards = await prisma.award.findMany();
     for (const a of allAwards) {
         let order = 99;
         const t = a.title.toLowerCase();
         if (t.includes('makassar hackathon')) order = 1;
-        else if (t.includes('ai talent hub')) order = 2;
-        else if (t.includes('budaya') || t.includes('aksarahub')) order = 3;
-        else if (t.includes('healthkathon') || t.includes('bpjs')) order = 4;
+        else if (t.includes('healthkathon') || t.includes('bpjs')) order = 2;
+        else if (t.includes('ai talent hub')) order = 3;
+        else if (t.includes('budaya') || t.includes('aksarahub')) order = 4;
         else if (t.includes('open the gate')) order = 5;
         else if (t.includes('outstanding student')) order = 6;
-        else if (t.includes('bank indonesia') || t.includes('genbi')) order = 7;
-        else if (t.includes('cumlaude')) order = 8;
+        else if (t.includes('cumlaude')) order = 7;
+        else if (t.includes('bank indonesia') || t.includes('genbi')) order = 8;
 
         await prisma.award.update({
             where: { id: a.id },

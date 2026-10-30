@@ -1686,6 +1686,17 @@ img {
   color: var(--accent, var(--blue));
   border: 1px solid color-mix(in srgb, var(--accent, var(--blue)) 26%, transparent);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.pub-icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+[data-theme="dark"] .pub-icon img[src*="medium.svg"] {
+  filter: invert(1) brightness(1.2);
 }
 
 .pub-meta-col {
@@ -2263,24 +2274,41 @@ img {
   color: var(--blue);
 }
 
-/* Certificate Image inside Award Banner */
+/* Certificate Image inside Award Banner (Real Size Display & No Obscuring Badge) */
 .award-insignia-banner.has-cert-img {
   position: relative;
-  background: #0b0f19;
-  padding: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10.5;
+  min-height: 190px;
+  background: radial-gradient(circle at 50% 50%, #171b26 0%, #0a0d14 100%);
+  padding: 8px;
   cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Remove badge pill in the upper-left corner of certificate banner */
+.award-insignia-banner.has-cert-img .award-badge-pill {
+  display: none !important;
 }
 
 .award-cert-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s var(--ease);
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s var(--ease);
 }
 
 .award-card:hover .award-cert-img {
-  transform: scale(1.06);
+  transform: scale(1.03);
 }
 
 .award-cert-overlay {

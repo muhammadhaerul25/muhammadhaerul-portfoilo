@@ -2736,7 +2736,7 @@
                     <span class="auth-notice-title">Admin Protected Area</span>
                     <span class="auth-notice-chip"><span class="chip-dot"></span> Restricted</span>
                 </div>
-                <p class="auth-notice-desc">Restricted access console. Masuk menggunakan Password Admin atau Akun Google terdaftar.</p>
+                <p class="auth-notice-desc">Restricted access console. Sign in using direct Administrator Password or registered Google Account.</p>
             </div>
         </div>
 
@@ -2953,6 +2953,21 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                             <span>Image Slideshow</span>
                             <span id="nav-slideshow-status-pill" style="font-size:0.62rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 7px; border-radius:10px; margin-left:auto;">ON</span>
+                        </li>
+                        <li class="nav-item" id="nav-theme" onclick="switchView('theme',this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                            <span>Light / Dark Mode</span>
+                            <span id="nav-theme-status-pill" style="font-size:0.62rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 7px; border-radius:10px; margin-left:auto;">ON</span>
                         </li>
                         <li class="nav-item" id="nav-language" onclick="switchView('language',this)">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -4062,12 +4077,12 @@
                                 <div>
                                     <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Primary CTA Button Label</label>
                                     <input type="text" id="cfg-cta-primary-text" class="fm-input" placeholder="View my work" oninput="updateHeroLivePreview()" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-weight:700;">
-                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Teks tombol utama pada hero section (e.g. <code>View my work</code>).</div>
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Primary action button text on hero section (e.g. <code>View my work</code>).</div>
                                 </div>
                                 <div>
                                     <label class="fm-label" style="margin-top:0; margin-bottom:8px; font-size:0.8rem;">Primary CTA Target URL</label>
                                     <input type="text" id="cfg-cta-primary-url" class="fm-input" placeholder="#projects" style="background:var(--surface); border-radius:10px; padding:11px 16px; font-family:monospace;">
-                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Target link atau anchor section tujuan saat tombol diklik (default: <code>#projects</code>).</div>
+                                    <div style="font-size:0.74rem; color:var(--ink-4); margin-top:4px;">Destination URL or anchor link when clicked (default: <code>#projects</code>).</div>
                                 </div>
                             </div>
                         </div>
@@ -4081,7 +4096,7 @@
                                     </div>
                                     <div>
                                         <div style="font-size:1.05rem; font-weight:800; color:var(--ink);">Hero Floating Photo Showcase</div>
-                                        <div style="font-size:0.8rem; color:var(--ink-4); margin-top:2px;">Aktifkan atau nonaktifkan kartu foto showcase perjalanan yang melayang di bagian Hero portfolio</div>
+                                        <div style="font-size:0.8rem; color:var(--ink-4); margin-top:2px;">Enable or disable floating ambient photo cards displayed on the portfolio hero section</div>
                                     </div>
                                 </div>
                                 <div style="display:flex; align-items:center; gap:12px;">
@@ -4098,7 +4113,7 @@
                             <div id="hero-glimpse-settings-body">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
                                     <div style="font-size:0.82rem; font-weight:700; color:var(--ink-3);">
-                                        Pilih Foto Spesifik yang Muncul di Hero Showcase:
+                                        Select Specific Photos to Appear in Hero Showcase:
                                     </div>
                                     <div style="display:flex; gap:8px;">
                                         <button type="button" class="btn-sm-ghost" onclick="toggleAllHeroPhotos(true)" style="font-size:0.75rem; font-weight:700; padding:5px 12px; border:1px solid var(--line); border-radius:var(--r-pill); background:var(--surface); cursor:pointer;">Activate All</button>
@@ -4411,7 +4426,7 @@
                                     </span>
                                 </div>
                                 <div style="font-size:0.86rem; color:var(--ink-3); margin-top:3px;">
-                                    Kelola fitur foto melayang (ambient floating cards) di halaman depan hero portfolio. Anda dapat mengaktifkan atau menonaktifkan fitur ini secara manual.
+                                    Manage ambient floating cards on the Hero section of your portfolio. You can enable or disable this feature anytime.
                                 </div>
                             </div>
                         </div>
@@ -4437,7 +4452,7 @@
                                 </span>
                             </div>
                             <p style="font-size:0.85rem; color:var(--ink-2); line-height:1.6; margin:0;">
-                                <strong>Manual On / Off:</strong> Aktifkan untuk menampilkan animasi kartu foto pembicara &amp; visual milestone melayang di Hero portfolio. Nonaktifkan jika Anda ingin tampilan Hero lebih minimalis dan bebas dari foto melayang.
+                                <strong>Manual On / Off:</strong> Enable to display floating animated milestone and speaking cards in the Hero section. Disable for a clean, minimalist hero layout without floating media.
                             </p>
                         </div>
                         <div style="display:flex; align-items:center; gap:16px; background:var(--surface); padding:12px 22px; border-radius:16px; border:1.5px solid var(--line); box-shadow:var(--shadow-sm);">
@@ -4466,7 +4481,7 @@
                                             <option value="7.0">Relaxed (Every 7.0s)</option>
                                             <option value="9.0">Slow (Every 9.0s)</option>
                                         </select>
-                                        <span style="font-size:0.72rem; color:var(--ink-4); margin-top:5px; display:block;">Jeda waktu kemunculan kartu foto melayang baru.</span>
+                                        <span style="font-size:0.72rem; color:var(--ink-4); margin-top:5px; display:block;">Interval delay between new floating photo cards appearing.</span>
                                     </div>
                                     <div>
                                         <label class="fm-label" style="font-size:0.78rem; font-weight:700; margin-bottom:6px; display:block;">Max Visible Cards</label>
@@ -4476,7 +4491,7 @@
                                             <option value="3" selected>3 Cards (Standard Recommended)</option>
                                             <option value="4">4 Cards (Full Ambient)</option>
                                         </select>
-                                        <span style="font-size:0.72rem; color:var(--ink-4); margin-top:5px; display:block;">Jumlah maksimal kartu melayang di layar secara bersamaan.</span>
+                                        <span style="font-size:0.72rem; color:var(--ink-4); margin-top:5px; display:block;">Maximum number of ambient cards visible on screen simultaneously.</span>
                                     </div>
                                 </div>
                             </div>
@@ -4491,14 +4506,14 @@
                                         <input type="radio" name="slideshow-source-mode" value="all" id="src-mode-all" checked onchange="onSlideshowSourceChange('all')" style="accent-color:var(--g-blue); width:18px; height:18px;">
                                         <div>
                                             <div style="font-weight:700; font-size:0.88rem; color:var(--ink);">All Gallery Photos</div>
-                                            <div style="font-size:0.74rem; color:var(--ink-4);">Rotasi otomatis seluruh foto di galeri</div>
+                                            <div style="font-size:0.74rem; color:var(--ink-4);">Automatically rotate through all gallery photos</div>
                                         </div>
                                     </label>
                                     <label style="display:flex; align-items:center; gap:10px; background:var(--surface); border:1.5px solid var(--line); padding:12px 18px; border-radius:12px; cursor:pointer; flex:1;">
                                         <input type="radio" name="slideshow-source-mode" value="selected" id="src-mode-selected" onchange="onSlideshowSourceChange('selected')" style="accent-color:var(--g-blue); width:18px; height:18px;">
                                         <div>
                                             <div style="font-weight:700; font-size:0.88rem; color:var(--ink);">Selected Photos Only</div>
-                                            <div style="font-size:0.74rem; color:var(--ink-4);">Hanya foto yang dicentang di daftar bawah</div>
+                                            <div style="font-size:0.74rem; color:var(--ink-4);">Only display photos selected in the list below</div>
                                         </div>
                                     </label>
                                 </div>
@@ -4516,7 +4531,7 @@
                                     <span id="preview-floating-status" style="font-size:0.72rem; font-weight:700; color:var(--g-blue); background:var(--g-blue-soft); padding:3px 10px; border-radius:10px;">Interactive</span>
                                 </div>
                                 <div style="font-size:0.76rem; color:var(--ink-4); margin-bottom:16px;">
-                                    Simulasi tampilan kartu foto melayang di landing page sesuai preferensi saat ini:
+                                    Live simulation of the ambient floating card on the landing page based on current settings:
                                 </div>
                             </div>
 
@@ -4538,7 +4553,7 @@
                             </div>
 
                             <div style="margin-top:14px; text-align:center;">
-                                <span style="font-size:0.75rem; color:var(--ink-4);">💡 Klik foto mana saja di daftar bawah untuk melihat pratinjau tampilannya di atas.</span>
+                                <span style="font-size:0.75rem; color:var(--ink-4);">💡 Click any photo in the list below to preview its card appearance above.</span>
                             </div>
                         </div>
                     </div>
@@ -4548,15 +4563,15 @@
                         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid var(--line-soft);">
                             <div>
                                 <div style="font-size:1.05rem; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:10px;">
-                                    <span>Pilih Foto Spesifik yang Muncul di Slideshow</span>
+                                    <span>Select Specific Photos Appearing in Slideshow</span>
                                     <span id="slideshow-selected-count" style="font-size:0.75rem; font-weight:800; background:var(--g-blue-soft); color:var(--g-blue); padding:3px 10px; border-radius:12px;">0 selected</span>
                                 </div>
                                 <div style="font-size:0.78rem; color:var(--ink-4); margin-top:3px;">
-                                    Centang foto yang ingin Anda tampilkan sebagai kartu melayang di Hero portfolio.
+                                    Check the photos you want to feature as floating ambient cards in the Hero portfolio.
                                 </div>
                             </div>
                             <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                                <input type="text" id="slideshow-search-input" class="fm-input" placeholder="Cari foto..." oninput="filterSlideshowPhotosList()" style="width:180px; font-size:0.82rem; padding:8px 12px; border-radius:10px;">
+                                <input type="text" id="slideshow-search-input" class="fm-input" placeholder="Search photos..." oninput="filterSlideshowPhotosList()" style="width:180px; font-size:0.82rem; padding:8px 12px; border-radius:10px;">
                                 <button type="button" class="btn btn-ghost" onclick="toggleAllSlideshowItems(true)" style="font-size:0.78rem; font-weight:700; padding:7px 16px; height:auto; background:var(--surface);">Select All</button>
                                 <button type="button" class="btn btn-ghost" onclick="toggleAllSlideshowItems(false)" style="font-size:0.78rem; font-weight:700; padding:7px 16px; height:auto; background:var(--surface);">Deselect All</button>
                             </div>
@@ -4564,6 +4579,174 @@
 
                         <div id="slideshow-photos-checklist-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px;">
                             <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══ LIGHT / DARK MODE SETTINGS VIEW ══ -->
+            <div id="view-theme" class="view">
+                <div class="panel">
+                    <!-- Header -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:26px; padding-bottom:20px; border-bottom:1.5px solid var(--line-soft);">
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg, rgba(66,133,244,0.15) 0%, rgba(251,188,4,0.15) 100%); color:var(--g-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(66,133,244,0.12); border:1.5px solid rgba(66,133,244,0.25);">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <span style="font-size:1.4rem; font-weight:800; color:var(--ink); letter-spacing:-0.02em;">Light / Dark Mode</span>
+                                    <span id="theme-header-badge" style="font-size:0.75rem; font-weight:800; padding:4px 12px; border-radius:20px; background:var(--g-green-soft); color:var(--g-green); border:1px solid rgba(52,168,83,0.3);">
+                                        ● Switcher Enabled
+                                    </span>
+                                </div>
+                                <div style="font-size:0.86rem; color:var(--ink-3); margin-top:3px;">
+                                    Configure visual appearance, set default theme for first-time visitors, and enable or disable the public theme switch button on your portfolio.
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex; gap:12px; align-items:center;">
+                            <a href="/#top" target="_blank" class="btn btn-ghost" style="padding:10px 18px; font-size:0.84rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                <span>Preview on Site</span>
+                            </a>
+                            <button type="button" class="btn btn-primary" id="btn-save-theme-settings" onclick="saveThemeSettings(this)" style="padding:10px 24px; font-size:0.86rem; font-weight:700; display:inline-flex; align-items:center; gap:8px;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Save Theme Settings</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 1. Master On/Off Switch Banner -->
+                    <div id="theme-master-card" style="background:linear-gradient(135deg, rgba(66,133,244,0.06), rgba(251,188,4,0.06)); border:1.5px solid #D2E3FC; border-radius:18px; padding:24px 28px; margin-bottom:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; transition:var(--t-spring);">
+                        <div style="max-width:650px;">
+                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                                <span style="font-size:1.1rem; font-weight:800; color:var(--ink);">Public Theme Switcher (Header Button)</span>
+                                <span id="theme-status-pill" style="font-size:0.75rem; font-weight:800; padding:3px 12px; border-radius:20px; background:#E6F4EA; color:#137333; border:1px solid rgba(52,168,83,0.3);">
+                                    ● Switcher Active
+                                </span>
+                            </div>
+                            <p style="font-size:0.85rem; color:var(--ink-2); line-height:1.6; margin:0;">
+                                <strong>Enable / Disable Switcher:</strong> When enabled, visitors can freely toggle between Light and Dark mode using the sun/moon button in the top navigation bar. When disabled, the theme button is hidden and the site locks to the default appearance chosen below.
+                            </p>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:16px; background:var(--surface); padding:12px 22px; border-radius:16px; border:1.5px solid var(--line); box-shadow:var(--shadow-sm);">
+                            <span id="theme-toggle-label" style="font-size:0.92rem; font-weight:800; color:var(--ink);">Enabled</span>
+                            <label style="position:relative; display:inline-flex; align-items:center; cursor:pointer;">
+                                <input type="checkbox" id="cfg-theme-enabled" checked onchange="onThemeToggleChange(this.checked)" style="width:24px; height:24px; accent-color:var(--g-blue); cursor:pointer;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 2. Main Grid: Mode Selection on Left, Live Preview on Right -->
+                    <div style="display:grid; grid-template-columns:1.2fr 0.9fr; gap:24px; margin-bottom:28px;">
+                        <!-- Mode Selector Card -->
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:20px;">
+                            <div>
+                                <div style="font-size:0.86rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                    Default Visual Mode
+                                </div>
+                                <div style="font-size:0.78rem; color:var(--ink-4);">
+                                    Choose the initial color scheme presented to new visitors before they customize their preferences:
+                                </div>
+                            </div>
+
+                            <div style="display:flex; flex-direction:column; gap:12px;">
+                                <!-- Option 1: Auto / System -->
+                                <label id="label-theme-auto" style="display:flex; align-items:center; gap:14px; background:var(--surface); border:2px solid var(--g-blue); padding:16px 20px; border-radius:14px; cursor:pointer; transition:all 0.2s ease;">
+                                    <input type="radio" name="theme-default-mode" value="auto" id="theme-mode-auto" checked onchange="onDefaultThemeChange('auto')" style="accent-color:var(--g-blue); width:20px; height:20px;">
+                                    <div style="flex:1;">
+                                        <div style="display:flex; align-items:center; gap:8px;">
+                                            <span style="font-weight:800; font-size:0.92rem; color:var(--ink);">System Preference (Auto)</span>
+                                            <span style="font-size:0.68rem; font-weight:800; background:var(--g-blue-soft); color:var(--g-blue); padding:2px 8px; border-radius:10px;">RECOMMENDED</span>
+                                        </div>
+                                        <div style="font-size:0.76rem; color:var(--ink-3); margin-top:2px;">
+                                            Automatically detects and matches visitor's device OS settings (Dark mode at night, Light mode in daytime).
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <!-- Option 2: Light Mode -->
+                                <label id="label-theme-light" style="display:flex; align-items:center; gap:14px; background:var(--surface); border:1.5px solid var(--line); padding:16px 20px; border-radius:14px; cursor:pointer; transition:all 0.2s ease;">
+                                    <input type="radio" name="theme-default-mode" value="light" id="theme-mode-light" onchange="onDefaultThemeChange('light')" style="accent-color:var(--g-blue); width:20px; height:20px;">
+                                    <div style="flex:1;">
+                                        <div style="display:flex; align-items:center; gap:8px;">
+                                            <span style="font-weight:800; font-size:0.92rem; color:var(--ink);">Light Mode</span>
+                                            <span style="font-size:0.68rem; font-weight:800; background:var(--surface-2); color:var(--ink-3); padding:2px 8px; border-radius:10px; border:1px solid var(--line);">CLEAN &amp; BRIGHT</span>
+                                        </div>
+                                        <div style="font-size:0.76rem; color:var(--ink-3); margin-top:2px;">
+                                            Pristine white canvas with crisp typography, subtle slate borders, and vibrant Google color accents.
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <!-- Option 3: Dark Mode -->
+                                <label id="label-theme-dark" style="display:flex; align-items:center; gap:14px; background:var(--surface); border:1.5px solid var(--line); padding:16px 20px; border-radius:14px; cursor:pointer; transition:all 0.2s ease;">
+                                    <input type="radio" name="theme-default-mode" value="dark" id="theme-mode-dark" onchange="onDefaultThemeChange('dark')" style="accent-color:var(--g-blue); width:20px; height:20px;">
+                                    <div style="flex:1;">
+                                        <div style="display:flex; align-items:center; gap:8px;">
+                                            <span style="font-weight:800; font-size:0.92rem; color:var(--ink);">Dark Mode</span>
+                                            <span style="font-size:0.68rem; font-weight:800; background:#1e293b; color:#93c5fd; padding:2px 8px; border-radius:10px;">DEEP OBSIDIAN</span>
+                                        </div>
+                                        <div style="font-size:0.76rem; color:var(--ink-3); margin-top:2px;">
+                                            Cinematic dark obsidian canvas, glowing neon highlights, reduced eye strain, and high technical prestige.
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Live Interactive Simulator Column -->
+                        <div style="background:var(--bg); border:1.5px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+                            <div>
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                                    <div style="font-size:0.86rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3); display:flex; align-items:center; gap:8px;">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        Theme Canvas Preview
+                                    </div>
+                                    <span id="theme-preview-mode-tag" style="font-size:0.72rem; font-weight:800; color:var(--g-blue); background:var(--g-blue-soft); padding:3px 10px; border-radius:10px;">System Auto</span>
+                                </div>
+                                <div style="font-size:0.76rem; color:var(--ink-4); margin-bottom:16px;">
+                                    Real-time preview of portfolio UI elements in the selected theme style:
+                                </div>
+                            </div>
+
+                            <!-- Live Mockup Box -->
+                            <div id="theme-sim-container" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1; border-radius:14px; padding:20px; box-shadow:0 12px 30px rgba(0,0,0,0.08); transition:all 0.3s ease;">
+                                <!-- Mock Header -->
+                                <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:12px; border-bottom:1px solid rgba(0,0,0,0.1); margin-bottom:14px;" id="theme-sim-header">
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <div style="width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg, #4285F4, #34A853); display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:800;">MH</div>
+                                        <span style="font-weight:800; font-size:0.84rem;">Muhammad Haerul</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <div id="theme-sim-toggle-btn" style="width:28px; height:28px; border-radius:50%; border:1px solid rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:center; font-size:12px;">☀️</div>
+                                        <div style="background:#0f172a; color:#fff; font-size:0.7rem; font-weight:700; padding:4px 10px; border-radius:20px;" id="theme-sim-cta">Let's talk</div>
+                                    </div>
+                                </div>
+
+                                <!-- Mock Hero Snippet -->
+                                <div>
+                                    <span id="theme-sim-pill" style="font-size:0.65rem; font-weight:800; background:rgba(66,133,244,0.1); color:#1a73e8; padding:2px 8px; border-radius:10px; display:inline-block; margin-bottom:8px;">AI Full-Stack Specialist</span>
+                                    <div id="theme-sim-title" style="font-size:0.98rem; font-weight:800; line-height:1.3; margin-bottom:6px;">I build, research and teach AI solutions.</div>
+                                    <div id="theme-sim-desc" style="font-size:0.75rem; color:#64748b; line-height:1.5;">Architecting intelligent systems with Agentic AI, modern web stacks, and enterprise-grade generative intelligence.</div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:14px; text-align:center;">
+                                <span style="font-size:0.75rem; color:var(--ink-4);">💡 Changes take effect immediately on public site upon saving.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -6844,6 +7027,8 @@ function switchView(view, el) {
     document.getElementById('topbar-crumb').textContent = m.crumb;
     document.getElementById('btn-refresh').style.display = (view==='feedbacks' || view==='inbox') ? 'flex' : 'none';
 
+    loadDashboardHiddenSettings();
+
     // Instant render from memory cache if available, else fetch
     if (view === 'feedbacks') {
         if (!dataLoaded) loadFeedback();
@@ -6930,6 +7115,8 @@ function switchView(view, el) {
         loadLanguageSettings();
     } else if (view === 'image-slideshow') {
         loadImageSlideshowSettings();
+    } else if (view === 'theme') {
+        loadThemeSettings();
     }
     localStorage.setItem('activeView', view);
 }
@@ -7279,7 +7466,7 @@ function toggleShowHidden() {
 }
 
 function confirmDeleteFeedback(id, name) {
-    showConfirm('Hapus feedback dari "' + (name || 'Anonymous') + '"? Tindakan ini tidak bisa dibatalkan.', async function() {
+    showConfirm('Delete feedback from "' + (name || 'Anonymous') + '"? This action cannot be undone.', async function() {
         try {
             var res = await fetch('/api/feedbacks/' + id, { method: 'DELETE' });
             var json = await res.json();
@@ -7292,13 +7479,13 @@ function confirmDeleteFeedback(id, name) {
                 }
                 applyFilters();
                 updateOverviewStatsAfterDelete();
-                showToast('Feedback berhasil dihapus.');
+                showToast('Feedback deleted successfully.');
             } else {
-                showToast(json.error || 'Gagal menghapus feedback.');
+                showToast(json.error || 'Failed to delete feedback.');
             }
         } catch(e) {
             console.error('Delete feedback error:', e);
-            showToast('Gagal menghapus feedback.');
+            showToast('Failed to delete feedback.');
         }
     });
 }
@@ -8486,7 +8673,12 @@ function renderTalksGrid() {
               '</div>'
             : '';
 
-        return '<div class="talk-card" style="animation-delay:'+delay+'ms">' +
+        var isVis = isItemVisible('talks', t.id);
+        var visBadge = isVis
+            ? '<span style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
+        return '<div class="talk-card" style="animation-delay:'+delay+'ms;' + (!isVis ? 'opacity:0.75; border:1.5px dashed var(--line);' : '') + '">' +
             '<div class="talk-poster" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer;" title="Click to view talk details">' +
                 (t.poster_url
                     ? '<img src="'+esc(t.poster_url)+'" alt="'+esc(t.event)+'" loading="lazy">'
@@ -8495,7 +8687,10 @@ function renderTalksGrid() {
                 '<div class="talk-poster-overlay"></div>' +
             '</div>' +
             '<div class="talk-body">' +
-                '<div class="talk-event" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer;" title="Click to view talk details">'+esc(t.event)+'</div>' +
+                '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">' +
+                    '<div class="talk-event" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer; flex:1;" title="Click to view talk details">'+esc(t.event)+'</div>' +
+                    visBadge +
+                '</div>' +
                 attendeesHtml +
                 topicsHtml +
                 (t.organizer
@@ -8529,6 +8724,7 @@ function renderTalksGrid() {
                     : '') +
             '</div>' +
             '<div class="talk-side">' +
+                '<button type="button" class="btn-talk" onclick="toggleItemVisibility(\'talks\',\''+t.id+'\',this)" title="'+(isVis?'Hide from portfolio':'Show on portfolio')+'" style="'+(isVis?'':'color:var(--g-blue);font-weight:700;')+'">'+(isVis?'Hide':'Show')+'</button>' +
                 '<button class="btn-talk view" onclick="openTalkViewModal('+tJson+')">View</button>' +
                 '<button class="btn-talk edit" onclick="openTalkDrawer('+tJson+')">Edit</button>' +
                 '<button class="btn-talk clone" onclick="duplicateTalk('+tJson+')" title="Duplicate Talk">Clone</button>' +
@@ -9292,13 +9488,18 @@ function renderProjectsGrid() {
             mediaHtml = '<div class="project-thumb empty-frame" style="background: linear-gradient(135deg, #E8F0FE 0%, #F1F3F4 100%); display: flex; flex-direction:column; align-items: center; justify-content: center; gap:8px; border-bottom: 1px solid var(--line-soft);"><div style="width:38px;height:38px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);color:var(--g-blue);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div><span style="font-size:0.75rem;font-weight:700;color:var(--ink-3);">Digital Project</span></div>';
         }
 
-        return '<div class="project-card">' +
+        var isVis = isItemVisible('projects', p.id);
+        var visBadge = isVis
+            ? '<span style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
+        return '<div class="project-card" style="' + (!isVis ? 'opacity:0.75; border:1.5px dashed var(--line);' : '') + '">' +
             mediaHtml +
             '<div class="project-content">' +
                 '<div>' +
                     (formattedDate ? '<div class="project-date">' + esc(formattedDate) + '</div>' : '') +
                     '<div class="project-head">' +
-                        '<div class="project-title">' + esc(p.name) + '</div>' +
+                        '<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><div class="project-title">' + esc(p.name) + '</div>' + visBadge + '</div>' +
                         visitHtml +
                     '</div>' +
                     renderProjectDesc(p.description, 'grid-' + p.id) +
@@ -9307,6 +9508,7 @@ function renderProjectsGrid() {
                 '<div class="project-actions">' +
                     '<div class="project-links">' + linksHtml + '</div>' +
                     '<div class="project-manage">' +
+                        '<button type="button" class="btn-talk" onclick="toggleItemVisibility(\'projects\',\''+p.id+'\',this)" title="'+(isVis?'Hide from portfolio':'Show on portfolio')+'" style="'+(isVis?'':'color:var(--g-blue);font-weight:700;')+'">'+(isVis?'Hide':'Show')+'</button>' +
                         '<button class="btn-talk view" onclick="openProjectViewModal('+pJson+')">View</button>' +
                         '<button class="btn-talk edit" onclick="openProjectDrawer('+pJson+')">Edit</button>' +
                         '<button class="btn-talk clone" onclick="duplicateProject('+pJson+')" title="Duplicate Project">Clone</button>' +
@@ -10167,10 +10369,10 @@ async function saveFeedbackFromModal(id) {
             }
             applyFilters();
             updateOverviewStatsAfterDelete();
-            showToast('Feedback berhasil diperbarui.');
+            showToast('Feedback updated successfully.');
             openFeedbackDetailModal(id);
         } else {
-            showToast(json.error || 'Gagal menyimpan perubahan feedback.');
+            showToast(json.error || 'Failed to save feedback changes.');
             if (saveBtn) {
                 saveBtn.disabled = false;
                 saveBtn.textContent = 'Save Changes';
@@ -10178,7 +10380,7 @@ async function saveFeedbackFromModal(id) {
         }
     } catch(e) {
         console.error('Error saving feedback:', e);
-        showToast('Gagal menyimpan perubahan feedback.');
+        showToast('Failed to save feedback changes.');
         if (saveBtn) {
             saveBtn.disabled = false;
             saveBtn.textContent = 'Save Changes';
@@ -10337,9 +10539,9 @@ function initGoogleSignIn(clientId) {
                         error_callback: function(err) {
                             console.warn('[GIS OAuth Token Error]:', err);
                             if (err && err.type === 'popup_closed') {
-                                showAuthGate('Jendela login Google ditutup. Silakan coba lagi.');
+                                showAuthGate('Google login window was closed. Please try again.');
                             } else {
-                                showAuthGate('Popup autentikasi Google diblokir browser atau mengalami kendala jaringan. Silakan gunakan opsi Kunci Admin.');
+                                showAuthGate('Google authentication popup was blocked by browser or encountered network issue. Please use Admin Password option.');
                             }
                         }
                     });
@@ -10431,7 +10633,7 @@ async function handlePasswordLogin(e) {
     var inp = document.getElementById('input-admin-password');
     var password = inp ? inp.value.trim() : '';
     if (!password) {
-        showAuthGate('Silakan masukkan password admin.');
+        showAuthGate('Please enter the administrator password.');
         return;
     }
 
@@ -10443,7 +10645,7 @@ async function handlePasswordLogin(e) {
     if (errEl) errEl.style.display = 'none';
     if (panelPass) panelPass.style.display = 'none';
     if (loadingEl) {
-        if (loadingText) loadingText.textContent = 'Memverifikasi Password Admin...';
+        if (loadingText) loadingText.textContent = 'Verifying Administrator Password...';
         loadingEl.style.display = 'flex';
     }
 
@@ -10461,7 +10663,7 @@ async function handlePasswordLogin(e) {
             handleAuthSuccess(data.user, true);
         } else {
             cancelAuthLoading();
-            showAuthGate(data.error || 'Password admin salah. Silakan coba lagi.');
+            showAuthGate(data.error || 'Incorrect admin password. Please try again.');
             if (inp) {
                 inp.focus();
                 inp.select();
@@ -10469,7 +10671,7 @@ async function handlePasswordLogin(e) {
         }
     } catch(err) {
         cancelAuthLoading();
-        showAuthGate('Gagal memverifikasi password: ' + err.message);
+        showAuthGate('Failed to verify password: ' + err.message);
     }
 }
 
@@ -10483,14 +10685,14 @@ function triggerGoogleOAuth() {
 
     if (panelGoogle) panelGoogle.style.display = 'none';
     if (loadingEl) {
-        if (loadingText) loadingText.textContent = 'Menghubungkan ke Akun Google...';
+        if (loadingText) loadingText.textContent = 'Connecting to Google Account...';
         loadingEl.style.display = 'flex';
     }
 
     if (googleAuthTimeout) clearTimeout(googleAuthTimeout);
     googleAuthTimeout = setTimeout(function() {
         cancelAuthLoading();
-        showAuthGate('Jendela Google Sign-In tidak merespons atau pop-up diblokir browser. Silakan coba lagi atau gunakan tab "Password Admin" untuk login langsung.');
+        showAuthGate('Google Sign-In window did not respond or popup was blocked by browser. Please try again or use the "Admin Password" tab.');
     }, 9000);
 
     // Prioritize ID Token One-Tap prompt to avoid gsi/transform blank popup bug
@@ -10502,11 +10704,11 @@ function triggerGoogleOAuth() {
                         tokenClient.requestAccessToken({ prompt: '' });
                     } catch(e) {
                         cancelAuthLoading();
-                        showAuthGate('Gagal membuka popup Google: ' + e.message);
+                        showAuthGate('Failed to open Google popup: ' + e.message);
                     }
                 } else {
                     cancelAuthLoading();
-                    showAuthGate('Google Sign-In tidak dapat dibuka di lingkungan ini. Silakan gunakan Password Admin.');
+                    showAuthGate('Google Sign-In could not be opened in this environment. Please use Admin Password.');
                 }
             }
         });
@@ -10515,11 +10717,11 @@ function triggerGoogleOAuth() {
             tokenClient.requestAccessToken({ prompt: '' });
         } catch(e) {
             cancelAuthLoading();
-            showAuthGate('Gagal membuka popup Google: ' + e.message);
+            showAuthGate('Failed to open Google popup: ' + e.message);
         }
     } else {
         cancelAuthLoading();
-        showAuthGate('Google Identity Services belum selesai dimuat atau diblokir adblocker. Silakan gunakan tab Password Admin.');
+        showAuthGate('Google Identity Services not yet loaded or blocked by adblocker. Please use Admin Password tab.');
     }
 }
 
@@ -10533,7 +10735,7 @@ async function handleGoogleOAuthResponse(tokenResponse) {
     } else if (tokenResponse && tokenResponse.error) {
         console.warn('[OAuth Error]:', tokenResponse);
         cancelAuthLoading();
-        showAuthGate('Login Google dibatalkan atau gagal: ' + tokenResponse.error);
+        showAuthGate('Google login cancelled or failed: ' + tokenResponse.error);
     }
 }
 
@@ -10557,7 +10759,7 @@ async function verifyWithBackend(payload) {
     if (panelPass) panelPass.style.display = 'none';
     if (panelGoogle) panelGoogle.style.display = 'none';
     if (loadingEl) {
-        if (loadingText) loadingText.textContent = 'Memverifikasi hak akses admin...';
+        if (loadingText) loadingText.textContent = 'Verifying administrator privileges...';
         loadingEl.style.display = 'flex';
     }
     if (errEl) errEl.style.display = 'none';
@@ -10576,11 +10778,11 @@ async function verifyWithBackend(payload) {
             handleAuthSuccess(data.user, true);
         } else {
             cancelAuthLoading();
-            showAuthGate(data.error || 'Akses ditolak: Akun Google Anda tidak terdaftar sebagai administrator.');
+            showAuthGate(data.error || 'Access denied: Your Google account is not listed as an authorized administrator.');
         }
     } catch (err) {
         cancelAuthLoading();
-        showAuthGate('Terjadi kesalahan saat memproses autentikasi: ' + err.message);
+        showAuthGate('An error occurred while processing authentication: ' + err.message);
     }
 }
 
@@ -11990,6 +12192,284 @@ async function saveLanguageSettings() {
 }
 
 /* ════════════════════════════════════════
+   THEME SETTINGS LOGIC
+════════════════════════════════════════ */
+var currentThemeSettings = {
+    enabled: true,
+    defaultMode: 'auto'
+};
+
+async function loadThemeSettings() {
+    try {
+        var res = await fetch('/api/settings');
+        var data = await res.json();
+        if (!res.ok || !data.success) return;
+
+        var th = (data.data && data.data.theme) ? data.data.theme : { enabled: true, defaultMode: 'auto' };
+        currentThemeSettings.enabled = th.enabled !== false;
+        currentThemeSettings.defaultMode = th.defaultMode || 'auto';
+
+        var chk = document.getElementById('cfg-theme-enabled');
+        if (chk) chk.checked = currentThemeSettings.enabled;
+        onThemeToggleChange(currentThemeSettings.enabled);
+
+        var radio = document.querySelector('input[name="theme-default-mode"][value="' + currentThemeSettings.defaultMode + '"]');
+        if (radio) radio.checked = true;
+        onDefaultThemeChange(currentThemeSettings.defaultMode);
+    } catch (err) {
+        console.error('Error loading theme settings:', err);
+    }
+}
+
+function onThemeToggleChange(enabled) {
+    currentThemeSettings.enabled = Boolean(enabled);
+    var label = document.getElementById('theme-toggle-label');
+    if (label) label.textContent = enabled ? 'Enabled' : 'Disabled';
+
+    var pill = document.getElementById('theme-status-pill');
+    if (pill) {
+        pill.textContent = enabled ? '● Switcher Active' : '○ Switcher Disabled';
+        pill.style.background = enabled ? '#E6F4EA' : '#F1F3F4';
+        pill.style.color = enabled ? '#137333' : '#5F6368';
+        pill.style.borderColor = enabled ? 'rgba(52,168,83,0.3)' : 'rgba(0,0,0,0.1)';
+    }
+
+    var badge = document.getElementById('theme-header-badge');
+    if (badge) {
+        badge.textContent = enabled ? '● Switcher Enabled' : '○ Switcher Disabled';
+        badge.style.background = enabled ? 'var(--g-green-soft)' : 'var(--surface-2)';
+        badge.style.color = enabled ? 'var(--g-green)' : 'var(--ink-4)';
+        badge.style.borderColor = enabled ? 'rgba(52,168,83,0.3)' : 'var(--line)';
+    }
+
+    var simBtn = document.getElementById('theme-sim-toggle-btn');
+    if (simBtn) {
+        simBtn.style.display = enabled ? 'flex' : 'none';
+    }
+}
+
+function onDefaultThemeChange(mode) {
+    currentThemeSettings.defaultMode = mode;
+
+    ['auto', 'light', 'dark'].forEach(function(m) {
+        var lbl = document.getElementById('label-theme-' + m);
+        if (lbl) {
+            if (m === mode) {
+                lbl.style.border = '2px solid var(--g-blue)';
+                lbl.style.boxShadow = '0 0 0 3px rgba(66,133,244,0.15)';
+            } else {
+                lbl.style.border = '1.5px solid var(--line)';
+                lbl.style.boxShadow = 'none';
+            }
+        }
+    });
+
+    updateThemePreview(mode);
+}
+
+function updateThemePreview(mode) {
+    var sim = document.getElementById('theme-sim-container');
+    var simHeader = document.getElementById('theme-sim-header');
+    var simTitle = document.getElementById('theme-sim-title');
+    var simDesc = document.getElementById('theme-sim-desc');
+    var simCta = document.getElementById('theme-sim-cta');
+    var simPill = document.getElementById('theme-sim-pill');
+    var simToggle = document.getElementById('theme-sim-toggle-btn');
+    var tag = document.getElementById('theme-preview-mode-tag');
+
+    var isDark = mode === 'dark';
+    if (mode === 'auto') {
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        isDark = prefersDark;
+        if (tag) tag.textContent = 'Auto (' + (prefersDark ? 'Dark OS' : 'Light OS') + ')';
+    } else {
+        if (tag) tag.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+    }
+
+    if (!sim) return;
+
+    if (isDark) {
+        sim.style.background = '#0a0d14';
+        sim.style.color = '#f8fafc';
+        sim.style.borderColor = '#1e293b';
+        if (simHeader) simHeader.style.borderColor = 'rgba(255,255,255,0.1)';
+        if (simTitle) simTitle.style.color = '#ffffff';
+        if (simDesc) simDesc.style.color = '#94a3b8';
+        if (simCta) {
+            simCta.style.background = '#3b82f6';
+            simCta.style.color = '#ffffff';
+        }
+        if (simPill) {
+            simPill.style.background = 'rgba(59,130,246,0.2)';
+            simPill.style.color = '#93c5fd';
+        }
+        if (simToggle) {
+            simToggle.textContent = '🌙';
+            simToggle.style.borderColor = 'rgba(255,255,255,0.2)';
+            simToggle.style.color = '#f8fafc';
+        }
+    } else {
+        sim.style.background = '#ffffff';
+        sim.style.color = '#0f172a';
+        sim.style.borderColor = '#cbd5e1';
+        if (simHeader) simHeader.style.borderColor = 'rgba(0,0,0,0.1)';
+        if (simTitle) simTitle.style.color = '#0f172a';
+        if (simDesc) simDesc.style.color = '#64748b';
+        if (simCta) {
+            simCta.style.background = '#0f172a';
+            simCta.style.color = '#ffffff';
+        }
+        if (simPill) {
+            simPill.style.background = 'rgba(66,133,244,0.1)';
+            simPill.style.color = '#1a73e8';
+        }
+        if (simToggle) {
+            simToggle.textContent = '☀️';
+            simToggle.style.borderColor = 'rgba(0,0,0,0.15)';
+            simToggle.style.color = '#0f172a';
+        }
+    }
+}
+
+async function saveThemeSettings(btn) {
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Saving...';
+    }
+
+    var chk = document.getElementById('cfg-theme-enabled');
+    var isEnabled = chk ? chk.checked : true;
+    var modeRadio = document.querySelector('input[name="theme-default-mode"]:checked');
+    var defMode = modeRadio ? modeRadio.value : 'auto';
+
+    var payload = {
+        theme: {
+            enabled: isEnabled,
+            defaultMode: defMode
+        }
+    };
+
+    try {
+        var token = localStorage.getItem('mh_admin_token') || '';
+        var res = await fetch('/api/settings', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token ? ('Bearer ' + token) : ''
+            },
+            body: JSON.stringify(payload)
+        });
+        var data = await res.json();
+
+        if (res.ok && data.success) {
+            showToast('Theme settings saved successfully! Live portfolio updated.', 'success');
+        } else {
+            showToast(data.error || 'Failed to save theme settings.', 'error');
+        }
+    } catch (err) {
+        console.error('Save theme settings error:', err);
+        showToast('Error saving theme settings: ' + err.message, 'error');
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span>Save Theme Settings</span>';
+        }
+    }
+}
+
+/* ════════════════════════════════════════
+   CRUD ITEM VISIBILITY TOGGLING LOGIC
+════════════════════════════════════════ */
+var dashboardHiddenItems = {
+    experiences: [],
+    projects: [],
+    educations: [],
+    certifications: [],
+    awards: [],
+    talks: [],
+    publications: [],
+    blogs: [],
+    skills: [],
+    gallery: []
+};
+var hiddenSettingsLoaded = false;
+
+async function loadDashboardHiddenSettings(force) {
+    if (hiddenSettingsLoaded && !force) return;
+    try {
+        var res = await fetch('/api/settings');
+        var data = await res.json();
+        if (data && data.success && data.data && data.data.hiddenItems) {
+            dashboardHiddenItems = Object.assign({}, dashboardHiddenItems, data.data.hiddenItems);
+            hiddenSettingsLoaded = true;
+        }
+    } catch (err) {
+        console.warn('Could not load hidden items settings', err);
+    }
+}
+
+function isItemVisible(section, id) {
+    var list = dashboardHiddenItems[section] || [];
+    return !list.map(String).includes(String(id));
+}
+
+async function toggleItemVisibility(section, id, btn) {
+    if (!section || !id) return;
+    var currentlyVisible = isItemVisible(section, id);
+    var targetVisible = !currentlyVisible;
+
+    if (btn) {
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+    }
+
+    try {
+        var res = await fetch('/api/settings/toggle-item-visibility', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ section: section, id: id, visible: targetVisible })
+        });
+        var data = await res.json();
+        if (data && data.success) {
+            if (data.hiddenItems) {
+                dashboardHiddenItems = data.hiddenItems;
+            } else {
+                var list = dashboardHiddenItems[section] || [];
+                if (targetVisible) {
+                    list = list.filter(function(item) { return String(item) !== String(id); });
+                } else {
+                    if (!list.map(String).includes(String(id))) list.push(String(id));
+                }
+                dashboardHiddenItems[section] = list;
+            }
+
+            // Re-render corresponding CRUD grid immediately
+            if (section === 'experiences') renderExperiencesGrid();
+            else if (section === 'projects') renderProjectsGrid();
+            else if (section === 'certifications') renderCertificationsGrid();
+            else if (section === 'awards') renderAwardsGrid();
+            else if (section === 'educations') renderEducationsGrid();
+            else if (section === 'talks') renderTalksGrid();
+            else if (section === 'publications') renderPublicationsGrid();
+            else if (section === 'blogs') renderBlogsGrid();
+            else if (section === 'skills') renderSkillsGrid();
+            else if (section === 'gallery') renderGalleryGrid();
+
+            showToast(targetVisible ? 'Item is now VISIBLE on public portfolio' : 'Item is now HIDDEN from public portfolio', 'success');
+        } else {
+            showToast('Failed to update visibility: ' + ((data && data.error) || 'Unknown error'), 'error');
+        }
+    } catch (err) {
+        showToast('Error updating visibility: ' + err.message, 'error');
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }
+    }
+}
+
+/* ════════════════════════════════════════
    IMAGE SLIDESHOW SETTINGS LOGIC
 ════════════════════════════════════════ */
 var slideshowConfig = {
@@ -13191,6 +13671,11 @@ function renderSkillsGrid() {
         var tech = Array.isArray(s.tech_stack) ? s.tech_stack : [];
         var color = s.accent_color || 'var(--blue)';
 
+        var isVis = isItemVisible('skills', s.id);
+        var visBadge = isVis
+            ? '<span style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
         var itemsListHtml = items.map(function(it) {
             return '<li style="display:flex; flex-direction:column; gap:2px; font-size:0.82rem; margin-bottom:6px;">' +
                 '<strong style="color:var(--ink);">' + esc(it.name || '') + '</strong>' +
@@ -13205,7 +13690,7 @@ function renderSkillsGrid() {
             '</span>';
         }).join('');
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:14px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface); border-top:4px solid ' + esc(color) + '; box-shadow:0 4px 16px rgba(0,0,0,0.03); transition:transform 0.2s, box-shadow 0.2s;">' +
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:14px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface); border-top:4px solid ' + esc(color) + '; box-shadow:0 4px 16px rgba(0,0,0,0.03); transition:transform 0.2s, box-shadow 0.2s;' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">' +
                 '<div style="display:flex; align-items:center; gap:12px; min-width:0;">' +
                     '<div style="width:38px; height:38px; border-radius:10px; background:var(--sidebar-hover); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:' + esc(color) + ';">' +
@@ -13216,9 +13701,12 @@ function renderSkillsGrid() {
                         '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:2px;">#' + esc(s.category_slug || '') + ' &bull; Order ' + (s.sort_order || 0) + '</div>' +
                     '</div>' +
                 '</div>' +
-                '<span style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">' +
-                    items.length + ' Items &bull; ' + tech.length + ' Tech' +
-                '</span>' +
+                '<div style="display:flex; align-items:center; gap:8px;">' +
+                    visBadge +
+                    '<span style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">' +
+                        items.length + ' Items &bull; ' + tech.length + ' Tech' +
+                    '</span>' +
+                '</div>' +
             '</div>' +
 
             '<div style="background:var(--surface-2); padding:12px 14px; border-radius:8px; border:1px solid var(--line-soft);">' +
@@ -13236,6 +13724,7 @@ function renderSkillsGrid() {
                     '<span>View Live</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>' +
                 '</a>' +
                 '<div style="display:flex; gap:6px;">' +
+                    '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'skills\',\'' + s.id + '\',this)" style="font-size:0.75rem; font-weight:700; padding:5px 10px; border-radius:var(--r-pill); border:1px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer;" title="' + (isVis ? 'Hide from portfolio' : 'Show on portfolio') + '">' + (isVis ? 'Hide' : 'Show') + '</button>' +
                     '<button class="btn-sm-ghost" onclick="duplicateSkillDomain(\'' + s.id + '\')" style="font-size:0.75rem; font-weight:700; padding:5px 10px; border-radius:var(--r-pill); border:1px solid var(--line); background:var(--surface); cursor:pointer;" title="Clone this domain">⧉ Clone</button>' +
                     '<button class="btn-sm-ghost" onclick="openSkillDrawerById(\'' + s.id + '\')" style="font-size:0.75rem; font-weight:700; padding:5px 12px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); cursor:pointer;">Edit</button>' +
                     '<button class="btn-sm-ghost" onclick="deleteSkillDomain(\'' + s.id + '\')" style="font-size:0.75rem; font-weight:700; padding:5px 12px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft); cursor:pointer;">Delete</button>' +
@@ -13862,7 +14351,12 @@ function renderExperiencesGrid() {
         if (exp.location) metaParts.push(esc(exp.location));
         var metaStr = metaParts.length ? ' · <span style="color:var(--ink-3); font-weight:500;">' + metaParts.join(' · ') + '</span>' : '';
 
-        return '<div class="project-card exp-card-item" style="display:flex; flex-direction:column; gap:16px; padding:26px 28px; border:1.5px solid var(--sidebar-border); border-radius:18px; background:var(--surface); box-shadow:0 2px 8px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02); transition:var(--t-spring);">' +
+        var isVis = isItemVisible('experiences', exp.id);
+        var visBadge = isVis
+            ? '<span style="background:var(--g-green-soft); color:var(--g-green); font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:20px; border:1px solid rgba(52,168,83,0.3); flex-shrink:0; display:inline-flex; align-items:center; gap:4px;">👁️ Visible</span>'
+            : '<span style="background:var(--g-red-soft); color:var(--g-red); font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:20px; border:1px solid rgba(234,67,53,0.3); flex-shrink:0; display:inline-flex; align-items:center; gap:4px;">🚫 Hidden</span>';
+
+        return '<div class="project-card exp-card-item" style="display:flex; flex-direction:column; gap:16px; padding:26px 28px; border:1.5px solid var(--sidebar-border); border-radius:18px; background:var(--surface); box-shadow:0 2px 8px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02); transition:var(--t-spring);' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             '<div style="display:flex; gap:16px; align-items:flex-start;">' +
                 (exp.logo_url ? '<div style="width:52px; height:52px; border-radius:12px; border:1.5px solid var(--line); background:#fff; padding:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:var(--shadow-sm);"><img src="' + esc(exp.logo_url) + '" alt="Logo" style="width:100%; height:100%; object-fit:contain;"></div>' : '<div style="width:52px; height:52px; border-radius:12px; background:rgba(52,168,83,0.1); color:var(--g-green); display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0;">💼</div>') +
                 '<div style="flex:1;">' +
@@ -13870,13 +14364,23 @@ function renderExperiencesGrid() {
                     '<div style="font-size:0.92rem; font-weight:700; color:var(--g-blue); margin-top:4px;">' + esc(exp.company) + metaStr + '</div>' +
                     '<div style="font-size:0.8rem; color:var(--ink-4); margin-top:5px; font-weight:500;">' + dateRange + '</div>' +
                 '</div>' +
-                (exp.is_current ? '<span style="background:var(--g-green-soft); color:var(--g-green); font-size:0.72rem; font-weight:800; padding:4px 12px; border-radius:20px; border:1px solid rgba(52,168,83,0.3); flex-shrink:0;">ACTIVE</span>' : '') +
+                '<div style="display:flex; align-items:center; gap:8px;">' +
+                    visBadge +
+                    (exp.is_current ? '<span style="background:var(--g-green-soft); color:var(--g-green); font-size:0.72rem; font-weight:800; padding:4px 12px; border-radius:20px; border:1px solid rgba(52,168,83,0.3); flex-shrink:0;">ACTIVE</span>' : '') +
+                '</div>' +
             '</div>' +
             (exp.description ? formatDashboardExpDescriptionHtml(exp.description) : '') +
             (stackPills ? '<div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; padding-top:8px;">' + stackPills + '</div>' : '') +
-            '<div style="display:flex; gap:10px; justify-content:flex-end; align-items:center; border-top:1.5px solid var(--line-soft); padding-top:16px; margin-top:8px;">' +
-                '<button class="btn-sm-ghost" onclick="openExperienceDrawerById(\'' + exp.id + '\')" style="font-size:0.82rem; font-weight:700; padding:8px 18px; border-radius:10px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink-2); cursor:pointer;">Edit</button>' +
-                '<button class="btn-sm-ghost" onclick="deleteExperience(\'' + exp.id + '\')" style="font-size:0.82rem; font-weight:700; padding:8px 18px; color:var(--g-red); border-radius:10px; border:1.5px solid rgba(234,67,53,0.25); background:var(--g-red-soft); cursor:pointer;">Delete</button>' +
+            '<div style="display:flex; gap:10px; justify-content:space-between; align-items:center; border-top:1.5px solid var(--line-soft); padding-top:16px; margin-top:8px;">' +
+                '<div>' +
+                    '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'experiences\', \'' + exp.id + '\', this)" style="font-size:0.82rem; font-weight:700; padding:8px 14px; border-radius:10px; border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">' +
+                        (isVis ? '<span>🚫 Hide from Portfolio</span>' : '<span>👁️ Show on Portfolio</span>') +
+                    '</button>' +
+                '</div>' +
+                '<div style="display:flex; gap:10px;">' +
+                    '<button class="btn-sm-ghost" onclick="openExperienceDrawerById(\'' + exp.id + '\')" style="font-size:0.82rem; font-weight:700; padding:8px 18px; border-radius:10px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink-2); cursor:pointer;">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deleteExperience(\'' + exp.id + '\')" style="font-size:0.82rem; font-weight:700; padding:8px 18px; color:var(--g-red); border-radius:10px; border:1.5px solid rgba(234,67,53,0.25); background:var(--g-red-soft); cursor:pointer;">Delete</button>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -14294,7 +14798,12 @@ function renderEducationsGrid() {
 
         var dateRange = esc(edu.start_date || '') + (edu.end_date ? ' — ' + esc(edu.end_date) : '');
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:18px; padding:26px 28px; border:1.5px solid var(--sidebar-border); border-radius:18px; background:var(--surface); box-shadow:0 2px 10px rgba(0,0,0,0.03); transition:all 0.2s ease;">' +
+        var isVis = isItemVisible('educations', edu.id);
+        var visBadge = isVis
+            ? '<span style="background:var(--g-green-soft); color:var(--g-green); font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:20px; border:1px solid rgba(52,168,83,0.3); flex-shrink:0; display:inline-flex; align-items:center; gap:4px;">👁️ Visible</span>'
+            : '<span style="background:var(--g-red-soft); color:var(--g-red); font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:20px; border:1px solid rgba(234,67,53,0.3); flex-shrink:0; display:inline-flex; align-items:center; gap:4px;">🚫 Hidden</span>';
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:18px; padding:26px 28px; border:1.5px solid var(--sidebar-border); border-radius:18px; background:var(--surface); box-shadow:0 2px 10px rgba(0,0,0,0.03); transition:all 0.2s ease;' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             '<div style="display:flex; gap:18px; align-items:flex-start;">' +
                 (edu.logo_url ? '<div style="width:52px; height:52px; border-radius:12px; border:1px solid var(--sidebar-border); background:#fff; display:flex; align-items:center; justify-content:center; padding:6px; flex-shrink:0; box-shadow:0 2px 6px rgba(0,0,0,0.04);"><img src="' + esc(edu.logo_url) + '" alt="Logo" style="max-width:100%; max-height:100%; object-fit:contain;"></div>' : '<div style="width:52px; height:52px; border-radius:12px; background:var(--g-blue-soft); color:var(--g-blue); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.3rem; flex-shrink:0;">🎓</div>') +
                 '<div style="flex:1; min-width:0;">' +
@@ -14302,7 +14811,8 @@ function renderEducationsGrid() {
                     '<div style="font-size:0.92rem; font-weight:700; color:var(--g-blue); margin-top:4px;">' + esc(edu.institution) + '</div>' +
                     '<div style="font-size:0.8rem; color:var(--ink-4); margin-top:4px; font-weight:500;">' + dateRange + '</div>' +
                 '</div>' +
-                '<div style="text-align:right; flex-shrink:0;">' +
+                '<div style="text-align:right; flex-shrink:0; display:flex; flex-direction:column; align-items:flex-end; gap:6px;">' +
+                    visBadge +
                     (edu.grade ? '<div style="font-size:1.1rem; font-weight:800; color:var(--ink);">' + esc(edu.grade) + '</div>' : '') +
                     (edu.honors ? '<div style="font-size:0.75rem; font-weight:700; color:var(--g-green); margin-top:2px;">' + esc(edu.honors) + '</div>' : '') +
                 '</div>' +
@@ -14317,9 +14827,16 @@ function renderEducationsGrid() {
                 var chips = pAwards.map(function(aw){ return '<span style="font-size:0.74rem; font-weight:700; background:rgba(251,188,4,0.14); color:#B45309; padding:4px 10px; border-radius:8px; display:inline-flex; align-items:center; gap:4px;">🏆 ' + esc(aw) + '</span>'; }).join('');
                 return '<div><div style="font-size:0.75rem; font-weight:700; color:var(--ink-4); text-transform:uppercase; margin-bottom:6px; letter-spacing:0.04em;">Academic Honors &amp; Awards</div><div style="display:flex; flex-wrap:wrap; gap:6px;">' + chips + '</div></div>';
             })() +
-            '<div style="display:flex; gap:10px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:16px; margin-top:auto;">' +
-                '<button class="btn-sm-ghost" onclick="openEducationDrawerById(\'' + edu.id + '\')" style="font-size:0.8rem; font-weight:700; padding:8px 18px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); cursor:pointer;">Edit</button>' +
-                '<button class="btn-sm-ghost" onclick="deleteEducation(\'' + edu.id + '\')" style="font-size:0.8rem; font-weight:700; padding:8px 18px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.25); background:var(--g-red-soft); cursor:pointer;">Delete</button>' +
+            '<div style="display:flex; gap:10px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:16px; margin-top:auto;">' +
+                '<div>' +
+                    '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'educations\', \'' + edu.id + '\', this)" style="font-size:0.8rem; font-weight:700; padding:7px 14px; border-radius:var(--r-pill); border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">' +
+                        (isVis ? '<span>🚫 Hide from Portfolio</span>' : '<span>👁️ Show on Portfolio</span>') +
+                    '</button>' +
+                '</div>' +
+                '<div style="display:flex; gap:10px;">' +
+                    '<button class="btn-sm-ghost" onclick="openEducationDrawerById(\'' + edu.id + '\')" style="font-size:0.8rem; font-weight:700; padding:8px 18px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface); cursor:pointer;">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deleteEducation(\'' + edu.id + '\')" style="font-size:0.8rem; font-weight:700; padding:8px 18px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.25); background:var(--g-red-soft); cursor:pointer;">Delete</button>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -15547,21 +16064,36 @@ function renderCertificationsGrid() {
             return '<span style="background:#e8f0fe; color:#1a73e8; font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px;">' + esc(s) + '</span>';
         }).join('');
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+        var isVis = isItemVisible('certifications', cert.id);
+        var visBadge = isVis
+            ? '<span style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
                 '<div style="flex:1;">' +
                     '<div style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(cert.title) + '</div>' +
                     '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(cert.issuer) + '</div>' +
                     (cert.issue_date ? '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:3px;">Issued ' + esc(cert.issue_date) + '</div>' : '') +
                 '</div>' +
-                (cert.category ? '<span style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">' + esc(cert.category) + '</span>' : '') +
+                '<div style="display:flex; align-items:center; gap:6px;">' +
+                    visBadge +
+                    (cert.category ? '<span style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">' + esc(cert.category) + '</span>' : '') +
+                '</div>' +
             '</div>' +
             (cert.image_url ? '<div style="width:100%; aspect-ratio:16/9; max-height:140px; border-radius:8px; overflow:hidden; border:1px solid var(--sidebar-border); background:#f8fafc; display:flex; align-items:center; justify-content:center; margin-top:4px;"><img src="' + esc(cert.image_url) + '" style="width:100%; height:100%; object-fit:contain; background:#ffffff; padding:4px;" alt="' + esc(cert.title) + '"></div>' : '') +
             (skillsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;">' + skillsPills + '</div>' : '') +
             (cert.credential_url ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(cert.credential_url) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 View Credential ↗</a></div>' : '') +
-            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
-                '<button class="btn-sm-ghost" onclick="openCertificationDrawerById(\'' + cert.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
-                '<button class="btn-sm-ghost" onclick="deleteCertification(\'' + cert.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '<div style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<div>' +
+                    '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'certifications\', \'' + cert.id + '\', this)" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer;" title="' + (isVis ? 'Hide from portfolio' : 'Show on portfolio') + '">' +
+                        (isVis ? 'Hide' : 'Show') +
+                    '</button>' +
+                '</div>' +
+                '<div style="display:flex; gap:8px;">' +
+                    '<button class="btn-sm-ghost" onclick="openCertificationDrawerById(\'' + cert.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deleteCertification(\'' + cert.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -15754,6 +16286,8 @@ function renderAwardsGrid() {
     }
 
     grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(360px, 1fr))';
+    grid.style.gap = '20px';
     if (empty) empty.style.display = 'none';
 
     grid.innerHTML = filtered.map(function(aw) {
@@ -15761,12 +16295,12 @@ function renderAwardsGrid() {
             return '<span style="background:var(--sidebar-hover); color:var(--ink-2); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; border:1px solid var(--sidebar-border);">' + esc(c) + '</span>';
         }).join('');
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
-            (aw.image_url ? '<div style="border-radius:10px; overflow:hidden; border:1px solid var(--sidebar-border); height:120px; margin-bottom:4px; background:#0b0f19;"><img src="' + esc(aw.image_url) + '" style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;" /></div>' : '') +
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:20px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface); box-shadow:var(--shadow-sm);">' +
+            (aw.image_url ? '<div style="width:100%; aspect-ratio:16/10.5; max-height:220px; border-radius:10px; overflow:hidden; border:1.5px solid var(--sidebar-border); background:radial-gradient(circle at 50% 50%, #171b26 0%, #0a0d14 100%); display:flex; align-items:center; justify-content:center; padding:8px; margin-bottom:4px; cursor:zoom-in;" onclick="window.open(\'' + esc(aw.image_url) + '\', \'_blank\')" title="Click to view full certificate proof"><img src="' + esc(aw.image_url) + '" style="width:100%; height:100%; object-fit:contain; border-radius:6px; box-shadow:0 4px 14px rgba(0,0,0,0.4); display:block;" alt="' + esc(aw.title) + '" /></div>' : '') +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
                 '<div style="flex:1;">' +
-                    '<div style="font-size:1.02rem; font-weight:800; color:var(--ink);">' + esc(aw.title) + '</div>' +
-                    '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(aw.issuer) + '</div>' +
+                    '<div style="font-size:1.02rem; font-weight:800; color:var(--ink); line-height:1.35;">' + esc(aw.title) + '</div>' +
+                    '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:3px;">' + esc(aw.issuer) + '</div>' +
                     (aw.metric_tag ? '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:3px;">' + esc(aw.metric_tag) + '</div>' : '') +
                 '</div>' +
                 (aw.badge_text ? '<span style="background:var(--g-yellow-soft); color:var(--ink); font-size:0.72rem; font-weight:800; padding:3px 10px; border-radius:10px; border:1px solid rgba(251,188,4,0.4); flex-shrink:0;">' + esc(aw.badge_text) + '</span>' : '') +

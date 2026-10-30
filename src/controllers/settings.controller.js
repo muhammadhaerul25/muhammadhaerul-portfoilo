@@ -101,6 +101,22 @@ const DEFAULT_SETTINGS = {
         maxVisible: 3,
         source: "all",
         activeIds: []
+    },
+    theme: {
+        enabled: true,
+        defaultMode: "auto"
+    },
+    hiddenItems: {
+        experiences: [],
+        projects: [],
+        educations: [],
+        certifications: [],
+        awards: [],
+        talks: [],
+        publications: [],
+        blogs: [],
+        skills: [],
+        gallery: []
     }
 };
 
@@ -139,10 +155,34 @@ function mergeSettings(base, override) {
         activeIds: activeIds
     };
 
+    const themeBase = base.theme || { enabled: true, defaultMode: "auto" };
+    const themeOverride = override.theme || {};
+    const mergedTheme = {
+        enabled: (themeOverride.enabled !== undefined) ? Boolean(themeOverride.enabled) : (themeBase.enabled !== false),
+        defaultMode: themeOverride.defaultMode || themeBase.defaultMode || "auto"
+    };
+
+    const baseHidden = base.hiddenItems || {};
+    const overHidden = override.hiddenItems || {};
+    const mergedHidden = {
+        experiences: Array.isArray(overHidden.experiences) ? overHidden.experiences : (Array.isArray(baseHidden.experiences) ? baseHidden.experiences : []),
+        projects: Array.isArray(overHidden.projects) ? overHidden.projects : (Array.isArray(baseHidden.projects) ? baseHidden.projects : []),
+        educations: Array.isArray(overHidden.educations) ? overHidden.educations : (Array.isArray(baseHidden.educations) ? baseHidden.educations : []),
+        certifications: Array.isArray(overHidden.certifications) ? overHidden.certifications : (Array.isArray(baseHidden.certifications) ? baseHidden.certifications : []),
+        awards: Array.isArray(overHidden.awards) ? overHidden.awards : (Array.isArray(baseHidden.awards) ? baseHidden.awards : []),
+        talks: Array.isArray(overHidden.talks) ? overHidden.talks : (Array.isArray(baseHidden.talks) ? baseHidden.talks : []),
+        publications: Array.isArray(overHidden.publications) ? overHidden.publications : (Array.isArray(baseHidden.publications) ? baseHidden.publications : []),
+        blogs: Array.isArray(overHidden.blogs) ? overHidden.blogs : (Array.isArray(baseHidden.blogs) ? baseHidden.blogs : []),
+        skills: Array.isArray(overHidden.skills) ? overHidden.skills : (Array.isArray(baseHidden.skills) ? baseHidden.skills : []),
+        gallery: Array.isArray(overHidden.gallery) ? overHidden.gallery : (Array.isArray(baseHidden.gallery) ? baseHidden.gallery : [])
+    };
+
     return {
         general: Object.assign({}, base.general, override.general || {}),
         navbar: Object.assign({}, base.navbar, override.navbar || {}),
         imageSlideshow: mergedSlideshow,
+        theme: mergedTheme,
+        hiddenItems: mergedHidden,
         hero: Object.assign({}, base.hero, override.hero || {}, {
             showGlimpse: isSlideshowEnabled,
             glimpseActiveIds: activeIds
@@ -227,9 +267,72 @@ async function updateSettings(req, res) {
     }
 }
 
+async function toggleItemVisibility(req, res) {
+    try {
+        const { section, id, visible } = req.body;
+        if (!section || !id) {
+            return res.status(400).json({ success: false, error: 'Section and ID are required' });
+        }
+
+        const rows = await prisma.$queryRawUnsafe(`
+            SELECT value FROM site_settings WHERE key = $1 LIMIT 1
+        `, SETTINGS_KEY);
+
+        let current = DEFAULT_SETTINGS;
+        if (rows && rows.length > 0 && rows[0].value) {
+            current = mergeSettings(DEFAULT_SETTINGS, rows[0].value);
+        }
+
+        const hidden = current.hiddenItems || {};
+        let list = Array.isArray(hidden[section]) ? [...hidden[section]] : [];
+
+        if (visible === true) {
+            list = list.filter(item => String(item) !== String(id));
+        } else if (visible === false) {
+            if (!list.map(String).includes(String(id))) list.push(String(id));
+        } else {
+            if (list.map(String).includes(String(id))) {
+                list = list.filter(item => String(item) !== String(id));
+            } else {
+                list.push(String(id));
+            }
+        }
+
+        hidden[section] = list;
+        current.hiddenItems = hidden;
+
+        const jsonStr = JSON.stringify(current);
+        await prisma.$executeRawUnsafe(`
+            INSERT INTO site_settings (key, value, updated_at)
+            VALUES ($1, $2::jsonb, NOW())
+            ON CONFLICT (key) DO UPDATE SET
+                value = EXCLUDED.value,
+                updated_at = NOW()
+        `, SETTINGS_KEY, jsonStr);
+
+        cache.del('site_settings');
+        cache.del('portfolio:bootstrap');
+        cache.del('portfolio_bootstrap');
+        cache.del(section);
+        cache.del(section + ':all');
+
+        return res.json({
+            success: true,
+            section,
+            id,
+            isVisible: !list.map(String).includes(String(id)),
+            hiddenItems: hidden
+        });
+    } catch (err) {
+        console.error('[Settings] Error toggling item visibility:', err);
+        return res.status(500).json({ success: false, error: err.message });
+    }
+}
+
 module.exports = {
     getSettings,
     updateSettings,
+    toggleItemVisibility,
     DEFAULT_SETTINGS,
     mergeSettings
 };
