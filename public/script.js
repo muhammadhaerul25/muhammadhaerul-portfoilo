@@ -532,8 +532,8 @@
     const line3 = (hero.titleLine3 !== undefined) ? hero.titleLine3 : 'for real-world use cases';
 
     return `<span class="hero-title-line">${formatHeroLine1(line1)}</span>` +
-           `<span class="hero-title-line"><span class="hero-ai-gradient">${escapeHtml(line2)}</span></span>` +
-           (line3 ? `<span class="hero-title-line">${escapeHtml(line3)}</span>` : '');
+      `<span class="hero-title-line"><span class="hero-ai-gradient">${escapeHtml(line2)}</span></span>` +
+      (line3 ? `<span class="hero-title-line">${escapeHtml(line3)}</span>` : '');
   }
 
   function applyTranslations(lang) {
@@ -764,7 +764,7 @@
     window.switchPortfolioLanguage(initialLang);
   }
 
-  window.switchPortfolioLanguage = function(lang) {
+  window.switchPortfolioLanguage = function (lang) {
     currentLang = lang === 'id' ? 'id' : 'en';
     localStorage.setItem('mh_lang', currentLang);
 
@@ -896,7 +896,7 @@
     if (!d) return '—';
     try {
       return new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
-    } catch(e) {
+    } catch (e) {
       return d;
     }
   }
@@ -926,7 +926,7 @@
   }
 
   // Toggle Read More / Read Less for clamped text in cards
-  window.toggleCardReadMore = function(btn, targetId) {
+  window.toggleCardReadMore = function (btn, targetId) {
     if (!btn) return;
     const target = document.getElementById(targetId);
     if (!target) return;
@@ -947,7 +947,7 @@
   };
 
   // Toggle Read More / Read Less for Skill Specialization Cards (shows/hides bullet sub-lists)
-  window.toggleSkillCardDetails = function(btn) {
+  window.toggleSkillCardDetails = function (btn) {
     if (!btn) return;
     const card = btn.closest('.unified-spec-card');
     if (!card) return;
@@ -1018,7 +1018,7 @@
   }
 
   // Play Video Directly Inside Project Card
-  window.playCardVideo = function(id, ytId) {
+  window.playCardVideo = function (id, ytId) {
     const container = document.getElementById(`p-media-${id}`);
     if (!container) return;
     container.innerHTML = `
@@ -1046,30 +1046,30 @@
 
     if (filter === 'cv') {
       return full.includes('yolo') || full.includes('opencv') || full.includes('object detection') ||
-             full.includes('ocr') || full.includes('alpr') || full.includes('computer vision') ||
-             full.includes('lontara') || full.includes('ppe') || full.includes('product recognition') ||
-             (full.includes('vision') && !full.includes('data visualization'));
+        full.includes('ocr') || full.includes('alpr') || full.includes('computer vision') ||
+        full.includes('lontara') || full.includes('ppe') || full.includes('product recognition') ||
+        (full.includes('vision') && !full.includes('data visualization'));
     }
     if (filter === 'nlp') {
       return full.includes('nlp') || full.includes('natural language') || full.includes('semantic') ||
-             full.includes('transcription') || full.includes('whisper') || full.includes('speech recognition') ||
-             full.includes('sentiment') || full.includes('rag') || full.includes('chatbot') ||
-             full.includes('english learning') || full.includes('search engine');
+        full.includes('transcription') || full.includes('whisper') || full.includes('speech recognition') ||
+        full.includes('sentiment') || full.includes('rag') || full.includes('chatbot') ||
+        full.includes('english learning') || full.includes('search engine');
     }
     if (filter === 'llm') {
       return full.includes('llm') || full.includes('rag') || full.includes('agent') ||
-             full.includes('gemini') || full.includes('flowise') || full.includes('openai') ||
-             full.includes('huggingface') || full.includes('chatbot') || full.includes('ai update hub');
+        full.includes('gemini') || full.includes('flowise') || full.includes('openai') ||
+        full.includes('huggingface') || full.includes('chatbot') || full.includes('ai update hub');
     }
     if (filter === 'data') {
       return full.includes('tableau') || full.includes('analytics') || full.includes('data visualization') ||
-             full.includes('data science') || full.includes('dashboard') || full.includes('business intelligence');
+        full.includes('data science') || full.includes('dashboard') || full.includes('business intelligence');
     }
     if (filter === 'web') {
       return full.includes('full-stack') || full.includes('react') || full.includes('fastapi') ||
-             full.includes('typescript') || full.includes('javascript') || full.includes('flask') ||
-             full.includes('html') || full.includes('android') || full.includes('frontend') ||
-             full.includes('backend') || full.includes('mobile');
+        full.includes('typescript') || full.includes('javascript') || full.includes('flask') ||
+        full.includes('html') || full.includes('android') || full.includes('frontend') ||
+        full.includes('backend') || full.includes('mobile');
     }
     return true;
   }
@@ -1155,7 +1155,7 @@
           </div>
         `;
       }
-      
+
       // Tech tags
       const techTags = (p.techStack || []).map(t => {
         const clean = t.includes(':') ? t.split(':')[1].trim() : t.trim();
@@ -1235,7 +1235,7 @@
         paginationControls.innerHTML = '';
       } else {
         paginationWrap.style.display = 'flex';
-        paginationInfo.innerHTML = showAllProjects 
+        paginationInfo.innerHTML = showAllProjects
           ? `Showing all <strong>${totalProjects}</strong> projects`
           : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalProjects}</strong> projects`;
 
@@ -1266,8 +1266,8 @@
           `;
         }
 
-        const toggleBtnLabel = showAllProjects 
-          ? `Paginated (6 / page)` 
+        const toggleBtnLabel = showAllProjects
+          ? `Paginated (6 / page)`
           : `Browse All (${totalProjects})`;
         controlsHtml += `
           <button type="button" class="p-page-toggle-btn" onclick="window.open('/projects', '_blank')" title="Open projects collection in a new dedicated page">
@@ -1282,7 +1282,7 @@
   }
 
   // Global Page Handler
-  window.changeProjectPage = function(page) {
+  window.changeProjectPage = function (page) {
     showAllProjects = false;
     currentProjectPage = page;
     renderProjects(currentProjectFilter, page);
@@ -1293,7 +1293,7 @@
   };
 
   // Global Toggle All Projects
-  window.toggleShowAllProjects = function() {
+  window.toggleShowAllProjects = function () {
     showAllProjects = !showAllProjects;
     renderProjects(currentProjectFilter, currentProjectPage);
   };
@@ -1378,8 +1378,8 @@
       const mediaPages = getTalkMediaPages(t, isId);
       const initialMedia = mediaPages[0] || { url: posterImg, label: 'Poster', type: 'poster' };
       const hasMediaTabs = mediaPages.length > 1;
-      
-      const topicsHtml = (t.topics || []).slice(0, 4).map(top => 
+
+      const topicsHtml = (t.topics || []).slice(0, 4).map(top =>
         `<span class="talk-topic-pill">${escapeHtml(top)}</span>`
       ).join('');
 
@@ -1509,8 +1509,8 @@
           `;
         }
 
-        const toggleBtnLabel = showAllTalks 
-          ? `Paginated (9 / page)` 
+        const toggleBtnLabel = showAllTalks
+          ? `Paginated (9 / page)`
           : `Browse All (${totalTalks})`;
         controlsHtml += `
           <button type="button" class="p-page-toggle-btn" onclick="window.open('/talks', '_blank')" title="Open talks archive in a new dedicated page">
@@ -1524,7 +1524,7 @@
     }
   }
 
-  window.changeTalkPage = function(page) {
+  window.changeTalkPage = function (page) {
     showAllTalks = false;
     currentTalkPage = page;
     renderTalks(page);
@@ -1532,7 +1532,7 @@
     if (tSection) tSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  window.toggleShowAllTalks = function() {
+  window.toggleShowAllTalks = function () {
     showAllTalks = !showAllTalks;
     renderTalks(currentTalkPage);
   };
@@ -1709,8 +1709,8 @@
 
     // Dynamically update score banner using workshop feedbacks only
     const validRatings = workshopFeedbacks.map(f => Number(f.rating)).filter(r => !isNaN(r) && r > 0);
-    const avgScore = validRatings.length 
-      ? (validRatings.reduce((acc, r) => acc + r, 0) / validRatings.length).toFixed(1) 
+    const avgScore = validRatings.length
+      ? (validRatings.reduce((acc, r) => acc + r, 0) / validRatings.length).toFixed(1)
       : '9.4';
     const scoreBig = document.querySelector('.t-score-big');
     if (scoreBig) scoreBig.textContent = avgScore;
@@ -1905,8 +1905,8 @@
           `;
         }
 
-        const toggleBtnLabel = showAllFeedbacks 
-          ? `Paginated (9 / page)` 
+        const toggleBtnLabel = showAllFeedbacks
+          ? `Paginated (9 / page)`
           : `Browse All (${totalFeedbacks})`;
         controlsHtml += `
           <button type="button" class="p-page-toggle-btn" onclick="window.open('/feedbacks', '_blank')" title="Open verified feedbacks in a new dedicated page">
@@ -1920,13 +1920,13 @@
     }
   }
 
-  window.handleFeedbackSortChange = function(val) {
+  window.handleFeedbackSortChange = function (val) {
     currentFeedbackSort = val;
     currentFeedbackPage = 1;
     renderTestimonials(1);
   };
 
-  window.changeFeedbackPage = function(page) {
+  window.changeFeedbackPage = function (page) {
     showAllFeedbacks = false;
     currentFeedbackPage = page;
     renderTestimonials(page);
@@ -1934,7 +1934,7 @@
     if (fSection) fSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  window.toggleShowAllFeedbacks = function() {
+  window.toggleShowAllFeedbacks = function () {
     showAllFeedbacks = !showAllFeedbacks;
     renderTestimonials(currentFeedbackPage);
   };
@@ -2032,7 +2032,7 @@
   }
 
   // Window toggle helper for expandable experience projects
-  window.toggleTimelineProjects = function(btn, drawerId) {
+  window.toggleTimelineProjects = function (btn, drawerId) {
     const drawer = document.getElementById(drawerId);
     if (!drawer) return;
     const isExpanded = btn.getAttribute('aria-expanded') === 'true';
@@ -2229,33 +2229,33 @@
               <small>Honors</small>
             </div>
             <div>
-              ${(function(){
-                var aItems = [];
-                if (edu.awards_summary) {
-                  var raw = String(edu.awards_summary).trim();
-                  if (raw.startsWith('[') && raw.endsWith(']')) {
-                    try { aItems = JSON.parse(raw); } catch(e) {}
-                  } else if (raw.includes('\n')) {
-                    aItems = raw.split('\n').map(s => s.trim()).filter(Boolean);
-                  } else {
-                    aItems = [raw];
-                  }
-                }
-                var pAward = aItems.length ? aItems[0] : 'Most Outstanding Student in Department (2021/2022/2023)';
-                var aMetric = '3×';
-                var cleanAward = pAward;
-                var match = pAward.match(/^([0-9]+[×xX]|🏆|\d{4}[–-]\d{4})\s*(.*)$/);
-                if (match) {
-                  aMetric = match[1];
-                  cleanAward = match[2] || pAward;
-                } else if (aItems.length > 1) {
-                  aMetric = aItems.length + '×';
-                } else if (pAward.includes('2021') || pAward.toLowerCase().includes('outstanding')) {
-                  aMetric = '3×';
-                }
-                return `<span>${escapeHtml(aMetric)}</span>
+              ${(function () {
+          var aItems = [];
+          if (edu.awards_summary) {
+            var raw = String(edu.awards_summary).trim();
+            if (raw.startsWith('[') && raw.endsWith(']')) {
+              try { aItems = JSON.parse(raw); } catch (e) { }
+            } else if (raw.includes('\n')) {
+              aItems = raw.split('\n').map(s => s.trim()).filter(Boolean);
+            } else {
+              aItems = [raw];
+            }
+          }
+          var pAward = aItems.length ? aItems[0] : 'Most Outstanding Student in Department (2021/2022/2023)';
+          var aMetric = '3×';
+          var cleanAward = pAward;
+          var match = pAward.match(/^([0-9]+[×xX]|🏆|\d{4}[–-]\d{4})\s*(.*)$/);
+          if (match) {
+            aMetric = match[1];
+            cleanAward = match[2] || pAward;
+          } else if (aItems.length > 1) {
+            aMetric = aItems.length + '×';
+          } else if (pAward.includes('2021') || pAward.toLowerCase().includes('outstanding')) {
+            aMetric = '3×';
+          }
+          return `<span>${escapeHtml(aMetric)}</span>
                 <small>${escapeHtml(cleanAward)}</small>`;
-              })()}
+        })()}
             </div>
           </div>
         </div>
@@ -2279,7 +2279,7 @@
     return '✨';
   }
 
-  window.filterSkillsSpecialization = function(cat, btn) {
+  window.filterSkillsSpecialization = function (cat, btn) {
     const pills = document.querySelectorAll('.skills-nav-pill');
     pills.forEach(p => p.classList.remove('active'));
     if (btn) {
@@ -2314,14 +2314,14 @@
           <span>✨ All</span>
         </button>
         ${skills.map(s => {
-          const slug = s.category_slug || (s.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-          const icon = getSkillCategoryIcon(s.category);
-          return `
+        const slug = s.category_slug || (s.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+        const icon = getSkillCategoryIcon(s.category);
+        return `
             <button class="skills-nav-pill" data-cat="${escapeHtml(slug)}" onclick="filterSkillsSpecialization('${escapeHtml(slug)}', this)">
               <span>${icon} ${escapeHtml(s.category)}</span>
             </button>
           `;
-        }).join('')}
+      }).join('')}
       `;
     }
 
@@ -2342,8 +2342,8 @@
             .filter(Boolean);
 
           const matchedTech = techList[idx] || techList.find(t => (it.name || '').toLowerCase().includes((t.name || '').toLowerCase()));
-          const techIcon = (matchedTech && matchedTech.icon_svg) 
-            ? matchedTech.icon_svg 
+          const techIcon = (matchedTech && matchedTech.icon_svg)
+            ? matchedTech.icon_svg
             : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
 
           return `
@@ -2628,7 +2628,7 @@
 
     if (paginationWrap && paginationInfo && paginationControls) {
       paginationWrap.style.display = 'flex';
-      
+
       const isId = isIndonesian();
       paginationInfo.innerHTML = isId
         ? `Menampilkan <strong>${startIndex + 1}–${endIndex}</strong> dari <strong>${totalCerts}</strong> lisensi &amp; sertifikasi`
@@ -2667,7 +2667,7 @@
     }
   }
 
-  window.changeCertPage = function(page) {
+  window.changeCertPage = function (page) {
     const totalPages = Math.ceil(((liveCertifications || []).length) / CERTS_PER_PAGE) || 1;
     if (page < 1 || page > totalPages) return;
     currentCertPage = page;
@@ -2801,7 +2801,7 @@
     }
   }
 
-  window.changeAwardPage = function(page) {
+  window.changeAwardPage = function (page) {
     const totalAwards = (liveAwards || []).length;
     const totalPages = Math.ceil(totalAwards / AWARDS_PER_PAGE) || 1;
     if (page < 1 || page > totalPages) return;
@@ -2926,7 +2926,7 @@
   }
 
   // Modal Handlers Attached to Window
-  window.openProjectModal = function(id) {
+  window.openProjectModal = function (id) {
     const p = liveProjects.find(item => item.id === id);
     if (!p) return;
 
@@ -3000,7 +3000,7 @@
     document.body.style.overflow = 'hidden';
   };
 
-  window.closeProjectModal = function() {
+  window.closeProjectModal = function () {
     const overlay = document.getElementById('projectModalOverlay');
     const bodyEl = document.getElementById('pmBody');
     if (overlay) overlay.classList.remove('active');
@@ -3008,7 +3008,7 @@
     document.body.style.overflow = '';
   };
 
-  window.openTalkModal = function(id) {
+  window.openTalkModal = function (id) {
     const t = liveTalks.find(item => item.id === id);
     if (!t) return;
 
@@ -3104,7 +3104,7 @@
     document.body.style.overflow = 'hidden';
   };
 
-  window.closeTalkModal = function() {
+  window.closeTalkModal = function () {
     const overlay = document.getElementById('talkModalOverlay');
     if (overlay) overlay.classList.remove('active');
     document.body.style.overflow = '';
@@ -3112,7 +3112,7 @@
 
   /* ============ TOAST NOTIFICATION ============ */
   let toastTimeout = null;
-  window.showToast = function(msg) {
+  window.showToast = function (msg) {
     const toast = document.getElementById('portfolioToast');
     if (!toast) return;
     toast.textContent = msg;
@@ -3124,7 +3124,7 @@
   };
 
   /* ============ COPY EMAIL TO CLIPBOARD ============ */
-  window.copyEmailToClipboard = function(btn) {
+  window.copyEmailToClipboard = function (btn) {
     const email = 'haerulmuhammad01@gmail.com';
     const targetBtn = btn || document.querySelector('.btn-copy-icon');
     const onDone = () => {
@@ -3161,7 +3161,7 @@
     });
   }
 
-  window.switchTalkPage = function(talkId, imgSrc, btn, altText) {
+  window.switchTalkPage = function (talkId, imgSrc, btn, altText) {
     let wrap = document.getElementById(`talk-prev-${talkId}`);
     if (!wrap && btn) {
       wrap = btn.closest('.talk-poster-wrap');
@@ -3201,7 +3201,7 @@
     }
   };
 
-  window.switchCertPage = function(certId, imgSrc, btn, altText) {
+  window.switchCertPage = function (certId, imgSrc, btn, altText) {
     let container = document.getElementById(`cert-prev-${certId}`);
     if (!container && btn) {
       container = btn.closest('.cert-card-preview-wrap')?.querySelector('.cert-card-preview');
@@ -3234,7 +3234,7 @@
     }
   };
 
-  window.openLightbox = function(src, alt) {
+  window.openLightbox = function (src, alt) {
     if (!src) return;
     const overlay = document.getElementById('lightboxOverlay');
     const img = document.getElementById('lightboxImg');
@@ -3242,7 +3242,7 @@
 
     // Detect standalone certificate/award/speaker/talk images - disable next/previous buttons completely
     const isStandalone = /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|khouw|kalbe|saveclip|whatsapp/i.test(src) ||
-                         /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|speaking|attendee/i.test(alt || '');
+      /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|speaking|attendee/i.test(alt || '');
 
     if (isStandalone) {
       overlay.classList.add('lightbox-no-nav');
@@ -3262,7 +3262,7 @@
     document.body.style.overflow = 'hidden';
   };
 
-  window.prevLightboxImage = function() {
+  window.prevLightboxImage = function () {
     const overlay = document.getElementById('lightboxOverlay');
     if (overlay && overlay.classList.contains('lightbox-no-nav')) return;
     if (!lightboxImages.length) return;
@@ -3275,7 +3275,7 @@
     }
   };
 
-  window.nextLightboxImage = function() {
+  window.nextLightboxImage = function () {
     const overlay = document.getElementById('lightboxOverlay');
     if (overlay && overlay.classList.contains('lightbox-no-nav')) return;
     if (!lightboxImages.length) return;
@@ -3288,7 +3288,7 @@
     }
   };
 
-  window.closeLightbox = function() {
+  window.closeLightbox = function () {
     const overlay = document.getElementById('lightboxOverlay');
     if (overlay) {
       overlay.classList.remove('active');
@@ -3629,9 +3629,9 @@
     if (!stage) return;
 
     const heroCfg = (window.liveSettings && window.liveSettings.hero) ||
-                    (bootstrapData && bootstrapData.settings && bootstrapData.settings.hero) || {};
+      (bootstrapData && bootstrapData.settings && bootstrapData.settings.hero) || {};
     const slideCfg = (window.liveSettings && window.liveSettings.imageSlideshow) ||
-                     (bootstrapData && bootstrapData.settings && bootstrapData.settings.imageSlideshow) || {};
+      (bootstrapData && bootstrapData.settings && bootstrapData.settings.imageSlideshow) || {};
 
     const isEnabled = (slideCfg.enabled !== undefined)
       ? Boolean(slideCfg.enabled)
@@ -4052,8 +4052,8 @@
           applyPageSettings(bootstrapData.settings);
         }
 
-        const locCfg = (bootstrapData.settings && bootstrapData.settings.localization) 
-          ? bootstrapData.settings.localization 
+        const locCfg = (bootstrapData.settings && bootstrapData.settings.localization)
+          ? bootstrapData.settings.localization
           : { bilingualEnabled: true, defaultLanguage: 'en' };
         initLanguageSwitcher(locCfg);
         return;
@@ -4144,7 +4144,7 @@
           const locCfg = res.data.localization || { bilingualEnabled: true, defaultLanguage: 'en' };
           initLanguageSwitcher(locCfg);
         }
-      }).catch(() => {});
+      }).catch(() => { });
     } catch (err) {
       console.warn('[Portfolio Sync] Offline or API error:', err);
     }
@@ -4241,8 +4241,8 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ visitorId: vid, path: window.location.pathname + window.location.hash }),
         keepalive: true
-      }).catch(() => {});
-    } catch (_) {}
+      }).catch(() => { });
+    } catch (_) { }
   })();
 
 })();
