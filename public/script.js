@@ -1305,6 +1305,51 @@
   let currentTalkPage = 1;
   let showAllTalks = false;
 
+  // Helper to resolve multi-image pages for talks (Poster & Certificate / Plakat)
+  function getTalkMediaPages(talk, isId) {
+    if (!talk) return [];
+    const pages = [];
+    const posterSrc = talk.poster_url || (talk.media && talk.media[0]) || null;
+    if (posterSrc) {
+      pages.push({
+        label: isId ? 'Poster' : 'Poster',
+        url: posterSrc,
+        type: 'poster'
+      });
+    }
+
+    // Identify certificate / plakat
+    let certUrl = null;
+    if (Array.isArray(talk.gallery)) {
+      certUrl = talk.gallery.find(img => /cert|sertifikat|plakat|piagam|certificate/i.test(img));
+    }
+    if (!certUrl && Array.isArray(talk.slides)) {
+      const cSlide = talk.slides.find(s => s.type === 'certificate' || /cert|sertifikat|plakat|piagam|certificate/i.test(s.label || ''));
+      if (cSlide) certUrl = cSlide.url;
+    }
+    if (!certUrl && (talk.event || '').toLowerCase().includes('khouw kalbe')) {
+      certUrl = '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg';
+    }
+
+    if (certUrl && certUrl !== posterSrc) {
+      pages.push({
+        label: isId ? 'Sertifikat / Plakat' : 'Certificate / Plaque',
+        url: certUrl,
+        type: 'certificate'
+      });
+    }
+
+    if (!pages.length && certUrl) {
+      pages.push({
+        label: isId ? 'Sertifikat / Plakat' : 'Certificate / Plaque',
+        url: certUrl,
+        type: 'certificate'
+      });
+    }
+
+    return pages;
+  }
+
   // Render Talks Grid with 3x3 Pagination
   function renderTalks(page = currentTalkPage) {
     const grid = document.getElementById('talks-dynamic-grid');
@@ -1329,6 +1374,10 @@
       const dateText = formatTalkDate(t.date);
       const attendeeCount = t.jumlah_peserta ? `${t.jumlah_peserta}+ Attendees` : 'Exclusive Session';
       const posterImg = t.poster_url || '/favicon.webp';
+      const isId = isIndonesian();
+      const mediaPages = getTalkMediaPages(t, isId);
+      const initialMedia = mediaPages[0] || { url: posterImg, label: 'Poster', type: 'poster' };
+      const hasMediaTabs = mediaPages.length > 1;
       
       const topicsHtml = (t.topics || []).slice(0, 4).map(top => 
         `<span class="talk-topic-pill">${escapeHtml(top)}</span>`
@@ -1363,12 +1412,33 @@
 
       return `
         <article class="talk-dynamic-card reveal in-view" data-tid="${t.id}">
-          <div class="talk-poster-wrap" onclick="window.openLightbox('${escapeHtml(posterImg)}', '${escapeHtml(t.event)}')">
-            <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(posterImg)}');"></div>
-            <img class="talk-poster-img" src="${escapeHtml(posterImg)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'" decoding="async">
+          <div class="talk-poster-wrap" id="talk-prev-${escapeHtml(t.id)}"
+            data-active-src="${escapeHtml(initialMedia.url)}"
+            data-active-title="${escapeHtml(t.event)}${hasMediaTabs ? ' (' + escapeHtml(initialMedia.label) + ')' : ''}"
+            onclick="window.openLightbox(this.getAttribute('data-active-src') || '${escapeHtml(posterImg)}', this.getAttribute('data-active-title') || '${escapeHtml(t.event)}')">
+            <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(initialMedia.url)}');"></div>
+            <img class="talk-poster-img" src="${escapeHtml(initialMedia.url)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'" decoding="async">
+            ${hasMediaTabs ? `
+              <div class="talk-media-tabs" role="tablist" aria-label="Talk Media Tabs" onclick="event.stopPropagation();">
+                ${mediaPages.map((p, idx) => `
+                  <button type="button"
+                    class="talk-tab-btn ${idx === 0 ? 'active' : ''}"
+                    role="tab"
+                    aria-selected="${idx === 0 ? 'true' : 'false'}"
+                    onclick="event.stopPropagation(); window.switchTalkPage('${escapeHtml(t.id)}', '${escapeHtml(p.url)}', this, '${escapeHtml(t.event)} (${escapeHtml(p.label)}')">
+                    ${p.type === 'certificate' ? `
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    ` : `
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    `}
+                    <span>${escapeHtml(p.label)}</span>
+                  </button>
+                `).join('')}
+              </div>
+            ` : ''}
             <div class="talk-poster-overlay">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              View Full Poster
+              ${isId ? 'Perbesar Gambar' : 'View Full Image'}
             </div>
           </div>
           <div class="talk-card-body">
@@ -2446,7 +2516,10 @@
       const hasPreview = pages.length > 0;
       const initialPage = pages[0] || null;
 
-      const isLppi = cert.issuer && cert.issuer.toLowerCase().includes('lppi');
+      const isLppi = cert.issuer && (
+        cert.issuer.toLowerCase().includes('lppi') ||
+        cert.issuer.toLowerCase().includes('bank indonesia')
+      );
       const issuerIconHtml = isLppi
         ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
         : escapeHtml(getInitials(cert.issuer));
@@ -2531,11 +2604,6 @@
           <div class="cert-card-mid">
             <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
             ${mediaHtml}
-            ${skills.length ? `
-              <div class="cert-tags-row">
-                ${skills.map(s => `<span class="cert-tag">${escapeHtml(s)}</span>`).join('')}
-              </div>
-            ` : ''}
           </div>
           <div class="cert-card-bottom">
             <span class="cert-status-tag">
@@ -2684,26 +2752,10 @@
                 </div>
               ` : ''}
               <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">${escapeHtml(aw.title)}</h3>
-              <div class="award-issuer-row" style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px; font-size: 0.83rem; color: var(--ink-muted); font-weight: 500;">
+              <div class="award-issuer-row" style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 0.83rem; color: var(--ink-muted); font-weight: 500;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0; opacity:0.8;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 <span>${escapeHtml(aw.issuer)}</span>
               </div>
-            </div>
-
-            <div class="award-doc-slot ${hasImage ? 'has-action' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:pointer;" title="Click to view full certificate proof"` : ''}>
-              <div class="award-doc-slot-info">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>${hasImage ? 'Official Certificate Record' : 'Official Academic Record'}</span>
-              </div>
-              <span class="award-doc-slot-pill ${hasImage ? 'view-pill' : ''}">
-                ${hasImage ? `
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  View Proof
-                ` : `
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>
-                  Verified
-                `}
-              </span>
             </div>
           </div>
         </article>
@@ -3101,23 +3153,53 @@
 
   function updateLightboxList() {
     lightboxImages = [];
-    if (Array.isArray(liveTalks)) {
-      liveTalks.forEach(t => {
-        if (t.poster_url) {
-          lightboxImages.push({ src: t.poster_url, alt: t.event || 'Talk Session' });
-        } else if (Array.isArray(t.media) && t.media.length) {
-          lightboxImages.push({ src: t.media[0], alt: t.event || 'Talk Session' });
-        }
-      });
-    }
-
-    // Also dynamically include any certificate or gallery images rendered on page
-    document.querySelectorAll('.award-cert-img, .cert-preview-img, .gallery-card-thumb').forEach(img => {
+    // Only visual gallery items support next/previous carousel slide navigation
+    document.querySelectorAll('.gallery-card-thumb').forEach(img => {
       if (img.src && !lightboxImages.some(item => item.src === img.src)) {
         lightboxImages.push({ src: img.src, alt: img.alt || 'Visual Gallery' });
       }
     });
   }
+
+  window.switchTalkPage = function(talkId, imgSrc, btn, altText) {
+    let wrap = document.getElementById(`talk-prev-${talkId}`);
+    if (!wrap && btn) {
+      wrap = btn.closest('.talk-poster-wrap');
+    }
+    if (!wrap) return;
+    const img = wrap.querySelector('.talk-poster-img');
+    const backdrop = wrap.querySelector('.talk-poster-backdrop');
+    if (img) {
+      img.style.opacity = '0.35';
+      img.style.filter = 'blur(4px)';
+      img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+      img.src = imgSrc;
+      if (altText) {
+        img.alt = altText;
+        img.title = altText;
+        wrap.setAttribute('data-active-title', altText);
+      }
+      wrap.setAttribute('data-active-src', imgSrc);
+      img.onload = () => {
+        img.style.opacity = '1';
+        img.style.filter = 'none';
+      };
+    }
+    if (backdrop) {
+      backdrop.style.backgroundImage = `url('${imgSrc}')`;
+    }
+    if (btn) {
+      const tabs = btn.closest('.talk-media-tabs');
+      if (tabs) {
+        tabs.querySelectorAll('.talk-tab-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      }
+    }
+  };
 
   window.switchCertPage = function(certId, imgSrc, btn, altText) {
     let container = document.getElementById(`cert-prev-${certId}`);
@@ -3158,11 +3240,11 @@
     const img = document.getElementById('lightboxImg');
     if (!overlay || !img) return;
 
-    // Detect standalone certificate/award images - disable next/previous buttons
-    const isCert = /cert|sertifikat|credential|award|proof|finalis/i.test(src) ||
-                   /cert|sertifikat|credential|award|proof|finalis/i.test(alt || '');
+    // Detect standalone certificate/award/speaker/talk images - disable next/previous buttons completely
+    const isStandalone = /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|khouw|kalbe|saveclip|whatsapp/i.test(src) ||
+                         /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|speaking|attendee/i.test(alt || '');
 
-    if (isCert) {
+    if (isStandalone) {
       overlay.classList.add('lightbox-no-nav');
     } else {
       overlay.classList.remove('lightbox-no-nav');

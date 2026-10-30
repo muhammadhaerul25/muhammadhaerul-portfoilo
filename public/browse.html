@@ -1198,16 +1198,40 @@
           const poster = t.poster_url || '/uploads/talks/default.webp';
           const topics = Array.isArray(t.topics) ? t.topics : [];
           const dateStr = t.date ? new Date(t.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+          const pages = getTalkMediaPages(t, false);
+          const initialMedia = pages[0] || { url: poster, label: 'Poster', type: 'poster' };
+          const hasMediaTabs = pages.length > 1;
 
           return `
             <div class="b-talk-card reveal in-view">
-              <div class="b-talk-media" onclick="openLightbox('${escapeHtml(poster)}', '${escapeHtml(t.event)}')" title="Click to view full event poster">
-                <img class="b-talk-blur-bg" src="${escapeHtml(poster)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                <img class="b-talk-main-img" src="${escapeHtml(poster)}" alt="${escapeHtml(t.event)}" loading="lazy" decoding="async">
+              ${hasMediaTabs ? `
+                <div class="cert-page-tabs" role="tablist" aria-label="Talk Media Pages" style="margin-bottom:8px;">
+                  ${pages.map((p, idx) => `
+                    <button type="button"
+                      class="cert-tab-btn ${idx === 0 ? 'active' : ''}"
+                      role="tab"
+                      aria-selected="${idx === 0 ? 'true' : 'false'}"
+                      onclick="event.stopPropagation(); switchBrowseTalkPage('${escapeHtml(t.id)}', '${escapeHtml(p.url)}', this, '${escapeHtml(t.event)} (${escapeHtml(p.label)}')">
+                      ${p.type === 'certificate' ? `
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                      ` : `
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                      `}
+                      <span>${escapeHtml(p.label)}</span>
+                    </button>
+                  `).join('')}
+                </div>
+              ` : ''}
+              <div class="b-talk-media" id="browse-talk-prev-${escapeHtml(t.id)}"
+                data-active-title="${escapeHtml(t.event)}${hasMediaTabs ? ' (' + escapeHtml(initialMedia.label) + ')' : ''}"
+                onclick="openLightbox(this.querySelector('.b-talk-main-img').src, this.getAttribute('data-active-title') || '${escapeHtml(t.event)}')"
+                title="Click to view full image">
+                <img class="b-talk-blur-bg" src="${escapeHtml(initialMedia.url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                <img class="b-talk-main-img" src="${escapeHtml(initialMedia.url)}" alt="${escapeHtml(t.event)}" loading="lazy" decoding="async">
                 <div class="b-media-zoom-overlay">
                   <span class="b-zoom-btn">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                    View Poster
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    View Full Image
                   </span>
                 </div>
               </div>
@@ -1250,7 +1274,7 @@
           if (activeCategoryFilter === 'genai') return textAll.includes('generative') || textAll.includes('prompt') || textAll.includes('langchain') || textAll.includes('llm');
           if (activeCategoryFilter === 'ml') return textAll.includes('deep learning') || textAll.includes('machine learning') || textAll.includes('mlops');
           if (activeCategoryFilter === 'data') return textAll.includes('data') || textAll.includes('sql') || textAll.includes('python');
-          if (activeCategoryFilter === 'lead') return textAll.includes('digdaya') || textAll.includes('banking') || textAll.includes('leadership') || textAll.includes('lppi');
+          if (activeCategoryFilter === 'lead') return textAll.includes('digdaya') || textAll.includes('banking') || textAll.includes('leadership') || textAll.includes('lppi') || textAll.includes('bank indonesia');
           return true;
         });
 
@@ -1265,7 +1289,7 @@
           const skills = Array.isArray(cert.skills) ? cert.skills : [];
           const accent = cert.accent_color || 'var(--blue)';
 
-          const isLppi = cert.issuer && cert.issuer.toLowerCase().includes('lppi');
+          const isLppi = cert.issuer && (cert.issuer.toLowerCase().includes('lppi') || cert.issuer.toLowerCase().includes('bank indonesia'));
           const issuerIconHtml = isLppi
             ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
             : escapeHtml(getInitials(cert.issuer));
@@ -1743,6 +1767,82 @@
       return [];
     }
 
+    
+    function getTalkMediaPages(talk, isId) {
+      if (!talk) return [];
+      const pages = [];
+      const posterSrc = talk.poster_url || (talk.media && talk.media[0]) || null;
+      if (posterSrc) {
+        pages.push({
+          label: isId ? 'Poster' : 'Poster',
+          url: posterSrc,
+          type: 'poster'
+        });
+      }
+      let certUrl = null;
+      if (Array.isArray(talk.gallery)) {
+        certUrl = talk.gallery.find(img => /cert|sertifikat|plakat|piagam|certificate/i.test(img));
+      }
+      if (!certUrl && Array.isArray(talk.slides)) {
+        const cSlide = talk.slides.find(s => s.type === 'certificate' || /cert|sertifikat|plakat|piagam|certificate/i.test(s.label || ''));
+        if (cSlide) certUrl = cSlide.url;
+      }
+      if (!certUrl && (talk.event || '').toLowerCase().includes('khouw kalbe')) {
+        certUrl = '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg';
+      }
+      if (certUrl && certUrl !== posterSrc) {
+        pages.push({
+          label: isId ? 'Sertifikat / Plakat' : 'Certificate / Plaque',
+          url: certUrl,
+          type: 'certificate'
+        });
+      }
+      if (!pages.length && certUrl) {
+        pages.push({
+          label: isId ? 'Sertifikat / Plakat' : 'Certificate / Plaque',
+          url: certUrl,
+          type: 'certificate'
+        });
+      }
+      return pages;
+    }
+
+    window.switchBrowseTalkPage = function(talkId, imgSrc, btn, altText) {
+      let container = document.getElementById(`browse-talk-prev-${talkId}`);
+      if (!container && btn) {
+        container = btn.closest('.b-talk-card')?.querySelector('.b-talk-media');
+      }
+      if (!container) return;
+      const blurImg = container.querySelector('.b-talk-blur-bg');
+      const mainImg = container.querySelector('.b-talk-main-img');
+      if (mainImg) {
+        mainImg.style.opacity = '0.35';
+        mainImg.style.filter = 'blur(4px)';
+        mainImg.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+        mainImg.src = imgSrc;
+        if (altText) {
+          mainImg.alt = altText;
+          mainImg.title = altText;
+          container.setAttribute('data-active-title', altText);
+        }
+        mainImg.onload = () => {
+          mainImg.style.opacity = '1';
+          mainImg.style.filter = 'none';
+        };
+      }
+      if (blurImg) {
+        blurImg.src = imgSrc;
+      }
+      const switcher = btn.closest('.cert-page-tabs') || btn.closest('.cert-page-switcher') || btn.parentElement;
+      if (switcher) {
+        switcher.querySelectorAll('.cert-tab-btn, .cert-page-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      }
+    };
     window.switchBrowseCertPage = function(certId, imgSrc, btn, altText) {
       let container = document.getElementById(`browse-cert-prev-${certId}`);
       if (!container && btn) {

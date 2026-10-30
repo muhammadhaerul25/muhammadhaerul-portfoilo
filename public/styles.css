@@ -2425,16 +2425,7 @@ img {
 
 /* Document Slot ready for actual certificates */
 .award-doc-slot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  background: var(--surface-2);
-  border: 1px dashed var(--border-strong);
-  font-size: 12px;
-  transition: all 0.25s var(--ease);
+  display: none !important;
 }
 
 [data-theme="dark"] .award-doc-slot {
@@ -2832,11 +2823,7 @@ img {
 }
 
 .cert-tags-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: auto;
-  padding-top: 8px;
+  display: none !important;
 }
 
 .cert-tag {
@@ -4425,6 +4412,56 @@ img {
 
 .talk-poster-wrap:hover .talk-poster-overlay {
   opacity: 1;
+}
+
+/* Talk Media Tabs (Flexible: Poster & Certificate/Plakat) */
+.talk-media-tabs {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  background: rgba(13, 15, 18, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  max-width: calc(100% - 20px);
+  pointer-events: auto;
+}
+
+.talk-tab-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.talk-tab-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.talk-tab-btn.active {
+  background: #ffffff;
+  color: #0b0f19;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 .talk-card-body {
   padding: 22px;
