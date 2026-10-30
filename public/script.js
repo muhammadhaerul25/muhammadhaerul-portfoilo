@@ -2345,13 +2345,40 @@
       const isId = isIndonesian();
       const hasPreview = Boolean(cert.image_url);
 
+      const isLppi = cert.issuer && cert.issuer.toLowerCase().includes('lppi');
+      const issuerIconHtml = isLppi
+        ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
+        : escapeHtml(getInitials(cert.issuer));
+      const issuerIconClass = isLppi ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+
+      let curriculumImg = null;
+      if (cert.title && /practitioner/i.test(cert.title)) {
+        curriculumImg = '/assets/certificates/cert-digdaya-practitioner-curriculum.jpg';
+      } else if (cert.title && /essential/i.test(cert.title)) {
+        curriculumImg = '/assets/certificates/cert-digdaya-essential-curriculum.jpg';
+      }
+
       const mediaHtml = hasPreview ? `
-        <div class="cert-card-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate">
-          <img src="${escapeHtml(cert.image_url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'" decoding="async">
-          <span class="cert-zoom-hint">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            ${isId ? 'Perbesar' : 'View Full'}
-          </span>
+        <div class="cert-card-preview-wrap">
+          <div class="cert-card-preview" id="cert-prev-${escapeHtml(cert.id)}" onclick="openLightbox(this.querySelector('img').src, '${escapeHtml(cert.title)}')" title="Click to view full certificate">
+            <img src="${escapeHtml(cert.image_url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'" decoding="async">
+            <span class="cert-zoom-hint">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              ${isId ? 'Perbesar' : 'View Full'}
+            </span>
+          </div>
+          ${curriculumImg ? `
+            <div class="cert-page-switcher">
+              <button type="button" class="cert-page-btn active" onclick="event.stopPropagation(); switchCertPage('${escapeHtml(cert.id)}', '${escapeHtml(cert.image_url)}', this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                ${isId ? 'Sertifikat' : 'Certificate'}
+              </button>
+              <button type="button" class="cert-page-btn" onclick="event.stopPropagation(); switchCertPage('${escapeHtml(cert.id)}', '${escapeHtml(curriculumImg)}', this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                ${isId ? 'Kurikulum' : 'Curriculum'}
+              </button>
+            </div>
+          ` : ''}
         </div>
       ` : `
         <div class="cert-card-badge-preview ${cert.credential_url ? 'has-link' : ''}" ${cert.credential_url ? `onclick="window.open('${escapeHtml(cert.credential_url)}', '_blank')"` : ''} title="${cert.credential_url ? 'Click to verify credential online' : 'Official Verified Credential'}">
@@ -2391,7 +2418,7 @@
         <div class="cert-card reveal in-view">
           <div class="cert-card-top">
             <div class="cert-issuer-badge">
-              <span class="cert-issuer-icon" style="--accent:${escapeHtml(accent)}">${escapeHtml(getInitials(cert.issuer))}</span>
+              <span class="${issuerIconClass}" style="--accent:${escapeHtml(accent)}">${issuerIconHtml}</span>
               <div class="cert-issuer-meta">
                 <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
                 <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
@@ -2982,6 +3009,22 @@
       }
     });
   }
+
+  window.switchCertPage = function(certId, imgSrc, btn) {
+    const container = document.getElementById(`cert-prev-${certId}`);
+    if (!container) return;
+    const img = container.querySelector('img');
+    if (img) {
+      img.style.opacity = '0.4';
+      img.src = imgSrc;
+      img.onload = () => { img.style.opacity = '1'; };
+    }
+    const switcher = btn.parentElement;
+    if (switcher) {
+      switcher.querySelectorAll('.cert-page-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  };
 
   window.openLightbox = function(src, alt) {
     if (!src) return;

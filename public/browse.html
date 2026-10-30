@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=7.6">
+  <link rel="stylesheet" href="/styles.css?v=7.7">
   <style>
     .browse-page {
       min-height: 100vh;
@@ -1243,11 +1243,24 @@
           const skills = Array.isArray(cert.skills) ? cert.skills : [];
           const accent = cert.accent_color || 'var(--blue)';
 
+          const isLppi = cert.issuer && cert.issuer.toLowerCase().includes('lppi');
+          const issuerIconHtml = isLppi
+            ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
+            : escapeHtml(getInitials(cert.issuer));
+          const issuerIconClass = isLppi ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+
+          let curriculumImg = null;
+          if (cert.title && /practitioner/i.test(cert.title)) {
+            curriculumImg = '/assets/certificates/cert-digdaya-practitioner-curriculum.jpg';
+          } else if (cert.title && /essential/i.test(cert.title)) {
+            curriculumImg = '/assets/certificates/cert-digdaya-essential-curriculum.jpg';
+          }
+
           return `
             <div class="cert-card reveal in-view" style="display:flex; flex-direction:column; justify-content:space-between;">
               <div class="cert-card-top">
                 <div class="cert-issuer-badge">
-                  <span class="cert-issuer-icon" style="--accent:${escapeHtml(accent)}">${escapeHtml(getInitials(cert.issuer))}</span>
+                  <span class="${issuerIconClass}" style="--accent:${escapeHtml(accent)}">${issuerIconHtml}</span>
                   <div class="cert-issuer-meta">
                     <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
                     <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
@@ -1257,15 +1270,29 @@
               <div class="cert-card-mid">
                 <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
                 ${cert.image_url ? `
-                  <div class="b-media-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate proof">
-                    <img class="b-media-blur-bg" src="${escapeHtml(cert.image_url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                    <img class="b-media-main-img" src="${escapeHtml(cert.image_url)}" alt="${escapeHtml(cert.title)}" loading="lazy" decoding="async">
-                    <div class="b-media-zoom-overlay">
-                      <span class="b-zoom-btn">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                        View Certificate
-                      </span>
+                  <div class="cert-card-preview-wrap">
+                    <div class="b-media-preview" id="browse-cert-prev-${escapeHtml(cert.id)}" onclick="openLightbox(this.querySelector('.b-media-main-img').src, '${escapeHtml(cert.title)}')" title="Click to view full certificate proof">
+                      <img class="b-media-blur-bg" src="${escapeHtml(cert.image_url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                      <img class="b-media-main-img" src="${escapeHtml(cert.image_url)}" alt="${escapeHtml(cert.title)}" loading="lazy" decoding="async">
+                      <div class="b-media-zoom-overlay">
+                        <span class="b-zoom-btn">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                          View Full
+                        </span>
+                      </div>
                     </div>
+                    ${curriculumImg ? `
+                      <div class="cert-page-switcher">
+                        <button type="button" class="cert-page-btn active" onclick="event.stopPropagation(); switchBrowseCertPage('${escapeHtml(cert.id)}', '${escapeHtml(cert.image_url)}', this)">
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                          Certificate
+                        </button>
+                        <button type="button" class="cert-page-btn" onclick="event.stopPropagation(); switchBrowseCertPage('${escapeHtml(cert.id)}', '${escapeHtml(curriculumImg)}', this)">
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                          Curriculum
+                        </button>
+                      </div>
+                    ` : ''}
                   </div>
                 ` : ''}
                 ${skills.length ? `
@@ -1614,6 +1641,26 @@
       const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
       return m ? m[1] : null;
     }
+
+    window.switchBrowseCertPage = function(certId, imgSrc, btn) {
+      const container = document.getElementById(`browse-cert-prev-${certId}`);
+      if (!container) return;
+      const blurImg = container.querySelector('.b-media-blur-bg');
+      const mainImg = container.querySelector('.b-media-main-img');
+      if (mainImg) {
+        mainImg.style.opacity = '0.4';
+        mainImg.src = imgSrc;
+        mainImg.onload = () => { mainImg.style.opacity = '1'; };
+      }
+      if (blurImg) {
+        blurImg.src = imgSrc;
+      }
+      const switcher = btn.parentElement;
+      if (switcher) {
+        switcher.querySelectorAll('.cert-page-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    };
 
     function getInitials(name) {
       if (!name) return 'MH';
