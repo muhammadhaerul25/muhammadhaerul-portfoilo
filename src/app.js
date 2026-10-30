@@ -81,6 +81,8 @@ app.get('/talks', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')
 app.get('/certifications', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
 app.get('/feedbacks', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
 app.get('/testimonials', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
+app.get('/awards', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
+app.get('/publications', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
 app.get('/browse', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
 app.get('/blog', (req, res) => res.redirect('/#blog'));
 app.get('/blogs', (req, res) => res.redirect('/#blog'));
@@ -88,6 +90,8 @@ app.get('/gallery', (req, res) => res.redirect('/#gallery'));
 app.get('/galeri', (req, res) => res.redirect('/#gallery'));
 app.get('/form/:slug', (req, res) => res.sendFile(path.join(publicDir, 'form-renderer.html')));
 app.get('/full-materi.pdf', (req, res) => res.sendFile(path.join(publicDir, 'full-materi.pdf')));
+app.get('/resume', (req, res) => res.sendFile(path.join(publicDir, 'assets/resume-muhammad-haerul.pdf')));
+app.get('/cv', (req, res) => res.sendFile(path.join(publicDir, 'assets/resume-muhammad-haerul.pdf')));
 
 // 6. Centralized API Gateway with Global Rate Limiting
 app.use('/api', apiLimiter, apiRoutes);

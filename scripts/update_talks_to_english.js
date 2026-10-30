@@ -7,7 +7,7 @@ async function main() {
         where: { id: 'cmt2kbpn800029sb99b3zz1ax' },
         data: {
             event: 'National Cybersecurity & Information Security Awareness Webinar',
-            organizer: 'National Cyber and Crypto Agency (BSSN)'
+            organizer: 'Badan Siber dan Sandi Negara (BSSN)'
         }
     });
 
@@ -25,8 +25,49 @@ async function main() {
         where: { id: 'cmt2kgv0z00039sb9w2y7ol67' },
         data: {
             event: 'AI Web Engineering & Security Hands-on Workshop',
-            organizer: 'Universitas Sulawesi Barat (West Sulawesi University)'
+            organizer: 'Universitas Sulawesi Barat'
         }
+    });
+
+    // 4. Restore original Indonesian institution names across educations, experiences, awards, publications
+    await prisma.education.updateMany({
+        where: { institution: { contains: 'Hasanuddin', mode: 'insensitive' } },
+        data: { institution: 'Universitas Hasanuddin' }
+    });
+
+    await prisma.experience.updateMany({
+        where: { company: { contains: 'Ministry of Education', mode: 'insensitive' } },
+        data: { company: 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi' }
+    });
+
+    await prisma.publication.updateMany({
+        where: { publisher: { contains: 'Hasanuddin', mode: 'insensitive' } },
+        data: { publisher: 'Universitas Hasanuddin' }
+    });
+
+    await prisma.award.updateMany({
+        where: { issuer: 'University of Indonesia x Pertamina' },
+        data: { issuer: 'Universitas Indonesia x Pertamina' }
+    });
+    await prisma.award.updateMany({
+        where: { issuer: 'University of Indonesia' },
+        data: { issuer: 'Universitas Indonesia' }
+    });
+    await prisma.award.updateMany({
+        where: { issuer: 'Hasanuddin University' },
+        data: { issuer: 'Universitas Hasanuddin' }
+    });
+    await prisma.award.updateMany({
+        where: { issuer: 'International Office Hasanuddin University' },
+        data: { issuer: 'International Office Universitas Hasanuddin' }
+    });
+    await prisma.award.updateMany({
+        where: { issuer: 'Faculty of Medicine, University of Airlangga' },
+        data: { issuer: 'Fakultas Kedokteran Universitas Airlangga' }
+    });
+    await prisma.award.updateMany({
+        where: { issuer: 'Kementrian Pendidikan dan Kebudayaan RI' },
+        data: { issuer: 'Kementerian Pendidikan dan Kebudayaan RI' }
     });
 
     cache.del('talks');

@@ -49,7 +49,7 @@ async function main() {
         publications: { title: "Publications & Research", subtitle: "Peer-reviewed research and applied AI engineering write-ups." },
         blogs: { title: "Technical Articles & Blog", subtitle: "Deep-dives into AI architectures, full-stack development, and tech thoughts." },
         gallery: { title: "Journey & Visual Moments", subtitle: "Behind-the-scenes snapshots of hackathons, speaking stages, and community sessions." },
-        testimonials: { title: "Participant & Client Feedbacks", subtitle: "Verified impressions and testimonials from workshop attendees and collaborators." },
+        testimonials: { title: "Feedback and Recommendations", subtitle: "Verified feedback from workshop participants and professional recommendations from collaborators." },
         contact: { title: "Let's Connect & Collaborate", subtitle: "Have a project in mind, need technical consulting, or want to invite me as a speaker? Drop a message." }
     };
 

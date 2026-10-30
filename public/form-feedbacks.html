@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem('mh_theme') || localStorage.getItem('mh-theme');
+                if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+                else document.documentElement.setAttribute('data-theme', 'light');
+            } catch(e) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave Feedback — Muhammad Haerul</title>
@@ -33,6 +42,16 @@
         --r-pill:   100px;
         --t: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
         --t-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    [data-theme="dark"] {
+        --ink:      #F8FAFC;
+        --ink-2:    #E2E8F0;
+        --ink-3:    #94A3B8;
+        --ink-4:    #64748B;
+        --border:   rgba(255, 255, 255, 0.12);
+        --bg:       #0A0E17;
+        --surface:  #141C2E;
     }
 
     body {
@@ -436,6 +455,132 @@
     .google-dots { display: flex; gap: 3px; }
     .dot { width: 6px; height: 6px; border-radius: 50%; }
 
+    /* ════════════════════════════════════════
+       DARK MODE OVERRIDES
+    ════════════════════════════════════════ */
+    [data-theme="dark"] body,
+    html[data-theme="dark"] body {
+        background: #0A0E17;
+        color: #F8FAFC;
+        background-image:
+            radial-gradient(ellipse 600px 400px at 0% 0%, rgba(66,133,244,0.14) 0%, transparent 60%),
+            radial-gradient(ellipse 400px 300px at 100% 100%, rgba(52,168,83,0.1) 0%, transparent 60%);
+    }
+    [data-theme="dark"] .card,
+    html[data-theme="dark"] .card {
+        background: #141C2E;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .input,
+    [data-theme="dark"] .textarea,
+    [data-theme="dark"] .select-inp {
+        background: #0F172A;
+        border-color: rgba(255, 255, 255, 0.14);
+        color: #F8FAFC;
+    }
+    [data-theme="dark"] select option {
+        background: #0F172A;
+        color: #F8FAFC;
+    }
+    [data-theme="dark"] .input:focus,
+    [data-theme="dark"] .textarea:focus,
+    [data-theme="dark"] .select-inp:focus {
+        background: #162036;
+        border-color: var(--g-blue);
+        box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.25);
+    }
+    [data-theme="dark"] .steps-track {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    [data-theme="dark"] .step-dot {
+        background: #1E293B;
+        border-color: rgba(255, 255, 255, 0.18);
+        box-shadow: 0 0 0 4px #141C2E;
+        color: #94A3B8;
+    }
+    [data-theme="dark"] .r-label {
+        border-color: rgba(255, 255, 255, 0.12);
+        color: #94A3B8;
+        background: #0F172A;
+    }
+    [data-theme="dark"] .r-label:hover {
+        background: rgba(66, 133, 244, 0.15);
+        color: #FFFFFF;
+    }
+    [data-theme="dark"] .btn-secondary {
+        background: #1E293B;
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #F1F5F9;
+    }
+    [data-theme="dark"] .btn-secondary:hover {
+        background: #283548;
+    }
+    [data-theme="dark"] .card-footer {
+        background: rgba(0, 0, 0, 0.2);
+        border-top-color: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .feedback-back-btn,
+    [data-theme="dark"] .feedback-theme-btn {
+        background: #141C2E;
+        border-color: rgba(255, 255, 255, 0.14);
+        color: #F8FAFC;
+    }
+    [data-theme="dark"] .feedback-back-btn:hover,
+    [data-theme="dark"] .feedback-theme-btn:hover {
+        border-color: var(--g-blue);
+        color: var(--g-blue);
+    }
+    
+    .feedback-page-wrapper {
+        width: 100%;
+        max-width: 540px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+    .feedback-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4px 6px;
+    }
+    .feedback-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: var(--r-pill);
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--ink-2);
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+        transition: var(--t);
+    }
+    .feedback-back-btn:hover {
+        border-color: var(--g-blue);
+        color: var(--g-blue);
+        transform: translateX(-2px);
+    }
+    .feedback-theme-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+        transition: var(--t);
+    }
+    .feedback-theme-btn:hover {
+        transform: scale(1.08);
+        border-color: var(--g-blue);
+    }
+
     @media (max-width: 480px) {
         body { padding: 16px; align-items: flex-start; }
         .card-body { padding: 24px 20px 28px; }
@@ -448,7 +593,18 @@
 </head>
 <body>
 
-<div class="card" id="main-card">
+<div class="feedback-page-wrapper">
+    <div class="feedback-top-bar">
+        <a href="/" class="feedback-back-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Portfolio</span>
+        </a>
+        <button type="button" class="feedback-theme-btn" id="feedbackThemeBtn" onclick="toggleFeedbackTheme()" title="Toggle Light / Dark Mode" aria-label="Toggle theme">
+            <span id="theme-icon">☀️</span>
+        </button>
+    </div>
+
+    <div class="card" id="main-card">
     <div class="card-stripe"></div>
 
     <!-- SUCCESS STATE (hidden initially) -->
@@ -604,8 +760,31 @@
         </div>
     </div><!-- /form-wrap -->
 </div>
+</div><!-- /feedback-page-wrapper -->
 
 <script>
+/* ════════════════════════════════════
+   THEME MANAGEMENT
+════════════════════════════════════ */
+function initFeedbackTheme() {
+    var saved = localStorage.getItem('mh_theme') || localStorage.getItem('mh-theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', saved);
+    var icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = saved === 'dark' ? '🌙' : '☀️';
+}
+function toggleFeedbackTheme() {
+    var curr = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = curr === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+        localStorage.setItem('mh_theme', next);
+        localStorage.setItem('mh-theme', next);
+    } catch(e) {}
+    var icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = next === 'dark' ? '🌙' : '☀️';
+}
+initFeedbackTheme();
+
 /* ════════════════════════════════════
    STATE
 ════════════════════════════════════ */
@@ -904,6 +1083,33 @@ document.addEventListener('DOMContentLoaded', async function() {
             '<option value="General Feedback">General Feedback</option>';
     }
 });
+
+/* ════════════════════════════════════
+   THEME TOGGLING & SYNCHRONIZATION
+════════════════════════════════════ */
+function updateThemeIcon(theme) {
+    var icon = document.getElementById('theme-icon');
+    if (icon) {
+        icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+}
+
+function toggleFeedbackTheme() {
+    var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+        localStorage.setItem('mh_theme', next);
+        localStorage.setItem('mh-theme', next);
+    } catch(e) {}
+    updateThemeIcon(next);
+}
+
+// Initial theme icon sync
+(function() {
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    updateThemeIcon(cur);
+})();
 </script>
 
 </body>

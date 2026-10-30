@@ -5,13 +5,13 @@
   const root = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
   const savedTheme = (() => {
-    try { return localStorage.getItem('mh-theme'); } catch (e) { return null; }
+    try { return localStorage.getItem('mh_theme') || localStorage.getItem('mh-theme'); } catch (e) { return null; }
   })();
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (savedTheme) {
-    root.setAttribute('data-theme', savedTheme);
-  } else if (prefersDark) {
+  // Default is LIGHT theme unless user explicitly saved 'dark'
+  if (savedTheme === 'dark') {
     root.setAttribute('data-theme', 'dark');
+  } else {
+    root.setAttribute('data-theme', 'light');
   }
 
   if (themeToggle) {
@@ -19,7 +19,10 @@
       const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
       const next = current === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
-      try { localStorage.setItem('mh-theme', next); } catch (e) { }
+      try {
+        localStorage.setItem('mh_theme', next);
+        localStorage.setItem('mh-theme', next);
+      } catch (e) { }
     });
   }
 
@@ -369,7 +372,7 @@
       about_fact_spec: "Specialization",
       about_fact_spec_val: "Agentic AI, LLM Systems & Computer Vision",
       about_fact_edu: "Formal Education",
-      about_fact_edu_val: "Informatics / Computer Science, Hasanuddin University",
+      about_fact_edu_val: "Informatics / Computer Science, Universitas Hasanuddin",
       about_fact_loc: "Location",
       about_fact_loc_val: "Makassar & Remote Worldwide",
 
@@ -404,8 +407,8 @@
       gallery_eyebrow: "11 — Journey & Visual Moments",
       gallery_title: "Moments from workshops, stages, and milestones.",
 
-      feedback_eyebrow: "12 — Feedbacks & Testimonials",
-      feedback_title: "What participants & collaborators say.",
+      feedback_eyebrow: "12 — Feedback and Recommendations",
+      feedback_title: "Feedback and Recommendations",
       feedback_btn_give: "Give Feedback",
       feedback_btn_desc: "Have you collaborated or attended a session? Share your thoughts.",
 
@@ -486,8 +489,8 @@
       gallery_eyebrow: "11 — Galeri Momen Perjalanan",
       gallery_title: "Dokumentasi dari panggung, workshop, dan komunitas.",
 
-      feedback_eyebrow: "12 — Ulasan & Testimoni",
-      feedback_title: "Apa kata mitra kerja & peserta lokakarya.",
+      feedback_eyebrow: "12 — Feedback dan Rekomendasi",
+      feedback_title: "Feedback and Recommendations",
       feedback_btn_give: "Kirim Ulasan",
       feedback_btn_desc: "Pernah berkolaborasi atau mengikuti sesi saya? Bagikan kesan Anda.",
 
@@ -854,16 +857,31 @@
       .replace(/'/g, '&#39;');
   }
 
+  const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function formatMonthYear(str) {
+    if (!str) return '';
+    const m = str.trim().match(/^(\d{4})-(\d{1,2})$/);
+    if (m) {
+      const y = m[1];
+      const monIdx = parseInt(m[2], 10) - 1;
+      if (monIdx >= 0 && monIdx < 12) {
+        return `${MONTH_NAMES[monIdx]} ${y}`;
+      }
+    }
+    return str;
+  }
+
   function formatDateRange(dr) {
     if (!dr) return 'Completed';
     if (dr.includes('_')) {
       const parts = dr.split('_');
       const start = parts[0] || '';
       const end = parts[1] || '';
-      if (end.toLowerCase() === 'present' || !end) return `${start} – Present`;
-      return `${start} – ${end}`;
+      if (end.toLowerCase() === 'present' || !end) return `${formatMonthYear(start)} – Present`;
+      if (start === end) return formatMonthYear(start);
+      return `${formatMonthYear(start)} – ${formatMonthYear(end)}`;
     }
-    return dr;
+    return formatMonthYear(dr);
   }
 
   function formatTalkDate(d) {
@@ -875,12 +893,120 @@
     }
   }
 
+  // Universal Year Badge Color Helper: strictly unified by Year across the entire portfolio
+  function getYearBadgeClass(dateVal) {
+    if (!dateVal) return 'year-tag-legacy';
+    const str = String(dateVal);
+    const matches = str.match(/\b(20\d\d|19\d\d)\b/g);
+    if (!matches || !matches.length) return 'year-tag-legacy';
+    const yr = matches[0];
+    if (yr === '2026') return 'year-tag-2026';
+    if (yr === '2025') return 'year-tag-2025';
+    if (yr === '2024') return 'year-tag-2024';
+    if (yr === '2023') return 'year-tag-2023';
+    if (yr === '2022') return 'year-tag-2022';
+    if (yr === '2021') return 'year-tag-2021';
+    return 'year-tag-legacy';
+  }
+
   // Extract YouTube Video ID
   function getYouTubeId(url) {
     if (!url) return null;
     const regExp = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/;
     const match = url.match(regExp);
     return match ? match[1] : null;
+  }
+
+  // Toggle Read More / Read Less for clamped text in cards
+  window.toggleCardReadMore = function(btn, targetId) {
+    if (!btn) return;
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const isClamped = target.classList.contains('is-clamped');
+    if (isClamped) {
+      target.classList.remove('is-clamped');
+      target.classList.add('is-expanded');
+      btn.setAttribute('aria-expanded', 'true');
+      const label = btn.querySelector('.rm-label');
+      if (label) label.textContent = 'Read less';
+    } else {
+      target.classList.remove('is-expanded');
+      target.classList.add('is-clamped');
+      btn.setAttribute('aria-expanded', 'false');
+      const label = btn.querySelector('.rm-label');
+      if (label) label.textContent = 'Read more';
+    }
+  };
+
+  // Toggle Read More / Read Less for Skill Specialization Cards (shows/hides bullet sub-lists)
+  window.toggleSkillCardDetails = function(btn) {
+    if (!btn) return;
+    const card = btn.closest('.unified-spec-card');
+    if (!card) return;
+    const isExpanded = card.classList.toggle('is-expanded');
+    btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    const label = btn.querySelector('.rm-label');
+    if (label) label.textContent = isExpanded ? 'Read less' : 'Read more';
+  };
+
+  // Format Project / Card Description into clean structured paragraphs & bullet lists
+  function formatStructuredCardText(rawText) {
+    if (!rawText) return '';
+    // Strip noisy decorative emojis while keeping text clean
+    const cleaned = String(rawText)
+      .replace(/[✨📊]/g, '')
+      .replace(/\r\n/g, '\n')
+      .trim();
+
+    const blocks = cleaned.split(/\n{2,}/).map(b => b.trim()).filter(Boolean);
+    return blocks.map(block => {
+      const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+      const bulletRegex = /^(?:[-•✅▪▸]|\d+[\.\)])\s*/;
+      const bulletCount = lines.filter(l => bulletRegex.test(l)).length;
+
+      if (lines.length > 1 && bulletCount >= 1) {
+        let html = '';
+        let inList = false;
+        lines.forEach(line => {
+          if (bulletRegex.test(line)) {
+            if (!inList) {
+              html += '<ul class="p-desc-list">';
+              inList = true;
+            }
+            const itemText = line.replace(bulletRegex, '').trim();
+            const dashIdx = itemText.search(/\s+[–—-]\s+/);
+            if (dashIdx > 0 && dashIdx < 50) {
+              const m = itemText.match(/\s+[–—-]\s+/);
+              const head = itemText.slice(0, dashIdx).trim();
+              const rest = itemText.slice(dashIdx + m[0].length).trim();
+              html += `<li><strong>${escapeHtml(head)}:</strong> ${escapeHtml(rest)}</li>`;
+            } else {
+              html += `<li>${escapeHtml(itemText)}</li>`;
+            }
+          } else {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            html += `<p class="p-card-desc">${escapeHtml(line)}</p>`;
+          }
+        });
+        if (inList) html += '</ul>';
+        return html;
+      }
+
+      return `<p class="p-card-desc">${escapeHtml(lines.join(' '))}</p>`;
+    }).join('');
+  }
+
+  function getPlainSummaryText(rawText) {
+    if (!rawText) return '';
+    return String(rawText)
+      .replace(/[✨✅📊]/g, '')
+      .replace(/(?:^|\n)\s*[-•]\s+/g, ' • ')
+      .replace(/\s*\n+\s*/g, ' ')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
   }
 
   // Play Video Directly Inside Project Card
@@ -973,7 +1099,7 @@
         mediaHeader = `
           <div class="p-card-media" id="p-media-${p.id}">
             <div class="p-video-wrapper" onclick="window.playCardVideo('${p.id}', '${ytId}')" role="button" tabindex="0" aria-label="Play ${escapeHtml(p.name)} video demo">
-              <img class="p-video-thumb" src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${escapeHtml(p.name)} Demo Thumbnail" loading="lazy" />
+              <img class="p-video-thumb" src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${escapeHtml(p.name)} Demo Thumbnail" loading="lazy" / decoding="async">
               <div class="p-video-overlay">
                 <div class="p-play-btn" title="Play Video Demo">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
@@ -983,6 +1109,18 @@
                   Watch Demo
                 </span>
               </div>
+            </div>
+          </div>
+        `;
+      } else if (p.thumbnailUrl) {
+        mediaHeader = `
+          <div class="p-card-media" id="p-media-${p.id}" style="cursor:pointer;" onclick="openProjectModal('${p.id}')">
+            <img class="p-video-thumb" src="${escapeHtml(p.thumbnailUrl)}" alt="${escapeHtml(p.name)} Thumbnail" loading="lazy" style="width:100%; height:100%; object-fit:cover;" / decoding="async">
+            <div class="p-video-overlay" style="background:rgba(0,0,0,0.18);">
+              <span class="p-video-badge" style="background:rgba(0,0,0,0.72); color:#fff;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                View Details
+              </span>
             </div>
           </div>
         `;
@@ -1023,16 +1161,35 @@
         </a>
       ` : '';
 
+      // Standardized Card Description with Clean 3-Line Preview & Structured Read More
+      const descText = (p.description || '').trim();
+      const plainSummary = getPlainSummaryText(descText);
+      const structuredFullHtml = formatStructuredCardText(descText);
+      const isExpandable = plainSummary.length > 135 || descText.includes('\n');
+      const descId = `p-desc-${p.id || Math.random().toString(36).substring(2, 9)}`;
+      const descHtml = isExpandable ? `
+        <div class="clamp-text-wrapper is-clamped" id="${descId}">
+          <p class="p-card-desc p-desc-summary">${escapeHtml(plainSummary)}</p>
+          <div class="p-desc-full">${structuredFullHtml}</div>
+        </div>
+        <button type="button" class="card-read-more-btn" onclick="window.toggleCardReadMore(this, '${descId}')" aria-expanded="false">
+          <span class="rm-label">Read more</span>
+          <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      ` : `
+        <p class="p-card-desc">${escapeHtml(plainSummary)}</p>
+      `;
+
       return `
         <article class="p-card reveal in-view" data-pid="${p.id}">
           ${mediaHeader}
           <div class="p-card-body">
             <div class="p-card-head">
-              <span class="p-card-date">${escapeHtml(dateText)}</span>
+              <span class="p-card-date ${getYearBadgeClass(dateText)}">${escapeHtml(dateText)}</span>
               <span class="p-card-badge">${badgeText}</span>
             </div>
             <h3 class="p-card-title">${escapeHtml(p.name)}</h3>
-            <p class="p-card-desc">${escapeHtml(p.description || '')}</p>
+            ${descHtml}
             <div class="p-card-tags">${techTags}</div>
           </div>
           <div class="p-card-foot">
@@ -1187,7 +1344,7 @@
         <article class="talk-dynamic-card reveal in-view" data-tid="${t.id}">
           <div class="talk-poster-wrap" onclick="window.openLightbox('${escapeHtml(posterImg)}', '${escapeHtml(t.event)}')">
             <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(posterImg)}');"></div>
-            <img class="talk-poster-img" src="${escapeHtml(posterImg)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'">
+            <img class="talk-poster-img" src="${escapeHtml(posterImg)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'" decoding="async">
             <div class="talk-poster-overlay">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               View Full Poster
@@ -1196,7 +1353,7 @@
           <div class="talk-card-body">
             <div>
               <div class="talk-meta-bar">
-                <span class="talk-date-badge">${escapeHtml(dateText)}</span>
+                <span class="talk-date-badge ${getYearBadgeClass(dateText)}">${escapeHtml(dateText)}</span>
                 <span class="talk-attendees-badge">👥 ${escapeHtml(attendeeCount)}</span>
               </div>
               <h3 class="talk-card-title">${escapeHtml(t.event)}</h3>
@@ -1296,11 +1453,26 @@
   let currentFeedbackRatingFilter = 'all';
   let currentFeedbackSort = 'rating-desc'; // Default: Rating 10 down to 1
 
+  function isRecommendationRecord(f) {
+    if (!f) return false;
+    const src = (f.source || '').toLowerCase();
+    return src.includes('recommendation') || src.includes('linkedin');
+  }
+
+  function getWorkshopFeedbacks() {
+    return (liveFeedbacks || []).filter(f => !isRecommendationRecord(f));
+  }
+
+  function getRecommendationRecords() {
+    return (liveFeedbacks || []).filter(f => isRecommendationRecord(f));
+  }
+
   function updateFeedbackFilterCounts() {
-    const all = (liveFeedbacks || []).length;
-    const count10 = (liveFeedbacks || []).filter(f => Number(f.rating) === 10).length;
-    const count9 = (liveFeedbacks || []).filter(f => Number(f.rating) >= 9).length;
-    const count8 = (liveFeedbacks || []).filter(f => Number(f.rating) >= 8).length;
+    const workshopList = getWorkshopFeedbacks();
+    const all = workshopList.length;
+    const count10 = workshopList.filter(f => Number(f.rating) === 10).length;
+    const count9 = workshopList.filter(f => Number(f.rating) >= 9).length;
+    const count8 = workshopList.filter(f => Number(f.rating) >= 8).length;
 
     const elAll = document.getElementById('fbCountAll');
     const el10 = document.getElementById('fbCount10');
@@ -1313,30 +1485,144 @@
     if (el8) el8.textContent = count8;
   }
 
+  function renderRecommendationCards() {
+    const recGrid = document.getElementById('recommendations-dynamic-grid');
+    const recBlock = document.getElementById('recommendations-section-block');
+    if (!recGrid) return;
+
+    const recommendations = getRecommendationRecords();
+    if (!recommendations.length) {
+      if (recBlock) recBlock.style.display = 'none';
+      recGrid.innerHTML = '';
+      return;
+    }
+
+    if (recBlock) recBlock.style.display = '';
+
+    recGrid.innerHTML = recommendations.map(f => {
+      const avatarBg = getAvatarColor(f.nama_lengkap);
+      const initials = getInitials(f.nama_lengkap);
+      const cleanName = formatName(f.nama_lengkap);
+      const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jul 2026';
+
+      const pesan = f.pesan_kesan ? f.pesan_kesan.trim() : '';
+      const alasan = f.alasan ? f.alasan.trim() : '';
+
+      let mainQuote = '';
+      let takeaway = '';
+
+      if (pesan && alasan) {
+        if (pesan.length < 15 && alasan.length > pesan.length) {
+          mainQuote = alasan;
+          takeaway = pesan;
+        } else {
+          mainQuote = pesan;
+          takeaway = alasan;
+        }
+      } else {
+        mainQuote = pesan || alasan || '';
+      }
+
+      const isLongQuote = mainQuote.length > 180;
+      const qId = `rec-q-${f.id || Math.random().toString(36).substring(2, 9)}`;
+
+      return `
+        <article class="t-card rec-card reveal in-view">
+          <svg class="t-watermark-quote" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+
+          <div>
+            <div class="t-card-head">
+              <div class="t-user-info">
+                <div class="t-avatar" style="background:${avatarBg};">${escapeHtml(initials)}</div>
+                <div class="t-user-names">
+                  <div class="t-name">${escapeHtml(cleanName)}</div>
+                  <div class="t-source">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="color:#0A66C2; flex-shrink:0;">
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                    <span>${escapeHtml(f.source || 'LinkedIn Recommendation')}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="t-rec-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                </svg>
+                <span>Recommended</span>
+              </div>
+            </div>
+
+            <div class="t-review-body">
+              ${isLongQuote ? `
+                <div class="clamp-text-wrapper t-quote-wrap is-clamped" id="${qId}">
+                  <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
+                </div>
+                <button type="button" class="card-read-more-btn" onclick="window.toggleCardReadMore(this, '${qId}')" aria-expanded="false">
+                  <span class="rm-label">Read more</span>
+                  <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+              ` : `
+                <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
+              `}
+
+              ${takeaway ? `
+                <div class="t-takeaway-card">
+                  <div class="t-takeaway-header">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span>Core Impact</span>
+                  </div>
+                  <p class="t-takeaway-text">“${escapeHtml(takeaway)}”</p>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <div class="t-card-foot">
+            <span class="t-verified-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Verified Colleague
+            </span>
+            <span class="t-foot-date">${escapeHtml(dateText)}</span>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
   // Render Testimonials Grid with 10-1 Default Sort, Filter, and 3x3 Pagination
   function renderTestimonials(page = currentFeedbackPage) {
     const grid = document.getElementById('testimonials-dynamic-grid');
     if (!grid) return;
 
-    if (!liveFeedbacks || !liveFeedbacks.length) {
+    renderRecommendationCards();
+
+    const workshopFeedbacks = getWorkshopFeedbacks();
+
+    if (!workshopFeedbacks.length) {
       grid.innerHTML = '<p style="color:var(--text-secondary); grid-column:1/-1; text-align:center; padding:40px 0;">No verified feedback records found.</p>';
       return;
     }
 
-    // Dynamically update score banner
-    const validRatings = liveFeedbacks.map(f => Number(f.rating)).filter(r => !isNaN(r) && r > 0);
+    // Dynamically update score banner using workshop feedbacks only
+    const validRatings = workshopFeedbacks.map(f => Number(f.rating)).filter(r => !isNaN(r) && r > 0);
     const avgScore = validRatings.length 
       ? (validRatings.reduce((acc, r) => acc + r, 0) / validRatings.length).toFixed(1) 
       : '9.4';
     const scoreBig = document.querySelector('.t-score-big');
     if (scoreBig) scoreBig.textContent = avgScore;
     const scoreLbl = document.querySelector('.t-score-lbl');
-    if (scoreLbl) scoreLbl.textContent = `Average Rating across ${liveFeedbacks.length} verified workshop reviews`;
+    if (scoreLbl) scoreLbl.textContent = `Average Rating across ${workshopFeedbacks.length} verified workshop reviews`;
 
     updateFeedbackFilterCounts();
 
     // 1. Filter Feedbacks
-    let list = [...liveFeedbacks];
+    let list = [...workshopFeedbacks];
     if (currentFeedbackRatingFilter === '10') {
       list = list.filter(f => Number(f.rating) === 10);
     } else if (currentFeedbackRatingFilter === '9') {
@@ -1407,6 +1693,9 @@
           mainQuote = pesan || alasan || 'Sesi materi sangat bermanfaat!';
         }
 
+        const isLongQuote = mainQuote.length > 180;
+        const qId = `t-q-${f.id || Math.random().toString(36).substring(2, 9)}`;
+
         return `
           <article class="t-card reveal in-view">
             <svg class="t-watermark-quote" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1436,7 +1725,17 @@
               </div>
 
               <div class="t-review-body">
-                <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
+                ${isLongQuote ? `
+                  <div class="clamp-text-wrapper t-quote-wrap is-clamped" id="${qId}">
+                    <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
+                  </div>
+                  <button type="button" class="card-read-more-btn" onclick="window.toggleCardReadMore(this, '${qId}')" aria-expanded="false">
+                    <span class="rm-label">Read more</span>
+                    <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                ` : `
+                  <p class="t-primary-quote">“${escapeHtml(mainQuote)}”</p>
+                `}
                 
                 ${takeaway ? `
                   <div class="t-takeaway-card">
@@ -1444,7 +1743,7 @@
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                       </svg>
-                      <span>Highlight Materi</span>
+                      <span>${(f.source && f.source.toLowerCase().includes('linkedin')) ? 'Core Impact' : 'Highlight Materi'}</span>
                     </div>
                     <p class="t-takeaway-text">“${escapeHtml(takeaway)}”</p>
                   </div>
@@ -1457,7 +1756,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
-                Verified Attendee
+                ${(f.source && f.source.toLowerCase().includes('linkedin')) ? 'Verified Colleague' : 'Verified Attendee'}
               </span>
               <span class="t-foot-date">${escapeHtml(dateText)}</span>
             </div>
@@ -1634,8 +1933,27 @@
     return { general: generalPart, projects: items };
   }
 
+  // Window toggle helper for expandable experience projects
+  window.toggleTimelineProjects = function(btn, drawerId) {
+    const drawer = document.getElementById(drawerId);
+    if (!drawer) return;
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    const count = btn.getAttribute('data-count') || '';
+    const textEl = btn.querySelector('.toggle-btn-text');
+
+    if (isExpanded) {
+      drawer.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      if (textEl) textEl.textContent = `Show ${count} more projects`;
+    } else {
+      drawer.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      if (textEl) textEl.textContent = 'Show fewer projects';
+    }
+  };
+
   // Format experience description into structured HTML (General Description + Projects: 1., 2., 3.)
-  function formatExperienceDescriptionHtml(desc, accent = 'var(--blue)') {
+  function formatExperienceDescriptionHtml(desc, accent = 'var(--blue)', expId = '') {
     if (!desc) return '';
     const parsed = parseExperienceDescription(desc);
 
@@ -1648,11 +1966,18 @@
       html += `<p class="timeline-desc timeline-general-desc">${escapeHtml(parsed.general).replace(/\n/g, '<br>')}</p>`;
     }
 
+    const totalProjects = parsed.projects.length;
+    // Show top 2 projects by default; wrap additional projects in an expandable drawer
+    const initialProjects = totalProjects > 2 ? parsed.projects.slice(0, 2) : parsed.projects;
+    const remainingProjects = totalProjects > 2 ? parsed.projects.slice(2) : [];
+    const cleanId = (expId || Math.random().toString(36).substring(2, 9)).replace(/[^a-zA-Z0-9_-]/g, '');
+    const drawerId = `exp-proj-drawer-${cleanId}`;
+
     html += `
       <div class="timeline-projects-block" style="--accent:${escapeHtml(accent)}">
-        <div class="timeline-projects-heading">Projects:</div>
+        <div class="timeline-projects-heading">Projects (${totalProjects}):</div>
         <ol class="timeline-projects-list">
-          ${parsed.projects.map(p => `
+          ${initialProjects.map(p => `
             <li class="timeline-project-row">
               <span class="timeline-project-num">${escapeHtml(p.num)}.</span>
               <div class="timeline-project-detail">
@@ -1661,9 +1986,34 @@
             </li>
           `).join('')}
         </ol>
-      </div>
     `;
 
+    if (remainingProjects.length > 0) {
+      html += `
+        <div class="timeline-projects-drawer" id="${drawerId}">
+          <div class="timeline-projects-drawer-inner">
+            <ol class="timeline-projects-list">
+              ${remainingProjects.map(p => `
+                <li class="timeline-project-row">
+                  <span class="timeline-project-num">${escapeHtml(p.num)}.</span>
+                  <div class="timeline-project-detail">
+                    ${p.title ? `<strong class="timeline-project-title">${escapeHtml(p.title)}:</strong> ` : ''}<span class="timeline-project-text">${escapeHtml(p.desc)}</span>
+                  </div>
+                </li>
+              `).join('')}
+            </ol>
+          </div>
+        </div>
+        <button type="button" class="timeline-projects-toggle-btn" onclick="window.toggleTimelineProjects(this, '${drawerId}')" aria-expanded="false" data-count="${remainingProjects.length}">
+          <span class="toggle-btn-text">Show ${remainingProjects.length} more projects</span>
+          <svg class="toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      `;
+    }
+
+    html += `</div>`;
     return html;
   }
 
@@ -1687,22 +2037,17 @@
           <div class="timeline-content">
             <div class="timeline-header">
               <div class="timeline-company-logo" aria-label="${escapeHtml(exp.company)} Logo">
-                ${exp.logo_url ? `<img src="${escapeHtml(exp.logo_url)}" alt="${escapeHtml(exp.company)}" loading="lazy">` : (exp.company && exp.company.toLowerCase().includes('aksarahub') ? `<img src="/assets/images/aksarahub-logo.png" alt="${escapeHtml(exp.company)}" loading="lazy">` : '')}
+                ${exp.logo_url ? `<img src="${escapeHtml(exp.logo_url)}" alt="${escapeHtml(exp.company)}" loading="lazy" decoding="async">` : (exp.company && exp.company.toLowerCase().includes('aksarahub') ? `<img src="/assets/images/aksarahub-logo.png" alt="${escapeHtml(exp.company)}" loading="lazy" decoding="async">` : '')}
               </div>
               <div class="timeline-header-main">
                 <div class="timeline-top">
                   <h3>${escapeHtml(exp.role)}</h3>
-                  <span class="timeline-date">${dateStr}</span>
+                  <span class="timeline-date ${getYearBadgeClass(dateStr)}">${dateStr}</span>
                 </div>
                 <p class="timeline-company">${escapeHtml(exp.company)}${metaStr}</p>
               </div>
             </div>
-            ${formatExperienceDescriptionHtml(exp.description, accent)}
-            ${stackList.length ? `
-              <div class="timeline-stack">
-                ${stackList.map(s => `<span>${escapeHtml(s)}</span>`).join('')}
-              </div>
-            ` : ''}
+            ${formatExperienceDescriptionHtml(exp.description, accent, exp.id)}
           </div>
         </div>
       `;
@@ -1724,18 +2069,19 @@
           <div class="edu-card-main">
             <div class="edu-header">
               <div class="edu-logo-wrap">
-                <img src="${escapeHtml(edu.logo_url || '/assets/images/unhas-logo.png')}" 
-                     onerror="this.src='https://www.unhas.ac.id/wp-content/uploads/2026/10/logo-unhas-resmi-berwarna-png-transparan-768x918.png'" 
+                <img src="${escapeHtml(edu.logo_url || '/assets/images/logos/unhas-logo.png')}" 
+                     onerror="this.src='/assets/images/logos/unhas-logo.png'" 
                      alt="${escapeHtml(edu.institution)} Logo" 
                      class="edu-logo" 
                      width="58" 
                      height="70" 
-                     loading="lazy">
+                     loading="lazy"
+                     decoding="async">
               </div>
               <div class="edu-header-info">
                 <h3>${escapeHtml(edu.degree)}</h3>
                 <p class="edu-school">${escapeHtml(edu.institution)}</p>
-                <p class="edu-date">${dateStr}</p>
+                <p class="edu-date ${getYearBadgeClass(dateStr)}">${dateStr}</p>
               </div>
             </div>
 
@@ -1760,7 +2106,7 @@
                 </div>
               </div>` : ''}
 
-              ${activities.length ? `
+              ${false && activities.length ? `
               <div class="edu-section-block">
                 <span class="edu-block-label">Activities and Societies</span>
                 <ul class="edu-societies-list">
@@ -1821,51 +2167,124 @@
 
   let liveSkills = [];
 
-  function initStackTabListeners() {
-    const stackTabs = document.querySelectorAll('.stack-tab');
-    const stackPanels = document.querySelectorAll('.stack-panel');
-    stackTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const cat = tab.getAttribute('data-cat');
-        stackTabs.forEach(t => t.classList.remove('active'));
-        stackPanels.forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        const panel = document.querySelector(`.stack-panel[data-cat="${cat}"]`);
-        if (panel) panel.classList.add('active');
-      });
-    });
+  function getSkillCategoryIcon(name) {
+    const n = (name || '').toLowerCase();
+    if (n.includes('program')) return '💻';
+    if (n.includes('data') || n.includes('analytic')) return '📊';
+    if (n.includes('vision')) return '👁️';
+    if (n.includes('nlp') || n.includes('language')) return '💬';
+    if (n.includes('generative')) return '⚡';
+    if (n.includes('agent')) return '🤖';
+    if (n.includes('software')) return '🛠️';
+    if (n.includes('database')) return '🗄️';
+    if (n.includes('devops') || n.includes('operation')) return '🚀';
+    return '✨';
   }
+
+  window.filterSkillsSpecialization = function(cat, btn) {
+    const pills = document.querySelectorAll('.skills-nav-pill');
+    pills.forEach(p => p.classList.remove('active'));
+    if (btn) {
+      btn.classList.add('active');
+      if (typeof btn.scrollIntoView === 'function') {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    const cards = document.querySelectorAll('.unified-spec-card');
+    cards.forEach(card => {
+      const spec = card.getAttribute('data-spec');
+      if (cat === 'all' || spec === cat) {
+        card.classList.remove('hidden-filter');
+      } else {
+        card.classList.add('hidden-filter');
+      }
+    });
+  };
 
   function renderSkills(skills = liveSkills) {
     if (!skills || !skills.length) return;
     liveSkills = skills;
 
     const skillsGrid = document.getElementById('skillsGrid');
+    const filterNav = document.getElementById('skillsFilterNav');
+
+    // Update Filter Nav if present
+    if (filterNav) {
+      filterNav.innerHTML = `
+        <button class="skills-nav-pill active" data-cat="all" onclick="filterSkillsSpecialization('all', this)">
+          <span>✨ All</span>
+        </button>
+        ${skills.map(s => {
+          const slug = s.category_slug || (s.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+          const icon = getSkillCategoryIcon(s.category);
+          return `
+            <button class="skills-nav-pill" data-cat="${escapeHtml(slug)}" onclick="filterSkillsSpecialization('${escapeHtml(slug)}', this)">
+              <span>${icon} ${escapeHtml(s.category)}</span>
+            </button>
+          `;
+        }).join('')}
+      `;
+    }
+
     if (skillsGrid) {
+      skillsGrid.className = 'unified-skills-grid';
       skillsGrid.innerHTML = skills.map(skill => {
+        const slug = skill.category_slug || (skill.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
         const items = Array.isArray(skill.items) ? skill.items : [];
+        const techList = Array.isArray(skill.tech_stack) ? skill.tech_stack : [];
         const accent = skill.accent_color || 'var(--blue)';
         const iconSvg = skill.icon_svg || '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
 
-        return `
-          <div class="skill-card reveal in-view" style="--accent:${escapeHtml(accent)}">
-            <div class="skill-card-head">
-              <span class="skill-icon">
-                ${iconSvg}
-              </span>
-              <h3>${escapeHtml(skill.category)}</h3>
+        // Stacks and Skills
+        const stackRowsHtml = items.map((it, idx) => {
+          const bulletPoints = (it.tags || '')
+            .split(/[·•,]/)
+            .map(x => x.trim())
+            .filter(Boolean);
+
+          const matchedTech = techList[idx] || techList.find(t => (it.name || '').toLowerCase().includes((t.name || '').toLowerCase()));
+          const techIcon = (matchedTech && matchedTech.icon_svg) 
+            ? matchedTech.icon_svg 
+            : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+
+          return `
+            <div class="spec-stack-row">
+              <div class="spec-stack-header">
+                <span class="spec-stack-icon">${techIcon}</span>
+                <span class="spec-stack-name">${escapeHtml(it.name || '')}</span>
+              </div>
+              ${bulletPoints.length ? `
+                <ul class="spec-skills-list">
+                  ${bulletPoints.map(sk => `<li class="spec-skill-item">${escapeHtml(sk)}</li>`).join('')}
+                </ul>
+              ` : ''}
             </div>
-            <ul class="skill-list">
-              ${items.map(it => `
-                <li class="skill-item">
-                  <div class="skill-item-head">
-                    <svg class="skill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="skill-name">${escapeHtml(it.name || '')}</span>
-                  </div>
-                  ${it.tags ? `<span class="skill-tags">${escapeHtml(it.tags)}</span>` : ''}
-                </li>
-              `).join('')}
-            </ul>
+          `;
+        }).join('');
+
+        return `
+          <div class="unified-spec-card reveal in-view" data-spec="${escapeHtml(slug)}" style="--accent:${escapeHtml(accent)}">
+            <div class="unified-spec-head">
+              <div class="unified-spec-head-left">
+                <span class="unified-spec-icon">${iconSvg}</span>
+                <div>
+                  <span class="unified-spec-tag">Specialization</span>
+                  <h3 class="unified-spec-title">${escapeHtml(skill.category)}</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="spec-stacks-container">
+              ${stackRowsHtml}
+            </div>
+
+            <div class="spec-card-foot">
+              <button type="button" class="card-read-more-btn" onclick="window.toggleSkillCardDetails(this)" aria-expanded="false">
+                <span class="rm-label">Read more</span>
+                <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
           </div>
         `;
       }).join('');
@@ -1873,48 +2292,25 @@
 
     const stackCategories = document.getElementById('stackCategories');
     if (stackCategories) {
-      const isId = isIndonesian();
-      const filterLabel = isId ? 'Jelajahi Berdasarkan Spesialisasi' : 'Explore by Specialization';
-
-      let tabsHtml = '';
-      let panelsHtml = '';
-
-      skills.forEach((s, idx) => {
-        const slug = s.category_slug || (s.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-        const isActive = idx === 0 ? 'active' : '';
-        tabsHtml += `<button class="stack-tab ${isActive}" data-cat="${escapeHtml(slug)}">${escapeHtml(s.category)}</button>`;
-
-        const techList = Array.isArray(s.tech_stack) ? s.tech_stack : [];
-        const badgesHtml = techList.map(t => {
-          const icon = t.icon_svg || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
-          return `
-            <div class="stack-badge">
-              <span class="stack-badge-icon">${icon}</span>
-              <span>${escapeHtml(t.name)}</span>
-            </div>
-          `;
-        }).join('');
-
-        panelsHtml += `
-          <div class="stack-panel ${isActive}" data-cat="${escapeHtml(slug)}">
-            ${badgesHtml || '<div style="color:var(--text-muted); font-size:0.85rem; padding:12px;">No technology badges added yet</div>'}
-          </div>
-        `;
-      });
-
-      stackCategories.innerHTML = `
-        <div class="stack-filter-section reveal in-view">
-          <span class="stack-filter-label">${escapeHtml(filterLabel)}</span>
-          <div class="stack-tabs" role="tablist">
-            ${tabsHtml}
-          </div>
-          ${panelsHtml}
-        </div>
-      `;
-
-      initStackTabListeners();
+      stackCategories.innerHTML = '';
+      stackCategories.style.display = 'none';
     }
   }
+
+  // Ensure static fallback skill cards also have Read more / Read less toggle button
+  document.querySelectorAll('.unified-spec-card').forEach(card => {
+    if (!card.querySelector('.spec-card-foot')) {
+      const foot = document.createElement('div');
+      foot.className = 'spec-card-foot';
+      foot.innerHTML = `
+        <button type="button" class="card-read-more-btn" onclick="window.toggleSkillCardDetails(this)" aria-expanded="false">
+          <span class="rm-label">Read more</span>
+          <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      `;
+      card.appendChild(foot);
+    }
+  });
 
   // Render Certifications Grid Dynamically with 3x3 Pagination & Browse All
   function renderCertifications(certifications = liveCertifications, page = currentCertPage) {
@@ -1946,7 +2342,7 @@
               <span class="cert-issuer-icon" style="--accent:${escapeHtml(accent)}">${escapeHtml(getInitials(cert.issuer))}</span>
               <div class="cert-issuer-meta">
                 <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
-                <span class="cert-date">${escapeHtml(cert.issue_date || '')}</span>
+                <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
               </div>
             </div>
             ${cert.category ? `<span class="cert-category-pill">${escapeHtml(cert.category)}</span>` : ''}
@@ -1955,7 +2351,7 @@
             <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
             ${cert.image_url ? `
               <div class="cert-card-preview" onclick="openLightbox('${escapeHtml(cert.image_url)}', '${escapeHtml(cert.title)}')" title="Click to view full certificate">
-                <img src="${escapeHtml(cert.image_url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                <img src="${escapeHtml(cert.image_url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'" decoding="async">
                 <span class="cert-zoom-hint">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                   ${isIndonesian() ? 'Perbesar' : 'View Full'}
@@ -2083,7 +2479,7 @@
               </span>
             ` : ''}
             ${hasImage ? `
-              <img src="${escapeHtml(aw.image_url)}" alt="${escapeHtml(aw.title)}" class="award-cert-img" loading="lazy" />
+              <img src="${escapeHtml(aw.image_url)}" alt="${escapeHtml(aw.title)}" class="award-cert-img" loading="lazy" / decoding="async">
               <div class="award-cert-overlay">
                 <span class="award-cert-zoom-btn">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -2111,7 +2507,7 @@
             <div>
               ${aw.metric_tag ? `
                 <div class="award-badge-top-wrap" style="margin-bottom: 8px;">
-                  <span class="award-metric-tag ${escapeHtml(color)}">${escapeHtml(aw.metric_tag)}</span>
+                  <span class="award-metric-tag ${escapeHtml(color)} ${getYearBadgeClass(aw.metric_tag)}">${escapeHtml(aw.metric_tag)}</span>
                 </div>
               ` : ''}
               <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">${escapeHtml(aw.title)}</h3>
@@ -2415,7 +2811,7 @@
     bodyEl.innerHTML = `
       <div style="display:flex; flex-direction:column; gap:18px;">
         <div style="border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border); max-height:280px; cursor:pointer;" onclick="window.openLightbox('${escapeHtml(posterImg)}', '${escapeHtml(t.event)}')">
-          <img src="${escapeHtml(posterImg)}" alt="${escapeHtml(t.event)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/favicon.webp'">
+          <img src="${escapeHtml(posterImg)}" alt="${escapeHtml(t.event)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/favicon.webp'" decoding="async">
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px;">
@@ -2436,7 +2832,7 @@
         ${certUrl ? `
           <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
             <div style="display:flex; align-items:center; gap:12px; min-width:0;">
-              <img src="${escapeHtml(certUrl)}" style="width:70px; height:50px; object-fit:contain; border-radius:6px; border:1px solid var(--border); background:rgba(0,0,0,0.05); cursor:pointer; flex-shrink:0;" onclick="window.openLightbox('${escapeHtml(certUrl)}', '${escapeHtml(t.event)} — Speaker Certificate')" alt="Speaker Certificate" />
+              <img src="${escapeHtml(certUrl)}" style="width:70px; height:50px; object-fit:contain; border-radius:6px; border:1px solid var(--border); background:rgba(0,0,0,0.05); cursor:pointer; flex-shrink:0;" onclick="window.openLightbox('${escapeHtml(certUrl)}', '${escapeHtml(t.event)} — Speaker Certificate')" alt="Speaker Certificate" / decoding="async">
               <div style="min-width:0;">
                 <strong style="font-size:13.5px; color:var(--text); display:block;">Speaker Certificate</strong>
                 <span style="font-size:11.5px; color:var(--text-tertiary);">Official speaker recognition</span>
@@ -2550,11 +2946,20 @@
     const img = document.getElementById('lightboxImg');
     if (!overlay || !img) return;
 
-    updateLightboxList();
-    currentLightboxIdx = lightboxImages.findIndex(item => item.src === src);
-    if (currentLightboxIdx === -1) {
-      lightboxImages.push({ src, alt: alt || 'Image' });
-      currentLightboxIdx = lightboxImages.length - 1;
+    // Detect standalone certificate/award images - disable next/previous buttons
+    const isCert = /cert|sertifikat|credential|award|proof|finalis/i.test(src) ||
+                   /cert|sertifikat|credential|award|proof|finalis/i.test(alt || '');
+
+    if (isCert) {
+      overlay.classList.add('lightbox-no-nav');
+    } else {
+      overlay.classList.remove('lightbox-no-nav');
+      updateLightboxList();
+      currentLightboxIdx = lightboxImages.findIndex(item => item.src === src);
+      if (currentLightboxIdx === -1) {
+        lightboxImages.push({ src, alt: alt || 'Image' });
+        currentLightboxIdx = lightboxImages.length - 1;
+      }
     }
 
     img.src = src;
@@ -2564,6 +2969,8 @@
   };
 
   window.prevLightboxImage = function() {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (overlay && overlay.classList.contains('lightbox-no-nav')) return;
     if (!lightboxImages.length) return;
     currentLightboxIdx = (currentLightboxIdx - 1 + lightboxImages.length) % lightboxImages.length;
     const item = lightboxImages[currentLightboxIdx];
@@ -2575,6 +2982,8 @@
   };
 
   window.nextLightboxImage = function() {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (overlay && overlay.classList.contains('lightbox-no-nav')) return;
     if (!lightboxImages.length) return;
     currentLightboxIdx = (currentLightboxIdx + 1) % lightboxImages.length;
     const item = lightboxImages[currentLightboxIdx];
@@ -2587,7 +2996,10 @@
 
   window.closeLightbox = function() {
     const overlay = document.getElementById('lightboxOverlay');
-    if (overlay) overlay.classList.remove('active');
+    if (overlay) {
+      overlay.classList.remove('active');
+      overlay.classList.remove('lightbox-no-nav');
+    }
     document.body.style.overflow = '';
   };
 
@@ -2595,14 +3007,15 @@
   window.addEventListener('keydown', (e) => {
     const overlay = document.getElementById('lightboxOverlay');
     const isLightboxActive = overlay && overlay.classList.contains('active');
+    const isNoNav = overlay && overlay.classList.contains('lightbox-no-nav');
 
     if (e.key === 'Escape') {
       window.closeProjectModal();
       window.closeTalkModal();
       window.closeLightbox();
-    } else if (isLightboxActive && e.key === 'ArrowLeft') {
+    } else if (isLightboxActive && !isNoNav && e.key === 'ArrowLeft') {
       window.prevLightboxImage();
-    } else if (isLightboxActive && e.key === 'ArrowRight') {
+    } else if (isLightboxActive && !isNoNav && e.key === 'ArrowRight') {
       window.nextLightboxImage();
     }
   });
@@ -2621,7 +3034,7 @@
     return `
       <article class="gallery-card" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
         <div class="gallery-card-thumb-wrap">
-          <img class="gallery-card-thumb" src="${imgUrl}" alt="Muhammad Haerul — ${titleText}" title="Muhammad Haerul — ${titleText}" loading="lazy">
+          <img class="gallery-card-thumb" src="${imgUrl}" alt="Muhammad Haerul — ${titleText}" title="Muhammad Haerul — ${titleText}" loading="lazy" decoding="async">
           <div class="gallery-zoom-overlay">
             <div class="gallery-zoom-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -2642,6 +3055,7 @@
   function renderGallery(filter = 'All') {
     const track1 = document.getElementById('galleryTrack1');
     const track2 = document.getElementById('galleryTrack2');
+    const track3 = document.getElementById('galleryTrack3');
     if (!track1 || !track2) return;
 
     currentGalleryFilter = filter;
@@ -2656,18 +3070,19 @@
         </div>
       `;
       track2.innerHTML = '';
+      if (track3) track3.innerHTML = '';
       return;
     }
 
-    // Build seamless infinite loop sequence
-    // Track 1
+    // Build seamless infinite loop sequence for 3 dynamic rows
+    // Track 1: Original Order
     let seq1 = [...items];
     while (seq1.length < 8) {
       seq1 = seq1.concat(items);
     }
     const loopItems1 = seq1.concat(seq1);
 
-    // Track 2 (staggered offset)
+    // Track 2: Staggered offset by 1/2
     let seq2 = [...items];
     if (seq2.length > 2) {
       const half = Math.floor(seq2.length / 2);
@@ -2678,8 +3093,22 @@
     }
     const loopItems2 = seq2.concat(seq2);
 
+    // Track 3: Staggered offset by 1/3 (Rich variety)
+    let seq3 = [...items];
+    if (seq3.length > 2) {
+      const third = Math.floor(seq3.length / 3);
+      seq3 = seq3.slice(third).concat(seq3.slice(0, third)).reverse();
+    }
+    while (seq3.length < 8) {
+      seq3 = seq3.concat(items);
+    }
+    const loopItems3 = seq3.concat(seq3);
+
     track1.innerHTML = loopItems1.map(item => buildGalleryCardHtml(item)).join('');
     track2.innerHTML = loopItems2.map(item => buildGalleryCardHtml(item)).join('');
+    if (track3) {
+      track3.innerHTML = loopItems3.map(item => buildGalleryCardHtml(item)).join('');
+    }
   }
 
   function updateGalleryFilterCounts() {
@@ -2773,12 +3202,25 @@
       `;
 
       if (pubLower.includes('hasanuddin') || pubLower.includes('unhas')) {
-        pubLogoHtml = `<img src="/assets/images/unhas-logo.png" alt="Hasanuddin University" style="width:24px; height:24px; object-fit:contain;" />`;
+        pubLogoHtml = `<img src="/assets/images/unhas-logo.png" alt="Hasanuddin University" style="width:24px; height:24px; object-fit:contain;" / decoding="async">`;
       } else if (pubLower.includes('pypi') || pubLower.includes('python')) {
-        pubLogoHtml = `<img src="/assets/images/pypi.svg" alt="Python Package Index (PyPI)" style="width:20px; height:20px; object-fit:contain;" />`;
+        pubLogoHtml = `<img src="/assets/images/pypi.svg" alt="Python Package Index (PyPI)" style="width:20px; height:20px; object-fit:contain;" / decoding="async">`;
       } else if (pubLower.includes('medium')) {
-        pubLogoHtml = `<img src="/assets/images/medium.svg" alt="Medium" style="width:20px; height:20px; object-fit:contain; filter: var(--medium-logo-filter, none);" />`;
+        pubLogoHtml = `<img src="/assets/images/medium.svg" alt="Medium" style="width:20px; height:20px; object-fit:contain; filter: var(--medium-logo-filter, none);" / decoding="async">`;
       }
+
+      const pubDescText = (p.description || '').trim();
+      const isLongPubDesc = pubDescText.length > 120;
+      const pubDescId = `pub-desc-${p.id || Math.random().toString(36).substring(2, 9)}`;
+      const pubDescHtml = pubDescText ? (isLongPubDesc ? `
+        <div class="clamp-text-wrapper is-clamped" id="${pubDescId}">
+          <p class="pub-description">${escapeHtml(pubDescText)}</p>
+        </div>
+        <button type="button" class="card-read-more-btn" onclick="event.stopPropagation(); window.toggleCardReadMore(this, '${pubDescId}')" aria-expanded="false">
+          <span class="rm-label">Read more</span>
+          <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      ` : `<p class="pub-description">${escapeHtml(pubDescText)}</p>`) : '';
 
       return `
         <article class="publication-card reveal in-view" ${link ? `onclick="window.open('${link}','_blank','noopener')"` : ''} style="${link ? 'cursor:pointer;' : ''}">
@@ -2789,7 +3231,7 @@
               </span>
               <div class="pub-meta-col">
                 <span class="pub-publisher">${escapeHtml(publisher)}</span>
-                ${p.date ? `<span class="pub-date">${escapeHtml(p.date)}</span>` : ''}
+                ${p.date ? `<span class="pub-date ${getYearBadgeClass(p.date)}">${escapeHtml(p.date)}</span>` : ''}
               </div>
             </div>
             <span class="pub-type-pill">Publication</span>
@@ -2797,7 +3239,7 @@
 
           <div class="pub-card-mid">
             <h3 class="pub-title">${escapeHtml(p.title)}</h3>
-            ${p.description ? `<p class="pub-description">${escapeHtml(p.description)}</p>` : ''}
+            ${pubDescHtml}
           </div>
 
           <div class="pub-card-bottom">
@@ -2828,15 +3270,18 @@
   }
 
   function renderBlogs(blogs) {
+    const blogSec = document.getElementById('blog');
+    const navBlog = document.querySelectorAll('a[href="#blog"], [data-nav][href="#blog"], a[href="#blogs"]');
     const grid = document.querySelector('#blog .blog-grid');
-    if (!grid) return;
     if (!Array.isArray(blogs) || !blogs.length) {
-      grid.innerHTML = `
-        <div style="grid-column:1/-1; padding:36px 20px; text-align:center; color:var(--ink-muted); font-size:14px; border:1px dashed var(--border-soft); border-radius:12px;">
-          Technical writings and case studies will appear here once published in the dashboard.
-        </div>`;
+      if (blogSec) blogSec.style.display = 'none';
+      navBlog.forEach(el => el.style.display = 'none');
+      if (grid) grid.innerHTML = '';
       return;
     }
+    if (blogSec) blogSec.style.display = '';
+    navBlog.forEach(el => el.style.display = '');
+    if (!grid) return;
     grid.innerHTML = blogs.map(b => {
       const artClass = escapeHtml(b.art_type || 'ai-pattern');
       const tags = Array.isArray(b.tags) ? b.tags : [];
@@ -2845,7 +3290,7 @@
           <div class="blog-card-media" style="position:relative; overflow:hidden;">
             ${b.badge ? `<span class="blog-tag-badge">${escapeHtml(b.badge)}</span>` : ''}
             ${b.cover_image ? `
-              <img src="${escapeHtml(b.cover_image)}" alt="${escapeHtml(b.title)}" class="blog-card-cover" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img src="${escapeHtml(b.cover_image)}" alt="${escapeHtml(b.title)}" class="blog-card-cover" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" decoding="async">
               <div class="blog-art-pattern ${artClass}" style="display:none;">
                 ${getBlogArtSvg(b.art_type)}
               </div>
@@ -2980,8 +3425,8 @@
 
       el.innerHTML = `
         <div class="hero-glimpse-media">
-          <img class="hero-glimpse-blur-bg" src="${escapeHtml(img)}" alt="" aria-hidden="true">
-          <img class="hero-glimpse-main-img" src="${escapeHtml(img)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.src='/favicon.webp'">
+          <img class="hero-glimpse-blur-bg" src="${escapeHtml(img)}" alt="" aria-hidden="true" decoding="async">
+          <img class="hero-glimpse-main-img" src="${escapeHtml(img)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.src='/favicon.webp'" decoding="async">
         </div>
         <div class="hero-glimpse-caption">
           <div class="hero-glimpse-meta">
@@ -3157,15 +3602,12 @@
           }
         }
 
-        if (!localStorage.getItem('mh-theme')) {
+        if (!localStorage.getItem('mh_theme') && !localStorage.getItem('mh-theme')) {
           const mode = settings.theme.defaultMode;
           if (mode === 'dark') {
             root.setAttribute('data-theme', 'dark');
-          } else if (mode === 'light') {
+          } else {
             root.setAttribute('data-theme', 'light');
-          } else if (mode === 'auto') {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
           }
         }
       }

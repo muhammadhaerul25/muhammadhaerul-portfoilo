@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem('mh_theme') || localStorage.getItem('mh-theme');
+                if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+                else document.documentElement.setAttribute('data-theme', 'light');
+            } catch(e) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhammad Haerul's Portfolio</title>
@@ -81,6 +90,81 @@
         /* Transitions */
         --t:        0.22s cubic-bezier(0.4, 0, 0.2, 1);
         --t-spring: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    [data-theme="dark"] {
+        --sidebar-bg:          #0F172A;
+        --sidebar-border:      rgba(255, 255, 255, 0.08);
+        --sidebar-active-bg:   rgba(66, 133, 244, 0.15);
+        --sidebar-active-text: #60A5FA;
+        --sidebar-hover:       rgba(255, 255, 255, 0.05);
+
+        --bg:        #0A0E17;
+        --surface:   #141C2E;
+        --ink:       #F8FAFC;
+        --ink-2:     #E2E8F0;
+        --ink-3:     #94A3B8;
+        --ink-4:     #64748B;
+        --line:      rgba(255, 255, 255, 0.1);
+        --line-soft: rgba(255, 255, 255, 0.06);
+
+        --shadow-sm:    0 1px 3px rgba(0,0,0,0.5);
+        --shadow-md:    0 4px 12px rgba(0,0,0,0.5);
+        --shadow-hover: 0 8px 24px rgba(0,0,0,0.6);
+    }
+    [data-theme="dark"] body {
+        background: #0A0E17;
+        color: #F8FAFC;
+    }
+    [data-theme="dark"] .topbar {
+        background: rgba(10, 14, 23, 0.92);
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .hero {
+        background: #141C2E;
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .stat-card {
+        background: #141C2E;
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .toolbar,
+    [data-theme="dark"] .filter-select,
+    [data-theme="dark"] .search-wrap input {
+        background: #0F172A;
+        border-color: rgba(255, 255, 255, 0.12);
+        color: #F8FAFC;
+    }
+    [data-theme="dark"] .admin-row {
+        background: #141C2E;
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .auth-gate-card {
+        background: #141C2E;
+        color: #F8FAFC;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+    [data-theme="dark"] .auth-text-input {
+        background: #0F172A;
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #F8FAFC;
+    }
+    [data-theme="dark"] .auth-tabs {
+        background: #0F172A;
+    }
+    [data-theme="dark"] .auth-tab-btn.active {
+        background: #1E293B;
+        color: #60A5FA;
+    }
+    [data-theme="dark"] .drawer {
+        background: #141C2E;
+        color: #F8FAFC;
+    }
+    [data-theme="dark"] .modal-card {
+        background: #141C2E;
+        color: #F8FAFC;
+        border-color: rgba(255, 255, 255, 0.1);
     }
 
     body {
@@ -2702,7 +2786,69 @@
         }
     }
 
-    </style>
+    
+/* Dashboard Theme Toggle Button (SVG Icon sync with Homepage) */
+#dashboardThemeBtn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+#dashboardThemeBtn:hover {
+  background: var(--surface-hover);
+  border-color: var(--line-strong, #CBD5E1);
+  color: var(--ink);
+}
+#dashboardThemeBtn .icon-sun {
+  display: block;
+  color: #F59E0B;
+}
+#dashboardThemeBtn .icon-moon {
+  display: none;
+  color: #38BDF8;
+}
+[data-theme="dark"] #dashboardThemeBtn .icon-sun {
+  display: none;
+}
+[data-theme="dark"] #dashboardThemeBtn .icon-moon {
+  display: block;
+}
+
+/* CV Action Buttons in Card Heads */
+.cv-card-btn-action {
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .15s ease;
+  line-height: 1.3;
+}
+.cv-card-btn-action:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+.cv-card-btn-select-all {
+  color: var(--g-blue);
+  background: var(--g-blue-soft);
+  border: 1px solid rgba(66, 133, 244, 0.28);
+}
+.cv-card-btn-clear {
+  color: var(--ink-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+</style>
 </head>
 <body>
 
@@ -3016,6 +3162,15 @@
                     </svg>
                     <span>View Site</span>
                 </a>
+                <button type="button" class="btn btn-ghost theme-toggle" id="dashboardThemeBtn" onclick="toggleDashboardTheme()" title="Toggle Light / Dark Mode" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="4.2" />
+                        <path d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7" />
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z" />
+                    </svg>
+                </button>
                 <button class="btn btn-ghost" onclick="refreshData()" id="btn-refresh" style="display:none">
                     <svg id="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
                     Refresh
@@ -4773,16 +4928,17 @@
                         <!-- Top Toolbar Actions -->
                         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%; margin-top:14px; padding:12px 14px; background:var(--bg); border:1.5px solid var(--line); border-radius:var(--r-md);">
                             <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                                <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-3);">Preset:</span>
-                                <select id="cv-version-select" onchange="switchCvVersion(this.value)" class="fm-select" style="padding:6px 12px; font-weight:700; font-size:0.82rem; border-radius:8px; border:1.5px solid var(--line); background:var(--surface); cursor:pointer;">
-                                    <option value="fullstack-ai">Full-Stack AI Engineer</option>
-                                    <option value="academic-research">Academic &amp; Researcher</option>
-                                    <option value="trainer-speaker">AI Technical Trainer &amp; Speaker</option>
-                                </select>
-                                <button type="button" class="btn btn-ghost" onclick="createNewCvVersion()" style="padding:6px 10px; font-size:0.75rem; font-weight:700;" title="Create new custom CV preset">+ New</button>
-                                <button type="button" class="btn btn-ghost" onclick="duplicateCurrentCvVersion()" style="padding:6px 10px; font-size:0.75rem; font-weight:700;" title="Duplicate active preset">Duplicate</button>
-                                <button type="button" class="btn btn-ghost" onclick="deleteCurrentCvVersion()" id="btn-delete-cv-ver" style="padding:6px 10px; font-size:0.75rem; font-weight:700; color:var(--g-red);" title="Delete current preset">Delete</button>
-                                <button type="button" class="btn btn-primary" onclick="saveActiveCvVersion(true)" style="padding:6px 14px; font-size:0.75rem; font-weight:700;">Save Version</button>
+                                <div style="display:inline-flex; align-items:center; gap:6px; background:var(--g-blue-soft); color:var(--g-blue); padding:5px 12px; border-radius:8px; font-size:0.75rem; font-weight:800; letter-spacing:0.02em;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                    <span>Agile Single CV</span>
+                                </div>
+                                <button type="button" class="btn btn-ghost" onclick="toggleAllGlobalCvCheckboxes(true)" style="padding:6px 11px; font-size:0.75rem; font-weight:700; border:1px solid var(--line); border-radius:8px; background:var(--surface);" title="Select all items across all sections">Select All</button>
+                                <button type="button" class="btn btn-ghost" onclick="toggleAllGlobalCvCheckboxes(false)" style="padding:6px 11px; font-size:0.75rem; font-weight:700; border:1px solid var(--line); border-radius:8px; background:var(--surface);" title="Clear selection across all sections">Clear All</button>
+                                <button type="button" class="btn btn-ghost" onclick="resetCvToDefaults()" style="padding:6px 11px; font-size:0.75rem; font-weight:700; border:1px solid var(--line); border-radius:8px; background:var(--surface);" title="Reset to standard default CV configuration">Reset</button>
+                                <button type="button" class="btn btn-primary" onclick="saveCvSingleConfig(true)" style="padding:6px 14px; font-size:0.75rem; font-weight:800; display:inline-flex; align-items:center; gap:6px;">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                    <span>Save CV</span>
+                                </button>
                             </div>
                             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                                 <div style="display:flex; align-items:center; background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-sm); padding:2px;">
@@ -4889,7 +5045,10 @@
                                         <span>Work Experience</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-exp-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-exp-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-exp-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -4908,7 +5067,10 @@
                                         <span>Featured Projects</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-proj-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-proj-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-proj-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -4927,7 +5089,10 @@
                                         <span>Education</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-edu-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-edu-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-edu-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -4946,7 +5111,10 @@
                                         <span>Skills &amp; Competencies</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-skill-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-skill-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-skill-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -4965,7 +5133,10 @@
                                         <span>Licences &amp; Certifications</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-cert-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-cert-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-cert-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -4984,7 +5155,10 @@
                                         <span>Honors &amp; Awards</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-award-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-award-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-award-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -5003,7 +5177,10 @@
                                         <span>Publications &amp; Articles</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-pub-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-pub-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-pub-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -5022,7 +5199,10 @@
                                         <span>Keynote Talks &amp; Workshops</span>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:8px;">
-                                        <button type="button" class="btn-sm-ghost" onclick="event.stopPropagation(); toggleAllCvCheckboxes('cv-talk-check', true)" style="font-size:0.7rem; color:var(--g-blue); border:none; background:none; cursor:pointer; font-weight:700;">Select All</button>
+                                        <div style="display:flex; align-items:center; gap:5px;" onclick="event.stopPropagation();">
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-select-all" onclick="toggleSectionCheckboxes('cv-talk-check', true)" title="Select all items in this section">Select All</button>
+                                            <button type="button" class="cv-card-btn-action cv-card-btn-clear" onclick="toggleSectionCheckboxes('cv-talk-check', false)" title="Deselect all items in this section">Clear</button>
+                                        </div>
                                         <svg class="cv-card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </div>
                                 </div>
@@ -15050,7 +15230,7 @@ function moveCvSection(secId, direction) {
     _cvSections[targetIdx] = temp;
     renderCvSectionOrderList();
     renderCvAtsPreview();
-    saveActiveCvVersion(false);
+    saveCvSingleConfig(false);
 }
 
 function toggleCvSectionActive(secId, isChecked) {
@@ -15059,7 +15239,7 @@ function toggleCvSectionActive(secId, isChecked) {
         sec.enabled = isChecked;
         renderCvSectionOrderList();
         renderCvAtsPreview();
-        saveActiveCvVersion(false);
+        saveCvSingleConfig(false);
     }
 }
 
@@ -15067,138 +15247,65 @@ function resetCvSectionOrder() {
     _cvSections = JSON.parse(JSON.stringify(_cvDefaultSections));
     renderCvSectionOrderList();
     renderCvAtsPreview();
-    saveActiveCvVersion(false);
+    saveCvSingleConfig(false);
     showToast('Section order reset to default!', 'success');
 }
 
-// ════ Version / Preset Management ════
-const CV_VERSIONS_KEY = 'mh_cv_saved_versions';
+// ════ Single Agile CV Configuration System ════
+const CV_CONFIG_KEY = 'mh_cv_active_config';
 
-function getDefaultCvVersions() {
-    return [
-        {
-            id: 'fullstack-ai',
-            name: 'Full-Stack AI Engineer',
-            template: 'modern',
-            header: {
-                name: 'Muhammad Haerul, S.Kom',
-                title: 'AI Full-Stack Engineer | AI Trainer',
-                email: 'haerulmuhammad01@gmail.com',
-                location: 'Makassar, Indonesia',
-                linkedin: 'linkedin.com/in/muhammadhaerul',
-                github: 'github.com/muhammadhaerul25',
-                website: 'https://muhammadhaerul.tech',
-                summary: 'AI Full-Stack Engineer and Technical Trainer with 4+ years of experience architecting end-to-end intelligent systems, agentic AI workflows, and high-performance web applications. Proven track record in industry AI deployment, enterprise APIs, and empowering hundreds of engineers through hands-on technical training.'
-            },
-            sections: JSON.parse(JSON.stringify(_cvDefaultSections))
+function getDefaultCvConfig() {
+    return {
+        template: 'modern',
+        header: {
+            name: 'Muhammad Haerul, S.Kom',
+            title: 'AI Full-Stack Engineer | AI Trainer',
+            email: 'haerulmuhammad01@gmail.com',
+            location: 'Makassar, Indonesia',
+            linkedin: 'linkedin.com/in/muhammadhaerul',
+            github: 'github.com/muhammadhaerul25',
+            website: 'https://muhammadhaerul.tech',
+            summary: 'AI Full-Stack Engineer and Technical Trainer with 4+ years of experience architecting end-to-end intelligent systems, agentic AI workflows, and high-performance web applications. Proven track record in industry AI deployment, enterprise APIs, and empowering hundreds of engineers through hands-on technical training.'
         },
-        {
-            id: 'academic-research',
-            name: 'Academic & Researcher',
-            template: 'classic',
-            header: {
-                name: 'Muhammad Haerul, S.Kom',
-                title: 'AI & Computer Science Researcher',
-                email: 'haerulmuhammad01@gmail.com',
-                location: 'Makassar, Indonesia',
-                linkedin: 'linkedin.com/in/muhammadhaerul',
-                github: 'github.com/muhammadhaerul25',
-                website: 'https://muhammadhaerul.tech',
-                summary: 'Computer Science graduate (GPA 3.97 / 4.00) and researcher specializing in Artificial Intelligence, Computer Vision, and applied NLP. Experienced in authoring technical publications, academic presentations, and scientific innovation.'
-            },
-            sections: [
-                { id: 'summary', name: 'Professional Summary', enabled: true },
-                { id: 'education', name: 'Education', enabled: true },
-                { id: 'awards', name: 'Honors & Awards', enabled: true },
-                { id: 'publications', name: 'Publications & Articles', enabled: true },
-                { id: 'projects', name: 'Featured Projects', enabled: true },
-                { id: 'experience', name: 'Work Experience', enabled: true },
-                { id: 'skills', name: 'Skills & Competencies', enabled: true },
-                { id: 'talks', name: 'Keynote Talks & Workshops', enabled: true },
-                { id: 'certifications', name: 'Certifications & Licenses', enabled: true }
-            ]
-        },
-        {
-            id: 'trainer-speaker',
-            name: 'AI Technical Trainer & Speaker',
-            template: 'compact',
-            header: {
-                name: 'Muhammad Haerul, S.Kom',
-                title: 'AI Technical Trainer & Keynote Speaker',
-                email: 'haerulmuhammad01@gmail.com',
-                location: 'Makassar, Indonesia',
-                linkedin: 'linkedin.com/in/muhammadhaerul',
-                github: 'github.com/muhammadhaerul25',
-                website: 'https://muhammadhaerul.tech',
-                summary: 'Experienced AI Trainer and public speaker who has trained over 650+ engineers, students, and professionals in Generative AI, Prompt Engineering, Agentic Workflows, and Modern Software Engineering.'
-            },
-            sections: [
-                { id: 'summary', name: 'Professional Summary', enabled: true },
-                { id: 'talks', name: 'Keynote Talks & Workshops', enabled: true },
-                { id: 'experience', name: 'Work Experience', enabled: true },
-                { id: 'skills', name: 'Skills & Competencies', enabled: true },
-                { id: 'projects', name: 'Featured Projects', enabled: true },
-                { id: 'awards', name: 'Honors & Awards', enabled: true },
-                { id: 'education', name: 'Education', enabled: true },
-                { id: 'certifications', name: 'Certifications & Licenses', enabled: true },
-                { id: 'publications', name: 'Publications & Articles', enabled: true }
-            ]
-        }
-    ];
+        sections: JSON.parse(JSON.stringify(_cvDefaultSections)),
+        checked: null // null selects all available items
+    };
 }
 
-function loadSavedCvVersions() {
+function loadSavedCvConfig() {
     try {
-        var raw = localStorage.getItem(CV_VERSIONS_KEY);
+        var raw = localStorage.getItem(CV_CONFIG_KEY);
         if (raw) {
             var parsed = JSON.parse(raw);
-            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            if (parsed && typeof parsed === 'object') return parsed;
         }
     } catch(e) {}
-    var def = getDefaultCvVersions();
-    localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(def));
+    var def = getDefaultCvConfig();
+    try { localStorage.setItem(CV_CONFIG_KEY, JSON.stringify(def)); } catch(e) {}
     return def;
 }
 
-function initCvVersionsDropdown() {
-    var sel = document.getElementById('cv-version-select');
-    if (!sel) return;
-    var list = loadSavedCvVersions();
-    sel.innerHTML = list.map(function(v) {
-        return '<option value="' + esc(v.id) + '">' + esc(v.name) + '</option>';
-    }).join('');
-    if (list.some(v => v.id === _cvActiveVersionId)) {
-        sel.value = _cvActiveVersionId;
-    } else {
-        _cvActiveVersionId = list[0].id;
-        sel.value = _cvActiveVersionId;
-    }
-}
+function applyLoadedCvConfig(cfg) {
+    if (!cfg) cfg = getDefaultCvConfig();
 
-function switchCvVersion(verId) {
-    var list = loadSavedCvVersions();
-    var ver = list.find(v => v.id === verId);
-    if (!ver) return;
-    _cvActiveVersionId = verId;
-
-    if (ver.header) {
-        if (document.getElementById('cv-cfg-name')) document.getElementById('cv-cfg-name').value = ver.header.name || '';
-        if (document.getElementById('cv-cfg-title')) document.getElementById('cv-cfg-title').value = ver.header.title || '';
-        if (document.getElementById('cv-cfg-email')) document.getElementById('cv-cfg-email').value = ver.header.email || '';
-        if (document.getElementById('cv-cfg-location')) document.getElementById('cv-cfg-location').value = ver.header.location || '';
-        if (document.getElementById('cv-cfg-linkedin')) document.getElementById('cv-cfg-linkedin').value = ver.header.linkedin || '';
-        if (document.getElementById('cv-cfg-github')) document.getElementById('cv-cfg-github').value = ver.header.github || '';
-        if (document.getElementById('cv-cfg-website')) document.getElementById('cv-cfg-website').value = ver.header.website || '';
-        if (document.getElementById('cv-cfg-summary')) document.getElementById('cv-cfg-summary').value = ver.header.summary || '';
+    if (cfg.header) {
+        if (document.getElementById('cv-cfg-name')) document.getElementById('cv-cfg-name').value = cfg.header.name || '';
+        if (document.getElementById('cv-cfg-title')) document.getElementById('cv-cfg-title').value = cfg.header.title || '';
+        if (document.getElementById('cv-cfg-email')) document.getElementById('cv-cfg-email').value = cfg.header.email || '';
+        if (document.getElementById('cv-cfg-location')) document.getElementById('cv-cfg-location').value = cfg.header.location || '';
+        if (document.getElementById('cv-cfg-linkedin')) document.getElementById('cv-cfg-linkedin').value = cfg.header.linkedin || '';
+        if (document.getElementById('cv-cfg-github')) document.getElementById('cv-cfg-github').value = cfg.header.github || '';
+        if (document.getElementById('cv-cfg-website')) document.getElementById('cv-cfg-website').value = cfg.header.website || '';
+        if (document.getElementById('cv-cfg-summary')) document.getElementById('cv-cfg-summary').value = cfg.header.summary || '';
     }
 
-    if (ver.template) {
-        setCvTemplate(ver.template);
+    if (cfg.template) {
+        setCvTemplate(cfg.template);
     }
 
-    if (Array.isArray(ver.sections) && ver.sections.length) {
-        var currentIds = ver.sections.map(s => s.id);
-        _cvSections = ver.sections.slice();
+    if (Array.isArray(cfg.sections) && cfg.sections.length) {
+        var currentIds = cfg.sections.map(function(s) { return s.id; });
+        _cvSections = cfg.sections.slice();
         _cvDefaultSections.forEach(function(ds) {
             if (!currentIds.includes(ds.id)) {
                 _cvSections.push(JSON.parse(JSON.stringify(ds)));
@@ -15209,17 +15316,16 @@ function switchCvVersion(verId) {
     }
     renderCvSectionOrderList();
 
-    if (ver.checked) {
-        applyCheckedMap('.cv-exp-check', ver.checked.experiences);
-        applyCheckedMap('.cv-edu-check', ver.checked.education);
-        applyCheckedMap('.cv-proj-check', ver.checked.projects);
-        applyCheckedMap('.cv-skill-check', ver.checked.skills);
-        applyCheckedMap('.cv-cert-check', ver.checked.certifications);
-        applyCheckedMap('.cv-award-check', ver.checked.awards);
-        applyCheckedMap('.cv-pub-check', ver.checked.publications);
-        applyCheckedMap('.cv-talk-check', ver.checked.talks);
+    if (cfg.checked) {
+        applyCheckedMap('.cv-exp-check', cfg.checked.experiences);
+        applyCheckedMap('.cv-edu-check', cfg.checked.education);
+        applyCheckedMap('.cv-proj-check', cfg.checked.projects);
+        applyCheckedMap('.cv-skill-check', cfg.checked.skills);
+        applyCheckedMap('.cv-cert-check', cfg.checked.certifications);
+        applyCheckedMap('.cv-award-check', cfg.checked.awards);
+        applyCheckedMap('.cv-pub-check', cfg.checked.publications);
+        applyCheckedMap('.cv-talk-check', cfg.checked.talks);
     }
-
     renderCvAtsPreview();
 }
 
@@ -15232,14 +15338,10 @@ function applyCheckedMap(selector, ids) {
 }
 
 function getActiveCheckedIds(selector) {
-    return Array.from(document.querySelectorAll(selector + ':checked')).map(cb => cb.getAttribute('data-id'));
+    return Array.from(document.querySelectorAll(selector + ':checked')).map(function(cb) { return cb.getAttribute('data-id'); });
 }
 
-function saveActiveCvVersion(showFeedback) {
-    var list = loadSavedCvVersions();
-    var idx = list.findIndex(v => v.id === _cvActiveVersionId);
-    if (idx === -1) return;
-
+function saveCvSingleConfig(showFeedback) {
     var header = {
         name: (document.getElementById('cv-cfg-name')?.value || '').trim(),
         title: (document.getElementById('cv-cfg-title')?.value || '').trim(),
@@ -15262,109 +15364,62 @@ function saveActiveCvVersion(showFeedback) {
         talks: getActiveCheckedIds('.cv-talk-check')
     };
 
-    list[idx].header = header;
-    list[idx].template = _cvCurrentTemplate;
-    list[idx].sections = _cvSections;
-    list[idx].checked = checked;
+    var cfg = {
+        template: _cvCurrentTemplate,
+        header: header,
+        sections: _cvSections,
+        checked: checked
+    };
 
     try {
-        localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
+        localStorage.setItem(CV_CONFIG_KEY, JSON.stringify(cfg));
         if (showFeedback) {
-            showToast('Preset "' + list[idx].name + '" saved successfully!', 'success');
+            showToast('Agile CV saved successfully!', 'success');
         }
     } catch(e) {
-        if (showFeedback) showToast('Failed to save preset to localStorage', 'error');
+        if (showFeedback) showToast('Failed to save CV settings', 'error');
     }
 }
 
-function createNewCvVersion() {
-    showPrompt({
-        title: 'New CV Preset',
-        message: 'Enter a name for the new CV preset:',
-        defaultValue: 'Full-Stack Engineer — Target Role',
-        placeholder: 'e.g. Senior AI Engineer',
-        confirmText: 'Create Preset',
-        onConfirm: function(name) {
-            if (!name || !name.trim()) return;
-            name = name.trim();
-            var id = 'ver-' + Date.now();
-            var list = loadSavedCvVersions();
-            var newVer = {
-                id: id,
-                name: name,
-                template: _cvCurrentTemplate,
-                header: {
-                    name: (document.getElementById('cv-cfg-name')?.value || 'Muhammad Haerul, S.Kom').trim(),
-                    title: (document.getElementById('cv-cfg-title')?.value || 'AI Full-Stack Engineer').trim(),
-                    email: (document.getElementById('cv-cfg-email')?.value || 'haerulmuhammad01@gmail.com').trim(),
-                    location: (document.getElementById('cv-cfg-location')?.value || 'Makassar, Indonesia').trim(),
-                    linkedin: (document.getElementById('cv-cfg-linkedin')?.value || 'linkedin.com/in/muhammadhaerul').trim(),
-                    github: (document.getElementById('cv-cfg-github')?.value || 'github.com/muhammadhaerul25').trim(),
-                    website: (document.getElementById('cv-cfg-website')?.value || 'https://muhammadhaerul.tech').trim(),
-                    summary: (document.getElementById('cv-cfg-summary')?.value || '').trim()
-                },
-                sections: JSON.parse(JSON.stringify(_cvSections)),
-                checked: {
-                    experiences: getActiveCheckedIds('.cv-exp-check'),
-                    education: getActiveCheckedIds('.cv-edu-check'),
-                    projects: getActiveCheckedIds('.cv-proj-check'),
-                    skills: getActiveCheckedIds('.cv-skill-check'),
-                    certifications: getActiveCheckedIds('.cv-cert-check'),
-                    awards: getActiveCheckedIds('.cv-award-check'),
-                    publications: getActiveCheckedIds('.cv-pub-check'),
-                    talks: getActiveCheckedIds('.cv-talk-check')
-                }
-            };
-            list.push(newVer);
-            localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
-            _cvActiveVersionId = id;
-            initCvVersionsDropdown();
-            switchCvVersion(id);
-            showToast('Created new preset "' + name + '"!', 'success');
-        }
-    });
-}
-
-function duplicateCurrentCvVersion() {
-    var list = loadSavedCvVersions();
-    var current = list.find(v => v.id === _cvActiveVersionId);
-    if (!current) return;
-    var newName = current.name + ' (Copy)';
-    var newId = 'ver-' + Date.now();
-    var clone = JSON.parse(JSON.stringify(current));
-    clone.id = newId;
-    clone.name = newName;
-    list.push(clone);
-    localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
-    _cvActiveVersionId = newId;
-    initCvVersionsDropdown();
-    switchCvVersion(newId);
-    showToast('Duplicated preset as "' + newName + '"!', 'success');
-}
-
-function deleteCurrentCvVersion() {
-    var list = loadSavedCvVersions();
-    if (list.length <= 1) {
-        showToast('Cannot delete the only existing CV preset.', 'error');
-        return;
-    }
-    var current = list.find(v => v.id === _cvActiveVersionId);
-    if (!current) return;
+function resetCvToDefaults() {
     showConfirm({
-        title: 'Delete CV Preset?',
-        itemTitle: current.name,
-        message: 'Are you sure you want to delete this preset? This action cannot be undone.',
-        confirmText: 'Delete Preset',
-        confirmType: 'danger',
+        title: 'Reset CV Workspace?',
+        message: 'This will reset your ATS CV layout, section order, and selection to the default configuration.',
+        confirmText: 'Reset to Defaults',
+        confirmType: 'primary',
         onConfirm: function() {
-            list = list.filter(v => v.id !== _cvActiveVersionId);
-            localStorage.setItem(CV_VERSIONS_KEY, JSON.stringify(list));
-            _cvActiveVersionId = list[0].id;
-            initCvVersionsDropdown();
-            switchCvVersion(_cvActiveVersionId);
-            showToast('Preset deleted.', 'info');
+            var def = getDefaultCvConfig();
+            try { localStorage.setItem(CV_CONFIG_KEY, JSON.stringify(def)); } catch(e) {}
+            applyLoadedCvConfig(def);
+            toggleAllGlobalCvCheckboxes(true);
+            showToast('CV workspace reset to defaults!', 'info');
         }
     });
+}
+
+function toggleSectionCheckboxes(cls, check) {
+    document.querySelectorAll('.' + cls).forEach(function(cb) {
+        cb.checked = Boolean(check);
+    });
+    renderCvAtsPreview();
+    saveCvSingleConfig(false);
+}
+
+function toggleAllGlobalCvCheckboxes(check) {
+    var classes = ['cv-exp-check', 'cv-edu-check', 'cv-proj-check', 'cv-skill-check', 'cv-cert-check', 'cv-award-check', 'cv-pub-check', 'cv-talk-check'];
+    classes.forEach(function(cls) {
+        document.querySelectorAll('.' + cls).forEach(function(cb) {
+            cb.checked = Boolean(check);
+        });
+    });
+    renderCvAtsPreview();
+    saveCvSingleConfig(false);
+    showToast(check ? 'All items selected' : 'All items cleared', 'info');
+}
+
+function onCvInputChange() {
+    renderCvAtsPreview();
+    saveCvSingleConfig(false);
 }
 
 // Sync Contact Header from Database Site Settings
@@ -15396,7 +15451,7 @@ async function syncCvCandidateFromProfile() {
                 document.getElementById('cv-cfg-website').value = 'https://muhammadhaerul.tech';
             }
             renderCvAtsPreview();
-            saveActiveCvVersion(false);
+            saveCvSingleConfig(false);
             showToast('Candidate header synchronized with profile!', 'success');
         }
     } catch(e) {
@@ -15463,7 +15518,7 @@ async function initCvMakerView() {
             }
         } catch(e) {}
         renderCvMakerChecklists();
-        initCvVersionsDropdown();
+        var savedCvCfg = loadSavedCvConfig(); applyLoadedCvConfig(savedCvCfg);
         renderCvSectionOrderList();
         _cvLoaded = true;
     }
@@ -15597,12 +15652,12 @@ function renderCvMakerChecklists() {
     }
 }
 
-function toggleAllCvCheckboxes(cls, check) {
+function toggleSectionCheckboxes(cls, check) {
     document.querySelectorAll('.' + cls).forEach(function(cb) {
         cb.checked = check;
     });
     renderCvAtsPreview();
-    saveActiveCvVersion(false);
+    saveCvSingleConfig(false);
 }
 
 function setCvTemplate(tpl) {
@@ -17430,6 +17485,33 @@ async function deleteBlog(id) {
     } else {
         initAllDropzones();
     }
+})();
+
+/* ════════════════════════════════════
+   DASHBOARD THEME SYNCHRONIZATION
+════════════════════════════════════ */
+function updateDashboardThemeIcon(theme) {
+    var icon = document.getElementById('dash-theme-icon');
+    if (icon) {
+        icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+}
+
+function toggleDashboardTheme() {
+    var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+        localStorage.setItem('mh_theme', next);
+        localStorage.setItem('mh-theme', next);
+    } catch(e) {}
+    updateDashboardThemeIcon(next);
+}
+
+// Initial sync
+(function() {
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    updateDashboardThemeIcon(cur);
 })();
 </script>
 
