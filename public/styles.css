@@ -2625,6 +2625,7 @@ img {
   align-items: center;
   gap: 10px;
   min-width: 0;
+  width: 100%;
 }
 
 .cert-issuer-icon {
@@ -2647,6 +2648,7 @@ img {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  flex: 1;
 }
 
 .cert-issuer-name {
@@ -2657,7 +2659,7 @@ img {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 170px;
+  max-width: 100%;
 }
 
 .cert-date {
@@ -2673,20 +2675,7 @@ img {
 }
 
 .cert-category-pill {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 20px;
-  background: var(--surface-2);
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-[data-theme="dark"] .cert-category-pill {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.08);
+  display: none !important;
 }
 
 .cert-card-mid {

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=7.1">
+  <link rel="stylesheet" href="/styles.css?v=7.6">
   <style>
     .browse-page {
       min-height: 100vh;
@@ -1253,7 +1253,6 @@
                     <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
                   </div>
                 </div>
-                ${cert.category ? `<span class="cert-category-pill">${escapeHtml(cert.category)}</span>` : ''}
               </div>
               <div class="cert-card-mid">
                 <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
@@ -1616,11 +1615,18 @@
       return m ? m[1] : null;
     }
 
-    function getInitials(str) {
-      if (!str) return 'MH';
-      const parts = str.trim().split(/\s+/);
-      if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-      return str.substring(0, 2).toUpperCase();
+    function getInitials(name) {
+      if (!name) return 'MH';
+      const clean = name.replace(/[-–—/|&(),.]/g, ' ').trim();
+      const words = clean.split(/\s+/).filter(Boolean);
+      if (!words.length) return 'MH';
+      if (words[0].length >= 2 && words[0] === words[0].toUpperCase()) {
+        return words[0].slice(0, 2);
+      }
+      if (words.length >= 2) {
+        return (words[0][0] + words[1][0]).toUpperCase();
+      }
+      return words[0].slice(0, 2).toUpperCase();
     }
 
     function escapeHtml(str) {

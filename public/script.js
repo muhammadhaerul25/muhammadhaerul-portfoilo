@@ -843,7 +843,7 @@
 
   function getInitials(name) {
     if (!name) return 'MH';
-    const clean = name.replace(/[-–—/|&()]/g, ' ').trim();
+    const clean = name.replace(/[-–—/|&(),.]/g, ' ').trim();
     const words = clean.split(/\s+/).filter(Boolean);
     if (!words.length) return 'MH';
     if (words[0].length >= 2 && words[0] === words[0].toUpperCase()) {
@@ -2397,7 +2397,6 @@
                 <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
               </div>
             </div>
-            ${cert.category ? `<span class="cert-category-pill">${escapeHtml(cert.category)}</span>` : ''}
           </div>
           <div class="cert-card-mid">
             <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
