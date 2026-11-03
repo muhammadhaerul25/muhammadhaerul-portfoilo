@@ -860,6 +860,7 @@
         border-radius: var(--r-md);
     }
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    @keyframes ai-gradient-flow { 0% { background-position: 0% 50%; } 100% { background-position: 250% 50%; } }
 
     .empty-state {
         text-align: center; padding: 72px 32px;
@@ -2848,6 +2849,157 @@
   border: 1px solid var(--line);
 }
 
+/* ════════════════════════════════════════
+   MODERN ON/OFF SLIDING TOGGLE SWITCH (iOS/Material)
+════════════════════════════════════════ */
+.modern-toggle-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    padding: 8px 18px 8px 10px;
+    border-radius: 9999px;
+    border: 1.5px solid var(--line);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.modern-toggle-switch:hover {
+    border-color: #CBD5E1;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .modern-toggle-switch:hover {
+    border-color: #475569;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.modern-toggle-switch input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    pointer-events: none;
+}
+
+.modern-toggle-switch input[type="checkbox"]:focus-visible + .toggle-track {
+    outline: 2px solid var(--g-blue);
+    outline-offset: 2px;
+}
+
+/* Sliding Track */
+.modern-toggle-switch .toggle-track {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    border-radius: 9999px;
+    background: #CBD5E1;
+    flex-shrink: 0;
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+[data-theme="dark"] .modern-toggle-switch .toggle-track {
+    background: #475569;
+}
+
+/* Sliding Thumb */
+.modern-toggle-switch .toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22), 0 1px 2px rgba(0, 0, 0, 0.12);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Checked / ON State */
+.modern-toggle-switch input[type="checkbox"]:checked + .toggle-track {
+    background: #1A73E8;
+    background-image: linear-gradient(135deg, #1A73E8 0%, #4285F4 100%);
+    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.35);
+}
+
+.modern-toggle-switch input[type="checkbox"]:checked + .toggle-track .toggle-thumb {
+    transform: translateX(24px);
+}
+
+/* Tactile stretch on active press */
+.modern-toggle-switch:active .toggle-thumb {
+    width: 26px;
+}
+.modern-toggle-switch input[type="checkbox"]:checked:active + .toggle-track .toggle-thumb {
+    transform: translateX(20px);
+    width: 26px;
+}
+
+/* Text & Badges */
+.modern-toggle-switch .toggle-text-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modern-toggle-switch .toggle-status-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Instant CSS state response for badges */
+.modern-toggle-switch input[type="checkbox"]:not(:checked) ~ .toggle-text-wrap .toggle-status-badge,
+.modern-toggle-switch .toggle-status-badge.is-off {
+    background: #F1F3F4;
+    color: #5F6368;
+    border: 1px solid #DADCE0;
+}
+
+[data-theme="dark"] .modern-toggle-switch input[type="checkbox"]:not(:checked) ~ .toggle-text-wrap .toggle-status-badge,
+[data-theme="dark"] .modern-toggle-switch .toggle-status-badge.is-off {
+    background: #2D3748;
+    color: #A0AEC0;
+    border-color: #4A5568;
+}
+
+.modern-toggle-switch input[type="checkbox"]:checked ~ .toggle-text-wrap .toggle-status-badge,
+.modern-toggle-switch .toggle-status-badge.is-on {
+    background: #E6F4EA;
+    color: #137333;
+    border: 1px solid rgba(52, 168, 83, 0.3);
+}
+
+[data-theme="dark"] .modern-toggle-switch input[type="checkbox"]:checked ~ .toggle-text-wrap .toggle-status-badge,
+[data-theme="dark"] .modern-toggle-switch .toggle-status-badge.is-on {
+    background: rgba(52, 168, 83, 0.2);
+    color: #81C995;
+    border-color: rgba(52, 168, 83, 0.4);
+}
+
+.modern-toggle-switch .toggle-text-label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+}
+
 </style>
 </head>
 <body>
@@ -3735,7 +3887,7 @@
                                 <div style="background:linear-gradient(135deg, rgba(66,133,244,0.05) 0%, rgba(52,168,83,0.05) 100%); border:1.5px solid rgba(66,133,244,0.25); border-radius:12px; padding:14px 18px; margin-top:14px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                     <span style="font-size:0.72rem; font-weight:800; color:var(--ink-4); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.06em;">Live Section 01 Headline Preview:</span>
                                     <div style="font-size:0.75rem; color:var(--g-blue); font-weight:800; margin-bottom:3px; letter-spacing:0.04em; text-transform:uppercase;" id="prof-eyebrow-preview">01 — PROFILE</div>
-                                    <div id="prof-lead-preview" style="color:var(--ink); font-weight:800; font-size:1.05rem; letter-spacing:-0.02em;">AI Full-Stack Specialist with 4 Years of Experiences</div>
+                                    <div id="prof-lead-preview" style="color:var(--ink); font-weight:800; font-size:1.05rem; letter-spacing:-0.02em;"><span style="background:linear-gradient(90deg, #1A73E8 0%, #4285F4 25%, #7C3AED 50%, #EA4335 75%, #34A853 88%, #1A73E8 100%); background-size:250% 100%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:ai-gradient-flow 6s linear infinite; display:inline-block; font-weight:800;">AI Full-Stack Specialist</span> with <span style="background:linear-gradient(120deg, #1A73E8 0%, #7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800;">4 Years</span> of Experiences</div>
                                 </div>
                             </div>
 
@@ -4255,12 +4407,15 @@
                                     </div>
                                 </div>
                                 <div style="display:flex; align-items:center; gap:12px;">
-                                    <span id="hero-glimpse-status-badge" style="font-size:0.75rem; font-weight:800; padding:5px 12px; border-radius:var(--r-pill); background:var(--g-green-soft); color:var(--g-green);">
-                                        ● Active
-                                    </span>
-                                    <label style="display:inline-flex; align-items:center; cursor:pointer; gap:8px; font-size:0.88rem; font-weight:700;">
-                                        <input type="checkbox" id="cfg-hero-glimpse-toggle" checked onchange="onHeroGlimpseMasterToggle(this.checked)" style="width:20px; height:20px; accent-color:var(--g-blue); cursor:pointer;">
-                                        <span>Showcase Active</span>
+                                    <label class="modern-toggle-switch" for="cfg-hero-glimpse-toggle" title="Click to toggle Hero Showcase ON or OFF">
+                                        <input type="checkbox" id="cfg-hero-glimpse-toggle" checked onchange="onHeroGlimpseMasterToggle(this.checked)">
+                                        <div class="toggle-track">
+                                            <span class="toggle-thumb"></span>
+                                        </div>
+                                        <div class="toggle-text-wrap">
+                                            <span id="hero-glimpse-toggle-badge" class="toggle-status-badge is-on">ON</span>
+                                            <span id="hero-glimpse-toggle-label" class="toggle-text-label">Showcase Active</span>
+                                        </div>
                                     </label>
                                 </div>
                             </div>
@@ -4525,9 +4680,15 @@
                                 </div>
                             </div>
                             <div>
-                                <label style="display:inline-flex; align-items:center; gap:10px; cursor:pointer; font-weight:700; font-size:0.92rem; background:var(--surface); border:1.5px solid var(--line); padding:10px 18px; border-radius:var(--r-pill);">
-                                    <input type="checkbox" id="cfg-bilingual-enabled" style="width:20px; height:20px; accent-color:var(--g-blue); cursor:pointer;">
-                                    <span>Enable Switcher</span>
+                                <label class="modern-toggle-switch" for="cfg-bilingual-enabled" title="Click to toggle Bilingual Switcher ON or OFF">
+                                    <input type="checkbox" id="cfg-bilingual-enabled" onchange="updateBilingualToggleUI(this.checked)">
+                                    <div class="toggle-track">
+                                        <span class="toggle-thumb"></span>
+                                    </div>
+                                    <div class="toggle-text-wrap">
+                                        <span id="bilingual-toggle-badge" class="toggle-status-badge is-on">ON</span>
+                                        <span id="bilingual-toggle-label" class="toggle-text-label">Switcher Active</span>
+                                    </div>
                                 </label>
                             </div>
                         </div>
@@ -4599,7 +4760,7 @@
 
                     <!-- 1. Master On/Off Switch Banner -->
                     <div id="slideshow-master-card" style="background:linear-gradient(135deg, rgba(66,133,244,0.06), rgba(52,168,83,0.06)); border:1.5px solid #D2E3FC; border-radius:18px; padding:24px 28px; margin-bottom:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; transition:var(--t-spring);">
-                        <div style="max-width:650px;">
+                        <div style="flex:1; min-width:280px; max-width:680px;">
                             <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
                                 <span style="font-size:1.1rem; font-weight:800; color:var(--ink);">Image Slideshow Feature Status</span>
                                 <span id="slideshow-status-pill" style="font-size:0.75rem; font-weight:800; padding:3px 12px; border-radius:20px; background:#E6F4EA; color:#137333; border:1px solid rgba(52,168,83,0.3);">
@@ -4610,12 +4771,16 @@
                                 <strong>Manual On / Off:</strong> Enable to display floating animated milestone and speaking cards in the Hero section. Disable for a clean, minimalist hero layout without floating media.
                             </p>
                         </div>
-                        <div style="display:flex; align-items:center; gap:16px; background:var(--surface); padding:12px 22px; border-radius:16px; border:1.5px solid var(--line); box-shadow:var(--shadow-sm);">
-                            <span id="slideshow-toggle-label" style="font-size:0.92rem; font-weight:800; color:var(--ink);">Active</span>
-                            <label style="position:relative; display:inline-flex; align-items:center; cursor:pointer;">
-                                <input type="checkbox" id="cfg-slideshow-enabled" checked onchange="onSlideshowToggleChange(this.checked)" style="width:24px; height:24px; accent-color:var(--g-blue); cursor:pointer;">
-                            </label>
-                        </div>
+                        <label class="modern-toggle-switch" for="cfg-slideshow-enabled" title="Click to toggle Slideshow ON or OFF" style="flex-shrink:0;">
+                            <input type="checkbox" id="cfg-slideshow-enabled" checked onchange="onSlideshowToggleChange(this.checked)">
+                            <div class="toggle-track">
+                                <span class="toggle-thumb"></span>
+                            </div>
+                            <div class="toggle-text-wrap">
+                                <span id="slideshow-toggle-badge" class="toggle-status-badge is-on">ON</span>
+                                <span id="slideshow-toggle-label" class="toggle-text-label">Active</span>
+                            </div>
+                        </label>
                     </div>
 
                     <!-- 2. Main Grid: Controls on Left, Live Simulator on Right -->
@@ -4784,7 +4949,7 @@
 
                     <!-- 1. Master On/Off Switch Banner -->
                     <div id="theme-master-card" style="background:linear-gradient(135deg, rgba(66,133,244,0.06), rgba(251,188,4,0.06)); border:1.5px solid #D2E3FC; border-radius:18px; padding:24px 28px; margin-bottom:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; transition:var(--t-spring);">
-                        <div style="max-width:650px;">
+                        <div style="flex:1; min-width:280px; max-width:680px;">
                             <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
                                 <span style="font-size:1.1rem; font-weight:800; color:var(--ink);">Public Theme Switcher (Header Button)</span>
                                 <span id="theme-status-pill" style="font-size:0.75rem; font-weight:800; padding:3px 12px; border-radius:20px; background:#E6F4EA; color:#137333; border:1px solid rgba(52,168,83,0.3);">
@@ -4795,12 +4960,16 @@
                                 <strong>Enable / Disable Switcher:</strong> When enabled, visitors can freely toggle between Light and Dark mode using the sun/moon button in the top navigation bar. When disabled, the theme button is hidden and the site locks to the default appearance chosen below.
                             </p>
                         </div>
-                        <div style="display:flex; align-items:center; gap:16px; background:var(--surface); padding:12px 22px; border-radius:16px; border:1.5px solid var(--line); box-shadow:var(--shadow-sm);">
-                            <span id="theme-toggle-label" style="font-size:0.92rem; font-weight:800; color:var(--ink);">Enabled</span>
-                            <label style="position:relative; display:inline-flex; align-items:center; cursor:pointer;">
-                                <input type="checkbox" id="cfg-theme-enabled" checked onchange="onThemeToggleChange(this.checked)" style="width:24px; height:24px; accent-color:var(--g-blue); cursor:pointer;">
-                            </label>
-                        </div>
+                        <label class="modern-toggle-switch" for="cfg-theme-enabled" title="Click to toggle Theme Switcher ON or OFF" style="flex-shrink:0;">
+                            <input type="checkbox" id="cfg-theme-enabled" checked onchange="onThemeToggleChange(this.checked)">
+                            <div class="toggle-track">
+                                <span class="toggle-thumb"></span>
+                            </div>
+                            <div class="toggle-text-wrap">
+                                <span id="theme-toggle-badge" class="toggle-status-badge is-on">ON</span>
+                                <span id="theme-toggle-label" class="toggle-text-label">Active</span>
+                            </div>
+                        </label>
                     </div>
 
                     <!-- 2. Main Grid: Mode Selection on Left, Live Preview on Right -->
@@ -11355,6 +11524,30 @@ function updateHeroLivePreview() {
     }
 }
 
+function onHeroGlimpseMasterToggle(checked) {
+    var badge = document.getElementById('hero-glimpse-toggle-badge');
+    var label = document.getElementById('hero-glimpse-toggle-label');
+    var body = document.getElementById('hero-glimpse-settings-body');
+    if (badge) {
+        badge.textContent = checked ? 'ON' : 'OFF';
+        badge.className = 'toggle-status-badge ' + (checked ? 'is-on' : 'is-off');
+    }
+    if (label) {
+        label.textContent = checked ? 'Showcase Active' : 'Showcase Disabled';
+    }
+    if (body) {
+        body.style.opacity = checked ? '1' : '0.45';
+        body.style.pointerEvents = checked ? 'auto' : 'none';
+    }
+}
+
+function toggleAllHeroPhotos(active) {
+    var checkboxes = document.querySelectorAll('#hero-glimpse-photos-grid input[type="checkbox"]');
+    checkboxes.forEach(function(cb) {
+        cb.checked = Boolean(active);
+    });
+}
+
 function renderNavbarEditor(items) {
     var container = document.getElementById('navbar-items-table-container');
     if (!container) return;
@@ -11420,30 +11613,55 @@ function renderSectionHeadingsEditor(sections) {
     if (!container) return;
 
     var keys = [
-        { id: 'experiences', name: 'Experiences' },
-        { id: 'education', name: 'Education' },
-        { id: 'projects', name: 'Projects' },
-        { id: 'talks', name: 'Talks' },
-        { id: 'certifications', name: 'Certifications' },
-        { id: 'awards', name: 'Awards' },
-        { id: 'publications', name: 'Publications' },
-        { id: 'blogs', name: 'Blogs' },
-        { id: 'gallery', name: 'Gallery' },
-        { id: 'testimonials', name: 'Feedbacks & Testimonials' },
-        { id: 'contact', name: 'Contact' }
+        { id: 'about', num: '01', name: 'Profile / About', defaultEyebrow: '01 — Profile' },
+        { id: 'education', num: '02', name: 'Education', defaultEyebrow: '02 — Education' },
+        { id: 'experiences', num: '03', name: 'Experiences', defaultEyebrow: '03 — Experiences' },
+        { id: 'skills', num: '04', name: 'Skills', defaultEyebrow: '04 — Skills' },
+        { id: 'projects', num: '05', name: 'Projects', defaultEyebrow: '05 — Featured & Case-Study Projects' },
+        { id: 'publications', num: '06', name: 'Publications', defaultEyebrow: '06 — Publications' },
+        { id: 'talks', num: '07', name: 'Talks', defaultEyebrow: '07 — Talks' },
+        { id: 'awards', num: '08', name: 'Awards', defaultEyebrow: '08 — Honors & Awards' },
+        { id: 'certifications', num: '09', name: 'Certifications', defaultEyebrow: '09 — Licences & Certifications' },
+        { id: 'blogs', num: '10', name: 'Blogs & Insights', defaultEyebrow: '10 — Blog & Insights' },
+        { id: 'gallery', num: '11', name: 'Visual Gallery', defaultEyebrow: '11 — Visual Gallery & Moments' },
+        { id: 'testimonials', num: '12', name: 'Feedbacks & Testimonials', defaultEyebrow: '12 — Feedback and Recommendations' },
+        { id: 'contact', num: '13', name: 'Contact', defaultEyebrow: '13 — Contacts' }
     ];
 
     var html = keys.map(function(k) {
         var s = sections[k.id] || {};
-        return '<div style="background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-sm); padding:16px;">' +
-            '<div style="font-size:0.85rem; font-weight:800; color:var(--ink); margin-bottom:10px;">' + esc(k.name) + ' Section</div>' +
-            '<div style="margin-bottom:8px;">' +
-                '<label class="fm-label" style="font-size:0.72rem;">Title</label>' +
-                '<input type="text" id="sec-title-' + k.id + '" value="' + esc(s.title || '') + '" class="fm-input" style="font-size:0.82rem;">' +
+        var currentName = (s.name !== undefined && s.name !== null && s.name !== '') 
+            ? s.name 
+            : ((s.eyebrow !== undefined && s.eyebrow !== null && s.eyebrow !== '') ? s.eyebrow : k.defaultEyebrow);
+
+        return '<div style="background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-sm); padding:16px; display:flex; flex-direction:column; gap:10px;">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line-soft); padding-bottom:10px;">' +
+                '<div style="display:flex; align-items:center; gap:8px;">' +
+                    '<span style="font-size:0.75rem; font-weight:800; color:#fff; background:var(--g-blue); width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;">' + esc(k.num) + '</span>' +
+                    '<span style="font-size:0.9rem; font-weight:800; color:var(--ink);">' + esc(k.num) + '. ' + esc(k.name) + '</span>' +
+                '</div>' +
+                '<span style="font-size:0.7rem; font-weight:700; color:var(--g-blue); background:var(--g-blue-soft); padding:2px 8px; border-radius:var(--r-pill);">#' + esc(k.id) + '</span>' +
             '</div>' +
             '<div>' +
-                '<label class="fm-label" style="font-size:0.72rem;">Subtitle</label>' +
-                '<input type="text" id="sec-sub-' + k.id + '" value="' + esc(s.subtitle || '') + '" class="fm-input" style="font-size:0.82rem;">' +
+                '<label class="fm-label" style="font-size:0.72rem; font-weight:700; color:var(--ink-2); display:flex; justify-content:space-between;">' +
+                    '<span>Section Name / Eyebrow (Nomor &amp; Nama Section)</span>' +
+                    '<span style="font-size:0.68rem; color:var(--ink-3); font-weight:normal;">Editable</span>' +
+                '</label>' +
+                '<input type="text" id="sec-name-' + k.id + '" value="' + esc(currentName) + '" placeholder="' + esc(k.defaultEyebrow) + '" class="fm-input" style="font-size:0.82rem; font-weight:600;">' +
+            '</div>' +
+            '<div>' +
+                '<label class="fm-label" style="font-size:0.72rem; font-weight:700; color:var(--ink-2); display:flex; justify-content:space-between;">' +
+                    '<span>Title (Judul Section)</span>' +
+                    '<span style="font-size:0.68rem; color:var(--ink-3); font-weight:normal;">Editable</span>' +
+                '</label>' +
+                '<input type="text" id="sec-title-' + k.id + '" value="' + esc(s.title || '') + '" placeholder="Custom section title..." class="fm-input" style="font-size:0.82rem;">' +
+            '</div>' +
+            '<div>' +
+                '<label class="fm-label" style="font-size:0.72rem; font-weight:700; color:var(--ink-2); display:flex; justify-content:space-between;">' +
+                    '<span>Subtitle (Deskripsi / Sub-judul)</span>' +
+                    '<span style="font-size:0.68rem; color:var(--ink-3); font-weight:normal;">Editable</span>' +
+                '</label>' +
+                '<input type="text" id="sec-sub-' + k.id + '" value="' + esc(s.subtitle || '') + '" placeholder="Custom section subtitle or description..." class="fm-input" style="font-size:0.82rem;">' +
             '</div>' +
         '</div>';
     }).join('');
@@ -11458,12 +11676,15 @@ async function savePageSettings(section, btn) {
     }
     if (btn) btn.disabled = true;
 
-    var secKeys = ['experiences', 'education', 'projects', 'talks', 'certifications', 'awards', 'publications', 'blogs', 'gallery', 'testimonials', 'contact'];
+    var secKeys = ['about', 'education', 'experiences', 'skills', 'projects', 'publications', 'talks', 'awards', 'certifications', 'blogs', 'gallery', 'testimonials', 'contact'];
     var sectionsPayload = {};
     secKeys.forEach(function(k) {
+        var nEl = document.getElementById('sec-name-' + k);
         var tEl = document.getElementById('sec-title-' + k);
         var sEl = document.getElementById('sec-sub-' + k);
         sectionsPayload[k] = {
+            name: nEl ? nEl.value.trim() : '',
+            eyebrow: nEl ? nEl.value.trim() : '',
             title: tEl ? tEl.value.trim() : '',
             subtitle: sEl ? sEl.value.trim() : ''
         };
@@ -12252,10 +12473,12 @@ function onProfileTagsInput(val) {
 }
 
 function updateProfileHeadingPreview() {
-    var role = document.getElementById('cfg-prof-lead-role') ? document.getElementById('cfg-prof-lead-role').value.trim() : 'AI Full-Stack Engineer';
+    var role = document.getElementById('cfg-prof-lead-role') ? document.getElementById('cfg-prof-lead-role').value.trim() : 'AI Full-Stack Specialist';
     var exp = document.getElementById('cfg-prof-lead-exp') ? document.getElementById('cfg-prof-lead-exp').value.trim() : '4 Years';
     var prev = document.getElementById('prof-lead-preview');
-    if (prev) prev.textContent = (role || 'AI Full-Stack Engineer') + ' with ' + (exp || '4 Years') + ' of Experiences';
+    if (prev) {
+        prev.innerHTML = '<span style="background:linear-gradient(90deg, #1A73E8 0%, #4285F4 25%, #7C3AED 50%, #EA4335 75%, #34A853 88%, #1A73E8 100%); background-size:250% 100%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:ai-gradient-flow 6s linear infinite; display:inline-block; font-weight:800;">' + esc(role || 'AI Full-Stack Specialist') + '</span> with <span style="background:linear-gradient(120deg, #1A73E8 0%, #7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800;">' + esc(exp || '4 Years') + '</span> of Experiences';
+    }
 }
 
 async function saveProfileSettings(btnEl) {
@@ -12312,6 +12535,18 @@ async function saveProfileSettings(btnEl) {
 /* ════════════════════════════════════════
    LANGUAGE & REGION SETTINGS LOGIC
 ════════════════════════════════════════ */
+function updateBilingualToggleUI(enabled) {
+    var badge = document.getElementById('bilingual-toggle-badge');
+    var label = document.getElementById('bilingual-toggle-label');
+    if (badge) {
+        badge.textContent = enabled ? 'ON' : 'OFF';
+        badge.className = 'toggle-status-badge ' + (enabled ? 'is-on' : 'is-off');
+    }
+    if (label) {
+        label.textContent = enabled ? 'Switcher Active' : 'Switcher Disabled';
+    }
+}
+
 async function loadLanguageSettings() {
     try {
         var res = await fetch('/api/settings');
@@ -12321,7 +12556,10 @@ async function loadLanguageSettings() {
         var loc = (data.data && data.data.localization) ? data.data.localization : { bilingualEnabled: true, defaultLanguage: 'en' };
         
         var chk = document.getElementById('cfg-bilingual-enabled');
-        if (chk) chk.checked = loc.bilingualEnabled !== false;
+        if (chk) {
+            chk.checked = loc.bilingualEnabled !== false;
+            updateBilingualToggleUI(chk.checked);
+        }
 
         var enRadio = document.getElementById('cfg-lang-en');
         var idRadio = document.getElementById('cfg-lang-id');
@@ -12404,7 +12642,13 @@ async function loadThemeSettings() {
 function onThemeToggleChange(enabled) {
     currentThemeSettings.enabled = Boolean(enabled);
     var label = document.getElementById('theme-toggle-label');
-    if (label) label.textContent = enabled ? 'Enabled' : 'Disabled';
+    if (label) label.textContent = enabled ? 'Active' : 'Disabled';
+
+    var toggleBadge = document.getElementById('theme-toggle-badge');
+    if (toggleBadge) {
+        toggleBadge.textContent = enabled ? 'ON' : 'OFF';
+        toggleBadge.className = 'toggle-status-badge ' + (enabled ? 'is-on' : 'is-off');
+    }
 
     var pill = document.getElementById('theme-status-pill');
     if (pill) {
@@ -12752,6 +12996,7 @@ function updateSlideshowToggleUI(enabled) {
     var statusPill = document.getElementById('slideshow-status-pill');
     var headerBadge = document.getElementById('slideshow-header-badge');
     var toggleLabel = document.getElementById('slideshow-toggle-label');
+    var toggleBadge = document.getElementById('slideshow-toggle-badge');
     var navPill = document.getElementById('nav-slideshow-status-pill');
     var masterCard = document.getElementById('slideshow-master-card');
     var controlsPanel = document.getElementById('slideshow-controls-panel');
@@ -12768,6 +13013,10 @@ function updateSlideshowToggleUI(enabled) {
             headerBadge.textContent = '● Enabled';
             headerBadge.style.background = 'var(--g-green-soft)';
             headerBadge.style.color = 'var(--g-green)';
+        }
+        if (toggleBadge) {
+            toggleBadge.textContent = 'ON';
+            toggleBadge.className = 'toggle-status-badge is-on';
         }
         if (toggleLabel) toggleLabel.textContent = 'Active';
         if (navPill) {
@@ -12795,6 +13044,10 @@ function updateSlideshowToggleUI(enabled) {
             headerBadge.textContent = '○ Disabled';
             headerBadge.style.background = 'rgba(95,99,104,0.12)';
             headerBadge.style.color = '#5F6368';
+        }
+        if (toggleBadge) {
+            toggleBadge.textContent = 'OFF';
+            toggleBadge.className = 'toggle-status-badge is-off';
         }
         if (toggleLabel) toggleLabel.textContent = 'Disabled';
         if (navPill) {

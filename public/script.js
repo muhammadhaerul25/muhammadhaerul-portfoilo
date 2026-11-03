@@ -689,6 +689,9 @@
     if (pubTitle) pubTitle.textContent = t.pubs_title;
     const pubDesc = document.querySelector('#publications .section-desc');
     if (pubDesc) pubDesc.textContent = t.pubs_desc;
+    document.querySelectorAll('#publications .pub-zoom-btn span').forEach(el => {
+      el.textContent = lang === 'id' ? 'Lihat Pratinjau' : 'View Full Preview';
+    });
 
     // Talks Section
     const talksEye = document.querySelector('#talks .section-eyebrow');
@@ -829,7 +832,7 @@
     const words = trimmed.split(/\s+/).filter(Boolean);
     if (!words.length) return 'Verified Attendee';
 
-    return words.map(w => {
+    return words.slice(0, 2).map(w => {
       const clean = w.replace(/[^\p{L}\p{N}]/gu, '');
       if (!clean) return '';
       const cap = clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase();
@@ -1415,7 +1418,9 @@
           <div class="talk-poster-wrap" id="talk-prev-${escapeHtml(t.id)}"
             data-active-src="${escapeHtml(initialMedia.url)}"
             data-active-title="${escapeHtml(t.event)}${hasMediaTabs ? ' (' + escapeHtml(initialMedia.label) + ')' : ''}"
-            onclick="window.openLightbox(this.getAttribute('data-active-src') || '${escapeHtml(posterImg)}', this.getAttribute('data-active-title') || '${escapeHtml(t.event)}')">
+            onclick="window.openLightbox(this.getAttribute('data-active-src') || '${escapeHtml(posterImg)}', this.getAttribute('data-active-title') || '${escapeHtml(t.event)}')"
+            title="${isId ? 'Klik untuk memperbesar gambar' : 'Click to view full image'}"
+            style="cursor:zoom-in;">
             <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(initialMedia.url)}');"></div>
             <img class="talk-poster-img" src="${escapeHtml(initialMedia.url)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'" decoding="async">
             ${hasMediaTabs ? `
@@ -1437,15 +1442,17 @@
               </div>
             ` : ''}
             <div class="talk-poster-overlay">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              ${isId ? 'Perbesar Gambar' : 'View Full Image'}
+              <span class="talk-zoom-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span class="talk-zoom-text">${initialMedia.type === 'certificate' ? (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof') : (isId ? 'Lihat Gambar Lengkap' : 'View Full Image')}</span>
+              </span>
             </div>
           </div>
           <div class="talk-card-body">
             <div>
               <div class="talk-meta-bar">
                 <span class="talk-date-badge ${getYearBadgeClass(dateText)}">${escapeHtml(dateText)}</span>
-                <span class="talk-attendees-badge">👥 ${escapeHtml(attendeeCount)}</span>
+                <span class="talk-attendees-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span>${escapeHtml(attendeeCount)}</span></span>
               </div>
               <h3 class="talk-card-title">${escapeHtml(t.event)}</h3>
               <p class="talk-card-org">
@@ -1596,7 +1603,8 @@
       const initials = getInitials(f.nama_lengkap);
       const displayName = f.nama_lengkap ? f.nama_lengkap.trim() : 'Engineering Colleague';
       let companyText = (f.source || '').replace(/^LinkedIn Recommendation\s*[·•-]?\s*/i, '').trim();
-      if (!companyText) companyText = 'Infomedia Nusantara / SCREENESIA';
+      if (!companyText) companyText = 'Infomedia Nusantara · SCREENESIA';
+      companyText = companyText.replace(/\s*\/\s*/g, ' · ');
       const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jul 2026';
 
       const pesan = f.pesan_kesan ? f.pesan_kesan.trim() : '';
@@ -1622,11 +1630,7 @@
 
       return `
         <article class="t-card rec-card reveal in-view">
-          <svg class="t-watermark-quote" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-          </svg>
-
-          <div>
+          <div class="t-card-main">
             <div class="t-card-head rec-card-head">
               <div class="t-user-info">
                 <div class="t-avatar-wrap">
@@ -1791,7 +1795,7 @@
           mainQuote = pesan || alasan || 'Sesi materi sangat bermanfaat!';
         }
 
-        const isLongQuote = mainQuote.length > 180;
+        const isLongQuote = mainQuote.length > 140;
         const qId = `t-q-${f.id || Math.random().toString(36).substring(2, 9)}`;
 
         return `
@@ -1800,7 +1804,7 @@
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
             </svg>
             
-            <div>
+            <div class="t-card-main">
               <div class="t-card-head">
                 <div class="t-user-info">
                   <div class="t-avatar" style="background:${avatarBg};">${escapeHtml(initials)}</div>
@@ -2267,16 +2271,34 @@
 
   function getSkillCategoryIcon(name) {
     const n = (name || '').toLowerCase();
-    if (n.includes('program')) return '💻';
-    if (n.includes('data') || n.includes('analytic')) return '📊';
-    if (n.includes('vision')) return '👁️';
-    if (n.includes('nlp') || n.includes('language')) return '💬';
-    if (n.includes('generative')) return '⚡';
-    if (n.includes('agent')) return '🤖';
-    if (n.includes('software')) return '🛠️';
-    if (n.includes('database')) return '🗄️';
-    if (n.includes('devops') || n.includes('operation')) return '🚀';
-    return '✨';
+    if (n.includes('program') || n.includes('code')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
+    }
+    if (n.includes('data') || n.includes('analytic') || n.includes('engineer')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>';
+    }
+    if (n.includes('vision') || n.includes('cv') || n.includes('image')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+    }
+    if (n.includes('nlp') || n.includes('language') || n.includes('text')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line></svg>';
+    }
+    if (n.includes('generative') || n.includes('genai')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>';
+    }
+    if (n.includes('agent') || n.includes('llm') || n.includes('bot')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>';
+    }
+    if (n.includes('software') || n.includes('tool') || n.includes('framework')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>';
+    }
+    if (n.includes('database') || n.includes('sql') || n.includes('db')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>';
+    }
+    if (n.includes('devops') || n.includes('cloud') || n.includes('deploy') || n.includes('infra') || n.includes('operation')) {
+      return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>';
+    }
+    return '<svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>';
   }
 
   window.filterSkillsSpecialization = function (cat, btn) {
@@ -2311,14 +2333,16 @@
     if (filterNav) {
       filterNav.innerHTML = `
         <button class="skills-nav-pill active" data-cat="all" onclick="filterSkillsSpecialization('all', this)">
-          <span>✨ All</span>
+          <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+          <span>All</span>
         </button>
         ${skills.map(s => {
         const slug = s.category_slug || (s.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-        const icon = getSkillCategoryIcon(s.category);
+        const iconSvg = getSkillCategoryIcon(s.category);
         return `
             <button class="skills-nav-pill" data-cat="${escapeHtml(slug)}" onclick="filterSkillsSpecialization('${escapeHtml(slug)}', this)">
-              <span>${icon} ${escapeHtml(s.category)}</span>
+              ${iconSvg}
+              <span>${escapeHtml(s.category)}</span>
             </button>
           `;
       }).join('')}
@@ -2474,6 +2498,68 @@
         }
       ];
     }
+    if (title.includes('prompt engineering') || cert.credential_id === 'MEPJO7536Z3V') {
+      return [
+        {
+          label: isId ? 'Sertifikat' : 'Certificate',
+          url: cert.image_url || '/assets/certificates/cert-prompt-engineering.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+          url: '/assets/certificates/cert-prompt-engineering-curriculum.jpg',
+          type: 'curriculum'
+        }
+      ];
+    }
+    if (title.includes('ux design') || cert.credential_id === '53XE16E99ZRN') {
+      return [
+        {
+          label: isId ? 'Sertifikat' : 'Certificate',
+          url: cert.image_url || '/assets/certificates/cert-ux-design.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+          url: '/assets/certificates/cert-ux-design-curriculum.jpg',
+          type: 'curriculum'
+        }
+      ];
+    }
+    if ((title.includes('deep learning') && (title.includes('dex') || title.includes('dts') || title.includes('nasional'))) || cert.credential_id === '21212074840-284') {
+      return [
+        {
+          label: isId ? 'Fundamental' : 'Fundamental',
+          url: '/assets/certificates/cert-deep-learning-dts-page1.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Kurikulum 1' : 'Curriculum 1',
+          url: '/assets/certificates/cert-deep-learning-dts-page2.jpg',
+          type: 'curriculum'
+        },
+        {
+          label: isId ? 'Intermediate' : 'Intermediate',
+          url: '/assets/certificates/cert-deep-learning-dts-page3.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Kurikulum 2' : 'Curriculum 2',
+          url: '/assets/certificates/cert-deep-learning-dts-page4.jpg',
+          type: 'curriculum'
+        },
+        {
+          label: isId ? 'Mastery' : 'Mastery',
+          url: '/assets/certificates/cert-deep-learning-dts-page5.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Kurikulum 3' : 'Curriculum 3',
+          url: '/assets/certificates/cert-deep-learning-dts-page6.jpg',
+          type: 'curriculum'
+        }
+      ];
+    }
 
     // 4. Single image certificate
     if (cert.image_url) {
@@ -2520,10 +2606,21 @@
         cert.issuer.toLowerCase().includes('lppi') ||
         cert.issuer.toLowerCase().includes('bank indonesia')
       );
+      const isDicoding = cert.issuer && cert.issuer.toLowerCase().includes('dicoding');
+      const isDts = cert.issuer && (
+        cert.issuer.toLowerCase().includes('digital talent scholarship') ||
+        cert.issuer.toLowerCase().includes('digitalent') ||
+        cert.issuer.toLowerCase().includes('kominfo') ||
+        cert.issuer.toLowerCase().includes('komdigi')
+      );
       const issuerIconHtml = isLppi
         ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
-        : escapeHtml(getInitials(cert.issuer));
-      const issuerIconClass = isLppi ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+        : (isDicoding
+          ? `<img src="/assets/certificates/logo-dicoding.png" alt="Dicoding Logo" class="cert-issuer-img">`
+          : (isDts
+            ? `<img src="/assets/certificates/logo-dts.png" alt="Digitalent DTS Logo" class="cert-issuer-img">`
+            : escapeHtml(getInitials(cert.issuer))));
+      const issuerIconClass = (isLppi || isDicoding || isDts) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
 
       const mediaHtml = hasPreview ? `
         <div class="cert-card-preview-wrap">
@@ -2546,14 +2643,17 @@
             </div>
           ` : ''}
           <div class="cert-card-preview" id="cert-prev-${escapeHtml(cert.id)}"
-            data-active-title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}${pages.length > 1 ? ' (' + escapeHtml(initialPage.label) + ')' : ''}"
+            data-active-title="${isId ? 'Sertifikat' : 'Certificate'} — ${escapeHtml(cert.title)}${pages.length > 1 ? ' (' + escapeHtml(initialPage.label) + ')' : ''}"
             onclick="openLightbox(this.querySelector('img').src, this.getAttribute('data-active-title') || '${escapeHtml(cert.title)}')"
-            title="${isId ? 'Klik untuk memperbesar sertifikat' : 'Click to view full certificate'}">
+            title="${isId ? 'Klik untuk memperbesar bukti sertifikat' : 'Click to view full certificate proof'}"
+            style="cursor:zoom-in;">
             <img src="${escapeHtml(initialPage.url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'" decoding="async">
-            <span class="cert-zoom-hint">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-              ${isId ? 'Perbesar' : 'View Full'}
-            </span>
+            <div class="cert-card-overlay">
+              <span class="cert-zoom-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span class="cert-zoom-text">${initialPage.type === 'curriculum' ? (isId ? 'Lihat Kurikulum' : 'View Curriculum') : (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof')}</span>
+              </span>
+            </div>
           </div>
         </div>
       ` : `
@@ -2715,8 +2815,9 @@
         <article class="award-card accent-${escapeHtml(color)} reveal in-view">
           <div class="award-insignia-banner ${hasImage ? 'has-cert-img' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:zoom-in;" title="Click to view full certificate proof"` : ''}>
             ${!hasImage ? `
-              <span class="award-badge-pill ${escapeHtml(color)}">
-                ${escapeHtml(aw.badge_text || '🏆 Honor & Award')}
+              <span class="award-badge-pill ${escapeHtml(color)}" style="display:inline-flex; align-items:center; gap:6px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7"/><path d="M14 14.66V17c0 .55.45 1 1 1h2"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                <span>${escapeHtml((aw.badge_text || 'Honor & Award').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim() || 'Honor & Award')}</span>
               </span>
             ` : ''}
             ${hasImage ? `
@@ -2724,7 +2825,7 @@
               <div class="award-cert-overlay">
                 <span class="award-cert-zoom-btn">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                  View Certificate Proof
+                  <span class="award-zoom-text">${isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof'}</span>
                 </span>
               </div>
             ` : `
@@ -3188,6 +3289,14 @@
     if (backdrop) {
       backdrop.style.backgroundImage = `url('${imgSrc}')`;
     }
+    const zoomText = wrap.querySelector('.talk-zoom-text, .talk-zoom-btn span');
+    if (zoomText) {
+      const isId = isIndonesian();
+      const isCert = (altText && (altText.toLowerCase().includes('sertifikat') || altText.toLowerCase().includes('certificate') || altText.toLowerCase().includes('plakat'))) || (btn && btn.textContent.toLowerCase().includes('sertifikat'));
+      zoomText.textContent = isCert
+        ? (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof')
+        : (isId ? 'Lihat Gambar Lengkap' : 'View Full Image');
+    }
     if (btn) {
       const tabs = btn.closest('.talk-media-tabs');
       if (tabs) {
@@ -3222,6 +3331,14 @@
         img.style.opacity = '1';
         img.style.filter = 'none';
       };
+    }
+    const zoomText = container.querySelector('.cert-zoom-text, .cert-zoom-btn span, .cert-zoom-hint');
+    if (zoomText) {
+      const isId = isIndonesian();
+      const isCurriculum = (altText && altText.toLowerCase().includes('kurikulum')) || (btn && btn.textContent.toLowerCase().includes('kurikulum'));
+      zoomText.textContent = isCurriculum
+        ? (isId ? 'Lihat Kurikulum' : 'View Curriculum')
+        : (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof');
     }
     const switcher = btn.closest('.cert-page-tabs') || btn.closest('.cert-page-switcher') || btn.parentElement;
     if (switcher) {
@@ -3516,6 +3633,22 @@
         </button>
       ` : `<p class="pub-description">${escapeHtml(pubDescText)}</p>`) : '';
 
+      let thumb = p.image_url || p.thumbnail_url || p.cover_image || '';
+      if (!thumb) {
+        if (pubLower.includes('hasanuddin') || pubLower.includes('unhas') || pubLower.includes('ppe')) {
+          thumb = '/assets/images/publications/pub-ppe-detection.jpg';
+        } else if (pubLower.includes('galaxy') || pubLower.includes('pypi')) {
+          thumb = '/assets/images/publications/pub-galaxy-detection.png';
+        } else if (pubLower.includes('medium') || pubLower.includes('multimodal') || pubLower.includes('agent')) {
+          thumb = '/assets/images/publications/pub-multimodal-agents.png';
+        } else {
+          thumb = '/assets/images/publications/pub-ppe-detection.jpg';
+        }
+      }
+
+      const zoomLabel = isIndonesian() ? 'Lihat Pratinjau' : 'View Full Preview';
+      const zoomHint = isIndonesian() ? 'Klik untuk melihat pratinjau' : 'Click to view full preview';
+
       return `
         <article class="publication-card reveal in-view" ${link ? `onclick="window.open('${link}','_blank','noopener')"` : ''} style="${link ? 'cursor:pointer;' : ''}">
           <div class="pub-card-top">
@@ -3529,6 +3662,18 @@
               </div>
             </div>
             <span class="pub-type-pill">Publication</span>
+          </div>
+
+          <div class="pub-card-preview"
+            onclick="event.stopPropagation(); window.openLightbox('${escapeHtml(thumb)}', '${escapeHtml(p.title)} — ${escapeHtml(publisher)}');"
+            title="${zoomHint}">
+            <img src="${escapeHtml(thumb)}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async">
+            <div class="pub-media-overlay">
+              <span class="pub-zoom-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>${zoomLabel}</span>
+              </span>
+            </div>
           </div>
 
           <div class="pub-card-mid">
@@ -3932,11 +4077,27 @@
       Object.keys(settings.sections).forEach(secKey => {
         const secCfg = settings.sections[secKey];
         if (!secCfg) return;
-        const secEl = document.getElementById(secKey);
+        let secEl = document.getElementById(secKey);
+        if (!secEl) {
+          if (secKey === 'experiences') secEl = document.getElementById('experience');
+          if (secKey === 'experience') secEl = document.getElementById('experiences');
+          if (secKey === 'blogs') secEl = document.getElementById('blog');
+          if (secKey === 'blog') secEl = document.getElementById('blogs');
+        }
         if (secEl) {
+          const eyebrowEl = secEl.querySelector('.section-eyebrow, .eyebrow');
+          const secName = secCfg.name || secCfg.eyebrow;
+          if (eyebrowEl && secName) {
+            eyebrowEl.textContent = secName;
+          }
           const titleEl = secEl.querySelector('.section-title');
           if (titleEl && secCfg.title) {
-            titleEl.textContent = secCfg.title;
+            const roleEl = titleEl.querySelector('.about-title-role');
+            if (secKey === 'about' && roleEl) {
+              roleEl.textContent = secCfg.title;
+            } else {
+              titleEl.textContent = secCfg.title;
+            }
           }
           const descEl = secEl.querySelector('.section-desc');
           if (descEl && secCfg.subtitle) {
@@ -3948,12 +4109,19 @@
 
     if (settings.footer) {
       if (settings.footer.tagline) {
-        const taglineEl = document.querySelector('.footer-tagline, .footer-desc');
+        const taglineEl = document.querySelector('.footer-tagline, .footer-desc, .footer-brand p');
         if (taglineEl) taglineEl.textContent = settings.footer.tagline;
       }
       if (settings.footer.copyright) {
         const copyEl = document.querySelector('.footer-copy');
-        if (copyEl) copyEl.textContent = settings.footer.copyright;
+        if (copyEl) {
+          const rawCopy = settings.footer.copyright;
+          if (rawCopy.includes('Muhammad Haerul')) {
+            copyEl.innerHTML = escapeHtml(rawCopy).replace('Muhammad Haerul', '<span class="footer-copy-name">Muhammad Haerul</span>');
+          } else {
+            copyEl.textContent = rawCopy;
+          }
+        }
       }
       if (settings.footer.socials) {
         const soc = settings.footer.socials;

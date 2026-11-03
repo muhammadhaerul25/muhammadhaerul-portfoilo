@@ -42,17 +42,19 @@ const DEFAULT_SETTINGS = {
         glimpseActiveIds: []
     },
     sections: {
-        experiences: { title: "Career Journey & Work Experience", subtitle: "Track record in software engineering, artificial intelligence, and technical leadership." },
-        education: { title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, software systems, and data science." },
-        projects: { title: "Featured Projects & AI Systems", subtitle: "Production-ready web applications, deep learning solutions, and agentic prototypes." },
-        talks: { title: "Speaking Engagements & Talks", subtitle: "Workshops, keynote talks, and hands-on AI bootcamps delivered across organizations." },
-        certifications: { title: "Professional Certifications", subtitle: "Verified credentials in Machine Learning, Generative AI, and Cloud Infrastructure." },
-        awards: { title: "Honors & Achievements", subtitle: "Competitions won, hackathons, and academic recognitions." },
-        publications: { title: "Publications & Research", subtitle: "Peer-reviewed research and applied AI engineering write-ups." },
-        blogs: { title: "Technical Articles & Blog", subtitle: "Deep-dives into AI architectures, full-stack development, and tech thoughts." },
-        gallery: { title: "Journey & Visual Moments", subtitle: "Behind-the-scenes snapshots of hackathons, speaking stages, and community sessions." },
-        testimonials: { title: "Participant & Client Feedbacks", subtitle: "Verified impressions and testimonials from workshop attendees and collaborators." },
-        contact: { title: "Let's Connect & Collaborate", subtitle: "Have a project in mind, need technical consulting, or want to invite me as a speaker? Drop a message." }
+        about: { name: "01 — Profile", eyebrow: "01 — Profile", title: "AI Full-Stack Specialist", subtitle: "Building dependable intelligent systems with 4+ years of hands-on expertise." },
+        education: { name: "02 — Education", eyebrow: "02 — Education", title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, software systems, and data science." },
+        experiences: { name: "03 — Experiences", eyebrow: "03 — Experiences", title: "Career Journey & Work Experience", subtitle: "Track record in software engineering, artificial intelligence, and technical leadership." },
+        skills: { name: "04 — Skills", eyebrow: "04 — Skills", title: "Depth where it matters, range where it helps.", subtitle: "Fluency is shown through delivered systems, not certificates alone — but here's the map." },
+        projects: { name: "05 — Featured & Case-Study Projects", eyebrow: "05 — Featured & Case-Study Projects", title: "Featured Projects & AI Systems", subtitle: "Production-ready web applications, deep learning solutions, and agentic prototypes." },
+        publications: { name: "06 — Publications", eyebrow: "06 — Publications", title: "Open-source work, written up and shared.", subtitle: "Code and write-ups released publicly so other engineers can learn from — or build on — the same systems." },
+        talks: { name: "07 — Talks", eyebrow: "07 — Talks", title: "Speaking Engagements & Talks", subtitle: "Workshops, keynote talks, and hands-on AI bootcamps delivered across organizations." },
+        awards: { name: "08 — Honors & Awards", eyebrow: "08 — Honors & Awards", title: "Honors & Achievements", subtitle: "Competitions won, hackathons, and academic recognitions." },
+        certifications: { name: "09 — Licences & Certifications", eyebrow: "09 — Licences & Certifications", title: "Professional Certifications", subtitle: "Verified credentials in Machine Learning, Generative AI, and Cloud Infrastructure." },
+        blogs: { name: "10 — Blog & Insights", eyebrow: "10 — Blog & Insights", title: "Technical Articles & Blog", subtitle: "Deep-dives into AI architectures, full-stack development, and tech thoughts." },
+        gallery: { name: "11 — Visual Gallery & Moments", eyebrow: "11 — Visual Gallery & Moments", title: "Journey & Visual Moments", subtitle: "Behind-the-scenes snapshots of hackathons, speaking stages, and community sessions." },
+        testimonials: { name: "12 — Feedback and Recommendations", eyebrow: "12 — Feedback and Recommendations", title: "Participant & Client Feedbacks", subtitle: "Verified impressions and testimonials from workshop attendees and collaborators." },
+        contact: { name: "13 — Contacts", eyebrow: "13 — Contacts", title: "Let's Connect & Collaborate", subtitle: "Have a project in mind, need technical consulting, or want to invite me as a speaker? Drop a message." }
     },
     footer: {
         tagline: "Building high-impact AI solutions, empowering minds through engineering education, and bridging the gap between research and production.",
@@ -187,7 +189,16 @@ function mergeSettings(base, override) {
             showGlimpse: isSlideshowEnabled,
             glimpseActiveIds: activeIds
         }),
-        sections: Object.assign({}, base.sections, override.sections || {}),
+        sections: (() => {
+            const out = {};
+            const baseSec = base.sections || {};
+            const overSec = (override && override.sections) || {};
+            const allKeys = Array.from(new Set([...Object.keys(baseSec), ...Object.keys(overSec)]));
+            allKeys.forEach(k => {
+                out[k] = Object.assign({}, baseSec[k] || {}, overSec[k] || {});
+            });
+            return out;
+        })(),
         localization: Object.assign({}, base.localization, override.localization || {}),
         footer: {
             tagline: (override.footer && override.footer.tagline !== undefined) ? override.footer.tagline : base.footer.tagline,
