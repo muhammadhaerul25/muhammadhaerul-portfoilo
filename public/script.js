@@ -617,26 +617,21 @@
       }
     }
 
-    const aboutTitle = document.querySelector('#about .section-title');
+    const aboutTitle = document.querySelector('#about .section-title, #about .about-lead');
     if (aboutTitle) {
-      if (aboutCfg && aboutCfg.title) {
-        // Preserved for applyPageSettings
+      const roleHeading = aboutTitle.querySelector('.about-title-role');
+      const yearsHeading = document.getElementById('about-exp-heading');
+      const role = (window.liveProfileSettings && window.liveProfileSettings.leadHeadingRole) || (roleHeading ? roleHeading.textContent : '') || 'AI Full-Stack Specialist';
+      const exp = (window.liveProfileSettings && window.liveProfileSettings.leadHeadingYears) || (yearsHeading ? yearsHeading.textContent : '') || (lang === 'id' ? '4 Tahun' : '4 Years');
+      if (lang === 'id') {
+        aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> dengan Pengalaman <span id="about-exp-heading">${escapeHtml(exp)}</span>`;
       } else {
-        const roleHeading = aboutTitle.querySelector('.about-title-role');
-        const yearsHeading = document.getElementById('about-exp-heading');
-        if (roleHeading && yearsHeading) {
-          const role = roleHeading.textContent || 'AI Full-Stack Engineer';
-          const exp = yearsHeading.textContent || (lang === 'id' ? '4 Tahun' : '4 Years');
-          if (lang === 'id') {
-            aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> dengan Pengalaman <span id="about-exp-heading">${escapeHtml(exp)}</span>`;
-          } else {
-            aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> with <span id="about-exp-heading">${escapeHtml(exp)}</span> of Experiences`;
-          }
-        } else {
-          aboutTitle.textContent = t.about_title;
-        }
+        aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> with <span id="about-exp-heading">${escapeHtml(exp)}</span> of Experiences`;
       }
     }
+
+    const aboutDescEl = document.getElementById('about-section-desc');
+    if (aboutDescEl) aboutDescEl.style.display = 'none';
 
     const bioParas = document.querySelectorAll('.about-bio p');
     if (bioParas && bioParas[0]) bioParas[0].textContent = t.about_bio1;
@@ -4176,33 +4171,37 @@
           eyebrowEl.style.removeProperty('display');
         }
 
-        // 2. Title (Judul Section)
-        const titleEl = secEl.querySelector('.section-title, .contact-title, .about-lead');
-        if (titleEl && secCfg.title) {
-          if (secKey === 'about') {
-            const roleEl = titleEl.querySelector('.about-title-role');
-            const yearsEl = titleEl.querySelector('#about-exp-heading');
-            const titleLower = secCfg.title.toLowerCase();
-            if (titleLower.includes('with') || titleLower.includes('dengan') || titleLower.includes('experience') || titleLower.includes('pengalaman')) {
-              titleEl.innerHTML = `<span class="about-title-role">${escapeHtml(secCfg.title)}</span>`;
-            } else if (secCfg.title === 'AI Full-Stack Specialist' || secCfg.title === 'AI Full-Stack Engineer') {
-              if (roleEl) roleEl.textContent = secCfg.title;
-            } else if (roleEl && !yearsEl) {
-              roleEl.textContent = secCfg.title;
+        // Section 01 (#about) special handling: Title is the Profile Lead Role + Years, never generic title or subtitle
+        if (secKey === 'about') {
+          const titleEl = secEl.querySelector('.section-title, .about-lead');
+          if (titleEl) {
+            const roleHeading = titleEl.querySelector('.about-title-role');
+            const yearsHeading = document.getElementById('about-exp-heading');
+            const role = (window.liveProfileSettings && window.liveProfileSettings.leadHeadingRole) || (roleHeading ? roleHeading.textContent : '') || 'AI Full-Stack Specialist';
+            const exp = (window.liveProfileSettings && window.liveProfileSettings.leadHeadingYears) || (yearsHeading ? yearsHeading.textContent : '') || (currentLang === 'id' ? '4 Tahun' : '4 Years');
+            if (currentLang === 'id') {
+              titleEl.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> dengan Pengalaman <span id="about-exp-heading">${escapeHtml(exp)}</span>`;
             } else {
-              titleEl.innerHTML = `<span class="about-title-role">${escapeHtml(secCfg.title)}</span>`;
+              titleEl.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> with <span id="about-exp-heading">${escapeHtml(exp)}</span> of Experiences`;
             }
-          } else {
-            titleEl.textContent = secCfg.title;
           }
+          const aboutDesc = secEl.querySelector('.section-desc, .about-sub');
+          if (aboutDesc) aboutDesc.style.display = 'none';
+          return;
+        }
+
+        // 2. Title (Judul Section) for all other sections
+        const titleEl = secEl.querySelector('.section-title, .contact-title');
+        if (titleEl && secCfg.title) {
+          titleEl.textContent = secCfg.title;
           titleEl.style.removeProperty('display');
         }
 
-        // 3. Subtitle / Description (Deskripsi / Sub-judul)
-        let descEl = secEl.querySelector('.section-desc, .section-sub, .contact-sub, .about-sub');
+        // 3. Subtitle / Description (Deskripsi / Sub-judul) for all other sections
+        let descEl = secEl.querySelector('.section-desc, .section-sub, .contact-sub');
         if (secCfg.subtitle !== undefined && secCfg.subtitle !== null && secCfg.subtitle.trim() !== '') {
           if (!descEl) {
-            const headEl = secEl.querySelector('.section-head, .contact-left, .about-col-content');
+            const headEl = secEl.querySelector('.section-head, .contact-left');
             if (headEl) {
               descEl = document.createElement('p');
               descEl.className = 'section-desc';
@@ -4214,7 +4213,7 @@
             descEl.style.display = 'block';
             descEl.style.removeProperty('display');
           }
-        } else if (descEl && (descEl.id.includes('section-desc') || descEl.classList.contains('about-sub'))) {
+        } else if (descEl && descEl.id.includes('section-desc')) {
           descEl.style.display = 'none';
         }
       });

@@ -11633,6 +11633,7 @@ function renderSectionHeadingsEditor(sections) {
         var currentName = (s.name !== undefined && s.name !== null && s.name !== '') 
             ? s.name 
             : ((s.eyebrow !== undefined && s.eyebrow !== null && s.eyebrow !== '') ? s.eyebrow : k.defaultEyebrow);
+        var isAbout = k.id === 'about';
 
         return '<div style="background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-sm); padding:16px; display:flex; flex-direction:column; gap:10px;">' +
             '<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line-soft); padding-bottom:10px;">' +
@@ -11649,20 +11650,29 @@ function renderSectionHeadingsEditor(sections) {
                 '</label>' +
                 '<input type="text" id="sec-name-' + k.id + '" value="' + esc(currentName) + '" placeholder="' + esc(k.defaultEyebrow) + '" class="fm-input" style="font-size:0.82rem; font-weight:600;">' +
             '</div>' +
-            '<div>' +
-                '<label class="fm-label" style="font-size:0.72rem; font-weight:700; color:var(--ink-2); display:flex; justify-content:space-between;">' +
-                    '<span>Title (Judul Section)</span>' +
-                    '<span style="font-size:0.68rem; color:var(--ink-3); font-weight:normal;">Editable</span>' +
-                '</label>' +
-                '<input type="text" id="sec-title-' + k.id + '" value="' + esc(s.title || '') + '" placeholder="Custom section title..." class="fm-input" style="font-size:0.82rem;">' +
-            '</div>' +
-            '<div>' +
-                '<label class="fm-label" style="font-size:0.72rem; font-weight:700; color:var(--ink-2); display:flex; justify-content:space-between;">' +
-                    '<span>Subtitle (Deskripsi / Sub-judul)</span>' +
-                    '<span style="font-size:0.68rem; color:var(--ink-3); font-weight:normal;">Editable</span>' +
-                '</label>' +
-                '<input type="text" id="sec-sub-' + k.id + '" value="' + esc(s.subtitle || '') + '" placeholder="Custom section subtitle or description..." class="fm-input" style="font-size:0.82rem;">' +
-            '</div>' +
+            (isAbout ? 
+                '<div style="background:var(--g-blue-soft); border:1px solid rgba(66,133,244,0.25); border-radius:8px; padding:10px 12px; font-size:0.78rem; color:var(--ink); line-height:1.45;">' +
+                    '<div style="font-weight:700; color:var(--g-blue); margin-bottom:3px; display:flex; align-items:center; gap:5px;">' +
+                        '<span>✨ Lead Title Terintegrasi</span>' +
+                    '</div>' +
+                    'Judul Section Profile menggunakan format animasi gradient khusus (<b>AI Full-Stack Specialist with 4 Years of Experiences</b>) yang dikelola langsung melalui menu <b>Management &rarr; Profile</b>. Subtitle dikosongkan agar langsung mengalir ke narasi bio.' +
+                '</div>'
+            : 
+                '<div>' +
+                    '<label class="fm-label" style="font-size:0.72rem; font-weight:700; color:var(--ink-2); display:flex; justify-content:space-between;">' +
+                        '<span>Title (Judul Section)</span>' +
+                        '<span style="font-size:0.68rem; color:var(--ink-3); font-weight:normal;">Editable</span>' +
+                    '</label>' +
+                    '<input type="text" id="sec-title-' + k.id + '" value="' + esc(s.title || '') + '" placeholder="Custom section title..." class="fm-input" style="font-size:0.82rem;">' +
+                '</div>' +
+                '<div>' +
+                    '<label class="fm-label" style="font-size:0.72rem; font-weight:700; color:var(--ink-2); display:flex; justify-content:space-between;">' +
+                        '<span>Subtitle (Deskripsi / Sub-judul)</span>' +
+                        '<span style="font-size:0.68rem; color:var(--ink-3); font-weight:normal;">Editable</span>' +
+                    '</label>' +
+                    '<input type="text" id="sec-sub-' + k.id + '" value="' + esc(s.subtitle || '') + '" placeholder="Custom section subtitle or description..." class="fm-input" style="font-size:0.82rem;">' +
+                '</div>'
+            ) +
         '</div>';
     }).join('');
 
@@ -11685,8 +11695,8 @@ async function savePageSettings(section, btn) {
         sectionsPayload[k] = {
             name: nEl ? nEl.value.trim() : '',
             eyebrow: nEl ? nEl.value.trim() : '',
-            title: tEl ? tEl.value.trim() : '',
-            subtitle: sEl ? sEl.value.trim() : ''
+            title: k === 'about' ? '' : (tEl ? tEl.value.trim() : ''),
+            subtitle: k === 'about' ? '' : (sEl ? sEl.value.trim() : '')
         };
     });
 

@@ -42,7 +42,7 @@ const DEFAULT_SETTINGS = {
         glimpseActiveIds: []
     },
     sections: {
-        about: { name: "01 — Profile", eyebrow: "01 — Profile", title: "AI Full-Stack Specialist", subtitle: "Building dependable intelligent systems with 4+ years of hands-on expertise." },
+        about: { name: "01 — Profile", eyebrow: "01 — Profile", title: "", subtitle: "" },
         education: { name: "02 — Education", eyebrow: "02 — Education", title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, software systems, and data science." },
         experiences: { name: "03 — Experiences", eyebrow: "03 — Experiences", title: "Career Journey & Work Experience", subtitle: "Track record in software engineering, artificial intelligence, and technical leadership." },
         skills: { name: "04 — Skills", eyebrow: "04 — Skills", title: "Depth where it matters, range where it helps.", subtitle: "Fluency is shown through delivered systems, not certificates alone — but here's the map." },
@@ -197,6 +197,10 @@ function mergeSettings(base, override) {
             allKeys.forEach(k => {
                 out[k] = Object.assign({}, baseSec[k] || {}, overSec[k] || {});
             });
+            if (out.about) {
+                out.about.title = "";
+                out.about.subtitle = "";
+            }
             return out;
         })(),
         localization: Object.assign({}, base.localization, override.localization || {}),
