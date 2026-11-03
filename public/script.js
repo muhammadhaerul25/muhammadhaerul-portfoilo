@@ -1431,25 +1431,10 @@
         slideUrl = t.slides[0].url || (t.slides[0].label && t.slides[0].label.startsWith('http') ? t.slides[0].label : '');
       }
 
-      let certUrl = '';
-      if (t.gallery && Array.isArray(t.gallery) && t.gallery.length && t.gallery[0]) {
-        certUrl = t.gallery[0];
-      } else if (t.slides && Array.isArray(t.slides)) {
-        const cSlide = t.slides.find(s => s.type === 'certificate' || (s.label && s.label.toLowerCase().includes('cert')));
-        if (cSlide) certUrl = cSlide.url;
-      }
-
-      const certBtn = certUrl ? `
-        <button type="button" class="p-btn-action" onclick="window.openLightbox('${escapeHtml(certUrl)}', '${escapeHtml(t.event)} — Certificate Proof')" style="font-size:12px; gap:4px; display:inline-flex; align-items:center;">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Certificate
-        </button>
-      ` : '';
-
       const slidesBtn = slideUrl ? `
         <a href="${escapeHtml(slideUrl)}" target="_blank" rel="noopener" class="p-btn-action primary" style="font-size:12px;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Deck / Slides
+          Slides
         </a>
       ` : '';
 
@@ -1510,7 +1495,6 @@
               ` : ''}
             </div>
             <div class="talk-card-actions">
-              ${certBtn}
               ${slidesBtn}
               <button type="button" class="p-btn-action" onclick="window.openTalkModal('${t.id}')">
                 Details
