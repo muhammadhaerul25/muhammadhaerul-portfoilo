@@ -2371,18 +2371,26 @@
 
     // Update Filter Nav if present
     if (filterNav) {
+      const currentActiveBtn = filterNav.querySelector('.skills-nav-pill.active');
+      const currentCat = currentActiveBtn ? currentActiveBtn.getAttribute('data-cat') : 'all';
+      const totalCount = skills.length;
+
       filterNav.innerHTML = `
-        <button class="skills-nav-pill active" data-cat="all" onclick="filterSkillsSpecialization('all', this)">
+        <button class="skills-nav-pill ${currentCat === 'all' || !currentCat ? 'active' : ''}" data-cat="all" onclick="filterSkillsSpecialization('all', this)">
           <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
           <span>All</span>
+          <span class="skills-filter-count">${totalCount}</span>
         </button>
         ${skills.map(s => {
         const slug = s.category_slug || (s.category || '').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
         const iconSvg = getSkillCategoryIcon(s.category);
+        const itemCount = Array.isArray(s.items) ? s.items.length : 3;
+        const isActive = currentCat === slug ? 'active' : '';
         return `
-            <button class="skills-nav-pill" data-cat="${escapeHtml(slug)}" onclick="filterSkillsSpecialization('${escapeHtml(slug)}', this)">
+            <button class="skills-nav-pill ${isActive}" data-cat="${escapeHtml(slug)}" onclick="filterSkillsSpecialization('${escapeHtml(slug)}', this)">
               ${iconSvg}
               <span>${escapeHtml(s.category)}</span>
+              <span class="skills-filter-count">${itemCount}</span>
             </button>
           `;
       }).join('')}
