@@ -788,48 +788,95 @@
 
         <div class="skills-filter-nav" id="skillsFilterNav" role="tablist">
           <button class="skills-nav-pill active" data-cat="all" onclick="filterSkillsSpecialization('all', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+            </svg>
             <span>All</span>
           </button>
           <button class="skills-nav-pill" data-cat="programming"
             onclick="filterSkillsSpecialization('programming', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
             <span>Programming</span>
           </button>
           <button class="skills-nav-pill" data-cat="data-analytics"
             onclick="filterSkillsSpecialization('data-analytics', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
             <span>Data Analytics</span>
           </button>
           <button class="skills-nav-pill" data-cat="computer-vision"
             onclick="filterSkillsSpecialization('computer-vision', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
             <span>Computer Vision</span>
           </button>
           <button class="skills-nav-pill" data-cat="nlp" onclick="filterSkillsSpecialization('nlp', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              <line x1="8" y1="9" x2="16" y2="9"></line>
+              <line x1="8" y1="13" x2="13" y2="13"></line>
+            </svg>
             <span>NLP</span>
           </button>
           <button class="skills-nav-pill" data-cat="generative-ai"
             onclick="filterSkillsSpecialization('generative-ai', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
             <span>Generative AI</span>
           </button>
           <button class="skills-nav-pill" data-cat="ai-agents" onclick="filterSkillsSpecialization('ai-agents', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+              <circle cx="12" cy="5" r="2"></circle>
+              <path d="M12 7v4"></path>
+              <line x1="8" y1="16" x2="8" y2="16"></line>
+              <line x1="16" y1="16" x2="16" y2="16"></line>
+            </svg>
             <span>AI Agents</span>
           </button>
           <button class="skills-nav-pill" data-cat="software-dev"
             onclick="filterSkillsSpecialization('software-dev', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+              </path>
+            </svg>
             <span>Software Dev</span>
           </button>
           <button class="skills-nav-pill" data-cat="database" onclick="filterSkillsSpecialization('database', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
             <span>Database</span>
           </button>
           <button class="skills-nav-pill" data-cat="devops" onclick="filterSkillsSpecialization('devops', this)">
-            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+            <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+            </svg>
             <span>DevOps</span>
           </button>
         </div>
@@ -1574,11 +1621,14 @@
               onclick="event.stopPropagation(); window.openLightbox('/assets/images/publications/pub-multimodal-agents.png', 'Architecting Real-Time Multimodal AI Agents &amp; Edge Vision Pipelines — Medium')"
               title="Click to view full preview">
               <img src="/assets/images/publications/pub-multimodal-agents.png"
-                alt="Architecting Real-Time Multimodal AI Agents &amp; Edge Vision Pipelines"
-                loading="lazy" decoding="async">
+                alt="Architecting Real-Time Multimodal AI Agents &amp; Edge Vision Pipelines" loading="lazy"
+                decoding="async">
               <div class="pub-media-overlay">
                 <span class="pub-zoom-btn">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
                   <span>View Full Preview</span>
                 </span>
               </div>
@@ -1630,12 +1680,14 @@
             <div class="pub-card-preview"
               onclick="event.stopPropagation(); window.openLightbox('/assets/images/publications/pub-galaxy-detection.png', 'Galaxy Object Detection — Python Package Index (PyPI)')"
               title="Click to view full preview">
-              <img src="/assets/images/publications/pub-galaxy-detection.png"
-                alt="Galaxy Object Detection"
+              <img src="/assets/images/publications/pub-galaxy-detection.png" alt="Galaxy Object Detection"
                 loading="lazy" decoding="async">
               <div class="pub-media-overlay">
                 <span class="pub-zoom-btn">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
                   <span>View Full Preview</span>
                 </span>
               </div>
@@ -1704,7 +1756,10 @@
                 loading="lazy" decoding="async">
               <div class="pub-media-overlay">
                 <span class="pub-zoom-btn">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
                   <span>View Full Preview</span>
                 </span>
               </div>
@@ -1769,7 +1824,9 @@
 
         <div class="talks-dynamic-grid" id="talks-dynamic-grid">
           <article class="talk-dynamic-card reveal in-view">
-            <div class="talk-poster-wrap" onclick="window.openLightbox('/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp', 'National Cybersecurity &amp; Information Security Awareness Webinar — Badan Siber dan Sandi Negara (BSSN)')" title="Click to view full image" style="cursor:zoom-in;">
+            <div class="talk-poster-wrap"
+              onclick="window.openLightbox('/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp', 'National Cybersecurity &amp; Information Security Awareness Webinar — Badan Siber dan Sandi Negara (BSSN)')"
+              title="Click to view full image" style="cursor:zoom-in;">
               <div class="talk-poster-backdrop"
                 style="background-image: url('/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp');"></div>
               <img class="talk-poster-img" src="/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp"
@@ -1778,7 +1835,10 @@
                 decoding="async" loading="lazy">
               <div class="talk-poster-overlay">
                 <span class="talk-zoom-btn">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
                   <span>View Full Image</span>
                 </span>
               </div>
@@ -1787,7 +1847,14 @@
               <div>
                 <div class="talk-meta-bar">
                   <span class="talk-date-badge">July 2025</span>
-                  <span class="talk-attendees-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span>300+ Attendees</span></span>
+                  <span class="talk-attendees-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg> <span>300+ Attendees</span></span>
                 </div>
                 <h3 class="talk-card-title">National Cybersecurity &amp; Information Security Awareness Webinar</h3>
                 <p class="talk-card-org">
@@ -1801,7 +1868,9 @@
             </div>
           </article>
           <article class="talk-dynamic-card reveal in-view">
-            <div class="talk-poster-wrap" onclick="window.openLightbox('/assets/images/muhammad-haerul-speaker-build-with-ai.webp', 'Build with AI: AI-Driven Development Keynote — Google Developer Groups Makassar')" title="Click to view full image" style="cursor:zoom-in;">
+            <div class="talk-poster-wrap"
+              onclick="window.openLightbox('/assets/images/muhammad-haerul-speaker-build-with-ai.webp', 'Build with AI: AI-Driven Development Keynote — Google Developer Groups Makassar')"
+              title="Click to view full image" style="cursor:zoom-in;">
               <div class="talk-poster-backdrop"
                 style="background-image: url('/assets/images/muhammad-haerul-speaker-build-with-ai.webp');"></div>
               <img class="talk-poster-img" src="/assets/images/muhammad-haerul-speaker-build-with-ai.webp"
@@ -1809,7 +1878,10 @@
                 title="Muhammad Haerul — Build with AI: AI-Driven Development Keynote" decoding="async" loading="lazy">
               <div class="talk-poster-overlay">
                 <span class="talk-zoom-btn">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
                   <span>View Full Image</span>
                 </span>
               </div>
@@ -1818,7 +1890,14 @@
               <div>
                 <div class="talk-meta-bar">
                   <span class="talk-date-badge">March 2025</span>
-                  <span class="talk-attendees-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span>150+ Attendees</span></span>
+                  <span class="talk-attendees-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg> <span>150+ Attendees</span></span>
                 </div>
                 <h3 class="talk-card-title">Build with AI: AI-Driven Development Keynote</h3>
                 <p class="talk-card-org">
@@ -1832,7 +1911,9 @@
             </div>
           </article>
           <article class="talk-dynamic-card reveal in-view">
-            <div class="talk-poster-wrap" onclick="window.openLightbox('/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp', 'GSA AI Forge: AI for Personal Branding — Google Student Ambassadors')" title="Click to view full image" style="cursor:zoom-in;">
+            <div class="talk-poster-wrap"
+              onclick="window.openLightbox('/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp', 'GSA AI Forge: AI for Personal Branding — Google Student Ambassadors')"
+              title="Click to view full image" style="cursor:zoom-in;">
               <div class="talk-poster-backdrop"
                 style="background-image: url('/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp');"></div>
               <img class="talk-poster-img" src="/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp"
@@ -1840,7 +1921,10 @@
                 title="Muhammad Haerul — GSA AI Forge: AI for Personal Branding" decoding="async" loading="lazy">
               <div class="talk-poster-overlay">
                 <span class="talk-zoom-btn">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
                   <span>View Full Image</span>
                 </span>
               </div>
@@ -1849,7 +1933,14 @@
               <div>
                 <div class="talk-meta-bar">
                   <span class="talk-date-badge">January 2025</span>
-                  <span class="talk-attendees-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span>120+ Attendees</span></span>
+                  <span class="talk-attendees-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg> <span>120+ Attendees</span></span>
                 </div>
                 <h3 class="talk-card-title">GSA AI Forge: AI for Personal Branding</h3>
                 <p class="talk-card-org">
@@ -1907,7 +1998,12 @@
               <div>
 
                 <div class="award-badge-top-wrap" style="margin-bottom: 8px;">
-                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg> 1st Place Winner</span>
+                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                    </svg> 1st Place Winner</span>
                 </div>
 
                 <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">Open The Gate Hack 2025</h3>
@@ -1921,7 +2017,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-gold reveal in-view">
@@ -1950,7 +2046,16 @@
               <div>
 
                 <div class="award-badge-top-wrap" style="margin-bottom: 8px;">
-                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7"/><path d="M14 14.66V17c0 .55.45 1 1 1h2"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> Best Creativity Winner</span>
+                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                      <path d="M4 22h16" />
+                      <path d="M10 14.66V17c0 .55-.45 1-1 1H7" />
+                      <path d="M14 14.66V17c0 .55.45 1 1 1h2" />
+                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                    </svg> Best Creativity Winner</span>
                 </div>
 
                 <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">AI Hackathon Competition (TECHNOART
@@ -1965,7 +2070,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-blue reveal in-view">
@@ -2008,7 +2113,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-red reveal in-view">
@@ -2052,14 +2157,18 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-gold reveal in-view">
             <div class="award-insignia-banner ">
 
               <span class="award-badge-pill gold" style="display:inline-flex; align-items:center; gap:6px;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
                 <span>GPA 3.97 / 4.00</span>
               </span>
 
@@ -2100,7 +2209,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-gold reveal in-view">
@@ -2129,7 +2238,12 @@
               <div>
 
                 <div class="award-badge-top-wrap" style="margin-bottom: 8px;">
-                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg> 2nd Place Winner</span>
+                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                    </svg> 2nd Place Winner</span>
                 </div>
 
                 <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">Makassar Hackathon 2024</h3>
@@ -2143,7 +2257,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-blue reveal in-view">
@@ -2187,14 +2301,23 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-green reveal in-view">
             <div class="award-insignia-banner ">
 
               <span class="award-badge-pill green" style="display:inline-flex; align-items:center; gap:6px;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="21" x2="21" y2="21"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="3 10 12 3 21 10"/><line x1="6" y1="10" x2="6" y2="21"/><line x1="10" y1="10" x2="10" y2="21"/><line x1="14" y1="10" x2="14" y2="21"/><line x1="18" y1="10" x2="18" y2="21"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="3" y1="21" x2="21" y2="21" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                  <polyline points="3 10 12 3 21 10" />
+                  <line x1="6" y1="10" x2="6" y2="21" />
+                  <line x1="10" y1="10" x2="10" y2="21" />
+                  <line x1="14" y1="10" x2="14" y2="21" />
+                  <line x1="18" y1="10" x2="18" y2="21" />
+                </svg>
                 <span>Central Bank Award</span>
               </span>
 
@@ -2235,7 +2358,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-purple reveal in-view">
@@ -2278,7 +2401,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-gold reveal in-view">
@@ -2323,7 +2446,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-blue reveal in-view">
@@ -2367,7 +2490,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-blue reveal in-view">
@@ -2411,7 +2534,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-gold reveal in-view">
@@ -2441,7 +2564,12 @@
               <div>
 
                 <div class="award-badge-top-wrap" style="margin-bottom: 8px;">
-                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg> 1st Place Winner</span>
+                  <span class="award-metric-tag gold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                    </svg> 1st Place Winner</span>
                 </div>
 
                 <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">National Essay Competition
@@ -2456,7 +2584,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-blue reveal in-view">
@@ -2500,7 +2628,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-blue reveal in-view">
@@ -2545,7 +2673,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
 
           <article class="award-card accent-blue reveal in-view">
@@ -2590,7 +2718,7 @@
                 </div>
               </div>
 
-              </div>
+            </div>
           </article>
         </div>
 
@@ -2626,12 +2754,25 @@
               <h4 class="cert-title">Hackathon DIGDAYA BI - Practitioner Phase</h4>
               <div class="cert-card-preview-wrap">
                 <div class="cert-page-tabs" role="tablist" aria-label="Certificate Pages">
-                  <button type="button" class="cert-tab-btn active" role="tab" aria-selected="true" onclick="event.stopPropagation(); switchCertPage('digdaya-practitioner', '/assets/certificates/cert-digdaya-practitioner.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase')">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <button type="button" class="cert-tab-btn active" role="tab" aria-selected="true"
+                    onclick="event.stopPropagation(); switchCertPage('digdaya-practitioner', '/assets/certificates/cert-digdaya-practitioner.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.3">
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
                     <span>Sertifikat</span>
                   </button>
-                  <button type="button" class="cert-tab-btn" role="tab" aria-selected="false" onclick="event.stopPropagation(); switchCertPage('digdaya-practitioner', '/assets/certificates/cert-digdaya-practitioner-curriculum.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase (Kurikulum)')">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <button type="button" class="cert-tab-btn" role="tab" aria-selected="false"
+                    onclick="event.stopPropagation(); switchCertPage('digdaya-practitioner', '/assets/certificates/cert-digdaya-practitioner-curriculum.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase (Kurikulum)')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.3">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <polyline points="14 2 14 8 20 8" />
+                      <line x1="16" y1="13" x2="8" y2="13" />
+                      <line x1="16" y1="17" x2="8" y2="17" />
+                    </svg>
                     <span>Kurikulum</span>
                   </button>
                 </div>
@@ -2640,16 +2781,21 @@
                   onclick="openLightbox(this.querySelector('img').src, this.getAttribute('data-active-title') || 'Hackathon DIGDAYA BI - Practitioner Phase')"
                   title="Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase (Bank Indonesia x LPPI)">
                   <img src="/assets/certificates/cert-digdaya-practitioner.jpg"
-                    alt="Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase" loading="lazy" decoding="async">
+                    alt="Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase" loading="lazy"
+                    decoding="async">
                   <div class="cert-card-overlay">
                     <span class="cert-zoom-btn">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                      </svg>
                       <span class="cert-zoom-text">View Full Image</span>
                     </span>
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2685,12 +2831,25 @@
               <h4 class="cert-title">Hackathon DIGDAYA BI - Essential Phase</h4>
               <div class="cert-card-preview-wrap">
                 <div class="cert-page-tabs" role="tablist" aria-label="Certificate Pages">
-                  <button type="button" class="cert-tab-btn active" role="tab" aria-selected="true" onclick="event.stopPropagation(); switchCertPage('digdaya-essential', '/assets/certificates/cert-digdaya-essential.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase')">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <button type="button" class="cert-tab-btn active" role="tab" aria-selected="true"
+                    onclick="event.stopPropagation(); switchCertPage('digdaya-essential', '/assets/certificates/cert-digdaya-essential.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.3">
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
                     <span>Sertifikat</span>
                   </button>
-                  <button type="button" class="cert-tab-btn" role="tab" aria-selected="false" onclick="event.stopPropagation(); switchCertPage('digdaya-essential', '/assets/certificates/cert-digdaya-essential-curriculum.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase (Kurikulum)')">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <button type="button" class="cert-tab-btn" role="tab" aria-selected="false"
+                    onclick="event.stopPropagation(); switchCertPage('digdaya-essential', '/assets/certificates/cert-digdaya-essential-curriculum.jpg', this, 'Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase (Kurikulum)')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.3">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <polyline points="14 2 14 8 20 8" />
+                      <line x1="16" y1="13" x2="8" y2="13" />
+                      <line x1="16" y1="17" x2="8" y2="17" />
+                    </svg>
                     <span>Kurikulum</span>
                   </button>
                 </div>
@@ -2699,16 +2858,21 @@
                   onclick="openLightbox(this.querySelector('img').src, this.getAttribute('data-active-title') || 'Hackathon DIGDAYA BI - Essential Phase')"
                   title="Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase (Bank Indonesia x LPPI)">
                   <img src="/assets/certificates/cert-digdaya-essential.jpg"
-                    alt="Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase" loading="lazy" decoding="async">
+                    alt="Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase" loading="lazy"
+                    decoding="async">
                   <div class="cert-card-overlay">
                     <span class="cert-zoom-btn">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                      </svg>
                       <span class="cert-zoom-text">View Full Image</span>
                     </span>
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2741,19 +2905,25 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">Machine Learning Specialization</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-ml-specialization.svg', 'Sertifikat Muhammad Haerul — Machine Learning Specialization (DeepLearning.AI & Stanford)')"
-                title="Sertifikat Muhammad Haerul — Machine Learning Specialization (DeepLearning.AI & Stanford)" style="cursor:zoom-in;">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-ml-specialization.svg', 'Sertifikat Muhammad Haerul — Machine Learning Specialization (DeepLearning.AI & Stanford)')"
+                title="Sertifikat Muhammad Haerul — Machine Learning Specialization (DeepLearning.AI & Stanford)"
+                style="cursor:zoom-in;">
                 <img src="/assets/certificates/cert-ml-specialization.svg"
                   alt="Sertifikat Muhammad Haerul — Machine Learning Specialization (DeepLearning.AI & Stanford)"
                   loading="lazy" decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2785,19 +2955,25 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">Machine Learning in Production</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-ml-production.svg', 'Sertifikat Muhammad Haerul — Machine Learning in Production (DeepLearning.AI)')"
-                title="Sertifikat Muhammad Haerul — Machine Learning in Production (DeepLearning.AI)" style="cursor:zoom-in;">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-ml-production.svg', 'Sertifikat Muhammad Haerul — Machine Learning in Production (DeepLearning.AI)')"
+                title="Sertifikat Muhammad Haerul — Machine Learning in Production (DeepLearning.AI)"
+                style="cursor:zoom-in;">
                 <img src="/assets/certificates/cert-ml-production.svg"
                   alt="Sertifikat Muhammad Haerul — Machine Learning in Production (DeepLearning.AI)" loading="lazy"
                   decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2829,19 +3005,25 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">Generative AI for Software Development</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-genai-software.svg', 'Sertifikat Muhammad Haerul — Generative AI for Software Development (DeepLearning.AI)')"
-                title="Sertifikat Muhammad Haerul — Generative AI for Software Development (DeepLearning.AI)" style="cursor:zoom-in;">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-genai-software.svg', 'Sertifikat Muhammad Haerul — Generative AI for Software Development (DeepLearning.AI)')"
+                title="Sertifikat Muhammad Haerul — Generative AI for Software Development (DeepLearning.AI)"
+                style="cursor:zoom-in;">
                 <img src="/assets/certificates/cert-genai-software.svg"
                   alt="Sertifikat Muhammad Haerul — Generative AI for Software Development (DeepLearning.AI)"
                   loading="lazy" decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2873,16 +3055,24 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">Generative AI with LangChain &amp; HuggingFace</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-genai-langchain.svg', 'Sertifikat Muhammad Haerul — Generative AI with LangChain & HuggingFace')" title="Sertifikat Muhammad Haerul — Generative AI with LangChain & HuggingFace" style="cursor:zoom-in;">
-                <img src="/assets/certificates/cert-genai-langchain.svg" alt="Sertifikat Muhammad Haerul — Generative AI with LangChain & HuggingFace" loading="lazy" decoding="async">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-genai-langchain.svg', 'Sertifikat Muhammad Haerul — Generative AI with LangChain & HuggingFace')"
+                title="Sertifikat Muhammad Haerul — Generative AI with LangChain & HuggingFace" style="cursor:zoom-in;">
+                <img src="/assets/certificates/cert-genai-langchain.svg"
+                  alt="Sertifikat Muhammad Haerul — Generative AI with LangChain & HuggingFace" loading="lazy"
+                  decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2905,7 +3095,8 @@
           <div class="cert-card reveal">
             <div class="cert-card-top">
               <div class="cert-issuer-badge">
-                <span class="cert-issuer-icon has-logo"><img src="/assets/certificates/logo-dicoding.png" alt="Dicoding Logo" class="cert-issuer-img"></span>
+                <span class="cert-issuer-icon has-logo"><img src="/assets/certificates/logo-dicoding.png"
+                    alt="Dicoding Logo" class="cert-issuer-img"></span>
                 <div class="cert-issuer-meta">
                   <span class="cert-issuer-name">Dicoding Indonesia</span>
                   <span class="cert-date">May 2026</span>
@@ -2914,19 +3105,25 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">Prompt Engineering for Software Developers</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-prompt-engineering.svg', 'Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Vanderbilt)')"
-                title="Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Vanderbilt)" style="cursor:zoom-in;">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-prompt-engineering.svg', 'Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Vanderbilt)')"
+                title="Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Vanderbilt)"
+                style="cursor:zoom-in;">
                 <img src="/assets/certificates/cert-prompt-engineering.svg"
-                alt="Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Vanderbilt)"
-                loading="lazy" decoding="async">
+                  alt="Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Vanderbilt)"
+                  loading="lazy" decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2949,7 +3146,8 @@
           <div class="cert-card reveal">
             <div class="cert-card-top">
               <div class="cert-issuer-badge">
-                <span class="cert-issuer-icon has-logo"><img src="/assets/certificates/logo-dts.png" alt="Digital Talent Scholarship Logo" class="cert-issuer-img"></span>
+                <span class="cert-issuer-icon has-logo"><img src="/assets/certificates/logo-dts.png"
+                    alt="Digital Talent Scholarship Logo" class="cert-issuer-img"></span>
                 <div class="cert-issuer-meta">
                   <span class="cert-issuer-name">Digital Talent Scholarship (Kominfo)</span>
                   <span class="cert-date">March 2026</span>
@@ -2958,19 +3156,25 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">Deep Learning — DTS Nasional</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-deep-learning-dts.svg', 'Sertifikat Muhammad Haerul — Deep Learning Digital Talent Scholarship (Kominfo)')"
-                title="Sertifikat Muhammad Haerul — Deep Learning Digital Talent Scholarship (Kominfo)" style="cursor:zoom-in;">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-deep-learning-dts.svg', 'Sertifikat Muhammad Haerul — Deep Learning Digital Talent Scholarship (Kominfo)')"
+                title="Sertifikat Muhammad Haerul — Deep Learning Digital Talent Scholarship (Kominfo)"
+                style="cursor:zoom-in;">
                 <img src="/assets/certificates/cert-deep-learning-dts.svg"
                   alt="Sertifikat Muhammad Haerul — Deep Learning Digital Talent Scholarship (Kominfo)" loading="lazy"
                   decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -2993,7 +3197,8 @@
           <div class="cert-card reveal">
             <div class="cert-card-top">
               <div class="cert-issuer-badge">
-                <span class="cert-issuer-icon has-logo"><img src="/assets/certificates/logo-dts.png" alt="Digital Talent Scholarship Logo" class="cert-issuer-img"></span>
+                <span class="cert-issuer-icon has-logo"><img src="/assets/certificates/logo-dts.png"
+                    alt="Digital Talent Scholarship Logo" class="cert-issuer-img"></span>
                 <div class="cert-issuer-meta">
                   <span class="cert-issuer-name">Digital Talent Scholarship (Kominfo)</span>
                   <span class="cert-date">February 2026</span>
@@ -3002,19 +3207,25 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">Data Science — DTS Nasional</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-data-science-dts.svg', 'Sertifikat Muhammad Haerul — Data Science Digital Talent Scholarship (Kominfo)')"
-                title="Sertifikat Muhammad Haerul — Data Science Digital Talent Scholarship (Kominfo)" style="cursor:zoom-in;">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-data-science-dts.svg', 'Sertifikat Muhammad Haerul — Data Science Digital Talent Scholarship (Kominfo)')"
+                title="Sertifikat Muhammad Haerul — Data Science Digital Talent Scholarship (Kominfo)"
+                style="cursor:zoom-in;">
                 <img src="/assets/certificates/cert-data-science-dts.svg"
                   alt="Sertifikat Muhammad Haerul — Data Science Digital Talent Scholarship (Kominfo)" loading="lazy"
                   decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -3046,19 +3257,25 @@
             </div>
             <div class="cert-card-mid">
               <h4 class="cert-title">SQL (Intermediate)</h4>
-              <div class="cert-card-preview" onclick="openLightbox('/assets/certificates/cert-sql-intermediate.svg', 'Sertifikat Muhammad Haerul — SQL Intermediate Skill Certificate (HackerRank)')"
-                title="Sertifikat Muhammad Haerul — SQL Intermediate Skill Certificate (HackerRank)" style="cursor:zoom-in;">
+              <div class="cert-card-preview"
+                onclick="openLightbox('/assets/certificates/cert-sql-intermediate.svg', 'Sertifikat Muhammad Haerul — SQL Intermediate Skill Certificate (HackerRank)')"
+                title="Sertifikat Muhammad Haerul — SQL Intermediate Skill Certificate (HackerRank)"
+                style="cursor:zoom-in;">
                 <img src="/assets/certificates/cert-sql-intermediate.svg"
                   alt="Sertifikat Muhammad Haerul — SQL Intermediate Skill Certificate (HackerRank)" loading="lazy"
                   decoding="async">
                 <div class="cert-card-overlay">
                   <span class="cert-zoom-btn">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
                     <span class="cert-zoom-text">View Full Image</span>
                   </span>
                 </div>
               </div>
-              
+
             </div>
             <div class="cert-card-bottom">
               <span class="cert-status-tag">
@@ -3312,11 +3529,26 @@
               <div class="t-score-big">9.4</div>
               <div class="t-stars-col">
                 <div class="t-stars" aria-label="5 stars rating">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
                 </div>
                 <span class="t-score-lbl">Average Rating across 9 verified workshop reviews</span>
               </div>
@@ -3337,10 +3569,21 @@
             <div class="feedback-filters" id="feedbackRatingFilters">
               <button type="button" class="f-filter-pill active" data-rating="all">All Reviews (<span
                   id="fbCountAll">9</span>)</button>
-              <button type="button" class="f-filter-pill" data-rating="10"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>10 Only (<span
-                  id="fbCount10">0</span>)</span></button>
-              <button type="button" class="f-filter-pill" data-rating="9"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>9+ (<span id="fbCount9">0</span>)</span></button>
-              <button type="button" class="f-filter-pill" data-rating="8"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>8+ (<span id="fbCount8">0</span>)</span></button>
+              <button type="button" class="f-filter-pill" data-rating="10"><svg width="12" height="12"
+                  viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg><span>10 Only (<span id="fbCount10">0</span>)</span></button>
+              <button type="button" class="f-filter-pill" data-rating="9"><svg width="12" height="12"
+                  viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg><span>9+ (<span id="fbCount9">0</span>)</span></button>
+              <button type="button" class="f-filter-pill" data-rating="8"><svg width="12" height="12"
+                  viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg><span>8+ (<span id="fbCount8">0</span>)</span></button>
             </div>
             <div class="feedback-sort-wrap">
               <span class="feedback-sort-label">Sort:</span>
@@ -3387,7 +3630,8 @@
         <div class="contact-left reveal">
           <span class="section-eyebrow">13 — Contacts</span>
           <h2 class="contact-title section-title">Let's build something that ships.</h2>
-          <p class="contact-sub section-desc">Open to AI Engineering roles, technical consulting, speaking invitations, and
+          <p class="contact-sub section-desc">Open to AI Engineering roles, technical consulting, speaking invitations,
+            and
             collaborations on products that put AI to real, careful use.</p>
 
           <div class="contact-links">
@@ -3454,7 +3698,8 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <a href="#top" class="footer-brand-link" aria-label="Muhammad Haerul" style="text-decoration:none; display:inline-block;">
+        <a href="#top" class="footer-brand-link" aria-label="Muhammad Haerul"
+          style="text-decoration:none; display:inline-block;">
           <span class="footer-brand-text">Muhammad Haerul, S.Kom</span>
         </a>
         <p>AI Full-Stack Engineer &amp; AI Trainer. Building intelligent systems and dependable software architectures

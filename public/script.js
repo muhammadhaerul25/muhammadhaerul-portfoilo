@@ -665,6 +665,30 @@
       }
     }
 
+    // Pillars translation
+    const pBuildTitle = document.querySelector('[data-i18n="about_pillar_build_title"]');
+    const pBuildDesc = document.querySelector('[data-i18n="about_pillar_build_desc"]');
+    const pResearchTitle = document.querySelector('[data-i18n="about_pillar_research_title"]');
+    const pResearchDesc = document.querySelector('[data-i18n="about_pillar_research_desc"]');
+    const pTeachTitle = document.querySelector('[data-i18n="about_pillar_teach_title"]');
+    const pTeachDesc = document.querySelector('[data-i18n="about_pillar_teach_desc"]');
+
+    if (lang === 'id') {
+      if (pBuildTitle) pBuildTitle.textContent = "Bangun";
+      if (pBuildDesc) pBuildDesc.textContent = "Sistem AI End-to-End & Arsitektur Web";
+      if (pResearchTitle) pResearchTitle.textContent = "Riset";
+      if (pResearchDesc) pResearchDesc.textContent = "Applied Deep Learning & Agentic AI";
+      if (pTeachTitle) pTeachTitle.textContent = "Edukasi";
+      if (pTeachDesc) pTeachDesc.textContent = "Workshop AI, Mentorship & Pelatihan";
+    } else {
+      if (pBuildTitle) pBuildTitle.textContent = "Build";
+      if (pBuildDesc) pBuildDesc.textContent = "End-to-End AI Systems & Web Architectures";
+      if (pResearchTitle) pResearchTitle.textContent = "Research";
+      if (pResearchDesc) pResearchDesc.textContent = "Applied Deep Learning & Agentic AI";
+      if (pTeachTitle) pTeachTitle.textContent = "Teach";
+      if (pTeachDesc) pTeachDesc.textContent = "AI Workshops, Mentorship & Training";
+    }
+
     // Education Section
     const eduCfg = secOverrides.education;
     const eduEye = document.querySelector('#education .section-eyebrow');
