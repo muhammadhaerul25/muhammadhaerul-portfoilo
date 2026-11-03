@@ -43,7 +43,7 @@ const DEFAULT_SETTINGS = {
     },
     sections: {
         about: { name: "01 — Profile", eyebrow: "01 — Profile", title: "", subtitle: "" },
-        education: { name: "02 — Education", eyebrow: "02 — Education", title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, software systems, and data science." },
+        education: { name: "02 — Education", eyebrow: "02 — Education", title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, specializing in Artificial Intelligence and Data Science." },
         experiences: { name: "03 — Experiences", eyebrow: "03 — Experiences", title: "Career Journey & Work Experience", subtitle: "Track record in software engineering, artificial intelligence, and technical leadership." },
         skills: { name: "04 — Skills", eyebrow: "04 — Skills", title: "Depth where it matters, range where it helps.", subtitle: "Fluency is shown through delivered systems, not certificates alone — but here's the map." },
         projects: { name: "05 — Featured & Case-Study Projects", eyebrow: "05 — Featured & Case-Study Projects", title: "Featured Projects & AI Systems", subtitle: "Production-ready web applications, deep learning solutions, and agentic prototypes." },

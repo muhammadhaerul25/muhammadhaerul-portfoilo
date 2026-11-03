@@ -41,7 +41,7 @@ async function main() {
     // Ensure sections are English
     val.sections = {
         experiences: { title: "Career Journey & Work Experience", subtitle: "Track record in software engineering, artificial intelligence, and technical leadership." },
-        education: { title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, software systems, and data science." },
+        education: { title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, specializing in Artificial Intelligence and Data Science." },
         projects: { title: "Featured Projects & AI Systems", subtitle: "Production-ready web applications, deep learning solutions, and agentic prototypes." },
         talks: { title: "Speaking Engagements & Talks", subtitle: "Workshops, keynote talks, and hands-on AI bootcamps delivered across organizations." },
         certifications: { title: "Professional Certifications", subtitle: "Verified credentials in Machine Learning, Generative AI, and Cloud Infrastructure." },
