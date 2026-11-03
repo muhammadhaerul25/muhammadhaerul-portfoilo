@@ -1376,7 +1376,7 @@
 
     if (certUrl && certUrl !== posterSrc) {
       pages.push({
-        label: isId ? 'Sertifikat / Plakat' : 'Certificate / Plaque',
+        label: isId ? 'Sertifikat' : 'Certificate',
         url: certUrl,
         type: 'certificate'
       });
@@ -1384,7 +1384,7 @@
 
     if (!pages.length && certUrl) {
       pages.push({
-        label: isId ? 'Sertifikat / Plakat' : 'Certificate / Plaque',
+        label: isId ? 'Sertifikat' : 'Certificate',
         url: certUrl,
         type: 'certificate'
       });
@@ -1467,15 +1467,21 @@
             <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(initialMedia.url)}');"></div>
             <img class="talk-poster-img" src="${escapeHtml(initialMedia.url)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'" decoding="async">
             ${hasMediaTabs ? `
-              <button type="button" class="card-media-nav-btn prev" aria-label="Previous Media" onclick="event.stopPropagation(); window.stepTalkCard('${escapeHtml(t.id)}', -1)" disabled>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              </button>
-              <button type="button" class="card-media-nav-btn next" aria-label="Next Media" onclick="event.stopPropagation(); window.stepTalkCard('${escapeHtml(t.id)}', 1)">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              </button>
-              <div class="card-page-badge" aria-label="Media 1 of ${mediaPages.length}">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span class="card-page-text">1 / ${mediaPages.length}</span>
+              <div class="talk-media-tabs" role="tablist" aria-label="Talk Media Tabs" onclick="event.stopPropagation();">
+                ${mediaPages.map((p, idx) => `
+                  <button type="button"
+                    class="talk-tab-btn ${idx === 0 ? 'active' : ''}"
+                    role="tab"
+                    aria-selected="${idx === 0 ? 'true' : 'false'}"
+                    onclick="event.stopPropagation(); window.switchTalkPage('${escapeHtml(t.id)}', '${escapeHtml(p.url)}', this, '${escapeHtml(t.event)} (${escapeHtml(p.label)})')">
+                    ${p.type === 'certificate' ? `
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    ` : `
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    `}
+                    <span>${escapeHtml(p.label)}</span>
+                  </button>
+                `).join('')}
               </div>
             ` : ''}
             <div class="talk-poster-overlay">

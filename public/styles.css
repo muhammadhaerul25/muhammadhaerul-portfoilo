@@ -7711,9 +7711,15 @@ img {
 
 
 /* ============ CARD MEDIA NAVIGATION & BADGES ============ */
-.cert-page-tabs,
-.talk-media-tabs {
+.cert-page-tabs {
   display: none !important;
+}
+
+.talk-poster-overlay,
+.b-talk-media .b-media-zoom-overlay {
+  align-items: flex-end !important;
+  justify-content: flex-end !important;
+  padding: 12px 14px !important;
 }
 
 .card-media-nav-btn {
