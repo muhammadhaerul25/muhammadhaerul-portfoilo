@@ -3671,21 +3671,23 @@
         </button>
       ` : `<p class="pub-description">${escapeHtml(pubDescText)}</p>`) : '';
 
-      let thumb = p.image_url || p.thumbnail_url || p.cover_image || '';
-      if (!thumb) {
-        if (pubLower.includes('hasanuddin') || pubLower.includes('unhas') || pubLower.includes('ppe')) {
-          thumb = '/assets/images/publications/pub-ppe-detection.jpg';
-        } else if (pubLower.includes('galaxy') || pubLower.includes('pypi')) {
-          thumb = '/assets/images/publications/pub-galaxy-detection.png';
-        } else if (pubLower.includes('medium') || pubLower.includes('multimodal') || pubLower.includes('agent')) {
-          thumb = '/assets/images/publications/pub-multimodal-agents.png';
-        } else {
-          thumb = '/assets/images/publications/pub-ppe-detection.jpg';
-        }
-      }
-
+      const thumb = p.image_url || p.thumbnail_url || p.cover_image || '';
       const zoomLabel = isIndonesian() ? 'Lihat Pratinjau' : 'View Full Preview';
       const zoomHint = isIndonesian() ? 'Klik untuk melihat pratinjau' : 'Click to view full preview';
+
+      const previewHtml = thumb ? `
+          <div class="pub-card-preview"
+            onclick="event.stopPropagation(); window.openLightbox('${escapeHtml(thumb)}', '${escapeHtml(p.title)} — ${escapeHtml(publisher)}');"
+            title="${zoomHint}">
+            <img src="${escapeHtml(thumb)}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async">
+            <div class="pub-media-overlay">
+              <span class="pub-zoom-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>${zoomLabel}</span>
+              </span>
+            </div>
+          </div>
+      ` : '';
 
       return `
         <article class="publication-card reveal in-view" ${link ? `onclick="window.open('${link}','_blank','noopener')"` : ''} style="${link ? 'cursor:pointer;' : ''}">
@@ -3702,17 +3704,7 @@
             <span class="pub-type-pill">Publication</span>
           </div>
 
-          <div class="pub-card-preview"
-            onclick="event.stopPropagation(); window.openLightbox('${escapeHtml(thumb)}', '${escapeHtml(p.title)} — ${escapeHtml(publisher)}');"
-            title="${zoomHint}">
-            <img src="${escapeHtml(thumb)}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async">
-            <div class="pub-media-overlay">
-              <span class="pub-zoom-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <span>${zoomLabel}</span>
-              </span>
-            </div>
-          </div>
+          ${previewHtml}
 
           <div class="pub-card-mid">
             <h3 class="pub-title">${escapeHtml(p.title)}</h3>

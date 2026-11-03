@@ -1655,19 +1655,20 @@
             <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.55; margin-bottom:16px;">${escapeHtml(pubDescText)}</p>
           `) : '';
 
-          const pubLower = ((pub.publisher || '') + ' ' + (pub.title || '')).toLowerCase();
-          let thumb = pub.image_url || pub.thumbnail_url || pub.cover_image || '';
-          if (!thumb) {
-            if (pubLower.includes('hasanuddin') || pubLower.includes('unhas') || pubLower.includes('ppe')) {
-              thumb = '/assets/images/publications/pub-ppe-detection.jpg';
-            } else if (pubLower.includes('galaxy') || pubLower.includes('pypi')) {
-              thumb = '/assets/images/publications/pub-galaxy-detection.png';
-            } else if (pubLower.includes('medium') || pubLower.includes('multimodal') || pubLower.includes('agent')) {
-              thumb = '/assets/images/publications/pub-multimodal-agents.png';
-            } else {
-              thumb = '/assets/images/publications/pub-ppe-detection.jpg';
-            }
-          }
+          const thumb = pub.image_url || pub.thumbnail_url || pub.cover_image || '';
+          const previewHtml = thumb ? `
+                <div class="pub-card-preview b-pub-media"
+                  onclick="event.stopPropagation(); window.openLightbox('${escapeHtml(thumb)}', '${escapeHtml(pub.title)} — ${escapeHtml(pub.publisher || 'Publication')}');"
+                  title="Click to view full preview">
+                  <img src="${escapeHtml(thumb)}" alt="${escapeHtml(pub.title)}" loading="lazy" decoding="async">
+                  <div class="pub-media-overlay">
+                    <span class="pub-zoom-btn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      <span>View Full Image</span>
+                    </span>
+                  </div>
+                </div>
+          ` : '';
 
           return `
             <div class="publication-card reveal in-view" style="display:flex; flex-direction:column; justify-content:space-between; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:24px;">
@@ -1685,17 +1686,7 @@
                   <span style="font-size:0.72rem; font-weight:800; text-transform:uppercase; color:var(--blue); background:var(--blue-soft); padding:3px 9px; border-radius:100px;">Published</span>
                 </div>
 
-                <div class="pub-card-preview b-pub-media"
-                  onclick="event.stopPropagation(); window.openLightbox('${escapeHtml(thumb)}', '${escapeHtml(pub.title)} — ${escapeHtml(pub.publisher || 'Publication')}');"
-                  title="Click to view full preview">
-                  <img src="${escapeHtml(thumb)}" alt="${escapeHtml(pub.title)}" loading="lazy" decoding="async">
-                  <div class="pub-media-overlay">
-                    <span class="pub-zoom-btn">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                      <span>View Full Image</span>
-                    </span>
-                  </div>
-                </div>
+                ${previewHtml}
 
                 <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-primary); line-height:1.3; margin-bottom:10px;">
                   ${escapeHtml(pub.title)}
