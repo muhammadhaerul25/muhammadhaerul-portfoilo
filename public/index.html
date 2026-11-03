@@ -283,7 +283,7 @@
         <canvas id="heroCanvas"></canvas>
         <div class="hero-grid"></div>
         <!-- Ambient Floating Journey Glimpses from Gallery -->
-        <div class="hero-glimpse-stage" id="heroGlimpseStage"></div>
+        <div class="hero-glimpse-stage" id="heroGlimpseStage" style="display:none;"></div>
       </div>
 
       <div class="hero-inner container">
@@ -444,6 +444,7 @@
         <div class="about-col-content">
           <h2 class="section-title about-lead reveal"><span class="about-title-role">AI Full-Stack Specialist</span>
             with <span id="about-exp-heading">4 Years</span> of Experiences</h2>
+          <p class="section-desc about-sub reveal" id="about-section-desc" style="display:none; margin-top:8px; margin-bottom:18px;"></p>
 
           <div class="about-story reveal">
             <p>My work sits at the intersection of AI engineering, applied research, product development, and digital
@@ -469,6 +470,7 @@
         <div class="section-head reveal">
           <span class="section-eyebrow">02 — Education</span>
           <h2 class="section-title">Academic foundation.</h2>
+          <p class="section-desc" id="education-section-desc" style="display:none;"></p>
         </div>
 
         <div class="edu-cards-wrap" id="edu-cards-wrap">
@@ -1878,6 +1880,7 @@
         <div class="section-head reveal">
           <span class="section-eyebrow">08 — Honors &amp; Awards</span>
           <h2 class="section-title">Recognition along the way.</h2>
+          <p class="section-desc" id="awards-section-desc" style="display:none;"></p>
         </div>
 
         <div class="awards-grid" id="awards-grid">
@@ -2606,6 +2609,7 @@
         <div class="section-head reveal">
           <span class="section-eyebrow">09 — Licences &amp; Certifications</span>
           <h2 class="section-title">Continuous, deliberate learning.</h2>
+          <p class="section-desc" id="certifications-section-desc" style="display:none;"></p>
         </div>
 
         <div class="cert-grid" id="cert-grid">
@@ -3116,7 +3120,7 @@
         <div class="section-head reveal">
           <span class="section-eyebrow">10 — Blog &amp; Insights</span>
           <h2 class="section-title">Technical Writings &amp; Case Studies</h2>
-          <p class="section-sub">
+          <p class="section-desc section-sub">
             Articles, system design breakdowns, and practical explorations in Artificial Intelligence, Computer Vision,
             and Modern Full-Stack Architectures.
           </p>
@@ -3385,8 +3389,8 @@
       <div class="container contact-grid">
         <div class="contact-left reveal">
           <span class="section-eyebrow">13 — Contacts</span>
-          <h2 class="contact-title">Let's build something that ships.</h2>
-          <p class="contact-sub">Open to AI Engineering roles, technical consulting, speaking invitations, and
+          <h2 class="contact-title section-title">Let's build something that ships.</h2>
+          <p class="contact-sub section-desc">Open to AI Engineering roles, technical consulting, speaking invitations, and
             collaborations on products that put AI to real, careful use.</p>
 
           <div class="contact-links">

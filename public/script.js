@@ -538,6 +538,7 @@
 
   function applyTranslations(lang) {
     const t = I18N[lang] || I18N.en;
+    const secOverrides = (window.liveSettings && window.liveSettings.sections) || {};
 
     // Navigation Links
     const navMap = {
@@ -606,23 +607,34 @@
     if (heroCtaTouch) heroCtaTouch.textContent = t.hero_cta_touch;
 
     // About Section
+    const aboutCfg = secOverrides.about;
     const aboutEye = document.querySelector('#about .section-eyebrow');
-    if (aboutEye) aboutEye.textContent = t.about_eyebrow;
+    if (aboutEye) {
+      if (aboutCfg && (aboutCfg.name || aboutCfg.eyebrow)) {
+        aboutEye.textContent = aboutCfg.name || aboutCfg.eyebrow;
+      } else {
+        aboutEye.textContent = t.about_eyebrow;
+      }
+    }
 
     const aboutTitle = document.querySelector('#about .section-title');
     if (aboutTitle) {
-      const roleHeading = aboutTitle.querySelector('.about-title-role');
-      const yearsHeading = document.getElementById('about-exp-heading');
-      if (roleHeading && yearsHeading) {
-        const role = roleHeading.textContent || 'AI Full-Stack Engineer';
-        const exp = yearsHeading.textContent || (lang === 'id' ? '4 Tahun' : '4 Years');
-        if (lang === 'id') {
-          aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> dengan Pengalaman <span id="about-exp-heading">${escapeHtml(exp)}</span>`;
-        } else {
-          aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> with <span id="about-exp-heading">${escapeHtml(exp)}</span> of Experiences`;
-        }
+      if (aboutCfg && aboutCfg.title) {
+        // Preserved for applyPageSettings
       } else {
-        aboutTitle.textContent = t.about_title;
+        const roleHeading = aboutTitle.querySelector('.about-title-role');
+        const yearsHeading = document.getElementById('about-exp-heading');
+        if (roleHeading && yearsHeading) {
+          const role = roleHeading.textContent || 'AI Full-Stack Engineer';
+          const exp = yearsHeading.textContent || (lang === 'id' ? '4 Tahun' : '4 Years');
+          if (lang === 'id') {
+            aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> dengan Pengalaman <span id="about-exp-heading">${escapeHtml(exp)}</span>`;
+          } else {
+            aboutTitle.innerHTML = `<span class="about-title-role">${escapeHtml(role)}</span> with <span id="about-exp-heading">${escapeHtml(exp)}</span> of Experiences`;
+          }
+        } else {
+          aboutTitle.textContent = t.about_title;
+        }
       }
     }
 
@@ -659,75 +671,86 @@
     }
 
     // Education Section
+    const eduCfg = secOverrides.education;
     const eduEye = document.querySelector('#education .section-eyebrow');
-    if (eduEye) eduEye.textContent = t.edu_eyebrow;
+    if (eduEye) eduEye.textContent = (eduCfg && (eduCfg.name || eduCfg.eyebrow)) ? (eduCfg.name || eduCfg.eyebrow) : t.edu_eyebrow;
     const eduTitle = document.querySelector('#education .section-title');
-    if (eduTitle) eduTitle.textContent = t.edu_title;
+    if (eduTitle) eduTitle.textContent = (eduCfg && eduCfg.title) ? eduCfg.title : t.edu_title;
 
     // Experience Section
+    const expCfg = secOverrides.experiences || secOverrides.experience;
     const expEye = document.querySelector('#experience .section-eyebrow');
-    if (expEye) expEye.textContent = t.exp_eyebrow;
+    if (expEye) expEye.textContent = (expCfg && (expCfg.name || expCfg.eyebrow)) ? (expCfg.name || expCfg.eyebrow) : t.exp_eyebrow;
     const expTitle = document.querySelector('#experience .section-title');
-    if (expTitle) expTitle.textContent = t.exp_title;
+    if (expTitle) expTitle.textContent = (expCfg && expCfg.title) ? expCfg.title : t.exp_title;
 
     // Skills Section
+    const skillsCfg = secOverrides.skills;
     const skillsEye = document.querySelector('#skills .section-eyebrow');
-    if (skillsEye) skillsEye.textContent = t.skills_eyebrow;
+    if (skillsEye) skillsEye.textContent = (skillsCfg && (skillsCfg.name || skillsCfg.eyebrow)) ? (skillsCfg.name || skillsCfg.eyebrow) : t.skills_eyebrow;
     const skillsTitle = document.querySelector('#skills .section-title');
-    if (skillsTitle) skillsTitle.textContent = t.skills_title;
+    if (skillsTitle) skillsTitle.textContent = (skillsCfg && skillsCfg.title) ? skillsCfg.title : t.skills_title;
 
     // Projects Section
+    const projCfg = secOverrides.projects;
     const projEye = document.querySelector('#projects .section-eyebrow');
-    if (projEye) projEye.textContent = t.projects_eyebrow;
+    if (projEye) projEye.textContent = (projCfg && (projCfg.name || projCfg.eyebrow)) ? (projCfg.name || projCfg.eyebrow) : t.projects_eyebrow;
     const projTitle = document.querySelector('#projects .section-title');
-    if (projTitle) projTitle.textContent = t.projects_title;
+    if (projTitle) projTitle.textContent = (projCfg && projCfg.title) ? projCfg.title : t.projects_title;
 
     // Publications Section
+    const pubCfg = secOverrides.publications;
     const pubEye = document.querySelector('#publications .section-eyebrow');
-    if (pubEye) pubEye.textContent = t.pubs_eyebrow;
+    if (pubEye) pubEye.textContent = (pubCfg && (pubCfg.name || pubCfg.eyebrow)) ? (pubCfg.name || pubCfg.eyebrow) : t.pubs_eyebrow;
     const pubTitle = document.querySelector('#publications .section-title');
-    if (pubTitle) pubTitle.textContent = t.pubs_title;
+    if (pubTitle) pubTitle.textContent = (pubCfg && pubCfg.title) ? pubCfg.title : t.pubs_title;
     const pubDesc = document.querySelector('#publications .section-desc');
-    if (pubDesc) pubDesc.textContent = t.pubs_desc;
+    if (pubDesc && (!pubCfg || !pubCfg.subtitle)) pubDesc.textContent = t.pubs_desc;
     document.querySelectorAll('#publications .pub-zoom-btn span').forEach(el => {
       el.textContent = lang === 'id' ? 'Lihat Pratinjau' : 'View Full Preview';
     });
 
     // Talks Section
+    const talksCfg = secOverrides.talks;
     const talksEye = document.querySelector('#talks .section-eyebrow');
-    if (talksEye) talksEye.textContent = t.talks_eyebrow;
+    if (talksEye) talksEye.textContent = (talksCfg && (talksCfg.name || talksCfg.eyebrow)) ? (talksCfg.name || talksCfg.eyebrow) : t.talks_eyebrow;
     const talksTitle = document.querySelector('#talks .section-title');
-    if (talksTitle) talksTitle.textContent = t.talks_title;
+    if (talksTitle) talksTitle.textContent = (talksCfg && talksCfg.title) ? talksCfg.title : t.talks_title;
 
     // Awards Section
+    const awardsCfg = secOverrides.awards;
     const awardsEye = document.querySelector('#awards .section-eyebrow');
-    if (awardsEye) awardsEye.textContent = t.awards_eyebrow;
+    if (awardsEye) awardsEye.textContent = (awardsCfg && (awardsCfg.name || awardsCfg.eyebrow)) ? (awardsCfg.name || awardsCfg.eyebrow) : t.awards_eyebrow;
     const awardsTitle = document.querySelector('#awards .section-title');
-    if (awardsTitle) awardsTitle.textContent = t.awards_title;
+    if (awardsTitle) awardsTitle.textContent = (awardsCfg && awardsCfg.title) ? awardsCfg.title : t.awards_title;
 
     // Certifications Section
+    const certsCfg = secOverrides.certifications;
     const certsEye = document.querySelector('#certifications .section-eyebrow');
-    if (certsEye) certsEye.textContent = t.certs_eyebrow;
+    if (certsEye) certsEye.textContent = (certsCfg && (certsCfg.name || certsCfg.eyebrow)) ? (certsCfg.name || certsCfg.eyebrow) : t.certs_eyebrow;
     const certsTitle = document.querySelector('#certifications .section-title');
-    if (certsTitle) certsTitle.textContent = t.certs_title;
+    if (certsTitle) certsTitle.textContent = (certsCfg && certsCfg.title) ? certsCfg.title : t.certs_title;
 
     // Blog Section
+    const blogCfg = secOverrides.blogs || secOverrides.blog;
     const blogEye = document.querySelector('#blog .section-eyebrow');
-    if (blogEye) blogEye.textContent = t.blog_eyebrow;
+    if (blogEye) blogEye.textContent = (blogCfg && (blogCfg.name || blogCfg.eyebrow)) ? (blogCfg.name || blogCfg.eyebrow) : t.blog_eyebrow;
     const blogTitle = document.querySelector('#blog .section-title');
-    if (blogTitle) blogTitle.textContent = t.blog_title;
+    if (blogTitle) blogTitle.textContent = (blogCfg && blogCfg.title) ? blogCfg.title : t.blog_title;
 
     // Gallery Section
+    const galCfg = secOverrides.gallery;
     const galEye = document.querySelector('#gallery .section-eyebrow');
-    if (galEye) galEye.textContent = t.gallery_eyebrow;
+    if (galEye) galEye.textContent = (galCfg && (galCfg.name || galCfg.eyebrow)) ? (galCfg.name || galCfg.eyebrow) : t.gallery_eyebrow;
     const galTitle = document.querySelector('#gallery .section-title');
-    if (galTitle) galTitle.textContent = t.gallery_title;
+    if (galTitle) galTitle.textContent = (galCfg && galCfg.title) ? galCfg.title : t.gallery_title;
 
     // Feedbacks Section
+    const fbCfg = secOverrides.testimonials || secOverrides.feedback;
     const fbEye = document.querySelector('#testimonials .section-eyebrow');
-    if (fbEye) fbEye.textContent = t.feedback_eyebrow;
+    if (fbEye) fbEye.textContent = (fbCfg && (fbCfg.name || fbCfg.eyebrow)) ? (fbCfg.name || fbCfg.eyebrow) : t.feedback_eyebrow;
     const fbTitle = document.querySelector('#testimonials .section-title');
-    if (fbTitle) fbTitle.textContent = t.feedback_title;
+    if (fbTitle) fbTitle.textContent = (fbCfg && fbCfg.title) ? fbCfg.title : t.feedback_title;
     const fbDesc = document.querySelector('#testimonials .feedback-cta-desc');
     if (fbDesc) fbDesc.textContent = t.feedback_btn_desc;
     const fbBtn = document.getElementById('btnGiveFeedback');
@@ -737,10 +760,11 @@
     }
 
     // Contact Section
+    const conCfg = secOverrides.contact;
     const conEye = document.querySelector('#contact .section-eyebrow');
-    if (conEye) conEye.textContent = t.contact_eyebrow;
-    const conTitle = document.querySelector('#contact .section-title');
-    if (conTitle) conTitle.textContent = t.contact_title;
+    if (conEye) conEye.textContent = (conCfg && (conCfg.name || conCfg.eyebrow)) ? (conCfg.name || conCfg.eyebrow) : t.contact_eyebrow;
+    const conTitle = document.querySelector('#contact .section-title, #contact .contact-title');
+    if (conTitle) conTitle.textContent = (conCfg && conCfg.title) ? conCfg.title : t.contact_title;
 
     const cfName = document.getElementById('cf-name');
     if (cfName) cfName.placeholder = t.contact_name_ph;
@@ -2806,6 +2830,7 @@
     const startIndex = (currentAwardPage - 1) * AWARDS_PER_PAGE;
     const endIndex = Math.min(startIndex + AWARDS_PER_PAGE, totalAwards);
     const displayedAwards = items.slice(startIndex, endIndex);
+    const isId = isIndonesian();
 
     awardsGrid.innerHTML = displayedAwards.map(aw => {
       const color = aw.badge_color || 'blue';
@@ -3766,6 +3791,7 @@
 
   /* ============ HERO AMBIENT JOURNEY GLIMPSES ============ */
   let heroGlimpseTimer = null;
+  let heroGlimpseInitialTimeout = null;
   let heroGlimpseIndex = 0;
   let heroGlimpseSlotIndex = 0;
 
@@ -3780,18 +3806,24 @@
 
     const isEnabled = (slideCfg.enabled !== undefined)
       ? Boolean(slideCfg.enabled)
-      : (heroCfg.showGlimpse !== false);
+      : (heroCfg.showGlimpse === true);
 
     if (!isEnabled) {
       if (heroGlimpseTimer) {
         clearInterval(heroGlimpseTimer);
         heroGlimpseTimer = null;
       }
+      if (heroGlimpseInitialTimeout) {
+        clearTimeout(heroGlimpseInitialTimeout);
+        heroGlimpseInitialTimeout = null;
+      }
       stage.innerHTML = '';
       stage.style.display = 'none';
+      stage.style.setProperty('display', 'none', 'important');
       return;
     }
     stage.style.display = '';
+    stage.style.removeProperty('display');
 
     if (heroGlimpseTimer) return; // already running
 
@@ -3806,6 +3838,26 @@
     ];
 
     function spawnGlimpse() {
+      // Re-verify if slideshow was disabled in runtime settings
+      const curSlideCfg = (window.liveSettings && window.liveSettings.imageSlideshow) ||
+        (bootstrapData && bootstrapData.settings && bootstrapData.settings.imageSlideshow);
+      const curHeroCfg = (window.liveSettings && window.liveSettings.hero) ||
+        (bootstrapData && bootstrapData.settings && bootstrapData.settings.hero);
+      const isCurEnabled = (curSlideCfg && curSlideCfg.enabled !== undefined)
+        ? Boolean(curSlideCfg.enabled)
+        : (curHeroCfg && curHeroCfg.showGlimpse === true);
+
+      if (!isCurEnabled) {
+        if (heroGlimpseTimer) { clearInterval(heroGlimpseTimer); heroGlimpseTimer = null; }
+        if (heroGlimpseInitialTimeout) { clearTimeout(heroGlimpseInitialTimeout); heroGlimpseInitialTimeout = null; }
+        if (stage) {
+          stage.innerHTML = '';
+          stage.style.display = 'none';
+          stage.style.setProperty('display', 'none', 'important');
+        }
+        return;
+      }
+
       if (document.hidden || window.innerWidth < 900) return;
       const hero = document.getElementById('hero');
       if (hero) {
@@ -3825,7 +3877,10 @@
       }
 
       if (!activeItems.length) {
-        if (!isEnabled) return;
+        if (!isCurEnabled) return;
+        if (configuredActiveIds && configuredActiveIds.length > 0) return;
+        if (slideCfg.source === 'selected') return;
+        // Fallback only if feature is explicitly enabled and no items filter configured
         activeItems = [
           {
             title: 'Build with AI Keynote',
@@ -3895,7 +3950,8 @@
       }
     }
 
-    setTimeout(spawnGlimpse, 1400);
+    if (heroGlimpseInitialTimeout) clearTimeout(heroGlimpseInitialTimeout);
+    heroGlimpseInitialTimeout = setTimeout(spawnGlimpse, 1400);
     const intervalSec = Number(slideCfg.intervalSeconds) || 4.2;
     heroGlimpseTimer = setInterval(spawnGlimpse, intervalSec * 1000);
 
@@ -3977,6 +4033,7 @@
   // Apply CMS Page Customizer settings (General, Hero, Sections, Footer)
   function applyPageSettings(settings) {
     if (!settings) return;
+    window.liveSettings = settings;
 
     if (settings.general) {
       if (settings.general.siteTitle) document.title = settings.general.siteTitle;
@@ -3998,7 +4055,6 @@
     }
 
     if (settings.hero || settings.imageSlideshow) {
-      window.liveSettings = settings;
       if (settings.hero) window.liveHeroSettings = settings.hero;
       const heroSec = document.getElementById('hero');
       if (heroSec && settings.hero) {
@@ -4054,19 +4110,27 @@
       const stage = document.getElementById('heroGlimpseStage');
       const isSlideshowActive = (settings.imageSlideshow && settings.imageSlideshow.enabled !== undefined)
         ? Boolean(settings.imageSlideshow.enabled)
-        : (settings.hero && settings.hero.showGlimpse !== false);
+        : (settings.hero && settings.hero.showGlimpse === true);
 
       if (!isSlideshowActive) {
         if (heroGlimpseTimer) {
           clearInterval(heroGlimpseTimer);
           heroGlimpseTimer = null;
         }
+        if (heroGlimpseInitialTimeout) {
+          clearTimeout(heroGlimpseInitialTimeout);
+          heroGlimpseInitialTimeout = null;
+        }
         if (stage) {
           stage.innerHTML = '';
           stage.style.display = 'none';
+          stage.style.setProperty('display', 'none', 'important');
         }
       } else {
-        if (stage) stage.style.display = '';
+        if (stage) {
+          stage.style.display = '';
+          stage.style.removeProperty('display');
+        }
         if (!heroGlimpseTimer) {
           initHeroJourneyGlimpses();
         }
@@ -4074,35 +4138,84 @@
     }
 
     if (settings.sections) {
+      const secKeyMap = {
+        'about': ['#about'],
+        'education': ['#education'],
+        'experiences': ['#experience', '#experiences'],
+        'experience': ['#experience', '#experiences'],
+        'skills': ['#skills'],
+        'projects': ['#projects'],
+        'publications': ['#publications'],
+        'talks': ['#talks'],
+        'awards': ['#awards'],
+        'certifications': ['#certifications'],
+        'blogs': ['#blog', '#blogs'],
+        'blog': ['#blog', '#blogs'],
+        'gallery': ['#gallery'],
+        'testimonials': ['#testimonials', '#feedback', '#feedbacks'],
+        'contact': ['#contact']
+      };
+
       Object.keys(settings.sections).forEach(secKey => {
         const secCfg = settings.sections[secKey];
         if (!secCfg) return;
-        let secEl = document.getElementById(secKey);
-        if (!secEl) {
-          if (secKey === 'experiences') secEl = document.getElementById('experience');
-          if (secKey === 'experience') secEl = document.getElementById('experiences');
-          if (secKey === 'blogs') secEl = document.getElementById('blog');
-          if (secKey === 'blog') secEl = document.getElementById('blogs');
+
+        const selectors = secKeyMap[secKey] || ['#' + secKey];
+        let secEl = null;
+        for (const sel of selectors) {
+          secEl = document.querySelector(sel);
+          if (secEl) break;
         }
-        if (secEl) {
-          const eyebrowEl = secEl.querySelector('.section-eyebrow, .eyebrow');
-          const secName = secCfg.name || secCfg.eyebrow;
-          if (eyebrowEl && secName) {
-            eyebrowEl.textContent = secName;
-          }
-          const titleEl = secEl.querySelector('.section-title');
-          if (titleEl && secCfg.title) {
+        if (!secEl) return;
+
+        // 1. Eyebrow (Nomor & Nama Section)
+        const eyebrowEl = secEl.querySelector('.section-eyebrow, .about-eyebrow, .eyebrow');
+        const secName = (secCfg.name !== undefined && secCfg.name !== '') ? secCfg.name : secCfg.eyebrow;
+        if (eyebrowEl && secName) {
+          eyebrowEl.textContent = secName;
+          eyebrowEl.style.removeProperty('display');
+        }
+
+        // 2. Title (Judul Section)
+        const titleEl = secEl.querySelector('.section-title, .contact-title, .about-lead');
+        if (titleEl && secCfg.title) {
+          if (secKey === 'about') {
             const roleEl = titleEl.querySelector('.about-title-role');
-            if (secKey === 'about' && roleEl) {
+            const yearsEl = titleEl.querySelector('#about-exp-heading');
+            const titleLower = secCfg.title.toLowerCase();
+            if (titleLower.includes('with') || titleLower.includes('dengan') || titleLower.includes('experience') || titleLower.includes('pengalaman')) {
+              titleEl.innerHTML = `<span class="about-title-role">${escapeHtml(secCfg.title)}</span>`;
+            } else if (secCfg.title === 'AI Full-Stack Specialist' || secCfg.title === 'AI Full-Stack Engineer') {
+              if (roleEl) roleEl.textContent = secCfg.title;
+            } else if (roleEl && !yearsEl) {
               roleEl.textContent = secCfg.title;
             } else {
-              titleEl.textContent = secCfg.title;
+              titleEl.innerHTML = `<span class="about-title-role">${escapeHtml(secCfg.title)}</span>`;
+            }
+          } else {
+            titleEl.textContent = secCfg.title;
+          }
+          titleEl.style.removeProperty('display');
+        }
+
+        // 3. Subtitle / Description (Deskripsi / Sub-judul)
+        let descEl = secEl.querySelector('.section-desc, .section-sub, .contact-sub, .about-sub');
+        if (secCfg.subtitle !== undefined && secCfg.subtitle !== null && secCfg.subtitle.trim() !== '') {
+          if (!descEl) {
+            const headEl = secEl.querySelector('.section-head, .contact-left, .about-col-content');
+            if (headEl) {
+              descEl = document.createElement('p');
+              descEl.className = 'section-desc';
+              headEl.appendChild(descEl);
             }
           }
-          const descEl = secEl.querySelector('.section-desc');
-          if (descEl && secCfg.subtitle) {
+          if (descEl) {
             descEl.textContent = secCfg.subtitle;
+            descEl.style.display = 'block';
+            descEl.style.removeProperty('display');
           }
+        } else if (descEl && (descEl.id.includes('section-desc') || descEl.classList.contains('about-sub'))) {
+          descEl.style.display = 'none';
         }
       });
     }
@@ -4146,7 +4259,6 @@
     setupProjectFilters();
     setupGalleryFilters();
     setupFeedbackFilters();
-    initHeroJourneyGlimpses();
 
     try {
       // 1. Fast-path: Single consolidated request (<2ms response from in-memory cache)
