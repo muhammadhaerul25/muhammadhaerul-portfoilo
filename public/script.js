@@ -1461,27 +1461,24 @@
           <div class="talk-poster-wrap" id="talk-prev-${escapeHtml(t.id)}"
             data-active-src="${escapeHtml(initialMedia.url)}"
             data-active-title="${escapeHtml(t.event)}${hasMediaTabs ? ' (' + escapeHtml(initialMedia.label) + ')' : ''}"
+            data-pages="${escapeHtml(JSON.stringify(mediaPages))}"
+            data-page-index="0"
+            data-talk-event="${escapeHtml(t.event)}"
             onclick="window.openLightbox(this.getAttribute('data-active-src') || '${escapeHtml(posterImg)}', this.getAttribute('data-active-title') || '${escapeHtml(t.event)}')"
             title="${isId ? 'Klik untuk memperbesar gambar' : 'Click to view full image'}"
             style="cursor:zoom-in;">
             <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(initialMedia.url)}');"></div>
             <img class="talk-poster-img" src="${escapeHtml(initialMedia.url)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'" decoding="async">
             ${hasMediaTabs ? `
-              <div class="talk-media-tabs" role="tablist" aria-label="Talk Media Tabs" onclick="event.stopPropagation();">
-                ${mediaPages.map((p, idx) => `
-                  <button type="button"
-                    class="talk-tab-btn ${idx === 0 ? 'active' : ''}"
-                    role="tab"
-                    aria-selected="${idx === 0 ? 'true' : 'false'}"
-                    onclick="event.stopPropagation(); window.switchTalkPage('${escapeHtml(t.id)}', '${escapeHtml(p.url)}', this, '${escapeHtml(t.event)} (${escapeHtml(p.label)}')">
-                    ${p.type === 'certificate' ? `
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    ` : `
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                    `}
-                    <span>${escapeHtml(p.label)}</span>
-                  </button>
-                `).join('')}
+              <button type="button" class="card-media-nav-btn prev" aria-label="Previous Media" onclick="event.stopPropagation(); window.stepTalkCard('${escapeHtml(t.id)}', -1)" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="card-media-nav-btn next" aria-label="Next Media" onclick="event.stopPropagation(); window.stepTalkCard('${escapeHtml(t.id)}', 1)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="card-page-badge" aria-label="Media 1 of ${mediaPages.length}">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span class="card-page-text">1 / ${mediaPages.length}</span>
               </div>
             ` : ''}
             <div class="talk-poster-overlay">
@@ -2667,30 +2664,27 @@
 
       const mediaHtml = hasPreview ? `
         <div class="cert-card-preview-wrap">
-          ${pages.length > 1 ? `
-            <div class="cert-page-tabs" role="tablist" aria-label="Certificate Pages">
-              ${pages.map((p, idx) => `
-                <button type="button"
-                  class="cert-tab-btn ${idx === 0 ? 'active' : ''}"
-                  role="tab"
-                  aria-selected="${idx === 0 ? 'true' : 'false'}"
-                  onclick="event.stopPropagation(); switchCertPage('${escapeHtml(cert.id)}', '${escapeHtml(p.url)}', this, 'Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(p.label)}')">
-                  ${p.type === 'curriculum' ? `
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                  ` : `
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                  `}
-                  <span>${escapeHtml(p.label)}</span>
-                </button>
-              `).join('')}
-            </div>
-          ` : ''}
           <div class="cert-card-preview" id="cert-prev-${escapeHtml(cert.id)}"
             data-active-title="${isId ? 'Sertifikat' : 'Certificate'} — ${escapeHtml(cert.title)}${pages.length > 1 ? ' (' + escapeHtml(initialPage.label) + ')' : ''}"
+            data-pages="${escapeHtml(JSON.stringify(pages))}"
+            data-page-index="0"
+            data-cert-title="${escapeHtml(cert.title)}"
             onclick="openLightbox(this.querySelector('img').src, this.getAttribute('data-active-title') || '${escapeHtml(cert.title)}')"
             title="${isId ? 'Klik untuk memperbesar bukti sertifikat' : 'Click to view full certificate proof'}"
             style="cursor:zoom-in;">
             <img src="${escapeHtml(initialPage.url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)} (${escapeHtml(cert.issuer || '')})" title="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" onerror="this.parentElement.style.display='none'" decoding="async">
+            ${pages.length > 1 ? `
+              <button type="button" class="card-media-nav-btn prev" aria-label="Previous Page" onclick="event.stopPropagation(); window.stepCertCard('${escapeHtml(cert.id)}', -1)" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="card-media-nav-btn next" aria-label="Next Page" onclick="event.stopPropagation(); window.stepCertCard('${escapeHtml(cert.id)}', 1)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="card-page-badge" aria-label="Page 1 of ${pages.length}">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span class="card-page-text">1 / ${pages.length}</span>
+              </div>
+            ` : ''}
             <div class="cert-card-overlay">
               <span class="cert-zoom-btn">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -2738,23 +2732,18 @@
           <div class="cert-card-top">
             <div class="cert-issuer-badge">
               <span class="${issuerIconClass}" style="--accent:${escapeHtml(accent)}">${issuerIconHtml}</span>
-              <div class="cert-issuer-meta">
-                <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
-                <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
-              </div>
+              <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
             </div>
+            <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
           </div>
           <div class="cert-card-mid">
             <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
             ${mediaHtml}
           </div>
           <div class="cert-card-bottom">
-            <span class="cert-status-tag">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              ${isId ? 'Kredensial Terverifikasi' : 'Credential Verified'}
-            </span>
+            ${cert.credential_id ? `<span class="cert-card-id font-mono">#${escapeHtml(cert.credential_id)}</span>` : '<span></span>'}
             ${cert.credential_url ? `
-              <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none; color:inherit;">
+              <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none;">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 ${isId ? 'Lihat Kredensial' : 'View Credential'}
               </a>
@@ -2891,15 +2880,15 @@
 
           <div class="award-card-body">
             <div>
-              ${aw.metric_tag ? `
-                <div class="award-badge-top-wrap" style="margin-bottom: 8px;">
-                  <span class="award-metric-tag ${escapeHtml(color)} ${getYearBadgeClass(aw.metric_tag)}">${escapeHtml(aw.metric_tag)}</span>
+              <h3 class="award-title" style="margin-top: 0; margin-bottom: 8px;">${escapeHtml(aw.title)}</h3>
+              <div class="award-issuer-row">
+                <div class="award-issuer-left">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0; opacity:0.8;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                  <span>${escapeHtml(aw.issuer)}</span>
                 </div>
-              ` : ''}
-              <h3 class="award-title" style="margin-top: 0; margin-bottom: 6px;">${escapeHtml(aw.title)}</h3>
-              <div class="award-issuer-row" style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 0.83rem; color: var(--ink-muted); font-weight: 500;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0; opacity:0.8;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                <span>${escapeHtml(aw.issuer)}</span>
+                ${aw.metric_tag ? `
+                  <span class="award-metric-tag ${escapeHtml(color)} ${getYearBadgeClass(aw.metric_tag)}">${escapeHtml(aw.metric_tag)}</span>
+                ` : ''}
               </div>
             </div>
           </div>
@@ -4549,3 +4538,127 @@
   })();
 
 })();
+
+  // Multi-page card navigation handlers
+  window.stepCertCard = function (certId, delta) {
+    const container = document.getElementById(`cert-prev-${certId}`);
+    if (!container) return;
+    const rawPages = container.getAttribute('data-pages');
+    if (!rawPages) return;
+    let pages = [];
+    try {
+      pages = JSON.parse(rawPages);
+    } catch (e) {
+      return;
+    }
+    if (!Array.isArray(pages) || pages.length <= 1) return;
+
+    let currentIndex = parseInt(container.getAttribute('data-page-index') || '0', 10);
+    let newIndex = currentIndex + delta;
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= pages.length) newIndex = pages.length - 1;
+    if (newIndex === currentIndex) return;
+
+    container.setAttribute('data-page-index', newIndex);
+
+    const targetPage = pages[newIndex];
+    const img = container.querySelector('img');
+    const certTitle = container.getAttribute('data-cert-title') || '';
+    const isId = typeof isIndonesian === 'function' ? isIndonesian() : false;
+    const pageTitle = `${isId ? 'Sertifikat' : 'Certificate'} — ${certTitle} (${isId ? 'Halaman' : 'Page'} ${newIndex + 1} / ${pages.length})`;
+
+    if (img) {
+      img.style.opacity = '0.35';
+      img.style.filter = 'blur(3px)';
+      img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+      img.src = targetPage.url;
+      img.alt = pageTitle;
+      img.title = pageTitle;
+      img.onload = () => {
+        img.style.opacity = '1';
+        img.style.filter = 'none';
+      };
+    }
+    container.setAttribute('data-active-title', pageTitle);
+
+    const badgeText = container.querySelector('.card-page-text');
+    if (badgeText) {
+      badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+    }
+
+    const prevBtn = container.querySelector('.card-media-nav-btn.prev');
+    const nextBtn = container.querySelector('.card-media-nav-btn.next');
+    if (prevBtn) prevBtn.disabled = (newIndex === 0);
+    if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
+
+    const zoomText = container.querySelector('.cert-zoom-text');
+    if (zoomText) {
+      zoomText.textContent = targetPage.type === 'curriculum'
+        ? (isId ? 'Lihat Kurikulum' : 'View Curriculum')
+        : (isId ? `Lihat Bukti Halaman ${newIndex + 1}` : `View Certificate Proof (p. ${newIndex + 1})`);
+    }
+  };
+
+  window.stepTalkCard = function (talkId, delta) {
+    const wrap = document.getElementById(`talk-prev-${talkId}`);
+    if (!wrap) return;
+    const rawPages = wrap.getAttribute('data-pages');
+    if (!rawPages) return;
+    let pages = [];
+    try {
+      pages = JSON.parse(rawPages);
+    } catch (e) {
+      return;
+    }
+    if (!Array.isArray(pages) || pages.length <= 1) return;
+
+    let currentIndex = parseInt(wrap.getAttribute('data-page-index') || '0', 10);
+    let newIndex = currentIndex + delta;
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= pages.length) newIndex = pages.length - 1;
+    if (newIndex === currentIndex) return;
+
+    wrap.setAttribute('data-page-index', newIndex);
+
+    const targetMedia = pages[newIndex];
+    const eventTitle = wrap.getAttribute('data-talk-event') || '';
+    const isId = typeof isIndonesian === 'function' ? isIndonesian() : false;
+    const mediaTitle = `${eventTitle} (${targetMedia.label || (isId ? 'Halaman ' + (newIndex + 1) : 'Page ' + (newIndex + 1))})`;
+
+    const img = wrap.querySelector('.talk-poster-img');
+    const backdrop = wrap.querySelector('.talk-poster-backdrop');
+    if (img) {
+      img.style.opacity = '0.35';
+      img.style.filter = 'blur(4px)';
+      img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+      img.src = targetMedia.url;
+      img.alt = `Muhammad Haerul speaking at ${mediaTitle}`;
+      img.title = mediaTitle;
+      img.onload = () => {
+        img.style.opacity = '1';
+        img.style.filter = 'none';
+      };
+    }
+    if (backdrop) {
+      backdrop.style.backgroundImage = `url('${targetMedia.url}')`;
+    }
+    wrap.setAttribute('data-active-src', targetMedia.url);
+    wrap.setAttribute('data-active-title', mediaTitle);
+
+    const badgeText = wrap.querySelector('.card-page-text');
+    if (badgeText) {
+      badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+    }
+
+    const prevBtn = wrap.querySelector('.card-media-nav-btn.prev');
+    const nextBtn = wrap.querySelector('.card-media-nav-btn.next');
+    if (prevBtn) prevBtn.disabled = (newIndex === 0);
+    if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
+
+    const zoomText = wrap.querySelector('.talk-zoom-text');
+    if (zoomText) {
+      zoomText.textContent = targetMedia.type === 'certificate'
+        ? (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof')
+        : (isId ? 'Lihat Gambar Lengkap' : 'View Full Image');
+    }
+  };

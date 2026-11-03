@@ -1226,31 +1226,28 @@
 
           return `
             <div class="b-talk-card reveal in-view">
-              ${hasMediaTabs ? `
-                <div class="cert-page-tabs" role="tablist" aria-label="Talk Media Pages" style="margin-bottom:8px;">
-                  ${pages.map((p, idx) => `
-                    <button type="button"
-                      class="cert-tab-btn ${idx === 0 ? 'active' : ''}"
-                      role="tab"
-                      aria-selected="${idx === 0 ? 'true' : 'false'}"
-                      onclick="event.stopPropagation(); switchBrowseTalkPage('${escapeHtml(t.id)}', '${escapeHtml(p.url)}', this, '${escapeHtml(t.event)} (${escapeHtml(p.label)}')">
-                      ${p.type === 'certificate' ? `
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                      ` : `
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                      `}
-                      <span>${escapeHtml(p.label)}</span>
-                    </button>
-                  `).join('')}
-                </div>
-              ` : ''}
               <div class="b-talk-media" id="browse-talk-prev-${escapeHtml(t.id)}"
                 data-active-title="${escapeHtml(t.event)}${hasMediaTabs ? ' (' + escapeHtml(initialMedia.label) + ')' : ''}"
+                data-pages="${escapeHtml(JSON.stringify(pages))}"
+                data-page-index="0"
+                data-talk-event="${escapeHtml(t.event)}"
                 onclick="openLightbox(this.querySelector('.b-talk-main-img').src, this.getAttribute('data-active-title') || '${escapeHtml(t.event)}')"
                 title="Click to view full image"
                 style="cursor:zoom-in;">
                 <img class="b-talk-blur-bg" src="${escapeHtml(initialMedia.url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
                 <img class="b-talk-main-img" src="${escapeHtml(initialMedia.url)}" alt="${escapeHtml(t.event)}" loading="lazy" decoding="async">
+                ${hasMediaTabs ? `
+                  <button type="button" class="card-media-nav-btn prev" aria-label="Previous Media" onclick="event.stopPropagation(); window.stepBrowseTalkCard('${escapeHtml(t.id)}', -1)" disabled>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  </button>
+                  <button type="button" class="card-media-nav-btn next" aria-label="Next Media" onclick="event.stopPropagation(); window.stepBrowseTalkCard('${escapeHtml(t.id)}', 1)">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+                  <div class="card-page-badge" aria-label="Media 1 of ${pages.length}">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    <span class="card-page-text">1 / ${pages.length}</span>
+                  </div>
+                ` : ''}
                 <div class="b-media-zoom-overlay">
                   <span class="b-zoom-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -1338,41 +1335,36 @@
               <div class="cert-card-top">
                 <div class="cert-issuer-badge">
                   <span class="${issuerIconClass}" style="--accent:${escapeHtml(accent)}">${issuerIconHtml}</span>
-                  <div class="cert-issuer-meta">
-                    <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
-                    <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
-                  </div>
+                  <span class="cert-issuer-name">${escapeHtml(cert.issuer)}</span>
                 </div>
+                <span class="cert-date ${getYearBadgeClass(cert.issue_date)}">${escapeHtml(cert.issue_date || '')}</span>
               </div>
               <div class="cert-card-mid">
                 <h4 class="cert-title">${escapeHtml(cert.title)}</h4>
                 ${hasPreview ? `
                   <div class="cert-card-preview-wrap">
-                    ${pages.length > 1 ? `
-                      <div class="cert-page-tabs" role="tablist" aria-label="Certificate Pages">
-                        ${pages.map((p, idx) => `
-                          <button type="button"
-                            class="cert-tab-btn ${idx === 0 ? 'active' : ''}"
-                            role="tab"
-                            aria-selected="${idx === 0 ? 'true' : 'false'}"
-                            onclick="event.stopPropagation(); switchBrowseCertPage('${escapeHtml(cert.id)}', '${escapeHtml(p.url)}', this, 'Certificate — ${escapeHtml(cert.title)} (${escapeHtml(p.label)}')">
-                            ${p.type === 'curriculum' ? `
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                            ` : `
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                            `}
-                            <span>${escapeHtml(p.label)}</span>
-                          </button>
-                        `).join('')}
-                      </div>
-                    ` : ''}
                     <div class="b-media-preview" id="browse-cert-prev-${escapeHtml(cert.id)}"
                       data-active-title="Certificate — ${escapeHtml(cert.title)}${pages.length > 1 ? ' (' + escapeHtml(initialPage.label) + ')' : ''}"
+                      data-pages="${escapeHtml(JSON.stringify(pages))}"
+                      data-page-index="0"
+                      data-cert-title="${escapeHtml(cert.title)}"
                       onclick="openLightbox(this.querySelector('.b-media-main-img').src, this.getAttribute('data-active-title') || '${escapeHtml(cert.title)}')"
                       title="Click to view full certificate proof"
                       style="cursor:zoom-in;">
                       <img class="b-media-blur-bg" src="${escapeHtml(initialPage.url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
                       <img class="b-media-main-img" src="${escapeHtml(initialPage.url)}" alt="${escapeHtml(cert.title)}" loading="lazy" decoding="async">
+                      ${pages.length > 1 ? `
+                        <button type="button" class="card-media-nav-btn prev" aria-label="Previous Page" onclick="event.stopPropagation(); window.stepBrowseCertCard('${escapeHtml(cert.id)}', -1)" disabled>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <button type="button" class="card-media-nav-btn next" aria-label="Next Page" onclick="event.stopPropagation(); window.stepBrowseCertCard('${escapeHtml(cert.id)}', 1)">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                        <div class="card-page-badge" aria-label="Page 1 of ${pages.length}">
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                          <span class="card-page-text">1 / ${pages.length}</span>
+                        </div>
+                      ` : ''}
                       <div class="b-media-zoom-overlay">
                         <span class="b-zoom-btn">
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -1389,10 +1381,7 @@
                 ` : ''}
               </div>
               <div class="cert-card-bottom" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
-                <span class="cert-status-tag" style="display:inline-flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:800; color:#0F9D58;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  Credential Verified
-                </span>
+                ${cert.credential_id ? `<span class="cert-card-id font-mono">#${escapeHtml(cert.credential_id)}</span>` : '<span></span>'}
                 ${cert.credential_url ? `
                   <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none; color:var(--blue); font-size:0.75rem; font-weight:700;">
                     View Credential →
@@ -1552,23 +1541,26 @@
           return `
             <div class="award-card reveal in-view" style="display:flex; flex-direction:column; justify-content:space-between; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:24px; position:relative;">
               <div>
-                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; gap:8px;">
+                <div style="display:flex; justify-content:flex-start; align-items:flex-start; margin-bottom:12px;">
                   <span style="font-size:0.74rem; font-weight:800; text-transform:uppercase; color:var(--blue); background:var(--blue-soft); padding:4px 10px; border-radius:100px;">
                     ${escapeHtml(badgeText)}
                   </span>
+                </div>
+
+                <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-primary); line-height:1.3; margin-bottom:8px;">
+                  ${escapeHtml(award.title)}
+                </h3>
+
+                <div class="award-issuer-row" style="margin-bottom:12px;">
+                  <div class="award-issuer-left">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0; opacity:0.8;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <span style="font-size:0.85rem; color:var(--text-primary); font-weight:700;">${escapeHtml(award.issuer || '')}</span>
+                  </div>
                   ${award.metric_tag ? `
                     <span class="award-metric-tag ${getYearBadgeClass(award.metric_tag)}">
                       ${escapeHtml(award.metric_tag)}
                     </span>
                   ` : ''}
-                </div>
-
-                <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-primary); line-height:1.3; margin-bottom:6px;">
-                  ${escapeHtml(award.title)}
-                </h3>
-
-                <div style="font-size:0.85rem; color:var(--blue); font-weight:700; margin-bottom:12px;">
-                  ${escapeHtml(award.issuer || '')}
                 </div>
 
                 ${award.image_url ? `
@@ -1929,6 +1921,99 @@
       }
       return pages;
     }
+
+    
+    window.stepBrowseCertCard = function(certId, delta) {
+      const container = document.getElementById(`browse-cert-prev-${certId}`);
+      if (!container) return;
+      const rawPages = container.getAttribute('data-pages');
+      if (!rawPages) return;
+      let pages = [];
+      try { pages = JSON.parse(rawPages); } catch(e) { return; }
+      if (!Array.isArray(pages) || pages.length <= 1) return;
+
+      let currentIndex = parseInt(container.getAttribute('data-page-index') || '0', 10);
+      let newIndex = currentIndex + delta;
+      if (newIndex < 0) newIndex = 0;
+      if (newIndex >= pages.length) newIndex = pages.length - 1;
+      if (newIndex === currentIndex) return;
+
+      container.setAttribute('data-page-index', newIndex);
+      const targetPage = pages[newIndex];
+      const certTitle = container.getAttribute('data-cert-title') || '';
+      const pageTitle = `Certificate — ${certTitle} (Page ${newIndex + 1} / ${pages.length})`;
+
+      const mainImg = container.querySelector('.b-media-main-img');
+      const blurImg = container.querySelector('.b-media-blur-bg');
+      if (mainImg) {
+        mainImg.style.opacity = '0.35';
+        mainImg.style.filter = 'blur(4px)';
+        mainImg.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+        mainImg.src = targetPage.url;
+        mainImg.alt = pageTitle;
+        mainImg.title = pageTitle;
+        mainImg.onload = () => {
+          mainImg.style.opacity = '1';
+          mainImg.style.filter = 'none';
+        };
+      }
+      if (blurImg) blurImg.src = targetPage.url;
+      container.setAttribute('data-active-title', pageTitle);
+
+      const badgeText = container.querySelector('.card-page-text');
+      if (badgeText) badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+
+      const prevBtn = container.querySelector('.card-media-nav-btn.prev');
+      const nextBtn = container.querySelector('.card-media-nav-btn.next');
+      if (prevBtn) prevBtn.disabled = (newIndex === 0);
+      if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
+    };
+
+    window.stepBrowseTalkCard = function(talkId, delta) {
+      const container = document.getElementById(`browse-talk-prev-${talkId}`);
+      if (!container) return;
+      const rawPages = container.getAttribute('data-pages');
+      if (!rawPages) return;
+      let pages = [];
+      try { pages = JSON.parse(rawPages); } catch(e) { return; }
+      if (!Array.isArray(pages) || pages.length <= 1) return;
+
+      let currentIndex = parseInt(container.getAttribute('data-page-index') || '0', 10);
+      let newIndex = currentIndex + delta;
+      if (newIndex < 0) newIndex = 0;
+      if (newIndex >= pages.length) newIndex = pages.length - 1;
+      if (newIndex === currentIndex) return;
+
+      container.setAttribute('data-page-index', newIndex);
+      const targetMedia = pages[newIndex];
+      const eventTitle = container.getAttribute('data-talk-event') || '';
+      const mediaTitle = `${eventTitle} (${targetMedia.label || 'Page ' + (newIndex + 1)})`;
+
+      const mainImg = container.querySelector('.b-talk-main-img');
+      const blurImg = container.querySelector('.b-talk-blur-bg');
+      if (mainImg) {
+        mainImg.style.opacity = '0.35';
+        mainImg.style.filter = 'blur(4px)';
+        mainImg.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+        mainImg.src = targetMedia.url;
+        mainImg.alt = mediaTitle;
+        mainImg.title = mediaTitle;
+        mainImg.onload = () => {
+          mainImg.style.opacity = '1';
+          mainImg.style.filter = 'none';
+        };
+      }
+      if (blurImg) blurImg.src = targetMedia.url;
+      container.setAttribute('data-active-title', mediaTitle);
+
+      const badgeText = container.querySelector('.card-page-text');
+      if (badgeText) badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+
+      const prevBtn = container.querySelector('.card-media-nav-btn.prev');
+      const nextBtn = container.querySelector('.card-media-nav-btn.next');
+      if (prevBtn) prevBtn.disabled = (newIndex === 0);
+      if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
+    };
 
     window.switchBrowseTalkPage = function(talkId, imgSrc, btn, altText) {
       let container = document.getElementById(`browse-talk-prev-${talkId}`);
