@@ -1156,8 +1156,6 @@
 
     grid.innerHTML = visibleProjects.map(p => {
       const dateText = formatDateRange(p.dateRange);
-      const isPresent = (p.dateRange || '').toLowerCase().includes('present');
-      const badgeText = isPresent ? 'Ongoing' : 'Production';
       const ytId = getYouTubeId(p.videoDemo);
 
       // Video Media Header Banner
@@ -1253,7 +1251,6 @@
           <div class="p-card-body">
             <div class="p-card-head">
               <span class="p-card-date ${getYearBadgeClass(dateText)}">${escapeHtml(dateText)}</span>
-              <span class="p-card-badge">${badgeText}</span>
             </div>
             <h3 class="p-card-title">${escapeHtml(p.name)}</h3>
             ${descHtml}
