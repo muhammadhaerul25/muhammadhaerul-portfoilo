@@ -699,7 +699,7 @@ function buildField(field) {
             var inp = document.createElement('input');
             inp.type = field.type;
             inp.className = 'field-input';
-            inp.placeholder = field.placeholder || (field.type === 'email' ? 'Contoh: budi@example.com' : (field.label.toLowerCase().includes('nama') ? 'Contoh: Budi Santoso' : ''));
+            inp.placeholder = field.placeholder || (field.type === 'email' ? 'e.g. john@example.com' : (field.label.toLowerCase().includes('name') || field.label.toLowerCase().includes('nama') ? 'e.g. John Doe' : ''));
             inp.value = savedVal;
             inp.dataset.fieldId = field.id;
             inp.addEventListener('input', function(){ answers[field.id] = this.value; });
@@ -711,7 +711,7 @@ function buildField(field) {
         case 'textarea':
             var ta = document.createElement('textarea');
             ta.className = 'field-textarea';
-            ta.placeholder = field.placeholder || 'Tuliskan jawaban Anda...';
+            ta.placeholder = field.placeholder || 'Write your answer here...';
             ta.value = savedVal;
             ta.dataset.fieldId = field.id;
             ta.addEventListener('input', function(){ answers[field.id] = this.value; });
@@ -728,7 +728,7 @@ function buildField(field) {
             sel.className = 'field-select';
             sel.dataset.fieldId = field.id;
             sel.id = 'f_' + field.id;
-            sel.innerHTML = '<option value="">— Pilih opsi —</option>' +
+            sel.innerHTML = '<option value="">— Select an option —</option>' +
                 opts.map(function(o){ return '<option value="'+escHtml(o)+'"'+(savedVal===o?' selected':'')+'>'+escHtml(o)+'</option>'; }).join('');
             sel.addEventListener('change', function(){ answers[field.id] = this.value; });
             sw.appendChild(sel); group.appendChild(sw);
@@ -835,11 +835,11 @@ function nextPage() {
     for (var i = 0; i < pageFields.length; i++) {
         var f = pageFields[i];
         if (f.required && (!answers[f.id] || (typeof answers[f.id] === 'string' && !answers[f.id].trim()))) {
-            showAlert('Harap isi kolom "' + f.label + '" sebelum melanjutkan.', 'error');
+            showAlert('Please fill out the "' + f.label + '" field before continuing.', 'error');
             return;
         }
         if (f.type === 'email' && answers[f.id] && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(answers[f.id])) {
-            showAlert('Harap masukkan alamat email yang valid.', 'error');
+            showAlert('Please enter a valid email address.', 'error');
             return;
         }
     }
@@ -887,7 +887,7 @@ async function submitForm() {
         showSuccessState('');
     } catch(e) {
         console.error(e);
-        showAlert('Gagal mengirimkan feedback: ' + e.message, 'error');
+        showAlert('Failed to submit feedback: ' + e.message, 'error');
     } finally {
         btn.disabled = false;
         txt.style.display = 'block';
@@ -905,7 +905,7 @@ function showSuccessState(name) {
     document.getElementById('form-body').style.display = 'none';
     var ss = document.getElementById('success-state');
     ss.style.display = 'block';
-    if (name) document.getElementById('success-name').textContent = 'Terima kasih, ' + name + '!';
+    if (name) document.getElementById('success-name').textContent = 'Thank you, ' + name + '!';
     launchConfetti();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }

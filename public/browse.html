@@ -915,49 +915,49 @@
       projects: {
         eyebrow: '05 — Featured & Case-Study Projects',
         title: 'Selected work, built end-to-end.',
-        subtitle: 'A mix of commercial systems and independent products — each shipped, not just prototyped.',
+        subtitle: '17 production-grade systems and case studies spanning Agentic AI workflows, RAG chatbots, YOLO & DETR computer vision pipelines, speech transcription, and full-stack web architectures.',
         searchPlaceholder: 'Search projects by name, technology, or keywords…'
       },
       talks: {
         eyebrow: '07 — Speaking & Workshops',
         title: 'Speaking Engagements, Seminars & Workshops',
-        subtitle: 'Hands-on AI education delivered across universities, tech communities, and corporate programs.',
+        subtitle: '15+ keynote speeches, university seminars, and hands-on workshops empowering 2,000+ engineers, students, and professionals across Indonesia in Generative AI, Deep Learning, and Data Science.',
         searchPlaceholder: 'Search talks by title, organizer, topic, or place…'
       },
       awards: {
         eyebrow: '08 — Honors & Awards',
-        eyebrowId: '08 — Penghargaan & Prestasi',
+        eyebrowId: '08 — Honors & Awards',
         title: 'Competitions, grants, and recognitions.',
-        titleId: 'Kompetisi, hibah, dan rekognisi prestasi.',
-        subtitle: '24 national and regional accolades in AI innovation, hackathons, keynote speaking, and academic excellence.',
-        subtitleId: '24 penghargaan dan rekognisi dalam inovasi AI, kompetisi hackathon, pembicara teknis, dan prestasi akademik.',
+        titleId: 'Competitions, grants, and recognitions.',
+        subtitle: '24 national and regional accolades across AI innovation, startup hackathons, data science competitions, keynote speaking recognitions, and academic excellence.',
+        subtitleId: '24 national and regional accolades across AI innovation, startup hackathons, data science competitions, keynote speaking recognitions, and academic excellence.',
         searchPlaceholder: 'Search awards by title, issuer, or tags…'
       },
       certifications: {
         eyebrow: '09 — Licences & Certifications',
-        eyebrowId: '09 — Lisensi & Sertifikasi',
+        eyebrowId: '09 — Licences & Certifications',
         title: 'Continuous, deliberate learning.',
-        titleId: 'Pembelajaran berkelanjutan dan terverifikasi.',
-        subtitle: '20 verified credentials in Generative AI, Deep Learning, Data Science, and Systems Architecture.',
-        subtitleId: '20 kredensial terverifikasi dalam Generative AI, Deep Learning, Data Science, dan Rekayasa Sistem.',
+        titleId: 'Continuous, deliberate learning.',
+        subtitle: '22 verified credentials across Program, Course, Skill, and Language certifications issued by British Council, Bank Indonesia, Komdigi DTS, DeepLearning.AI, IBM, Google, Microsoft, and Dicoding.',
+        subtitleId: '22 verified credentials across Program, Course, Skill, and Language certifications issued by British Council, Bank Indonesia, Komdigi DTS, DeepLearning.AI, IBM, Google, Microsoft, and Dicoding.',
         searchPlaceholder: 'Search credentials by title, issuer, or skills…'
       },
       publications: {
         eyebrow: '10 — Research & Open Source',
-        eyebrowId: '10 — Riset & Publikasi Terbuka',
+        eyebrowId: '10 — Research & Open Source',
         title: 'Research papers, PyPI packages, and publications.',
-        titleId: 'Makalah riset, pustaka PyPI, dan publikasi teknis.',
-        subtitle: 'Applied computer vision research, open-source object detection libraries, and engineering write-ups.',
-        subtitleId: 'Riset computer vision terapan, pustaka deteksi objek sumber terbuka, dan panduan arsitektur sistem.',
+        titleId: 'Research papers, PyPI packages, and publications.',
+        subtitle: 'Published IEEE computer vision research on Faster R-CNN and DETR industrial PPE detection alongside open-source Python packages on PyPI for automated vision dataset pipelines.',
+        subtitleId: 'Published IEEE computer vision research on Faster R-CNN and DETR industrial PPE detection alongside open-source Python packages on PyPI for automated vision dataset pipelines.',
         searchPlaceholder: 'Search publications by title, publisher, or keywords…'
       },
       feedbacks: {
         eyebrow: '11 — Feedbacks & Testimonials',
-        eyebrowId: '11 — Ulasan & Rekomendasi',
+        eyebrowId: '11 — Feedbacks & Testimonials',
         title: 'What collaborators and participants say.',
-        titleId: 'Apa yang dikatakan kolaborator dan peserta program.',
-        subtitle: 'Verified recommendations and authentic impressions from project partners, team members, and workshop participants.',
-        subtitleId: 'Rekomendasi terverifikasi dan impresi otentik dari rekan proyek, anggota tim, dan peserta workshop.',
+        titleId: 'What collaborators and participants say.',
+        subtitle: 'Verified LinkedIn recommendations from engineering colleagues and 9.4/10 average-rated reviews from workshop attendees, mentees, and project collaborators.',
+        subtitleId: 'Verified LinkedIn recommendations from engineering colleagues and 9.4/10 average-rated reviews from workshop attendees, mentees, and project collaborators.',
         searchPlaceholder: 'Search feedbacks by name, review text, or topic…'
       }
     };
@@ -972,43 +972,41 @@
 
     // Fetch All Data via Bootstrap
 
-    let currentBrowseLang = localStorage.getItem('mh_lang') || 'en';
+    let currentBrowseLang = 'en';
+    try { localStorage.setItem('mh_lang', 'en'); } catch (e) {}
 
     function initBrowseLanguage(locSettings) {
       const wrap = document.getElementById('langSwitchWrap');
       if (wrap) {
-        const isBilingual = locSettings ? (locSettings.bilingualEnabled !== false) : true;
-        wrap.style.display = isBilingual ? 'inline-flex' : 'none';
+        wrap.style.display = 'none';
       }
-      switchBrowseLanguage(currentBrowseLang);
+      switchBrowseLanguage('en');
     }
 
-    function switchBrowseLanguage(lang) {
-      currentBrowseLang = lang === 'id' ? 'id' : 'en';
-      localStorage.setItem('mh_lang', currentBrowseLang);
+    function switchBrowseLanguage() {
+      currentBrowseLang = 'en';
+      try { localStorage.setItem('mh_lang', 'en'); } catch (e) {}
 
       const btnEn = document.getElementById('langBtnEn');
       const btnId = document.getElementById('langBtnId');
-      if (btnEn) btnEn.classList.toggle('active', currentBrowseLang === 'en');
-      if (btnId) btnId.classList.toggle('active', currentBrowseLang === 'id');
+      if (btnEn) btnEn.classList.add('active');
+      if (btnId) btnId.classList.remove('active');
 
-      const isId = currentBrowseLang === 'id';
+      const isId = false;
       const backHomeBtn = document.querySelector('.btn-back-home span');
-      if (backHomeBtn) backHomeBtn.textContent = isId ? 'Kembali ke Beranda' : 'Back to Home';
+      if (backHomeBtn) backHomeBtn.textContent = 'Back to Home';
 
       // Update meta texts
       const meta = COLLECTION_META[currentCollection] || COLLECTION_META.projects;
-      const title = isId ? (meta.titleId || meta.title) : meta.title;
-      const subtitle = isId ? (meta.subtitleId || meta.subtitle) : meta.subtitle;
-      const eyebrow = isId ? (meta.eyebrowId || meta.eyebrow) : meta.eyebrow;
+      const title = meta.title;
+      const subtitle = meta.subtitle;
+      const eyebrow = meta.eyebrow;
 
       document.getElementById('collectionEyebrow').textContent = eyebrow;
       document.getElementById('collectionTitle').textContent = title;
       document.getElementById('collectionSubtitle').textContent = subtitle;
       document.getElementById('pageTitle').textContent = `${title} · Muhammad Haerul`;
-      document.getElementById('browseSearchInput').placeholder = isId 
-        ? 'Cari berdasarkan judul, teknologi, penyelenggara, atau kata kunci...' 
-        : meta.searchPlaceholder;
+      document.getElementById('browseSearchInput').placeholder = meta.searchPlaceholder;
 
       renderCollection();
     }
@@ -1019,9 +1017,7 @@
         const json = await res.json();
         if (json.success && json.data) {
           bootstrapData = json.data;
-          const locCfg = (bootstrapData.settings && bootstrapData.settings.localization) 
-            ? bootstrapData.settings.localization 
-            : { bilingualEnabled: true, defaultLanguage: 'en' };
+          const locCfg = { bilingualEnabled: false, defaultLanguage: 'en' };
           initBrowseLanguage(locCfg);
           renderCollection();
         }
@@ -1039,9 +1035,9 @@
       const issuer = (cert.issuer || '').toLowerCase();
       const cat = (cert.category || '').toLowerCase();
       if (filter === 'language') {
-        return (issuer.includes('hackerrank') && (title.includes('python') || title.includes('sql'))) ||
-               title.includes('language') || title.includes('toefl') || title.includes('ielts') ||
-               cat === 'programming' || cat === 'database engineering';
+        return issuer.includes('british council') || title.includes('englishscore') ||
+               title.includes('toefl') || title.includes('ielts') ||
+               cat === 'language proficiency';
       }
       if (filter === 'skill') {
         return issuer.includes('hackerrank') || issuer.includes('pasas') || issuer.includes('data academy') ||
@@ -1053,12 +1049,12 @@
                issuer.includes('lppi') || issuer.includes('bank indonesia') || issuer.includes('kemendikbud') ||
                issuer.includes('microsoft') || issuer.includes('google') ||
                title.includes('digdaya') || title.includes('microcredential') || title.includes('elevate') ||
-               title.includes('it support') || title.includes('entrepreneurship') || title.includes('nasional');
+               title.includes('it support') || title.includes('entrepreneurship') || title.includes('nasional') || title.includes('dex');
       }
       if (filter === 'course') {
         return issuer.includes('dicoding') || issuer.includes('deeplearning') || issuer.includes('udemy') ||
                issuer.includes('ibm') || title.includes('specialization') || title.includes('prompt engineering') ||
-               title.includes('belajar') || title.includes('production');
+               title.includes('ux design') || title.includes('devops') || title.includes('belajar') || title.includes('production');
       }
       return false;
     }
@@ -1317,7 +1313,7 @@
         }).join('');
       }
       else if (currentCollection === 'certifications') {
-        const raw = (bootstrapData.certifications || []).slice().sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0));
+        const raw = sortItemsByDateDesc(bootstrapData.certifications || [], 'issue_date');
         
         if (!filtersRow.dataset.rendered || filtersRow.dataset.collection !== 'certifications') {
           const countProg = raw.filter(c => matchesCertClassification(c, 'program')).length;
@@ -1353,28 +1349,11 @@
           const skills = Array.isArray(cert.skills) ? cert.skills : [];
           const accent = cert.accent_color || 'var(--blue)';
 
-          const isLppi = cert.issuer && (cert.issuer.toLowerCase().includes('lppi') || cert.issuer.toLowerCase().includes('bank indonesia'));
-          const isDicoding = cert.issuer && cert.issuer.toLowerCase().includes('dicoding');
-          const isDts = cert.issuer && (
-            cert.issuer.toLowerCase().includes('digital talent scholarship') ||
-            cert.issuer.toLowerCase().includes('digitalent') ||
-            cert.issuer.toLowerCase().includes('kominfo') ||
-            cert.issuer.toLowerCase().includes('komdigi')
-          );
-          const isPasas = cert.issuer && cert.issuer.toLowerCase().includes('pasas');
-          const isMicrosoft = cert.issuer && cert.issuer.toLowerCase().includes('microsoft');
-          const issuerIconHtml = isLppi
-            ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
-            : (isDicoding
-                ? `<img src="/assets/certificates/logo-dicoding.png" alt="Dicoding Logo" class="cert-issuer-img">`
-                : (isDts
-                    ? `<img src="/assets/certificates/logo-dts.png" alt="Digitalent DTS Logo" class="cert-issuer-img">`
-                    : (isPasas
-                        ? `<img src="/assets/certificates/logo-pasas.png" alt="PASAS Institute Logo" class="cert-issuer-img">`
-                        : (isMicrosoft
-                            ? `<img src="/assets/certificates/logo-microsoft.svg" alt="Microsoft Logo" class="cert-issuer-img">`
-                            : escapeHtml(getInitials(cert.issuer))))));
-          const issuerIconClass = (isLppi || isDicoding || isDts || isPasas || isMicrosoft) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+          const logoInfo = getCertIssuerLogoInfo(cert.issuer);
+          const issuerIconHtml = logoInfo
+            ? `<img src="${logoInfo.url}" alt="${escapeHtml(logoInfo.alt)}" class="cert-issuer-img">`
+            : escapeHtml(getInitials(cert.issuer));
+          const issuerIconClass = logoInfo ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
 
           const pages = getCertificatePages(cert, false);
           const hasPreview = pages.length > 0;
@@ -1453,10 +1432,14 @@
         });
 
         if (!filtersRow.dataset.rendered || filtersRow.dataset.collection !== 'feedbacks') {
+          const count10 = raw.filter(f => Math.round(Number(f.rating)) === 10).length;
+          const count9 = raw.filter(f => Math.round(Number(f.rating)) === 9).length;
+          const count8 = raw.filter(f => Math.round(Number(f.rating)) === 8).length;
           filtersRow.innerHTML = `
             <button class="browse-filter-pill active" onclick="setCategoryFilter('all', this)">All Reviews (${raw.length})</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('perfect', this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>10/10 Score</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('top', this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>9+ Score</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('10', this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>10 (${count10})</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('9', this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>9 (${count9})</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('8', this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>8 (${count8})</button>
             <button class="browse-filter-pill" onclick="setCategoryFilter('recommendation', this)">Collaborations</button>
           `;
           filtersRow.dataset.rendered = 'true';
@@ -1466,9 +1449,10 @@
         let filtered = raw.filter(f => {
           const matchQ = !q || (f.nama_lengkap || '').toLowerCase().includes(q) || (f.alasan || '').toLowerCase().includes(q) || (f.pesan_kesan || '').toLowerCase().includes(q) || (f.source || '').toLowerCase().includes(q);
           if (!matchQ) return false;
-          const r = Number(f.rating) || 0;
-          if (activeCategoryFilter === 'perfect') return r === 10;
-          if (activeCategoryFilter === 'top') return r >= 9;
+          const r = Math.round(Number(f.rating) || 0);
+          if (activeCategoryFilter === '10' || activeCategoryFilter === 'perfect') return r === 10;
+          if (activeCategoryFilter === '9' || activeCategoryFilter === 'top') return r === 9;
+          if (activeCategoryFilter === '8') return r === 8;
           if (activeCategoryFilter === 'recommendation') return (f.source || '').toLowerCase().includes('linkedin') || (f.source || '').toLowerCase().includes('recommendation');
           return true;
         });
@@ -1542,7 +1526,7 @@
         }).join('');
       }
       else if (currentCollection === 'awards') {
-        const raw = (bootstrapData.awards || []).slice().sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0));
+        const raw = sortItemsByDateDesc(bootstrapData.awards || [], 'metric_tag');
         
         if (!filtersRow.dataset.rendered || filtersRow.dataset.collection !== 'awards') {
           filtersRow.innerHTML = `
@@ -1653,7 +1637,7 @@
         }).join('');
       }
       else if (currentCollection === 'publications') {
-        const raw = (bootstrapData.publications || []).slice().sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0));
+        const raw = sortItemsByDateDesc(bootstrapData.publications || [], 'date');
 
         if (!filtersRow.dataset.rendered || filtersRow.dataset.collection !== 'publications') {
           filtersRow.innerHTML = `
@@ -1785,6 +1769,50 @@
       return m ? m[1] : null;
     }
 
+    function getCertIssuerLogoInfo(issuer) {
+      const s = (issuer || '').toLowerCase();
+      if (s.includes('british council') || s.includes('englishscore')) {
+        return { url: '/assets/certificates/logo-british-council.png?v=2', alt: 'British Council Logo' };
+      }
+      if (s.includes('lppi') || s.includes('bank indonesia')) {
+        return { url: '/assets/certificates/logo-lppi.png?v=2', alt: 'Bank Indonesia x LPPI Logo' };
+      }
+      if (s.includes('dicoding')) {
+        return { url: '/assets/certificates/logo-dicoding.png?v=2', alt: 'Dicoding Indonesia Logo' };
+      }
+      if (s.includes('digital talent') || s.includes('digitalent') || s.includes('kominfo') || s.includes('komdigi')) {
+        return { url: '/assets/certificates/logo-dts.png?v=2', alt: 'Digital Talent Scholarship Logo' };
+      }
+      if (s.includes('microsoft')) {
+        return { url: '/assets/certificates/logo-microsoft.svg?v=2', alt: 'Microsoft Logo' };
+      }
+      if (s.includes('ibm')) {
+        return { url: '/assets/certificates/logo-ibm.png?v=2', alt: 'IBM Logo' };
+      }
+      if (s.includes('deeplearning.ai') || s.includes('deeplearning')) {
+        return { url: '/assets/certificates/logo-deeplearningai.png?v=2', alt: 'DeepLearning.AI Logo' };
+      }
+      if (s.includes('udemy')) {
+        return { url: '/assets/certificates/logo-udemy.png?v=2', alt: 'Udemy Logo' };
+      }
+      if (s.includes('hackerrank')) {
+        return { url: '/assets/certificates/logo-hackerrank.png?v=2', alt: 'HackerRank Logo' };
+      }
+      if (s.includes('pasas')) {
+        return { url: '/assets/certificates/logo-pasas.png?v=2', alt: 'PASAS Institute Logo' };
+      }
+      if (s.includes('data academy')) {
+        return { url: '/assets/certificates/logo-data-academy.png?v=2', alt: 'Data Academy Logo' };
+      }
+      if (s.includes('google')) {
+        return { url: '/assets/certificates/logo-google.svg?v=2', alt: 'Google Logo' };
+      }
+      if (s.includes('kemendikbud') || s.includes('kementerian pendidikan')) {
+        return { url: '/assets/certificates/logo-kemendikbud.svg?v=2', alt: 'Kemendikbud Logo' };
+      }
+      return null;
+    }
+
     function getCertificatePages(cert, isId = false) {
       if (!cert) return [];
       if (Array.isArray(cert.pages) && cert.pages.length > 0) {
@@ -1906,31 +1934,74 @@
           }
         ];
       }
-      if (title.includes('supervisor') || (cert.credential_id && cert.credential_id.includes('344'))) {
+      if ((title.includes('data science') && (title.includes('dex') || title.includes('nasional'))) || title.includes('supervisor') || (cert.credential_id && cert.credential_id.includes('344'))) {
         return [
           {
-            label: isId ? 'Sertifikat' : 'Certificate',
-            url: '/assets/certificates/cert-data-scientist-supervisor-dts-page1.jpg',
+            label: 'Associate Data Scientist',
+            url: '/assets/certificates/cert-associate-data-scientist-dts-page1.jpg?v=2',
             type: 'certificate'
           },
           {
-            label: isId ? 'Materi / Kurikulum' : 'Curriculum',
-            url: '/assets/certificates/cert-data-scientist-supervisor-dts-page2.jpg',
+            label: 'Curriculum 1',
+            url: '/assets/certificates/cert-associate-data-scientist-dts-page2.jpg?v=2',
+            type: 'curriculum'
+          },
+          {
+            label: 'Data Scientist Supervisor',
+            url: '/assets/certificates/cert-data-scientist-supervisor-dts-page1.jpg?v=2',
+            type: 'certificate'
+          },
+          {
+            label: 'Curriculum 2',
+            url: '/assets/certificates/cert-data-scientist-supervisor-dts-page2.jpg?v=2',
             type: 'curriculum'
           }
         ];
       }
-      if ((title.includes('associate data scientist') && (title.includes('python') || title.includes('dts') || title.includes('komdigi') || title.includes('nasional'))) || (cert.credential_id && cert.credential_id.includes('2667'))) {
+      if ((title.includes('large language model') && (title.includes('dex') || title.includes('nasional'))) || (cert.credential_id && cert.credential_id.includes('139'))) {
         return [
           {
-            label: isId ? 'Sertifikat' : 'Certificate',
-            url: '/assets/certificates/cert-associate-data-scientist-dts-page1.jpg',
+            label: 'LLM Theory to Code',
+            url: '/assets/certificates/cert-llm-dex-nasional-page1.jpg?v=2',
             type: 'certificate'
           },
           {
-            label: isId ? 'Materi / Kurikulum' : 'Curriculum',
-            url: '/assets/certificates/cert-associate-data-scientist-dts-page2.jpg',
+            label: 'Curriculum 1',
+            url: '/assets/certificates/cert-llm-dex-nasional-page2.jpg?v=2',
             type: 'curriculum'
+          },
+          {
+            label: 'Fine-Tuning & RAG',
+            url: '/assets/certificates/cert-llm-dex-nasional-page3.jpg?v=2',
+            type: 'certificate'
+          },
+          {
+            label: 'Curriculum 2',
+            url: '/assets/certificates/cert-llm-dex-nasional-page4.jpg?v=2',
+            type: 'curriculum'
+          }
+        ];
+      }
+      if (title.includes('englishscore') || (cert.issuer && cert.issuer.toLowerCase().includes('british council')) || cert.credential_id === 'd52b7ef8') {
+        return [
+          {
+            label: 'Certificate',
+            url: '/assets/certificates/cert-englishscore-british-council-page1.jpg?v=2',
+            type: 'certificate'
+          },
+          {
+            label: 'Score Breakdown',
+            url: '/assets/certificates/cert-englishscore-british-council-page2.jpg?v=2',
+            type: 'curriculum'
+          }
+        ];
+      }
+      if ((cert.issuer && cert.issuer.toLowerCase().includes('data academy')) || (cert.credential_id && cert.credential_id.includes('7634'))) {
+        return [
+          {
+            label: isId ? 'Sertifikat' : 'Certificate',
+            url: cert.image_url || '/assets/certificates/cert-data-academy-cisdv.jpg',
+            type: 'certificate'
           }
         ];
       }
@@ -2221,6 +2292,35 @@
       let hash = 0;
       for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
       return colors[Math.abs(hash) % colors.length];
+    }
+
+    function parseItemDateWeight(raw) {
+      if (!raw) return 0;
+      const str = String(raw).trim();
+      const lower = str.toLowerCase();
+      if (lower.includes('present') || lower.includes('current') || lower.includes('ongoing')) return 99991231;
+      const d = new Date(str);
+      if (!isNaN(d.getTime()) && d.getFullYear() >= 1990 && d.getFullYear() <= 2100 && !/^\d{4}$/.test(str)) {
+        return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+      }
+      const mMap = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
+      const myMatch = lower.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[\s,.-]+(20\d{2}|19\d{2})\b/);
+      if (myMatch) return parseInt(myMatch[2], 10) * 10000 + (mMap[myMatch[1]] || 1) * 100 + 1;
+      const ymMatch = str.match(/\b(20\d{2}|19\d{2})[-/.](\d{1,2})(?:[-/.](\d{1,2}))?\b/);
+      if (ymMatch) return parseInt(ymMatch[1], 10) * 10000 + parseInt(ymMatch[2], 10) * 100 + (ymMatch[3] ? parseInt(ymMatch[3], 10) : 1);
+      const years = str.match(/\b(20\d{2}|19\d{2})\b/g);
+      if (years && years.length) return Math.max(...years.map(y => parseInt(y, 10))) * 10000 + 601;
+      return 0;
+    }
+
+    function sortItemsByDateDesc(list, field) {
+      if (!Array.isArray(list)) return [];
+      return list.slice().sort((a, b) => {
+        const wA = parseItemDateWeight(a[field] || a.issue_date || a.date || a.metric_tag || a.year || a.created_at);
+        const wB = parseItemDateWeight(b[field] || b.issue_date || b.date || b.metric_tag || b.year || b.created_at);
+        if (wB !== wA) return wB - wA;
+        return (a.sort_order ?? 999) - (b.sort_order ?? 999);
+      });
     }
 
     function getProjectDateSortValue(p) {

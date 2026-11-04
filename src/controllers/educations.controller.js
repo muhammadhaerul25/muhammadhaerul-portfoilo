@@ -1,6 +1,7 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
+const { sortExperiencesByDateDesc } = require('../utils/dateSort');
 
 // GET all educations (Public)
 const getAllEducations = asyncHandler(async (req, res) => {
@@ -11,9 +12,10 @@ const getAllEducations = asyncHandler(async (req, res) => {
         return res.json(cached);
     }
 
-    const educations = await prisma.education.findMany({
+    const rawEdu = await prisma.education.findMany({
         orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
     });
+    const educations = sortExperiencesByDateDesc(rawEdu);
 
     const responseData = { success: true, count: educations.length, data: educations };
     cache.set('educations:all', responseData, 60);

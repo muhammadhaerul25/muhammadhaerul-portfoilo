@@ -2,6 +2,7 @@ const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
 const { processUploadedFile } = require('../middlewares/upload');
+const { sortByDateDesc } = require('../utils/dateSort');
 
 // GET all gallery items (Public)
 const getAllGallery = asyncHandler(async (req, res) => {
@@ -20,10 +21,11 @@ const getAllGallery = asyncHandler(async (req, res) => {
         where.category = { equals: category, mode: 'insensitive' };
     }
 
-    const items = await prisma.galleryItem.findMany({
+    const rawItems = await prisma.galleryItem.findMany({
         where,
         orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
     });
+    const items = sortByDateDesc(rawItems, 'date');
 
     // Compute distinct categories
     const allItems = await prisma.galleryItem.findMany({

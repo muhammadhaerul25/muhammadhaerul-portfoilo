@@ -43,18 +43,18 @@ const DEFAULT_SETTINGS = {
     },
     sections: {
         about: { name: "01 — Profile", eyebrow: "01 — Profile", title: "", subtitle: "" },
-        education: { name: "02 — Education", eyebrow: "02 — Education", title: "Academic Foundation & Education", subtitle: "" },
-        experiences: { name: "03 — Experiences", eyebrow: "03 — Experiences", title: "Career Journey & Work Experience", subtitle: "" },
-        skills: { name: "04 — Skills", eyebrow: "04 — Skills", title: "Depth where it matters, range where it helps.", subtitle: "" },
-        projects: { name: "05 — Featured & Case-Study Projects", eyebrow: "05 — Featured & Case-Study Projects", title: "Featured Projects & AI Systems", subtitle: "" },
-        publications: { name: "06 — Publications", eyebrow: "06 — Publications", title: "Open-source work, written up and shared.", subtitle: "" },
-        talks: { name: "07 — Talks", eyebrow: "07 — Talks", title: "Speaking Engagements & Talks", subtitle: "" },
-        awards: { name: "08 — Honors & Awards", eyebrow: "08 — Honors & Awards", title: "Honors & Achievements", subtitle: "" },
-        certifications: { name: "09 — Licences & Certifications", eyebrow: "09 — Licences & Certifications", title: "Professional Certifications", subtitle: "" },
-        blogs: { name: "10 — Blog & Insights", eyebrow: "10 — Blog & Insights", title: "Technical Articles & Blog", subtitle: "" },
-        gallery: { name: "11 — Visual Gallery & Moments", eyebrow: "11 — Visual Gallery & Moments", title: "Journey & Visual Moments", subtitle: "" },
-        testimonials: { name: "12 — Feedback and Recommendations", eyebrow: "12 — Feedback and Recommendations", title: "Participant & Client Feedbacks", subtitle: "" },
-        contact: { name: "13 — Contacts", eyebrow: "13 — Contacts", title: "Let's Connect & Collaborate", subtitle: "" }
+        education: { name: "02 — Education", eyebrow: "02 — Education", title: "Academic Foundation & Education", subtitle: "Formal academic degree — Bachelor of Computer Science specializing in Artificial Intelligence and Data Science at Universitas Hasanuddin (GPA 3.97/4.00, Cum Laude, 3× Most Outstanding Student)." },
+        experiences: { name: "03 — Experiences", eyebrow: "03 — Experiences", title: "Career Journey & Work Experience", subtitle: "4+ years of professional experience across 11 roles at Telkom Indonesia, Bank Indonesia, Infomedia Nusantara, Paper.id, XL Axiata, RevoU, and AksaraHub—shipping enterprise AI, LLM OCR, and computer vision pipelines." },
+        skills: { name: "04 — Skills", eyebrow: "04 — Skills", title: "Depth where it matters, range where it helps.", subtitle: "End-to-end technical stack across 9 core domains: Programming, Data Analytics, Computer Vision, NLP, Generative AI, AI Agents, Full-Stack Development, Database Engineering, and Cloud MLOps." },
+        projects: { name: "05 — Featured & Case-Study Projects", eyebrow: "05 — Featured & Case-Study Projects", title: "Featured Projects & AI Systems", subtitle: "17 production-grade systems and case studies spanning Agentic AI workflows, RAG chatbots, YOLO & DETR computer vision pipelines, speech transcription, and full-stack web architectures." },
+        publications: { name: "06 — Publications", eyebrow: "06 — Publications", title: "Open-source work, written up and shared.", subtitle: "Published IEEE computer vision research on Faster R-CNN and DETR industrial PPE detection alongside open-source Python packages on PyPI for automated vision dataset pipelines." },
+        talks: { name: "07 — Talks", eyebrow: "07 — Talks", title: "Speaking Engagements & Talks", subtitle: "15+ keynote speeches, university seminars, and hands-on workshops empowering 2,000+ engineers, students, and professionals across Indonesia in Generative AI, Deep Learning, and Data Science." },
+        awards: { name: "08 — Honors & Awards", eyebrow: "08 — Honors & Awards", title: "Honors & Achievements", subtitle: "24 national and regional accolades across AI innovation, startup hackathons, data science competitions, keynote speaking recognitions, and academic excellence." },
+        certifications: { name: "09 — Licences & Certifications", eyebrow: "09 — Licences & Certifications", title: "Professional Certifications", subtitle: "22 verified credentials across Program, Course, Skill, and Language certifications issued by British Council, Bank Indonesia, Komdigi DTS, DeepLearning.AI, IBM, Google, Microsoft, and Dicoding." },
+        blogs: { name: "10 — Blog & Insights", eyebrow: "10 — Blog & Insights", title: "Technical Articles & Blog", subtitle: "In-depth technical write-ups, engineering tutorials, and architecture guides on Large Language Models, Agentic AI workflows, Computer Vision, and production software systems." },
+        gallery: { name: "11 — Visual Gallery & Moments", eyebrow: "11 — Visual Gallery & Moments", title: "Journey & Visual Moments", subtitle: "18 curated visual highlights capturing keynote talks, corporate AI training sessions, national competition victories, and academic milestones." },
+        testimonials: { name: "12 — Feedback and Recommendations", eyebrow: "12 — Feedback and Recommendations", title: "Participant & Client Feedbacks", subtitle: "Verified LinkedIn recommendations from engineering colleagues and 9.4/10 average-rated reviews from workshop attendees, mentees, and project collaborators." },
+        contact: { name: "13 — Contacts", eyebrow: "13 — Contacts", title: "Let's Connect & Collaborate", subtitle: "Available for end-to-end AI engineering, applied machine learning research collaborations, corporate AI training, and technical speaking engagements." }
     },
     footer: {
         tagline: "Building high-impact AI solutions, empowering minds through engineering education, and bridging the gap between research and production.",
@@ -72,7 +72,7 @@ const DEFAULT_SETTINGS = {
         name: "Muhammad Haerul, S.Kom",
         role: "AI Full-Stack Specialist",
         roleSub: "(Engineer, Researcher, and Trainer)",
-        education: "Bachelor of Computer Science",
+        education: "Formal Academic Degree — Bachelor of Computer Science, Specializing in Artificial Intelligence and Data Science",
         experienceYears: "4+ years in AI & Data Science",
         leadHeadingRole: "AI Full-Stack Specialist",
         leadHeadingYears: "4 Years",
@@ -94,7 +94,7 @@ const DEFAULT_SETTINGS = {
         ]
     },
     localization: {
-        bilingualEnabled: true,
+        bilingualEnabled: false,
         defaultLanguage: "en"
     },
     imageSlideshow: {
@@ -126,6 +126,9 @@ const SETTINGS_KEY = 'site_page_settings';
 
 function mergeSettings(base, override) {
     if (!override) return base;
+    if (typeof override === 'string') {
+        try { override = JSON.parse(override); } catch (e) { return base; }
+    }
 
     const imgSlideOverride = override.imageSlideshow || {};
     const imgSlideBase = base.imageSlideshow || {

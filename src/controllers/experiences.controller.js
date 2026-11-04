@@ -1,6 +1,7 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
+const { sortExperiencesByDateDesc } = require('../utils/dateSort');
 
 // GET all experiences (Public)
 const getAllExperiences = asyncHandler(async (req, res) => {
@@ -11,9 +12,10 @@ const getAllExperiences = asyncHandler(async (req, res) => {
         return res.json(cached);
     }
 
-    const experiences = await prisma.experience.findMany({
+    const rawExp = await prisma.experience.findMany({
         orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
     });
+    const experiences = sortExperiencesByDateDesc(rawExp);
 
     const responseData = { success: true, count: experiences.length, data: experiences };
     cache.set('experiences:all', responseData, 60);

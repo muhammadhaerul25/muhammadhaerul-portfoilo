@@ -2,6 +2,7 @@ const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
 const { DEFAULT_SETTINGS, mergeSettings } = require('./settings.controller');
+const { sortByDateDesc, sortExperiencesByDateDesc } = require('../utils/dateSort');
 
 function getProjectDateSortValue(p) {
     if (!p) return '';
@@ -89,6 +90,13 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
     ]);
 
     const sortedProjects = sortProjectsByDateDesc(projects);
+    const sortedExperiences = sortExperiencesByDateDesc(experiences);
+    const sortedEducations = sortExperiencesByDateDesc(educations);
+    const sortedCertifications = sortByDateDesc(certifications, 'issue_date');
+    const sortedAwards = sortByDateDesc(awards, 'metric_tag');
+    const sortedGallery = sortByDateDesc(gallery, 'date');
+    const sortedPublications = sortByDateDesc(publications, 'date');
+    const sortedBlogs = sortByDateDesc(blogs, 'date');
 
     let settings = Object.assign({}, DEFAULT_SETTINGS);
     try {
@@ -114,14 +122,14 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
             projects: filterVisible(sortedProjects, 'projects'),
             talks: filterVisible(talks, 'talks'),
             feedbacks,
-            experiences: filterVisible(experiences, 'experiences'),
-            educations: filterVisible(educations, 'educations'),
+            experiences: filterVisible(sortedExperiences, 'experiences'),
+            educations: filterVisible(sortedEducations, 'educations'),
             skills: filterVisible(skills, 'skills'),
-            certifications: filterVisible(certifications, 'certifications'),
-            awards: filterVisible(awards, 'awards'),
-            gallery: filterVisible(gallery, 'gallery'),
-            publications: filterVisible(publications, 'publications'),
-            blogs: filterVisible(blogs, 'blogs'),
+            certifications: filterVisible(sortedCertifications, 'certifications'),
+            awards: filterVisible(sortedAwards, 'awards'),
+            gallery: filterVisible(sortedGallery, 'gallery'),
+            publications: filterVisible(sortedPublications, 'publications'),
+            blogs: filterVisible(sortedBlogs, 'blogs'),
             settings
         }
     };

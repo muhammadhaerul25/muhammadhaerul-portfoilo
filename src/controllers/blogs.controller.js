@@ -2,6 +2,7 @@ const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
 const { processUploadedFile } = require('../middlewares/upload');
+const { sortByDateDesc } = require('../utils/dateSort');
 
 // GET all blogs (Public / Dashboard)
 const getAllBlogs = asyncHandler(async (req, res) => {
@@ -19,10 +20,11 @@ const getAllBlogs = asyncHandler(async (req, res) => {
         ? {}
         : { OR: [{ status: 'published' }, { status: null }] };
 
-    const blogs = await prisma.blogPost.findMany({
+    const rawBlogs = await prisma.blogPost.findMany({
         where,
         orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
     });
+    const blogs = sortByDateDesc(rawBlogs, 'date');
 
     const responseData = { success: true, count: blogs.length, data: blogs };
     cache.set(cacheKey, responseData, 60);

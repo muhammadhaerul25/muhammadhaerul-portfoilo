@@ -1,6 +1,7 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
+const { sortByDateDesc } = require('../utils/dateSort');
 
 // GET all publications (Public)
 const getAllPublications = asyncHandler(async (req, res) => {
@@ -14,9 +15,10 @@ const getAllPublications = asyncHandler(async (req, res) => {
         }
     }
 
-    const publications = await prisma.publication.findMany({
+    const rawPubs = await prisma.publication.findMany({
         orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
     });
+    const publications = sortByDateDesc(rawPubs, 'date');
 
     const responseData = { success: true, count: publications.length, data: publications };
     cache.set('publications:all', responseData, 60);

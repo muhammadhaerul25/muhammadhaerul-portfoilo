@@ -2,6 +2,7 @@ const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
 const { processUploadedFile } = require('../middlewares/upload');
+const { sortByDateDesc } = require('../utils/dateSort');
 
 // GET all certifications (Public)
 const getAllCertifications = asyncHandler(async (req, res) => {
@@ -12,9 +13,10 @@ const getAllCertifications = asyncHandler(async (req, res) => {
         return res.json(cached);
     }
 
-    const certifications = await prisma.certification.findMany({
+    const rawCerts = await prisma.certification.findMany({
         orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
     });
+    const certifications = sortByDateDesc(rawCerts, 'issue_date');
 
     const responseData = { success: true, count: certifications.length, data: certifications };
     cache.set('certifications:all', responseData, 60);

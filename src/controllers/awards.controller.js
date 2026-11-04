@@ -1,6 +1,7 @@
 const prisma = require('../config/db');
 const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
+const { sortByDateDesc } = require('../utils/dateSort');
 
 // GET all awards (Public)
 const getAllAwards = asyncHandler(async (req, res) => {
@@ -14,18 +15,19 @@ const getAllAwards = asyncHandler(async (req, res) => {
         }
     }
 
-    let awards;
+    let rawAwards;
     try {
-        awards = await prisma.$queryRawUnsafe(`
+        rawAwards = await prisma.$queryRawUnsafe(`
             SELECT id, title, issuer, metric_tag, badge_text, badge_color, description, chips, image_url, sort_order, created_at, updated_at
             FROM awards
             ORDER BY sort_order ASC, created_at DESC;
         `);
     } catch (e) {
-        awards = await prisma.award.findMany({
+        rawAwards = await prisma.award.findMany({
             orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }]
         });
     }
+    const awards = sortByDateDesc(rawAwards, 'metric_tag');
 
     const responseData = { success: true, count: awards.length, data: awards };
     cache.set('awards:all', responseData, 60);

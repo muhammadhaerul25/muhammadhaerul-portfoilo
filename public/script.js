@@ -337,9 +337,119 @@
      BILINGUAL LOCALIZATION & TRANSLATION ENGINE (EN / ID)
   ════════════════════════════════════════════════════════════════ */
   let currentLang = 'en';
+  try {
+    localStorage.setItem('mh_lang', 'en');
+  } catch (e) {}
 
   function isIndonesian() {
-    return currentLang === 'id';
+    return false;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     UNIVERSAL DATE-DESCENDING SORT HELPERS (NEWEST FIRST)
+  ════════════════════════════════════════════════════════════════ */
+  const PORTFOLIO_MONTH_MAP = {
+    jan: 1, january: 1, januari: 1,
+    feb: 2, february: 2, februari: 2,
+    mar: 3, march: 3, maret: 3,
+    apr: 4, april: 4,
+    may: 5, mei: 5,
+    jun: 6, june: 6, juni: 6,
+    jul: 7, july: 7, juli: 7,
+    aug: 8, august: 8, agu: 8, agustus: 8,
+    sep: 9, sept: 9, september: 9,
+    oct: 10, october: 10, okt: 10, oktober: 10,
+    nov: 11, november: 11, nop: 11,
+    dec: 12, december: 12, des: 12, desember: 12
+  };
+
+  function parsePortfolioDateScore(raw) {
+    if (!raw) return 0;
+    if (raw instanceof Date) return isNaN(raw.getTime()) ? 0 : raw.getTime();
+    const s = String(raw).trim().toLowerCase();
+    if (!s) return 0;
+    if (s.includes('present') || s.includes('current') || s.includes('sekarang')) {
+      return new Date(2099, 11, 31).getTime();
+    }
+    const isoMatch = s.match(/^(\d{4})-(\d{1,2})(?:-(\d{1,2}))?/);
+    if (isoMatch) {
+      return new Date(parseInt(isoMatch[1], 10), parseInt(isoMatch[2], 10) - 1, isoMatch[3] ? parseInt(isoMatch[3], 10) : 15).getTime();
+    }
+    const mdyMatch = s.match(/([a-z]+)\s+(\d{1,2}),?\s+(\d{4})/);
+    if (mdyMatch && PORTFOLIO_MONTH_MAP[mdyMatch[1]]) {
+      return new Date(parseInt(mdyMatch[3], 10), PORTFOLIO_MONTH_MAP[mdyMatch[1]] - 1, parseInt(mdyMatch[2], 10)).getTime();
+    }
+    const dmyMatch = s.match(/(\d{1,2})\s+([a-z]+),?\s+(\d{4})/);
+    if (dmyMatch && PORTFOLIO_MONTH_MAP[dmyMatch[2]]) {
+      return new Date(parseInt(dmyMatch[3], 10), PORTFOLIO_MONTH_MAP[dmyMatch[2]] - 1, parseInt(dmyMatch[1], 10)).getTime();
+    }
+    const myMatch = s.match(/([a-z]+)\s+(\d{4})/);
+    if (myMatch && PORTFOLIO_MONTH_MAP[myMatch[1]]) {
+      return new Date(parseInt(myMatch[2], 10), PORTFOLIO_MONTH_MAP[myMatch[1]] - 1, 15).getTime();
+    }
+    const years = s.match(/\b(19\d{2}|20\d{2})\b/g);
+    if (years && years.length) {
+      const maxYear = Math.max(...years.map(y => parseInt(y, 10)));
+      return new Date(maxYear, 5, 15).getTime();
+    }
+    const parsed = Date.parse(raw);
+    return isNaN(parsed) ? 0 : parsed;
+  }
+
+  function sortItemsByDateDesc(items, dateField = 'date') {
+    if (!Array.isArray(items)) return [];
+    return [...items].sort((a, b) => {
+      const scoreA = parsePortfolioDateScore(a[dateField] || a.issue_date || a.date || a.metric_tag);
+      const scoreB = parsePortfolioDateScore(b[dateField] || b.issue_date || b.date || b.metric_tag);
+      if (scoreB !== scoreA) return scoreB - scoreA;
+      const sortA = typeof a.sort_order === 'number' ? a.sort_order : 9999;
+      const sortB = typeof b.sort_order === 'number' ? b.sort_order : 9999;
+      if (sortA !== sortB) return sortA - sortB;
+      const cA = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const cB = b.created_at ? new Date(b.created_at).getTime() : 0;
+      return cB - cA;
+    });
+  }
+
+  function sortTimelineByDateDesc(items) {
+    if (!Array.isArray(items)) return [];
+    return [...items].sort((a, b) => {
+      const startA = parsePortfolioDateScore(a.start_date);
+      const startB = parsePortfolioDateScore(b.start_date);
+      const endA = a.is_current ? new Date(2099, 11, 31).getTime() : (parsePortfolioDateScore(a.end_date) || startA);
+      const endB = b.is_current ? new Date(2099, 11, 31).getTime() : (parsePortfolioDateScore(b.end_date) || startB);
+      if (endB !== endA) return endB - endA;
+      if (startB !== startA) return startB - startA;
+      return (a.sort_order || 0) - (b.sort_order || 0);
+    });
+  }
+
+  function sortProjectsClientDesc(projects) {
+    if (!Array.isArray(projects)) return [];
+    return [...projects].sort((a, b) => {
+      const getScore = (p) => {
+        if (!p) return '0000-00';
+        const dr = (p.dateRange || '').trim();
+        if (dr) {
+          if (dr.includes('_')) {
+            const parts = dr.split('_');
+            const start = parts[0] ? parts[0].trim() : '';
+            const end = parts[1] ? parts[1].trim() : '';
+            const sortEnd = end ? end : (start ? '9999-12' : '0000-00');
+            const sortStart = start || '0000-00';
+            return `${sortEnd}_${sortStart}`;
+          }
+          return dr;
+        }
+        return p.created_at ? new Date(p.created_at).toISOString() : '0000-00';
+      };
+      const kA = getScore(a);
+      const kB = getScore(b);
+      if (kA !== kB) return kB.localeCompare(kA);
+      const cA = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const cB = b.created_at ? new Date(b.created_at).getTime() : 0;
+      return cB - cA;
+    });
   }
 
   const I18N = {
@@ -372,7 +482,7 @@
       about_fact_spec: "Specialization",
       about_fact_spec_val: "Agentic AI, LLM Systems & Computer Vision",
       about_fact_edu: "Formal Education",
-      about_fact_edu_val: "Informatics / Computer Science, Universitas Hasanuddin",
+      about_fact_edu_val: "Formal Academic Degree — Bachelor of Computer Science, Specializing in Artificial Intelligence and Data Science",
       about_fact_loc: "Location",
       about_fact_loc_val: "Makassar & Remote Worldwide",
 
@@ -390,18 +500,18 @@
 
       pubs_eyebrow: "06 — Publications",
       pubs_title: "Open-source work, written up and shared.",
-            edu_desc: "Formal academic degree, computer science coursework, and honors.",
-      exp_desc: "Professional career roles, software engineering, and AI leadership.",
-      skills_desc: "Programming, Data Analytics, Computer Vision, NLP, Generative AI, and DevOps.",
-      projects_desc: "Production web apps, AI systems, computer vision models, and end-to-end case studies.",
-      pubs_desc: "Scientific papers, research publications, and open-source technical documentation.",
-      talks_desc: "Keynote speeches, seminars, workshops, technical training, and panel discussions.",
-      awards_desc: "National hackathon championships, competition awards, and industry recognitions.",
-      certs_desc: "Industry licenses, professional specializations, and verified credentials.",
-      blog_desc: "In-depth technical articles, engineering tutorials, and system architecture guides.",
-      gallery_desc: "Curated visual moments from stages, workshops, hackathons, and milestones.",
-      feedback_desc: "Authentic testimonials and peer impressions from workshop attendees and colleagues.",
-      contact_desc: "Collaboration inquiries, technical speaking invitations, and project consultations.",
+      edu_desc: "Formal academic degree — Bachelor of Computer Science specializing in Artificial Intelligence and Data Science at Universitas Hasanuddin (GPA 3.97/4.00, Cum Laude, 3× Most Outstanding Student).",
+      exp_desc: "4+ years of professional experience across 11 roles at Telkom Indonesia, Bank Indonesia, Infomedia Nusantara, Paper.id, XL Axiata, RevoU, and AksaraHub—shipping enterprise AI, LLM OCR, and computer vision pipelines.",
+      skills_desc: "End-to-end technical stack across 9 core domains: Programming, Data Analytics, Computer Vision, NLP, Generative AI, AI Agents, Full-Stack Development, Database Engineering, and Cloud MLOps.",
+      projects_desc: "17 production-grade systems and case studies spanning Agentic AI workflows, RAG chatbots, YOLO & DETR computer vision pipelines, speech transcription, and full-stack web architectures.",
+      pubs_desc: "Published IEEE computer vision research on Faster R-CNN and DETR industrial PPE detection alongside open-source Python packages on PyPI for automated vision dataset pipelines.",
+      talks_desc: "15+ keynote speeches, university seminars, and hands-on workshops empowering 2,000+ engineers, students, and professionals across Indonesia in Generative AI, Deep Learning, and Data Science.",
+      awards_desc: "24 national and regional accolades across AI innovation, startup hackathons, data science competitions, keynote speaking recognitions, and academic excellence.",
+      certs_desc: "22 verified credentials across Program, Course, Skill, and Language certifications issued by British Council, Bank Indonesia, Komdigi DTS, DeepLearning.AI, IBM, Google, Microsoft, and Dicoding.",
+      blog_desc: "In-depth technical write-ups, engineering tutorials, and architecture guides on Large Language Models, Agentic AI workflows, Computer Vision, and production software systems.",
+      gallery_desc: "18 curated visual highlights capturing keynote talks, corporate AI training sessions, national competition victories, and academic milestones.",
+      feedback_desc: "Verified LinkedIn recommendations from engineering colleagues and 9.4/10 average-rated reviews from workshop attendees, mentees, and project collaborators.",
+      contact_desc: "Available for end-to-end AI engineering, applied machine learning research collaborations, corporate AI training, and technical speaking engagements.",
 
       talks_eyebrow: "07 — Talks & Workshops",
       talks_title: "Speaking Engagements, Seminars & Workshops",
@@ -864,29 +974,28 @@
     }
   }
 
+  I18N.id = I18N.en;
+
   function initLanguageSwitcher(locSettings) {
     const wrap = document.getElementById('langSwitchWrap');
-    if (!wrap) return;
-
-    const isBilingual = locSettings ? (locSettings.bilingualEnabled !== false) : true;
-    wrap.style.display = isBilingual ? 'inline-flex' : 'none';
-
-    const savedLang = localStorage.getItem('mh_lang');
-    const initialLang = savedLang || (locSettings && locSettings.defaultLanguage) || 'en';
-    window.switchPortfolioLanguage(initialLang);
+    if (wrap) {
+      wrap.style.display = 'none';
+    }
+    try { localStorage.setItem('mh_lang', 'en'); } catch (e) {}
+    window.switchPortfolioLanguage('en');
   }
 
-  window.switchPortfolioLanguage = function (lang) {
-    currentLang = lang === 'id' ? 'id' : 'en';
-    localStorage.setItem('mh_lang', currentLang);
+  window.switchPortfolioLanguage = function () {
+    currentLang = 'en';
+    try { localStorage.setItem('mh_lang', 'en'); } catch (e) {}
 
     const btnEn = document.getElementById('langBtnEn');
     const btnId = document.getElementById('langBtnId');
-    if (btnEn) btnEn.classList.toggle('active', currentLang === 'en');
-    if (btnId) btnId.classList.toggle('active', currentLang === 'id');
+    if (btnEn) btnEn.classList.add('active');
+    if (btnId) btnId.classList.remove('active');
 
-    document.documentElement.lang = currentLang;
-    applyTranslations(currentLang);
+    document.documentElement.lang = 'en';
+    applyTranslations('en');
     if (window.liveProfileSettings && typeof applyProfileSettings === 'function') {
       applyProfileSettings(window.liveProfileSettings);
     }
@@ -1219,6 +1328,7 @@
 
     currentProjectFilter = filter;
     currentProjectPage = page;
+    liveProjects = sortProjectsClientDesc(liveProjects);
     const filtered = liveProjects.filter(p => matchesProjectCategory(p, filter));
 
     if (!filtered.length) {
@@ -1491,6 +1601,7 @@
     const paginationInfo = document.getElementById('talksPaginationInfo');
     const paginationControls = document.getElementById('talksPaginationControls');
 
+    liveTalks = sortItemsByDateDesc(liveTalks || [], 'date');
     const totalTalks = (liveTalks || []).length;
     const totalPages = Math.ceil(totalTalks / TALKS_PER_PAGE) || 1;
 
@@ -1690,9 +1801,9 @@
   function updateFeedbackFilterCounts() {
     const workshopList = getWorkshopFeedbacks();
     const all = workshopList.length;
-    const count10 = workshopList.filter(f => Number(f.rating) === 10).length;
-    const count9 = workshopList.filter(f => Number(f.rating) >= 9).length;
-    const count8 = workshopList.filter(f => Number(f.rating) >= 8).length;
+    const count10 = workshopList.filter(f => Math.round(Number(f.rating)) === 10).length;
+    const count9 = workshopList.filter(f => Math.round(Number(f.rating)) === 9).length;
+    const count8 = workshopList.filter(f => Math.round(Number(f.rating)) === 8).length;
 
     const elAll = document.getElementById('fbCountAll');
     const el10 = document.getElementById('fbCount10');
@@ -1838,14 +1949,13 @@
 
     updateFeedbackFilterCounts();
 
-    // 1. Filter Feedbacks
+    // 1. Filter Feedbacks (Exact Rating Match)
     let list = [...workshopFeedbacks];
-    if (currentFeedbackRatingFilter === '10') {
-      list = list.filter(f => Number(f.rating) === 10);
-    } else if (currentFeedbackRatingFilter === '9') {
-      list = list.filter(f => Number(f.rating) >= 9);
-    } else if (currentFeedbackRatingFilter === '8') {
-      list = list.filter(f => Number(f.rating) >= 8);
+    if (currentFeedbackRatingFilter && currentFeedbackRatingFilter !== 'all') {
+      const targetRating = Number(currentFeedbackRatingFilter);
+      if (!isNaN(targetRating)) {
+        list = list.filter(f => Math.round(Number(f.rating)) === targetRating);
+      }
     }
 
     // 2. Sort Feedbacks (Default: rating-desc from 10 to 1)
@@ -1907,7 +2017,7 @@
             takeaway = alasan;
           }
         } else {
-          mainQuote = pesan || alasan || 'Sesi materi sangat bermanfaat!';
+          mainQuote = pesan || alasan || 'The session material was highly insightful and practical!';
         }
 
         const isLongQuote = mainQuote.length > 140;
@@ -2231,6 +2341,7 @@
   function renderTimeline(experiences = liveExperiences) {
     const timelineEl = document.getElementById('timeline');
     if (!timelineEl || !experiences || !experiences.length) return;
+    experiences = sortTimelineByDateDesc(experiences);
 
     timelineEl.innerHTML = experiences.map(exp => {
       const dateStr = `${escapeHtml(exp.start_date || '')}${exp.end_date ? ' — ' + escapeHtml(exp.end_date) : (exp.is_current ? ' — Present' : '')}`;
@@ -2268,6 +2379,7 @@
   function renderEducations(educations = liveEducations) {
     const eduWrap = document.getElementById('edu-cards-wrap');
     if (!eduWrap || !educations || !educations.length) return;
+    educations = sortTimelineByDateDesc(educations);
 
     eduWrap.innerHTML = educations.map(edu => {
       const courseworks = Array.isArray(edu.courseworks) ? edu.courseworks : [];
@@ -2707,7 +2819,7 @@
 
   // Initialize horizontal pill scrolls
   window.updateSkillsNavState = setupHorizontalFilterScroll('skillsFilterNav', 'skillsScrollPrev', 'skillsScrollNext');
-  setupHorizontalFilterScroll('.project-filter-group');
+  window.updateProjectNavState = setupHorizontalFilterScroll('projectFilterNav', 'projectScrollPrev', 'projectScrollNext');
   window.updateCertNavState = setupHorizontalFilterScroll('certFilterNav', 'certScrollPrev', 'certScrollNext');
 
   // Flexible Certificate Multi-page / Document Resolver
@@ -2732,25 +2844,77 @@
       });
     }
 
-    // 2. Comma or newline separated images in image_url
-    if (cert.image_url && (cert.image_url.includes(',') || cert.image_url.includes('\n'))) {
-      const splitUrls = cert.image_url.split(/[,\n]+/).map(s => s.trim()).filter(Boolean);
-      if (splitUrls.length > 1) {
-        return splitUrls.map((url, idx) => ({
-          label: idx === 0 ? (isId ? 'Sertifikat' : 'Certificate') : (isId ? 'Materi / Kurikulum' : 'Curriculum'),
-          url,
-          type: idx === 0 ? 'certificate' : 'curriculum'
-        }));
-      }
-    }
-
-    // 3. Known dual-page certificates (DIGDAYA Practitioner & Essential)
+    // 2. Known multi-page certificates with custom page labels
     const title = (cert.title || '').toLowerCase();
+    const issuerLower = (cert.issuer || '').toLowerCase();
+
+    if (title.includes('englishscore') || issuerLower.includes('british council') || cert.id === 'cmw1pr4qh0001tsb9g557m6uj') {
+      return [
+        {
+          label: isId ? 'Sertifikat & Skor' : 'Certificate & Score',
+          url: '/assets/certificates/cert-englishscore-british-council-page1.jpg?v=2',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Rincian CEFR' : 'CEFR Breakdown',
+          url: '/assets/certificates/cert-englishscore-british-council-page2.jpg?v=2',
+          type: 'curriculum'
+        }
+      ];
+    }
+    if ((title.includes('large language model') && (title.includes('dex') || title.includes('nasional'))) || cert.id === 'cmw1pr52r0002tsb9e7l8tukv') {
+      return [
+        {
+          label: isId ? 'Sertifikat 1' : 'Certificate 1',
+          url: '/assets/certificates/cert-llm-dex-nasional-page1.jpg?v=2',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Kurikulum 1' : 'Curriculum 1',
+          url: '/assets/certificates/cert-llm-dex-nasional-page2.jpg?v=2',
+          type: 'curriculum'
+        },
+        {
+          label: isId ? 'Sertifikat 2' : 'Certificate 2',
+          url: '/assets/certificates/cert-llm-dex-nasional-page3.jpg?v=2',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Kurikulum 2' : 'Curriculum 2',
+          url: '/assets/certificates/cert-llm-dex-nasional-page4.jpg?v=2',
+          type: 'curriculum'
+        }
+      ];
+    }
+    if ((title.includes('data science') && (title.includes('dex') || title.includes('nasional'))) || cert.id === 'cmvup563c0005ggb9z8lyjoeu') {
+      return [
+        {
+          label: 'Associate Data Scientist',
+          url: '/assets/certificates/cert-associate-data-scientist-dts-page1.jpg?v=2',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Kurikulum 1' : 'Curriculum 1',
+          url: '/assets/certificates/cert-associate-data-scientist-dts-page2.jpg?v=2',
+          type: 'curriculum'
+        },
+        {
+          label: 'Data Scientist Supervisor',
+          url: '/assets/certificates/cert-data-scientist-supervisor-dts-page1.jpg?v=2',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Kurikulum 2' : 'Curriculum 2',
+          url: '/assets/certificates/cert-data-scientist-supervisor-dts-page2.jpg?v=2',
+          type: 'curriculum'
+        }
+      ];
+    }
     if (title.includes('digdaya') && title.includes('practitioner')) {
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
-          url: cert.image_url || '/assets/certificates/cert-digdaya-practitioner.jpg',
+          url: '/assets/certificates/cert-digdaya-practitioner.jpg',
           type: 'certificate'
         },
         {
@@ -2764,7 +2928,7 @@
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
-          url: cert.image_url || '/assets/certificates/cert-digdaya-essential.jpg',
+          url: '/assets/certificates/cert-digdaya-essential.jpg',
           type: 'certificate'
         },
         {
@@ -2778,7 +2942,7 @@
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
-          url: cert.image_url || '/assets/certificates/cert-prompt-engineering.jpg',
+          url: '/assets/certificates/cert-prompt-engineering.jpg',
           type: 'certificate'
         },
         {
@@ -2792,7 +2956,7 @@
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
-          url: cert.image_url || '/assets/certificates/cert-ux-design.jpg',
+          url: '/assets/certificates/cert-ux-design.jpg',
           type: 'certificate'
         },
         {
@@ -2836,35 +3000,16 @@
         }
       ];
     }
-    if (title.includes('supervisor') || (cert.credential_id && cert.credential_id.includes('344'))) {
+    if (issuerLower.includes('data academy') || (cert.credential_id && cert.credential_id.includes('7634'))) {
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
-          url: '/assets/certificates/cert-data-scientist-supervisor-dts-page1.jpg',
+          url: cert.image_url || '/assets/certificates/cert-data-academy-cisdv.jpg',
           type: 'certificate'
-        },
-        {
-          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
-          url: '/assets/certificates/cert-data-scientist-supervisor-dts-page2.jpg',
-          type: 'curriculum'
         }
       ];
     }
-    if ((title.includes('associate data scientist') && (title.includes('python') || title.includes('dts') || title.includes('komdigi') || title.includes('nasional'))) || (cert.credential_id && cert.credential_id.includes('2667'))) {
-      return [
-        {
-          label: isId ? 'Sertifikat' : 'Certificate',
-          url: '/assets/certificates/cert-associate-data-scientist-dts-page1.jpg',
-          type: 'certificate'
-        },
-        {
-          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
-          url: '/assets/certificates/cert-associate-data-scientist-dts-page2.jpg',
-          type: 'curriculum'
-        }
-      ];
-    }
-    if (title.includes('cisdv') || (cert.credential_id && cert.credential_id.includes('CISDV13854')) || (cert.issuer && cert.issuer.toLowerCase().includes('pasas'))) {
+    if (title.includes('cisdv') || (cert.credential_id && cert.credential_id.includes('CISDV13854')) || issuerLower.includes('pasas')) {
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
@@ -2877,7 +3022,7 @@
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
-          url: cert.image_url || '/assets/certificates/cert-devops-dicoding.jpg',
+          url: '/assets/certificates/cert-devops-dicoding.jpg',
           type: 'certificate'
         },
         {
@@ -2887,11 +3032,11 @@
         }
       ];
     }
-    if (title.includes('digital entrepreneurship') && (cert.issuer || '').toLowerCase().includes('google')) {
+    if (title.includes('digital entrepreneurship') && issuerLower.includes('google')) {
       return [
         {
           label: isId ? 'Sertifikat' : 'Certificate',
-          url: cert.image_url || '/assets/certificates/cert-google-digital-entrepreneurship.jpg',
+          url: '/assets/certificates/cert-google-digital-entrepreneurship.jpg',
           type: 'certificate'
         },
         {
@@ -2900,6 +3045,20 @@
           type: 'curriculum'
         }
       ];
+    }
+
+    // 3. Comma or newline separated images in image_url
+    if (cert.image_url && (cert.image_url.includes(',') || cert.image_url.includes('\n'))) {
+      const splitUrls = cert.image_url.split(/[,\n]+/).map(s => s.trim()).filter(Boolean);
+      if (splitUrls.length > 1) {
+        return splitUrls.map((url, idx) => ({
+          label: idx % 2 === 0
+            ? (splitUrls.length > 2 ? `Certificate ${Math.floor(idx / 2) + 1}` : 'Certificate')
+            : (splitUrls.length > 2 ? `Curriculum ${Math.floor(idx / 2) + 1}` : 'Curriculum'),
+          url,
+          type: idx % 2 === 0 ? 'certificate' : 'curriculum'
+        }));
+      }
     }
 
     // 4. Single image certificate
@@ -2923,9 +3082,9 @@
     const issuer = (cert.issuer || '').toLowerCase();
     const cat = (cert.category || '').toLowerCase();
     if (filter === 'language') {
-      return (issuer.includes('hackerrank') && (title.includes('python') || title.includes('sql'))) ||
-             title.includes('language') || title.includes('toefl') || title.includes('ielts') ||
-             cat === 'programming' || cat === 'database engineering';
+      return issuer.includes('british council') || title.includes('englishscore') ||
+             title.includes('toefl') || title.includes('ielts') ||
+             cat === 'language proficiency';
     }
     if (filter === 'skill') {
       return issuer.includes('hackerrank') || issuer.includes('pasas') || issuer.includes('data academy') ||
@@ -2937,12 +3096,12 @@
              issuer.includes('lppi') || issuer.includes('bank indonesia') || issuer.includes('kemendikbud') ||
              issuer.includes('microsoft') || issuer.includes('google') ||
              title.includes('digdaya') || title.includes('microcredential') || title.includes('elevate') ||
-             title.includes('it support') || title.includes('entrepreneurship') || title.includes('nasional');
+             title.includes('it support') || title.includes('entrepreneurship') || title.includes('nasional') || title.includes('dex');
     }
     if (filter === 'course') {
       return issuer.includes('dicoding') || issuer.includes('deeplearning') || issuer.includes('udemy') ||
              issuer.includes('ibm') || title.includes('specialization') || title.includes('prompt engineering') ||
-             title.includes('belajar') || title.includes('production');
+             title.includes('ux design') || title.includes('devops') || title.includes('belajar') || title.includes('production');
     }
     return false;
   }
@@ -2995,6 +3154,50 @@
     }
   };
 
+  function getCertIssuerLogoInfo(issuer) {
+    const s = (issuer || '').toLowerCase();
+    if (s.includes('british council') || s.includes('englishscore')) {
+      return { url: '/assets/certificates/logo-british-council.png?v=2', alt: 'British Council Logo' };
+    }
+    if (s.includes('lppi') || s.includes('bank indonesia')) {
+      return { url: '/assets/certificates/logo-lppi.png?v=2', alt: 'Bank Indonesia x LPPI Logo' };
+    }
+    if (s.includes('dicoding')) {
+      return { url: '/assets/certificates/logo-dicoding.png?v=2', alt: 'Dicoding Indonesia Logo' };
+    }
+    if (s.includes('digital talent') || s.includes('digitalent') || s.includes('kominfo') || s.includes('komdigi')) {
+      return { url: '/assets/certificates/logo-dts.png?v=2', alt: 'Digital Talent Scholarship Logo' };
+    }
+    if (s.includes('microsoft')) {
+      return { url: '/assets/certificates/logo-microsoft.svg?v=2', alt: 'Microsoft Logo' };
+    }
+    if (s.includes('ibm')) {
+      return { url: '/assets/certificates/logo-ibm.png?v=2', alt: 'IBM Logo' };
+    }
+    if (s.includes('deeplearning.ai') || s.includes('deeplearning')) {
+      return { url: '/assets/certificates/logo-deeplearningai.png?v=2', alt: 'DeepLearning.AI Logo' };
+    }
+    if (s.includes('udemy')) {
+      return { url: '/assets/certificates/logo-udemy.png?v=2', alt: 'Udemy Logo' };
+    }
+    if (s.includes('hackerrank')) {
+      return { url: '/assets/certificates/logo-hackerrank.png?v=2', alt: 'HackerRank Logo' };
+    }
+    if (s.includes('pasas')) {
+      return { url: '/assets/certificates/logo-pasas.png?v=2', alt: 'PASAS Institute Logo' };
+    }
+    if (s.includes('data academy')) {
+      return { url: '/assets/certificates/logo-data-academy.png?v=2', alt: 'Data Academy Logo' };
+    }
+    if (s.includes('google')) {
+      return { url: '/assets/certificates/logo-google.svg?v=2', alt: 'Google Logo' };
+    }
+    if (s.includes('kemendikbud') || s.includes('kementerian pendidikan')) {
+      return { url: '/assets/certificates/logo-kemendikbud.svg?v=2', alt: 'Kemendikbud Logo' };
+    }
+    return null;
+  }
+
   // Render Certifications Grid Dynamically with Classification Filtering & 3x3 Pagination
   function renderCertifications(firstArg, secondArg) {
     if (Array.isArray(firstArg)) {
@@ -3014,6 +3217,7 @@
     const paginationControls = document.getElementById('certPaginationControls');
     if (!certGrid) return;
 
+    liveCertifications = sortItemsByDateDesc(liveCertifications || [], 'issue_date');
     const allCerts = (Array.isArray(liveCertifications) && liveCertifications.length)
       ? liveCertifications
       : [];
@@ -3048,31 +3252,11 @@
       const hasPreview = pages.length > 0;
       const initialPage = pages[0] || null;
 
-      const isLppi = cert.issuer && (
-        cert.issuer.toLowerCase().includes('lppi') ||
-        cert.issuer.toLowerCase().includes('bank indonesia')
-      );
-      const isDicoding = cert.issuer && cert.issuer.toLowerCase().includes('dicoding');
-      const isDts = cert.issuer && (
-        cert.issuer.toLowerCase().includes('digital talent scholarship') ||
-        cert.issuer.toLowerCase().includes('digitalent') ||
-        cert.issuer.toLowerCase().includes('kominfo') ||
-        cert.issuer.toLowerCase().includes('komdigi')
-      );
-      const isPasas = cert.issuer && cert.issuer.toLowerCase().includes('pasas');
-      const isMicrosoft = cert.issuer && cert.issuer.toLowerCase().includes('microsoft');
-      const issuerIconHtml = isLppi
-        ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
-        : (isDicoding
-          ? `<img src="/assets/certificates/logo-dicoding.png" alt="Dicoding Logo" class="cert-issuer-img">`
-          : (isDts
-            ? `<img src="/assets/certificates/logo-dts.png" alt="Digitalent DTS Logo" class="cert-issuer-img">`
-            : (isPasas
-              ? `<img src="/assets/certificates/logo-pasas.png" alt="PASAS Institute Logo" class="cert-issuer-img">`
-              : (isMicrosoft
-                ? `<img src="/assets/certificates/logo-microsoft.svg" alt="Microsoft Logo" class="cert-issuer-img">`
-                : escapeHtml(getInitials(cert.issuer))))));
-      const issuerIconClass = (isLppi || isDicoding || isDts || isPasas || isMicrosoft) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+      const logoInfo = getCertIssuerLogoInfo(cert.issuer);
+      const issuerIconHtml = logoInfo
+        ? `<img src="${logoInfo.url}" alt="${escapeHtml(logoInfo.alt)}" class="cert-issuer-img">`
+        : escapeHtml(getInitials(cert.issuer));
+      const issuerIconClass = logoInfo ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
 
       const mediaHtml = hasPreview ? `
         <div class="cert-card-preview-wrap">
@@ -3236,6 +3420,7 @@
     }
 
     const awardsGrid = document.getElementById('awards-grid');
+    liveAwards = sortItemsByDateDesc(liveAwards || [], 'metric_tag');
     const items = (Array.isArray(liveAwards) && liveAwards.length) ? liveAwards : [];
     if (!awardsGrid || !items.length) return;
 
@@ -3464,6 +3649,9 @@
     if (elNlp) elNlp.textContent = countNlp;
     if (elGenAi) elGenAi.textContent = countGenAi;
     if (elAgents) elAgents.textContent = countAgents;
+    if (typeof window.updateProjectNavState === 'function') {
+      setTimeout(window.updateProjectNavState, 80);
+    }
   }
 
   // Setup Project Filter Listeners
@@ -3477,10 +3665,16 @@
         });
         pill.classList.add('active');
         pill.setAttribute('aria-selected', 'true');
+        if (typeof pill.scrollIntoView === 'function') {
+          pill.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        }
         const filter = pill.getAttribute('data-filter') || 'all';
         currentProjectPage = 1;
         showAllProjects = false;
         renderProjects(filter, 1);
+        if (typeof window.updateProjectNavState === 'function') {
+          setTimeout(window.updateProjectNavState, 80);
+        }
       });
     });
   }
@@ -4109,6 +4303,7 @@
     if (!track1 || !track2) return;
 
     currentGalleryFilter = filter;
+    liveGallery = sortItemsByDateDesc(liveGallery || [], 'date');
     const items = (!filter || filter === 'All')
       ? liveGallery
       : liveGallery.filter(item => (item.category || '').toLowerCase() === filter.toLowerCase());
@@ -4230,6 +4425,7 @@
   function renderPublications(pubs = livePublications) {
     const grid = document.getElementById('publications-grid') || document.querySelector('#publications .publications-grid, #publications .talks-grid');
     if (!grid) return;
+    pubs = sortItemsByDateDesc(pubs || [], 'date');
     if (!Array.isArray(pubs) || !pubs.length) {
       grid.innerHTML = `
         <div style="grid-column:1/-1; padding:36px 20px; text-align:center; color:var(--text-tertiary); font-size:14px; border:1px dashed var(--border); border-radius:14px; background:var(--surface);">
@@ -4353,6 +4549,7 @@
     const blogSec = document.getElementById('blog');
     const navBlog = document.querySelectorAll('a[href="#blog"], [data-nav][href="#blog"], a[href="#blogs"]');
     const grid = document.querySelector('#blog .blog-grid');
+    blogs = sortItemsByDateDesc(blogs || [], 'date');
     if (!Array.isArray(blogs) || !blogs.length) {
       if (blogSec) blogSec.style.display = 'none';
       navBlog.forEach(el => el.style.display = 'none');
@@ -4958,7 +5155,7 @@
 
         const locCfg = (bootstrapData.settings && bootstrapData.settings.localization)
           ? bootstrapData.settings.localization
-          : { bilingualEnabled: true, defaultLanguage: 'en' };
+          : { bilingualEnabled: false, defaultLanguage: 'en' };
         initLanguageSwitcher(locCfg);
         return;
       }
@@ -5047,7 +5244,7 @@
         if (res && res.success && res.data) {
           if (res.data.profile) applyProfileSettings(res.data.profile);
           applyPageSettings(res.data);
-          const locCfg = res.data.localization || { bilingualEnabled: true, defaultLanguage: 'en' };
+          const locCfg = res.data.localization || { bilingualEnabled: false, defaultLanguage: 'en' };
           initLanguageSwitcher(locCfg);
         }
       }).catch(() => { });
