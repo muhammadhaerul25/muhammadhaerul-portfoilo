@@ -1215,19 +1215,19 @@
 
       // Buttons
       const demoBtn = ytId ? `
-        <button type="button" class="p-btn-action" onclick="window.playCardVideo('${p.id}', '${ytId}')" title="Play demo video inside card">
+        <button type="button" class="p-btn-action p-btn-demo" onclick="window.playCardVideo('${p.id}', '${ytId}')" title="Play demo video inside card">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Demo
         </button>
       ` : (p.videoDemo ? `
-        <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-btn-action" title="Watch demo on YouTube">
+        <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-btn-action p-btn-demo" title="Watch demo on YouTube">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Demo
         </a>
       ` : '');
 
       const liveBtn = p.linkProject ? `
-        <a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="p-btn-action" title="Open live project">
+        <a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="p-btn-action p-btn-live" title="Open live project">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Live
         </a>
@@ -1266,7 +1266,7 @@
           <div class="p-card-foot">
             ${demoBtn}
             ${liveBtn}
-            <button type="button" class="p-btn-action primary" onclick="window.openProjectModal('${p.id}')">
+            <button type="button" class="p-btn-action primary p-btn-details" onclick="window.openProjectModal('${p.id}')">
               Details
               <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3118,18 +3118,18 @@
 
     footEl.innerHTML = `
       ${p.videoDemo ? `
-        <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-btn-action primary">
+        <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-btn-action p-btn-demo">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Watch on YouTube
         </a>
       ` : ''}
       ${p.linkProject ? `
-        <a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="p-btn-action">
+        <a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="p-btn-action p-btn-live">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Visit Project
         </a>
       ` : ''}
-      <button type="button" class="p-btn-action" onclick="closeProjectModal()">Close</button>
+      <button type="button" class="p-btn-action primary" onclick="closeProjectModal()">Close</button>
     `;
 
     overlay.classList.add('active');

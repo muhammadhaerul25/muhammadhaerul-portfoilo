@@ -5013,19 +5013,108 @@ img {
   color: var(--blue);
   background: var(--blue-soft);
 }
-.p-btn-action.primary {
+
+/* Distinct Action Buttons for Demo, Live, and Details */
+.p-btn-action.p-btn-demo {
+  background: rgba(234, 67, 53, 0.08);
+  border-color: rgba(234, 67, 53, 0.28);
+  color: #D93025;
+}
+.p-btn-action.p-btn-demo svg {
+  fill: #EA4335;
+}
+.p-btn-action.p-btn-demo:hover {
+  background: rgba(234, 67, 53, 0.16);
+  border-color: rgba(234, 67, 53, 0.5);
+  color: #C5221F;
+  transform: translateY(-1px);
+}
+
+.p-btn-action.p-btn-live {
+  background: rgba(26, 115, 232, 0.08);
+  border-color: rgba(26, 115, 232, 0.28);
+  color: #1A73E8;
+}
+.p-btn-action.p-btn-live svg {
+  stroke: #1A73E8;
+}
+.p-btn-action.p-btn-live:hover {
+  background: rgba(26, 115, 232, 0.16);
+  border-color: rgba(26, 115, 232, 0.5);
+  color: #1557B0;
+  transform: translateY(-1px);
+}
+
+.p-btn-action.primary,
+.p-btn-action.p-btn-details {
   background: var(--text);
   color: var(--bg);
   border-color: var(--text);
 }
-[data-theme="dark"] .p-btn-action.primary {
+.p-btn-action.primary svg,
+.p-btn-action.p-btn-details svg {
+  stroke: var(--bg);
+}
+.p-btn-action.primary:hover,
+.p-btn-action.p-btn-details:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #FFFFFF;
+}
+.p-btn-action.primary:hover svg,
+.p-btn-action.p-btn-details:hover svg {
+  stroke: #FFFFFF;
+}
+
+[data-theme="dark"] .p-btn-action.p-btn-demo {
+  background: rgba(242, 139, 130, 0.12);
+  border-color: rgba(242, 139, 130, 0.32);
+  color: #F28B82;
+}
+[data-theme="dark"] .p-btn-action.p-btn-demo svg {
+  fill: #F28B82;
+}
+[data-theme="dark"] .p-btn-action.p-btn-demo:hover {
+  background: rgba(242, 139, 130, 0.22);
+  border-color: rgba(242, 139, 130, 0.6);
+  color: #F6AEA9;
+}
+
+[data-theme="dark"] .p-btn-action.p-btn-live {
+  background: rgba(138, 180, 248, 0.12);
+  border-color: rgba(138, 180, 248, 0.32);
+  color: #8AB4F8;
+}
+[data-theme="dark"] .p-btn-action.p-btn-live svg {
+  stroke: #8AB4F8;
+}
+[data-theme="dark"] .p-btn-action.p-btn-live:hover {
+  background: rgba(138, 180, 248, 0.22);
+  border-color: rgba(138, 180, 248, 0.6);
+  color: #AECBFA;
+}
+
+[data-theme="dark"] .p-btn-action.primary,
+[data-theme="dark"] .p-btn-action.p-btn-details {
   background: #EDEEF0;
   color: #121316;
   border-color: #EDEEF0;
 }
-.p-btn-action.primary:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+[data-theme="dark"] .p-btn-action.primary svg,
+[data-theme="dark"] .p-btn-action.p-btn-details svg {
+  stroke: #121316;
+}
+[data-theme="dark"] .p-btn-action.primary:hover,
+[data-theme="dark"] .p-btn-action.p-btn-details:hover {
+  background: #8AB4F8;
+  border-color: #8AB4F8;
+  color: #121316;
+}
+[data-theme="dark"] .p-btn-action.primary:hover svg,
+[data-theme="dark"] .p-btn-action.p-btn-details:hover svg {
+  stroke: #121316;
 }
 
 /* Talks Dynamic Cards (3-column layout) */
