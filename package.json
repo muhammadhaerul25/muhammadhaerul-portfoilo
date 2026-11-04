@@ -1,7 +1,7 @@
 {
-  "name": "presentation-personal-branding---portfolio-digital",
-  "version": "1.0.0",
-  "description": "",
+  "name": "muhammadhaerul-portfolio",
+  "version": "2.0.0",
+  "description": "Personal Portfolio, Speaking Engagements, Publications & Dynamic Feedback Platform for Muhammad Haerul (@muhammadhaerul.25)",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -9,21 +9,36 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "convert:webp": "node scripts/convert-to-webp.js",
+    "db:check": "node scripts/db/check_db.js",
+    "db:tables": "node scripts/db/check_all_db_tables.js",
+    "db:optimize": "node scripts/maintenance/optimize_db_indexes.js",
+    "seed:admin": "node scripts/seed/seed_admin.js",
+    "seed:skills": "node scripts/seed/seed_skills.js",
+    "convert:webp": "node scripts/maintenance/convert-to-webp.js",
+    "generate:resume": "node scripts/maintenance/generate_resume_pdf.js",
+    "verify:routes": "node scripts/verify/verify_routing.js",
+    "verify:backend": "node scripts/verify/verify_backend_optimization.js",
     "postinstall": "prisma generate"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/muhammadhaerul25/presentation-personal-branding---portfolio-digital.git"
+    "url": "git+https://github.com/muhammadhaerul25/muhammadhaerul-portfolio.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "portfolio",
+    "ai-engineer",
+    "data-scientist",
+    "express",
+    "prisma",
+    "postgresql"
+  ],
+  "author": "Muhammad Haerul (@muhammadhaerul.25)",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/muhammadhaerul25/presentation-personal-branding---portfolio-digital/issues"
+    "url": "https://github.com/muhammadhaerul25/muhammadhaerul-portfolio/issues"
   },
-  "homepage": "https://github.com/muhammadhaerul25/presentation-personal-branding---portfolio-digital#readme",
+  "homepage": "https://www.muhammadhaerul.tech",
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",

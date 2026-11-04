@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const compression = require('compression');
 
 const apiRoutes = require('./routes');
+const pageRoutes = require('./routes/pages.routes');
 const errorHandler = require('./middlewares/errorHandler');
 const notFoundHandler = require('./middlewares/notFound');
 const { apiLimiter, sanitizeInput, corsOptions } = require('./middlewares/security');
@@ -63,35 +64,8 @@ app.use(express.static(publicDir, {
     }
 }));
 
-// 5. Clean Page Routes
-app.get('/', (req, res) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.sendFile(path.join(publicDir, 'index.html'));
-});
-app.get('/dashboard', (req, res) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    res.sendFile(path.join(publicDir, 'dashboard.html'));
-});
-app.get('/feedback', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
-app.get('/form-feedbacks', (req, res) => res.sendFile(path.join(publicDir, 'form-feedbacks.html')));
-app.get('/projects', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/talks', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/certifications', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/feedbacks', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/testimonials', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/awards', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/publications', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/browse', (req, res) => res.sendFile(path.join(publicDir, 'browse.html')));
-app.get('/blog', (req, res) => res.redirect('/#blog'));
-app.get('/blogs', (req, res) => res.redirect('/#blog'));
-app.get('/gallery', (req, res) => res.redirect('/#gallery'));
-app.get('/galeri', (req, res) => res.redirect('/#gallery'));
-app.get('/form/:slug', (req, res) => res.sendFile(path.join(publicDir, 'form-renderer.html')));
-app.get('/full-materi.pdf', (req, res) => res.sendFile(path.join(publicDir, 'full-materi.pdf')));
-app.get('/resume', (req, res) => res.sendFile(path.join(publicDir, 'assets/resume-muhammad-haerul.pdf')));
-app.get('/cv', (req, res) => res.sendFile(path.join(publicDir, 'assets/resume-muhammad-haerul.pdf')));
+// 5. Clean Page & Document Routes
+app.use('/', pageRoutes);
 
 // 6. Centralized API Gateway with Global Rate Limiting
 app.use('/api', apiLimiter, apiRoutes);

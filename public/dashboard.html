@@ -4859,8 +4859,8 @@
                             <div style="position:relative; width:100%; min-height:310px; background:radial-gradient(circle at 50% 50%, rgba(66,133,244,0.08) 0%, rgba(248,249,250,1) 85%), repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0,0,0,0.03) 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(0,0,0,0.03) 20px); border:1.5px dashed #CBD5E1; border-radius:16px; display:flex; align-items:center; justify-content:center; padding:20px; overflow:hidden;">
                                 <div id="simulated-floating-card" class="hero-glimpse-item active" style="position:relative; transform:none; opacity:1; cursor:default; max-width:270px; width:100%; box-shadow:0 16px 36px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.7); animation:none;">
                                     <div class="hero-glimpse-media">
-                                        <img id="sim-card-blur" class="hero-glimpse-blur-bg" src="/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp" alt="">
-                                        <img id="sim-card-img" class="hero-glimpse-main-img" src="/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp" alt="Keynote" onerror="this.src='/favicon.webp'">
+                                        <img id="sim-card-blur" class="hero-glimpse-blur-bg" src="/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp" alt="">
+                                        <img id="sim-card-img" class="hero-glimpse-main-img" src="/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp" alt="Keynote" onerror="this.src='/favicon.webp'">
                                     </div>
                                     <div class="hero-glimpse-caption">
                                         <div class="hero-glimpse-meta">
@@ -5933,7 +5933,7 @@
                     </div>
                     <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">
                         <div style="display:flex; gap:8px;">
-                            <input class="field-input" id="exp-logo" placeholder="e.g. /assets/images/aksarahub-logo.png or https://…" oninput="updateExpLogoPreview()" style="font-size:0.86rem; padding:8px 12px;">
+                            <input class="field-input" id="exp-logo" placeholder="e.g. /assets/images/logos/aksarahub-logo.png or https://…" oninput="updateExpLogoPreview()" style="font-size:0.86rem; padding:8px 12px;">
                             <input type="file" id="exp-logo-file" accept="image/*" style="display:none" onchange="uploadExpLogo()">
                             <button type="button" class="btn-upload" id="exp-logo-upload-btn" onclick="document.getElementById('exp-logo-file').click()" style="padding:8px 14px; flex-shrink:0;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload
@@ -6101,7 +6101,7 @@
                     </div>
                     <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">
                         <div style="display:flex; gap:8px;">
-                            <input class="field-input" id="edu-logo" placeholder="e.g. /assets/images/unhas-logo.png or https://…" oninput="updateEduLogoPreview()" style="font-size:0.86rem; padding:8px 12px;">
+                            <input class="field-input" id="edu-logo" placeholder="e.g. /assets/images/logos/unhas-logo.png or https://…" oninput="updateEduLogoPreview()" style="font-size:0.86rem; padding:8px 12px;">
                             <input type="file" id="edu-logo-file" accept="image/*" style="display:none" onchange="uploadEduLogo()">
                             <button type="button" class="btn-upload" id="edu-logo-upload-btn" onclick="document.getElementById('edu-logo-file').click()" style="padding:8px 14px; flex-shrink:0;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload
@@ -7512,7 +7512,7 @@ async function loadOverview() {
         var [resBoot, resForms, resContact] = await Promise.all([
             fetch('/api/portfolio/bootstrap').then(r => r.json()).catch(() => ({ success: false })),
             fetch('/api/forms').then(r => r.json()).catch(() => ({ data: [] })),
-            fetch('/api/contact').then(r => r.json()).catch(() => ({ count: 0, unreadCount: 0 }))
+            (localStorage.getItem('mh_admin_token') ? fetch('/api/contact').then(r => r.json()).catch(() => ({ count: 0, unreadCount: 0 })) : Promise.resolve({ count: 0, unreadCount: 0 }))
         ]);
 
         var bootData = (resBoot && resBoot.success && resBoot.data) ? resBoot.data : {};
@@ -12947,7 +12947,7 @@ async function loadImageSlideshowSettings() {
                     title: 'Build with AI: AI-Driven Development Keynote',
                     category: 'SPEAKING & WORKSHOPS',
                     date: 'May 2026',
-                    image_url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2825725287413554497_n_1787520000000.webp'
+                    image_url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp'
                 },
                 {
                     id: 'default-2',
@@ -16399,7 +16399,7 @@ function renderCertificationsGrid() {
                     (cert.category ? '<span style="background:var(--sidebar-hover); color:var(--ink-3); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid var(--sidebar-border); flex-shrink:0;">' + esc(cert.category) + '</span>' : '') +
                 '</div>' +
             '</div>' +
-            (cert.image_url ? '<div style="width:100%; aspect-ratio:16/9; max-height:140px; border-radius:8px; overflow:hidden; border:1px solid var(--sidebar-border); background:#f8fafc; display:flex; align-items:center; justify-content:center; margin-top:4px;"><img src="' + esc(cert.image_url) + '" style="width:100%; height:100%; object-fit:contain; background:#ffffff; padding:4px;" alt="' + esc(cert.title) + '"></div>' : '') +
+            (cert.image_url ? '<div style="width:100%; aspect-ratio:16/9; max-height:140px; border-radius:8px; overflow:hidden; border:1px solid var(--sidebar-border); background:#f8fafc; display:flex; align-items:center; justify-content:center; margin-top:4px;"><img src="' + esc(String(cert.image_url).split(/[,\n]+/)[0].trim()) + '" style="width:100%; height:100%; object-fit:contain; background:#ffffff; padding:4px;" alt="' + esc(cert.title) + '"></div>' : '') +
             (skillsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;">' + skillsPills + '</div>' : '') +
             (cert.credential_url ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(cert.credential_url) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 View Credential ↗</a></div>' : '') +
             '<div style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
@@ -16736,6 +16736,7 @@ async function deleteAward(id) {
 var inboxData = [];
 
 async function loadInbox() {
+    if (!localStorage.getItem('mh_admin_token')) return;
     try {
         var res = await fetch('/api/contact');
         var data = await res.json();

@@ -1943,6 +1943,34 @@
           }
         ];
       }
+      if (title.includes('devops') || cert.credential_id === 'MRZMYND6KZYQ') {
+        return [
+          {
+            label: isId ? 'Sertifikat' : 'Certificate',
+            url: cert.image_url || '/assets/certificates/cert-devops-dicoding.jpg',
+            type: 'certificate'
+          },
+          {
+            label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+            url: '/assets/certificates/cert-devops-dicoding-page2.jpg',
+            type: 'curriculum'
+          }
+        ];
+      }
+      if (title.includes('digital entrepreneurship') && (cert.issuer || '').toLowerCase().includes('google')) {
+        return [
+          {
+            label: isId ? 'Sertifikat' : 'Certificate',
+            url: cert.image_url || '/assets/certificates/cert-google-digital-entrepreneurship.jpg',
+            type: 'certificate'
+          },
+          {
+            label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+            url: '/assets/certificates/cert-google-digital-entrepreneurship-page2.jpg',
+            type: 'curriculum'
+          }
+        ];
+      }
 
       if (cert.image_url) {
         return [

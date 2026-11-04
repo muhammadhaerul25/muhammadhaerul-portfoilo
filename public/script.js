@@ -1032,6 +1032,19 @@
     return 'year-tag-legacy';
   }
 
+  function getYearAccentColor(dateVal) {
+    const cls = getYearBadgeClass(dateVal);
+    switch (cls) {
+      case 'year-tag-2026': return 'var(--year-2026, #1d4ed8)';
+      case 'year-tag-2025': return 'var(--year-2025, #7c3aed)';
+      case 'year-tag-2024': return 'var(--year-2024, #059669)';
+      case 'year-tag-2023': return 'var(--year-2023, #d97706)';
+      case 'year-tag-2022': return 'var(--year-2022, #e11d48)';
+      case 'year-tag-2021': return 'var(--year-2021, #0d9488)';
+      default: return 'var(--year-legacy, #475569)';
+    }
+  }
+
   // Extract YouTube Video ID
   function getYouTubeId(url) {
     if (!url) return null;
@@ -2220,8 +2233,8 @@
     if (!timelineEl || !experiences || !experiences.length) return;
 
     timelineEl.innerHTML = experiences.map(exp => {
-      const accent = exp.accent_color || 'var(--blue)';
       const dateStr = `${escapeHtml(exp.start_date || '')}${exp.end_date ? ' — ' + escapeHtml(exp.end_date) : (exp.is_current ? ' — Present' : '')}`;
+      const accent = getYearAccentColor(dateStr);
       const stackList = Array.isArray(exp.stack) ? exp.stack : [];
       const metaParts = [];
       if (exp.work_type) metaParts.push(exp.work_type);
@@ -2229,12 +2242,12 @@
       const metaStr = metaParts.map(p => ` <span class="timeline-loc">· ${escapeHtml(p)}</span>`).join('');
 
       return `
-        <div class="timeline-item reveal in-view">
+        <div class="timeline-item reveal in-view" style="--accent:${escapeHtml(accent)}">
           <div class="timeline-marker" style="--accent:${escapeHtml(accent)}"></div>
           <div class="timeline-content">
             <div class="timeline-header">
               <div class="timeline-company-logo" aria-label="${escapeHtml(exp.company)} Logo">
-                ${exp.logo_url ? `<img src="${escapeHtml(exp.logo_url)}" alt="${escapeHtml(exp.company)}" loading="lazy" decoding="async">` : (exp.company && exp.company.toLowerCase().includes('aksarahub') ? `<img src="/assets/images/aksarahub-logo.png" alt="${escapeHtml(exp.company)}" loading="lazy" decoding="async">` : '')}
+                ${exp.logo_url ? `<img src="${escapeHtml(exp.logo_url)}" alt="${escapeHtml(exp.company)}" loading="lazy" decoding="async">` : (exp.company && exp.company.toLowerCase().includes('aksarahub') ? `<img src="/assets/images/logos/aksarahub-logo.png" alt="${escapeHtml(exp.company)}" loading="lazy" decoding="async">` : '')}
               </div>
               <div class="timeline-header-main">
                 <div class="timeline-top">
@@ -2857,6 +2870,34 @@
           label: isId ? 'Sertifikat' : 'Certificate',
           url: cert.image_url || '/assets/certificates/cert-pasas-cisdv.jpg',
           type: 'certificate'
+        }
+      ];
+    }
+    if (title.includes('devops') || cert.credential_id === 'MRZMYND6KZYQ') {
+      return [
+        {
+          label: isId ? 'Sertifikat' : 'Certificate',
+          url: cert.image_url || '/assets/certificates/cert-devops-dicoding.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+          url: '/assets/certificates/cert-devops-dicoding-page2.jpg',
+          type: 'curriculum'
+        }
+      ];
+    }
+    if (title.includes('digital entrepreneurship') && (cert.issuer || '').toLowerCase().includes('google')) {
+      return [
+        {
+          label: isId ? 'Sertifikat' : 'Certificate',
+          url: cert.image_url || '/assets/certificates/cert-google-digital-entrepreneurship.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+          url: '/assets/certificates/cert-google-digital-entrepreneurship-page2.jpg',
+          type: 'curriculum'
         }
       ];
     }
@@ -4211,7 +4252,7 @@
       `;
 
       if (pubLower.includes('hasanuddin') || pubLower.includes('unhas')) {
-        pubLogoHtml = `<img src="/assets/images/unhas-logo.png" alt="Hasanuddin University" style="width:24px; height:24px; object-fit:contain;" / decoding="async">`;
+        pubLogoHtml = `<img src="/assets/images/logos/unhas-logo.png" alt="Hasanuddin University" style="width:24px; height:24px; object-fit:contain;" / decoding="async">`;
       } else if (pubLower.includes('pypi') || pubLower.includes('python')) {
         pubLogoHtml = `<img src="/assets/images/pypi.svg" alt="Python Package Index (PyPI)" style="width:20px; height:20px; object-fit:contain;" / decoding="async">`;
       } else if (pubLower.includes('medium')) {

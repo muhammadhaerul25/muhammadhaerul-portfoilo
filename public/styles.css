@@ -1894,9 +1894,9 @@ img {
   font-family: inherit;
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--accent, var(--blue));
-  background: rgba(66, 133, 244, 0.08);
-  border: 1px solid rgba(66, 133, 244, 0.22);
+  color: var(--accent, var(--blue, #2563eb));
+  background: color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 25%, transparent);
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1904,18 +1904,18 @@ img {
 }
 
 [data-theme="dark"] .timeline-projects-toggle-btn {
-  background: rgba(66, 133, 244, 0.14);
-  border-color: rgba(66, 133, 244, 0.32);
+  background: color-mix(in srgb, var(--accent, var(--blue, #60a5fa)) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent, var(--blue, #60a5fa)) 35%, transparent);
 }
 
 .timeline-projects-toggle-btn:hover {
-  background: rgba(66, 133, 244, 0.16);
-  border-color: var(--accent, var(--blue));
+  background: color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 18%, transparent);
+  border-color: var(--accent, var(--blue, #2563eb));
   transform: translateY(-1px);
 }
 
 [data-theme="dark"] .timeline-projects-toggle-btn:hover {
-  background: rgba(66, 133, 244, 0.26);
+  background: color-mix(in srgb, var(--accent, var(--blue, #60a5fa)) 26%, transparent);
 }
 
 .timeline-projects-toggle-btn:active {
@@ -2806,6 +2806,26 @@ img {
 }
 
 /* Year Color System: Strictly unified by year across the entire portfolio */
+:root {
+  --year-2026: #1d4ed8;
+  --year-2025: #7c3aed;
+  --year-2024: #059669;
+  --year-2023: #d97706;
+  --year-2022: #e11d48;
+  --year-2021: #0d9488;
+  --year-legacy: #475569;
+}
+
+[data-theme="dark"] {
+  --year-2026: #60a5fa;
+  --year-2025: #a78bfa;
+  --year-2024: #34d399;
+  --year-2023: #fbbf24;
+  --year-2022: #fb7185;
+  --year-2021: #2dd4bf;
+  --year-legacy: #94a3b8;
+}
+
 .year-tag-2026,
 .award-metric-tag.blue,
 .award-metric-tag.year-tag-2026 {
@@ -7791,9 +7811,9 @@ img {
   margin-bottom: 14px;
   padding: 5px 12px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--blue, #2563eb) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--blue, #2563eb) 20%, transparent);
-  color: var(--blue, #2563eb);
+  background: color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 20%, transparent);
+  color: var(--accent, var(--blue, #2563eb));
   font-family: var(--font-sans, inherit);
   font-size: 12px;
   font-weight: 700;
@@ -7807,17 +7827,17 @@ img {
 
 .card-read-more-btn:hover,
 .timeline-projects-toggle-btn:hover {
-  background: color-mix(in srgb, var(--blue, #2563eb) 15%, transparent);
-  border-color: color-mix(in srgb, var(--blue, #2563eb) 38%, transparent);
-  color: var(--blue, #1d4ed8);
+  background: color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 15%, transparent);
+  border-color: color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 38%, transparent);
+  color: var(--accent, var(--blue, #1d4ed8));
   transform: translateY(-1px);
   text-decoration: none;
 }
 
 .card-read-more-btn[aria-expanded="true"],
 .timeline-projects-toggle-btn[aria-expanded="true"] {
-  background: color-mix(in srgb, var(--blue, #2563eb) 14%, transparent);
-  border-color: color-mix(in srgb, var(--blue, #2563eb) 35%, transparent);
+  background: color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent, var(--blue, #2563eb)) 35%, transparent);
 }
 
 .card-read-more-btn .rm-chevron,
