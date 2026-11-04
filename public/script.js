@@ -3390,67 +3390,106 @@
     const overlay = document.getElementById('projectModalOverlay');
     const titleEl = document.getElementById('pmTitle');
     const dateEl = document.getElementById('pmDate');
+    const statusEl = document.getElementById('pmStatus');
     const bodyEl = document.getElementById('pmBody');
     const footEl = document.getElementById('pmFoot');
 
     if (!overlay || !bodyEl) return;
 
     titleEl.textContent = p.name || 'Project Details';
-    dateEl.textContent = formatDateRange(p.dateRange);
+    const dateStr = formatDateRange(p.dateRange);
+    dateEl.textContent = dateStr;
+    dateEl.className = `p-card-date ${getYearBadgeClass(dateStr)}`;
+
+    if (statusEl) {
+      if (p.linkProject) {
+        statusEl.innerHTML = `<span class="status-dot"></span> Live Application`;
+        statusEl.style.display = 'inline-flex';
+      } else {
+        statusEl.style.display = 'none';
+      }
+    }
 
     // Parse tech stack categorizations
-    const stackItems = (p.techStack || []).map(t => {
-      if (t.includes(':')) {
-        const parts = t.split(':');
-        return `<div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border); font-size:13px;">
-          <span style="color:var(--text-tertiary); font-family:var(--font-mono); font-size:12px;">${escapeHtml(parts[0].trim())}</span>
-          <strong style="color:var(--text);">${escapeHtml(parts[1].trim())}</strong>
-        </div>`;
+    let stackHtml = '';
+    if (p.techStack && p.techStack.length) {
+      const hasCategories = p.techStack.some(t => t.includes(':'));
+      if (hasCategories) {
+        const cards = p.techStack.map(t => {
+          if (t.includes(':')) {
+            const parts = t.split(':');
+            return `<div class="p-modal-stack-card">
+              <span class="p-modal-stack-label">${escapeHtml(parts[0].trim())}</span>
+              <strong class="p-modal-stack-val">${escapeHtml(parts[1].trim())}</strong>
+            </div>`;
+          }
+          return `<div class="p-modal-stack-card">
+            <span class="p-modal-stack-label">Stack</span>
+            <strong class="p-modal-stack-val">${escapeHtml(t.trim())}</strong>
+          </div>`;
+        }).join('');
+        stackHtml = `<div class="p-modal-stack-grid">${cards}</div>`;
+      } else {
+        const pills = p.techStack.map(t => `<span class="p-tag" style="font-size:12px; padding:5px 12px;">${escapeHtml(t.trim())}</span>`).join('');
+        stackHtml = `<div style="display:flex; flex-wrap:wrap; gap:8px;">${pills}</div>`;
       }
-      return `<span class="p-tag" style="margin:2px;">${escapeHtml(t)}</span>`;
-    }).join('');
+    }
 
     const ytId = getYouTubeId(p.videoDemo);
     const videoEmbedHtml = ytId ? `
-      <div style="position:relative; aspect-ratio:16/9; width:100%; border-radius:var(--radius-md); overflow:hidden; margin-bottom:22px; background:#000; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
-        <iframe style="width:100%; height:100%; border:0;" 
+      <div class="p-modal-media-wrap">
+        <iframe 
           src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" 
           title="${escapeHtml(p.name)} Video Demo" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           allowfullscreen>
         </iframe>
       </div>
-    ` : '';
+    ` : (p.thumbnailUrl ? `
+      <div class="p-modal-media-wrap" style="background:#0F172A;">
+        <img src="${escapeHtml(p.thumbnailUrl)}" alt="${escapeHtml(p.name)}" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    ` : '');
+
+    const formattedDesc = formatStructuredCardText(p.description || '');
 
     bodyEl.innerHTML = `
       ${videoEmbedHtml}
-      <div style="margin-bottom:20px;">
-        <h4 style="font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-tertiary); font-family:var(--font-mono); margin-bottom:8px;">Overview</h4>
-        <p style="font-size:14.5px; color:var(--text-secondary); line-height:1.75; white-space:pre-line;">${escapeHtml(p.description || '')}</p>
+      <div style="margin-bottom:24px;">
+        <h4 class="p-modal-section-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Overview &amp; Key Capabilities
+        </h4>
+        <div class="p-modal-desc-box">
+          ${formattedDesc}
+        </div>
       </div>
 
-      ${p.techStack && p.techStack.length ? `
-        <div style="margin-bottom:20px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px;">
-          <h4 style="font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-tertiary); font-family:var(--font-mono); margin-bottom:10px;">Tech Stack Architecture</h4>
-          ${stackItems}
+      ${stackHtml ? `
+        <div class="p-modal-stack-box">
+          <h4 class="p-modal-section-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Tech Stack Architecture
+          </h4>
+          ${stackHtml}
         </div>
       ` : ''}
     `;
 
     footEl.innerHTML = `
       ${p.videoDemo ? `
-        <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-btn-action p-btn-demo">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <a href="${escapeHtml(p.videoDemo)}" target="_blank" rel="noopener" class="p-modal-btn-video" title="Watch demo on YouTube">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Watch on YouTube
         </a>
       ` : ''}
       ${p.linkProject ? `
-        <a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="p-btn-action p-btn-live">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Visit Project
+        <a href="${escapeHtml(p.linkProject)}" target="_blank" rel="noopener" class="p-modal-btn-live" title="Visit production live project">
+          Visit Live Project
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
         </a>
       ` : ''}
-      <button type="button" class="p-btn-action primary" onclick="closeProjectModal()">Close</button>
+      <button type="button" class="p-modal-btn-dismiss" onclick="closeProjectModal()">Close</button>
     `;
 
     overlay.classList.add('active');

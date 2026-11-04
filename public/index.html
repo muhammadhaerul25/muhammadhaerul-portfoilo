@@ -3736,11 +3736,16 @@
 
   <!-- ============ PROJECT DETAIL MODAL ============ -->
   <div class="mh-modal-overlay" id="projectModalOverlay" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
-    <div class="mh-modal">
+    <div class="mh-modal project-detail-modal">
+      <div class="card-stripe"></div>
       <div class="mh-modal-head">
         <div>
+          <div class="p-modal-eyebrow">Project Showcase</div>
           <h3 class="mh-modal-title" id="pmTitle">Project Details</h3>
-          <p class="mh-modal-sub" id="pmDate"></p>
+          <div class="p-modal-meta-row" id="pmMetaRow">
+            <span class="p-card-date" id="pmDate"></span>
+            <span class="p-modal-status-badge" id="pmStatus" style="display:none;"></span>
+          </div>
         </div>
         <button type="button" class="mh-modal-close" onclick="closeProjectModal()" aria-label="Close dialog">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
