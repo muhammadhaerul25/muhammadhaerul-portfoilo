@@ -1527,7 +1527,12 @@
       if (totalTalks <= TALKS_PER_PAGE) {
         paginationWrap.style.display = totalTalks > 0 ? 'flex' : 'none';
         paginationInfo.innerHTML = `Showing all <strong>${totalTalks}</strong> ${totalTalks === 1 ? 'talk' : 'talks'}`;
-        paginationControls.innerHTML = '';
+        paginationControls.innerHTML = `
+          <button type="button" class="p-page-toggle-btn" onclick="window.open('/talks', '_blank')" title="Open talks in a new dedicated page">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalTalks})</span>
+          </button>
+        `;
       } else {
         paginationWrap.style.display = 'flex';
         paginationInfo.innerHTML = showAllTalks
@@ -2967,6 +2972,7 @@
         cert.issuer.toLowerCase().includes('komdigi')
       );
       const isPasas = cert.issuer && cert.issuer.toLowerCase().includes('pasas');
+      const isMicrosoft = cert.issuer && cert.issuer.toLowerCase().includes('microsoft');
       const issuerIconHtml = isLppi
         ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
         : (isDicoding
@@ -2975,8 +2981,10 @@
             ? `<img src="/assets/certificates/logo-dts.png" alt="Digitalent DTS Logo" class="cert-issuer-img">`
             : (isPasas
               ? `<img src="/assets/certificates/logo-pasas.png" alt="PASAS Institute Logo" class="cert-issuer-img">`
-              : escapeHtml(getInitials(cert.issuer)))));
-      const issuerIconClass = (isLppi || isDicoding || isDts || isPasas) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+              : (isMicrosoft
+                ? `<img src="/assets/certificates/logo-microsoft.svg" alt="Microsoft Logo" class="cert-issuer-img">`
+                : escapeHtml(getInitials(cert.issuer))))));
+      const issuerIconClass = (isLppi || isDicoding || isDts || isPasas || isMicrosoft) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
 
       const mediaHtml = hasPreview ? `
         <div class="cert-card-preview-wrap">
@@ -3247,6 +3255,13 @@
         controlsHtml += `
           <button type="button" class="p-page-btn" onclick="window.changeAwardPage(${currentAwardPage + 1})" ${nextDisabled} aria-label="Next Page">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        `;
+
+        controlsHtml += `
+          <button type="button" class="p-page-toggle-btn" onclick="window.open('/awards', '_blank')" title="Open awards in a new dedicated page">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalAwards})</span>
           </button>
         `;
 
@@ -4219,6 +4234,21 @@
         </article>
       `;
     }).join('');
+
+    const pubWrap = document.getElementById('pubsPaginationWrap');
+    const pubInfo = document.getElementById('pubsPaginationInfo');
+    const pubControls = document.getElementById('pubsPaginationControls');
+    const totalPubs = (pubs || []).length;
+    if (pubWrap && pubInfo && pubControls) {
+      pubWrap.style.display = totalPubs > 0 ? 'flex' : 'none';
+      pubInfo.innerHTML = `Showing all <strong>${totalPubs}</strong> ${totalPubs === 1 ? 'publication' : 'publications'}`;
+      pubControls.innerHTML = `
+        <button type="button" class="p-page-toggle-btn" onclick="window.open('/publications', '_blank')" title="Open publications in a new dedicated page">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>${isIndonesian() ? 'Lihat Semua' : 'Browse All'} (${totalPubs})</span>
+        </button>
+      `;
+    }
   }
 
   function getBlogArtSvg(type) {

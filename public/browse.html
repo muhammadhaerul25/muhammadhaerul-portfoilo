@@ -1362,6 +1362,7 @@
             cert.issuer.toLowerCase().includes('komdigi')
           );
           const isPasas = cert.issuer && cert.issuer.toLowerCase().includes('pasas');
+          const isMicrosoft = cert.issuer && cert.issuer.toLowerCase().includes('microsoft');
           const issuerIconHtml = isLppi
             ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
             : (isDicoding
@@ -1370,8 +1371,10 @@
                     ? `<img src="/assets/certificates/logo-dts.png" alt="Digitalent DTS Logo" class="cert-issuer-img">`
                     : (isPasas
                         ? `<img src="/assets/certificates/logo-pasas.png" alt="PASAS Institute Logo" class="cert-issuer-img">`
-                        : escapeHtml(getInitials(cert.issuer)))));
-          const issuerIconClass = (isLppi || isDicoding || isDts || isPasas) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+                        : (isMicrosoft
+                            ? `<img src="/assets/certificates/logo-microsoft.svg" alt="Microsoft Logo" class="cert-issuer-img">`
+                            : escapeHtml(getInitials(cert.issuer))))));
+          const issuerIconClass = (isLppi || isDicoding || isDts || isPasas || isMicrosoft) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
 
           const pages = getCertificatePages(cert, false);
           const hasPreview = pages.length > 0;
