@@ -4196,10 +4196,9 @@
               </span>
               <div class="pub-meta-col">
                 <span class="pub-publisher">${escapeHtml(publisher)}</span>
-                ${p.date ? `<span class="pub-date ${getYearBadgeClass(p.date)}">${escapeHtml(p.date)}</span>` : ''}
               </div>
             </div>
-            <span class="pub-type-pill">Publication</span>
+            ${p.date ? `<span class="pub-date ${getYearBadgeClass(p.date)}">${escapeHtml(p.date)}</span>` : ''}
           </div>
 
           ${previewHtml}
