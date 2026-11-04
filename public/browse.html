@@ -1076,11 +1076,12 @@
         if (!filtersRow.dataset.rendered || filtersRow.dataset.collection !== 'projects') {
           filtersRow.innerHTML = `
             <button class="browse-filter-pill active" onclick="setCategoryFilter('all', this)">All Projects (${raw.length})</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('web', this)">Full-Stack Development</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('data', this)">Data Analytics</button>
             <button class="browse-filter-pill" onclick="setCategoryFilter('cv', this)">Computer Vision</button>
             <button class="browse-filter-pill" onclick="setCategoryFilter('nlp', this)">NLP</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('llm', this)">LLMs & AI Agents</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('data', this)">Data & Analytics</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('web', this)">Full-Stack & Web</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('genai', this)">Generative AI</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('agents', this)">AI Agents</button>
           `;
           filtersRow.dataset.rendered = 'true';
           filtersRow.dataset.collection = 'projects';
@@ -1119,7 +1120,18 @@
             return full.includes('full-stack') || full.includes('react') || full.includes('fastapi') ||
                    full.includes('typescript') || full.includes('javascript') || full.includes('flask') ||
                    full.includes('html') || full.includes('android') || full.includes('frontend') ||
-                   full.includes('backend') || full.includes('mobile');
+                   full.includes('backend') || full.includes('mobile') || full.includes('app -') || full.includes('web');
+          }
+          if (activeCategoryFilter === 'genai') {
+            const full = (p.name + ' ' + (p.description||'') + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return full.includes('generative ai') || full.includes('genai') || full.includes('llm') || full.includes('rag') ||
+                   full.includes('gemini') || full.includes('openai') || full.includes('huggingface') || full.includes('transcription') ||
+                   full.includes('whisper') || full.includes('chatbot') || full.includes('english learning') || full.includes('ai update hub') || full.includes('split bills');
+          }
+          if (activeCategoryFilter === 'agents') {
+            const full = (p.name + ' ' + (p.description||'') + ' ' + (p.techStack||[]).join(' ')).toLowerCase();
+            return full.includes('agent') || full.includes('flowise') || full.includes('vectorrag') || full.includes('automation') ||
+                   full.includes('intelligence aggregation') || full.includes('ai-powered') || full.includes('companion');
           }
           return true;
         });

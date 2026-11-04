@@ -1100,6 +1100,16 @@
     const tags = (p.techStack || []).join(' ').toLowerCase();
     const full = `${name} ${desc} ${tags}`;
 
+    if (filter === 'web') {
+      return full.includes('full-stack') || full.includes('react') || full.includes('fastapi') ||
+        full.includes('typescript') || full.includes('javascript') || full.includes('flask') ||
+        full.includes('html') || full.includes('android') || full.includes('frontend') ||
+        full.includes('backend') || full.includes('mobile') || full.includes('app -') || full.includes('web');
+    }
+    if (filter === 'data') {
+      return full.includes('tableau') || full.includes('analytics') || full.includes('data visualization') ||
+        full.includes('data science') || full.includes('dashboard') || full.includes('business intelligence');
+    }
     if (filter === 'cv') {
       return full.includes('yolo') || full.includes('opencv') || full.includes('object detection') ||
         full.includes('ocr') || full.includes('alpr') || full.includes('computer vision') ||
@@ -1112,20 +1122,17 @@
         full.includes('sentiment') || full.includes('rag') || full.includes('chatbot') ||
         full.includes('english learning') || full.includes('search engine');
     }
+    if (filter === 'genai') {
+      return full.includes('generative ai') || full.includes('genai') || full.includes('llm') || full.includes('rag') ||
+        full.includes('gemini') || full.includes('openai') || full.includes('huggingface') || full.includes('transcription') ||
+        full.includes('whisper') || full.includes('chatbot') || full.includes('english learning') || full.includes('ai update hub') || full.includes('split bills');
+    }
+    if (filter === 'agents') {
+      return full.includes('agent') || full.includes('flowise') || full.includes('vectorrag') || full.includes('automation') ||
+        full.includes('intelligence aggregation') || full.includes('ai-powered') || full.includes('companion');
+    }
     if (filter === 'llm') {
-      return full.includes('llm') || full.includes('rag') || full.includes('agent') ||
-        full.includes('gemini') || full.includes('flowise') || full.includes('openai') ||
-        full.includes('huggingface') || full.includes('chatbot') || full.includes('ai update hub');
-    }
-    if (filter === 'data') {
-      return full.includes('tableau') || full.includes('analytics') || full.includes('data visualization') ||
-        full.includes('data science') || full.includes('dashboard') || full.includes('business intelligence');
-    }
-    if (filter === 'web') {
-      return full.includes('full-stack') || full.includes('react') || full.includes('fastapi') ||
-        full.includes('typescript') || full.includes('javascript') || full.includes('flask') ||
-        full.includes('html') || full.includes('android') || full.includes('frontend') ||
-        full.includes('backend') || full.includes('mobile');
+      return matchesProjectCategory(p, 'genai') || matchesProjectCategory(p, 'agents');
     }
     return true;
   }
@@ -3333,25 +3340,28 @@
   function updateProjectFilterCounts() {
     if (!liveProjects || !liveProjects.length) return;
     const countAll = liveProjects.length;
+    const countWeb = liveProjects.filter(p => matchesProjectCategory(p, 'web')).length;
+    const countData = liveProjects.filter(p => matchesProjectCategory(p, 'data')).length;
     const countCv = liveProjects.filter(p => matchesProjectCategory(p, 'cv')).length;
     const countNlp = liveProjects.filter(p => matchesProjectCategory(p, 'nlp')).length;
-    const countLlm = liveProjects.filter(p => matchesProjectCategory(p, 'llm')).length;
-    const countData = liveProjects.filter(p => matchesProjectCategory(p, 'data')).length;
-    const countWeb = liveProjects.filter(p => matchesProjectCategory(p, 'web')).length;
+    const countGenAi = liveProjects.filter(p => matchesProjectCategory(p, 'genai')).length;
+    const countAgents = liveProjects.filter(p => matchesProjectCategory(p, 'agents')).length;
 
     const elAll = document.querySelector('.p-filter-pill[data-filter="all"] .p-filter-count');
+    const elWeb = document.querySelector('.p-filter-pill[data-filter="web"] .p-filter-count');
+    const elData = document.querySelector('.p-filter-pill[data-filter="data"] .p-filter-count');
     const elCv = document.querySelector('.p-filter-pill[data-filter="cv"] .p-filter-count');
     const elNlp = document.querySelector('.p-filter-pill[data-filter="nlp"] .p-filter-count');
-    const elLlm = document.querySelector('.p-filter-pill[data-filter="llm"] .p-filter-count');
-    const elData = document.querySelector('.p-filter-pill[data-filter="data"] .p-filter-count');
-    const elWeb = document.querySelector('.p-filter-pill[data-filter="web"] .p-filter-count');
+    const elGenAi = document.querySelector('.p-filter-pill[data-filter="genai"] .p-filter-count');
+    const elAgents = document.querySelector('.p-filter-pill[data-filter="agents"] .p-filter-count');
 
     if (elAll) elAll.textContent = countAll;
+    if (elWeb) elWeb.textContent = countWeb;
+    if (elData) elData.textContent = countData;
     if (elCv) elCv.textContent = countCv;
     if (elNlp) elNlp.textContent = countNlp;
-    if (elLlm) elLlm.textContent = countLlm;
-    if (elData) elData.textContent = countData;
-    if (elWeb) elWeb.textContent = countWeb;
+    if (elGenAi) elGenAi.textContent = countGenAi;
+    if (elAgents) elAgents.textContent = countAgents;
   }
 
   // Setup Project Filter Listeners
