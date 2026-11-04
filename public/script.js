@@ -2074,17 +2074,16 @@
     const drawer = document.getElementById(drawerId);
     if (!drawer) return;
     const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-    const count = btn.getAttribute('data-count') || '';
     const textEl = btn.querySelector('.toggle-btn-text');
 
     if (isExpanded) {
       drawer.classList.remove('is-open');
       btn.setAttribute('aria-expanded', 'false');
-      if (textEl) textEl.textContent = `Show ${count} more projects`;
+      if (textEl) textEl.textContent = 'Read more';
     } else {
       drawer.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
-      if (textEl) textEl.textContent = 'Show fewer projects';
+      if (textEl) textEl.textContent = 'Read less';
     }
   };
 
@@ -2141,7 +2140,7 @@
           </div>
         </div>
         <button type="button" class="timeline-projects-toggle-btn" onclick="window.toggleTimelineProjects(this, '${drawerId}')" aria-expanded="false" data-count="${remainingProjects.length}">
-          <span class="toggle-btn-text">Show ${remainingProjects.length} more projects</span>
+          <span class="toggle-btn-text">Read more</span>
           <svg class="toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
@@ -2344,6 +2343,9 @@
         btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
     }
+    if (window.updateSkillsNavState) {
+      setTimeout(window.updateSkillsNavState, 350);
+    }
 
     const cards = document.querySelectorAll('.unified-spec-card');
     cards.forEach(card => {
@@ -2389,6 +2391,10 @@
           `;
       }).join('')}
       `;
+
+      if (window.updateSkillsNavState) {
+        setTimeout(window.updateSkillsNavState, 60);
+      }
     }
 
     if (skillsGrid) {
@@ -2475,6 +2481,158 @@
       card.appendChild(foot);
     }
   });
+
+  // Horizontal Drag, Wheel, and Arrow Nav for Pill Filters
+  function setupHorizontalFilterScroll(containerTarget, prevBtnId, nextBtnId) {
+    const container = typeof containerTarget === 'string'
+      ? (document.getElementById(containerTarget) || document.querySelector(containerTarget))
+      : containerTarget;
+    if (!container) return null;
+
+    const prevBtn = prevBtnId ? document.getElementById(prevBtnId) : null;
+    const nextBtn = nextBtnId ? document.getElementById(nextBtnId) : null;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+    let isDragging = false;
+    let dragDistance = 0;
+    let wasDragging = false;
+
+    function updateNavState() {
+      if (!container) return;
+      const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
+      const hasOverflow = maxScroll > 4;
+
+      if (!hasOverflow) {
+        if (prevBtn) prevBtn.classList.remove('is-visible');
+        if (nextBtn) nextBtn.classList.remove('is-visible');
+        container.classList.remove('fade-left', 'fade-right', 'fade-both');
+        return;
+      }
+
+      const sl = container.scrollLeft;
+      const atStart = sl <= 6;
+      const atEnd = sl >= maxScroll - 6;
+
+      if (prevBtn) {
+        if (atStart) {
+          prevBtn.classList.remove('is-visible');
+        } else {
+          prevBtn.classList.add('is-visible');
+        }
+      }
+
+      if (nextBtn) {
+        if (atEnd) {
+          nextBtn.classList.remove('is-visible');
+        } else {
+          nextBtn.classList.add('is-visible');
+        }
+      }
+
+      if (atStart && !atEnd) {
+        container.classList.add('fade-right');
+        container.classList.remove('fade-left', 'fade-both');
+      } else if (atEnd && !atStart) {
+        container.classList.add('fade-left');
+        container.classList.remove('fade-right', 'fade-both');
+      } else if (!atStart && !atEnd) {
+        container.classList.add('fade-both');
+        container.classList.remove('fade-left', 'fade-right');
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        container.scrollBy({ left: -280, behavior: 'smooth' });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        container.scrollBy({ left: 280, behavior: 'smooth' });
+      });
+    }
+
+    container.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDown = true;
+      isDragging = false;
+      dragDistance = 0;
+      startX = e.pageX - container.offsetLeft;
+      scrollStart = container.scrollLeft;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.25;
+      dragDistance = Math.abs(x - startX);
+
+      if (dragDistance > 6) {
+        if (!isDragging) {
+          isDragging = true;
+          container.classList.add('is-dragging');
+        }
+        e.preventDefault();
+        container.scrollLeft = scrollStart - walk;
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDown) {
+        isDown = false;
+        if (isDragging) {
+          wasDragging = true;
+          setTimeout(() => { wasDragging = false; }, 80);
+          container.classList.remove('is-dragging');
+        }
+        updateNavState();
+      }
+    });
+
+    container.addEventListener('click', (e) => {
+      if (wasDragging) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+
+    container.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.metaKey) return;
+      const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
+      if (maxScroll <= 4) return;
+
+      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (delta === 0) return;
+
+      const canScrollLeft = container.scrollLeft > 2 && delta < 0;
+      const canScrollRight = container.scrollLeft < maxScroll - 2 && delta > 0;
+
+      if (canScrollLeft || canScrollRight) {
+        e.preventDefault();
+        container.scrollLeft += delta * 0.9;
+        updateNavState();
+      }
+    }, { passive: false });
+
+    container.addEventListener('scroll', updateNavState, { passive: true });
+    window.addEventListener('resize', updateNavState);
+
+    setTimeout(updateNavState, 100);
+    setTimeout(updateNavState, 400);
+
+    return updateNavState;
+  }
+
+  // Initialize horizontal pill scrolls
+  window.updateSkillsNavState = setupHorizontalFilterScroll('skillsFilterNav', 'skillsScrollPrev', 'skillsScrollNext');
+  setupHorizontalFilterScroll('.project-filter-group');
 
   // Flexible Certificate Multi-page / Document Resolver
   function getCertificatePages(cert, isId = false) {
@@ -3709,10 +3867,6 @@
           </div>
 
           <div class="pub-card-bottom">
-            <span style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              ${isIndonesian() ? 'Terverifikasi' : 'Published &amp; Verified'}
-            </span>
             ${link ? `
               <a href="${link}" target="_blank" rel="noopener" class="pub-link-btn" onclick="event.stopPropagation();">
                 <span>${isIndonesian() ? 'Buka Publikasi' : 'Read Publication'}</span>

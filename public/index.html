@@ -697,7 +697,7 @@
                 <button type="button" class="timeline-projects-toggle-btn"
                   onclick="window.toggleTimelineProjects(this, 'exp-proj-drawer-masa')" aria-expanded="false"
                   data-count="1">
-                  <span class="toggle-btn-text">Show 1 more project</span>
+                  <span class="toggle-btn-text">Read more</span>
                   <svg class="toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -782,7 +782,13 @@
 
 
         <div class="skills-filter-bar reveal">
-          <div class="skills-filter-nav" id="skillsFilterNav" role="tablist" aria-label="Filter skills by specialization">
+          <div class="skills-filter-scroll-wrapper">
+            <button type="button" class="skills-scroll-arrow skills-scroll-prev" id="skillsScrollPrev" aria-label="Scroll left" tabindex="-1">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="skills-filter-nav" id="skillsFilterNav" role="tablist" aria-label="Filter skills by specialization">
             <button class="skills-nav-pill active" data-cat="all" onclick="filterSkillsSpecialization('all', this)">
               <svg class="pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -884,6 +890,12 @@
               </svg>
               <span>DevOps</span>
               <span class="skills-filter-count">3</span>
+            </button>
+          </div>
+            <button type="button" class="skills-scroll-arrow skills-scroll-next" id="skillsScrollNext" aria-label="Scroll right" tabindex="-1">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
             </button>
           </div>
         </div>
@@ -1628,13 +1640,6 @@
             </div>
 
             <div class="pub-card-bottom">
-              <span
-                style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Published &amp; Verified
-              </span>
               <a href="https://medium.com/@muhammadhaerul.25" target="_blank" rel="noopener" class="pub-link-btn"
                 onclick="event.stopPropagation();">
                 <span>Read Publication</span>
@@ -1683,13 +1688,6 @@
             </div>
 
             <div class="pub-card-bottom">
-              <span
-                style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Published &amp; Verified
-              </span>
               <a href="https://pypi.org/project/galaxy-object-detection-core/" target="_blank" rel="noopener"
                 class="pub-link-btn" onclick="event.stopPropagation();">
                 <span>Read Publication</span>
@@ -1738,13 +1736,6 @@
             </div>
 
             <div class="pub-card-bottom">
-              <span
-                style="display:inline-flex; align-items:center; gap:5px; font-weight:600; font-size:11.5px; color:var(--text-tertiary);">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Published &amp; Verified
-              </span>
               <a href="https://repository.unhas.ac.id/id/eprint/44411/" target="_blank" rel="noopener"
                 class="pub-link-btn" onclick="event.stopPropagation();">
                 <span>Read Publication</span>
