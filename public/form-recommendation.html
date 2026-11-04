@@ -106,6 +106,10 @@
         color: var(--in-blue);
         transform: translateY(-1px);
     }
+    .btn-theme .icon-moon { display: none; }
+    .btn-theme .icon-sun { display: block; }
+    [data-theme="dark"] .btn-theme .icon-sun { display: none !important; }
+    [data-theme="dark"] .btn-theme .icon-moon { display: block !important; }
 
     /* ════════════════════════════════════════
        CARD
@@ -513,7 +517,8 @@
             <span>Back to Portfolio</span>
         </a>
         <button type="button" class="btn-theme" onclick="toggleTheme()" aria-label="Toggle theme">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             <span>Theme</span>
         </button>
     </div>
@@ -704,12 +709,28 @@
 <script>
 var currentStep = 1;
 
+function updateThemeIcons(theme) {
+    var sun = document.querySelector('.btn-theme .icon-sun');
+    var moon = document.querySelector('.btn-theme .icon-moon');
+    if (sun && moon) {
+        sun.style.display = theme === 'dark' ? 'none' : 'block';
+        moon.style.display = theme === 'dark' ? 'block' : 'none';
+    }
+}
 function toggleTheme() {
-    var cur = document.documentElement.getAttribute('data-theme');
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
     var nxt = cur === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', nxt);
-    localStorage.setItem('mh_theme', nxt);
+    try {
+        localStorage.setItem('mh_theme', nxt);
+        localStorage.setItem('mh-theme', nxt);
+    } catch(e) {}
+    updateThemeIcons(nxt);
 }
+(function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    updateThemeIcons(cur);
+})();
 
 function updateCharCount(inpId, countId, max) {
     var el = document.getElementById(inpId);

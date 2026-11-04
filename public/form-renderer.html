@@ -176,17 +176,22 @@
         border-radius: 50%;
         border: 1px solid var(--border);
         background: var(--surface);
+        color: var(--ink-2);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.05rem;
         transition: var(--t);
     }
     .form-theme-btn:hover {
         transform: scale(1.08);
         border-color: var(--primary);
+        color: var(--primary);
     }
+    .form-theme-btn .icon-moon { display: none; }
+    .form-theme-btn .icon-sun { display: block; }
+    [data-theme="dark"] .form-theme-btn .icon-sun { display: none !important; }
+    [data-theme="dark"] .form-theme-btn .icon-moon { display: block !important; }
 
     body {
         font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -507,7 +512,20 @@
             <span>Back to Portfolio</span>
         </a>
         <button type="button" class="form-theme-btn" id="formThemeBtn" onclick="toggleFormRendererTheme()" title="Toggle Light / Dark Mode" aria-label="Toggle theme">
-            <span id="renderer-theme-icon">☀️</span>
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
         </button>
     </div>
 
@@ -946,9 +964,13 @@ function escHtml(s) {
    THEME SYNCHRONIZATION
 ════════════════════ */
 function updateRendererThemeIcon(theme) {
-    var icon = document.getElementById('renderer-theme-icon');
-    if (icon) {
-        icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    var btn = document.getElementById('formThemeBtn');
+    if (!btn) return;
+    var sun = btn.querySelector('.icon-sun');
+    var moon = btn.querySelector('.icon-moon');
+    if (sun && moon) {
+        sun.style.display = theme === 'dark' ? 'none' : 'block';
+        moon.style.display = theme === 'dark' ? 'block' : 'none';
     }
 }
 

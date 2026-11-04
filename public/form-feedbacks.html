@@ -569,17 +569,22 @@
         border-radius: 50%;
         border: 1px solid var(--border);
         background: var(--surface);
+        color: var(--ink-2);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.05rem;
         transition: var(--t);
     }
     .feedback-theme-btn:hover {
         transform: scale(1.08);
         border-color: var(--g-blue);
+        color: var(--g-blue);
     }
+    .feedback-theme-btn .icon-moon { display: none; }
+    .feedback-theme-btn .icon-sun { display: block; }
+    [data-theme="dark"] .feedback-theme-btn .icon-sun { display: none !important; }
+    [data-theme="dark"] .feedback-theme-btn .icon-moon { display: block !important; }
 
     @media (max-width: 480px) {
         body { padding: 16px; align-items: flex-start; }
@@ -600,7 +605,20 @@
             <span>Back to Portfolio</span>
         </a>
         <button type="button" class="feedback-theme-btn" id="feedbackThemeBtn" onclick="toggleFeedbackTheme()" title="Toggle Light / Dark Mode" aria-label="Toggle theme">
-            <span id="theme-icon">☀️</span>
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
         </button>
     </div>
 
@@ -766,12 +784,23 @@
 /* ════════════════════════════════════
    THEME MANAGEMENT
 ════════════════════════════════════ */
+function updateThemeIcon(theme) {
+    var btn = document.getElementById('feedbackThemeBtn');
+    if (!btn) return;
+    var sun = btn.querySelector('.icon-sun');
+    var moon = btn.querySelector('.icon-moon');
+    if (sun && moon) {
+        sun.style.display = theme === 'dark' ? 'none' : 'block';
+        moon.style.display = theme === 'dark' ? 'block' : 'none';
+    }
+}
+
 function initFeedbackTheme() {
     var saved = localStorage.getItem('mh_theme') || localStorage.getItem('mh-theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', saved);
-    var icon = document.getElementById('theme-icon');
-    if (icon) icon.textContent = saved === 'dark' ? '🌙' : '☀️';
+    updateThemeIcon(saved);
 }
+
 function toggleFeedbackTheme() {
     var curr = document.documentElement.getAttribute('data-theme') || 'light';
     var next = curr === 'dark' ? 'light' : 'dark';
@@ -780,8 +809,7 @@ function toggleFeedbackTheme() {
         localStorage.setItem('mh_theme', next);
         localStorage.setItem('mh-theme', next);
     } catch(e) {}
-    var icon = document.getElementById('theme-icon');
-    if (icon) icon.textContent = next === 'dark' ? '🌙' : '☀️';
+    updateThemeIcon(next);
 }
 initFeedbackTheme();
 
@@ -1083,27 +1111,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             '<option value="General Feedback">General Feedback</option>';
     }
 });
-
-/* ════════════════════════════════════
-   THEME TOGGLING & SYNCHRONIZATION
-════════════════════════════════════ */
-function updateThemeIcon(theme) {
-    var icon = document.getElementById('theme-icon');
-    if (icon) {
-        icon.textContent = theme === 'dark' ? '🌙' : '☀️';
-    }
-}
-
-function toggleFeedbackTheme() {
-    var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-    var next = cur === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try {
-        localStorage.setItem('mh_theme', next);
-        localStorage.setItem('mh-theme', next);
-    } catch(e) {}
-    updateThemeIcon(next);
-}
 
 // Initial theme icon sync
 (function() {
