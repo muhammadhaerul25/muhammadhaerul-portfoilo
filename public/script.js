@@ -724,7 +724,14 @@
     const pubTitle = document.querySelector('#publications .section-title');
     if (pubTitle) pubTitle.textContent = (pubCfg && pubCfg.title) ? pubCfg.title : t.pubs_title;
     const pubDesc = document.querySelector('#publications .section-desc');
-    if (pubDesc && (!pubCfg || !pubCfg.subtitle)) pubDesc.textContent = t.pubs_desc;
+    if (pubDesc) {
+      if (pubCfg && pubCfg.subtitle) {
+        pubDesc.textContent = pubCfg.subtitle;
+        pubDesc.style.display = 'block';
+      } else {
+        pubDesc.style.display = 'none';
+      }
+    }
     document.querySelectorAll('#publications .pub-zoom-btn span').forEach(el => {
       el.textContent = lang === 'id' ? 'Lihat Pratinjau' : 'View Full Preview';
     });
@@ -4213,7 +4220,7 @@
             descEl.style.display = 'block';
             descEl.style.removeProperty('display');
           }
-        } else if (descEl && descEl.id.includes('section-desc')) {
+        } else if (descEl) {
           descEl.style.display = 'none';
         }
       });

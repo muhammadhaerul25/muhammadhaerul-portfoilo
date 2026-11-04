@@ -40,17 +40,17 @@ async function main() {
 
     // Ensure sections are English
     val.sections = {
-        experiences: { title: "Career Journey & Work Experience", subtitle: "Track record in software engineering, artificial intelligence, and technical leadership." },
-        education: { title: "Academic Foundation & Education", subtitle: "Formal studies in Computer Science, specializing in Artificial Intelligence and Data Science." },
-        projects: { title: "Featured Projects & AI Systems", subtitle: "Production-ready web applications, deep learning solutions, and agentic prototypes." },
-        talks: { title: "Speaking Engagements & Talks", subtitle: "Workshops, keynote talks, and hands-on AI bootcamps delivered across organizations." },
-        certifications: { title: "Professional Certifications", subtitle: "Verified credentials in Machine Learning, Generative AI, and Cloud Infrastructure." },
-        awards: { title: "Honors & Achievements", subtitle: "Competitions won, hackathons, and academic recognitions." },
-        publications: { title: "Publications & Research", subtitle: "Peer-reviewed research and applied AI engineering write-ups." },
-        blogs: { title: "Technical Articles & Blog", subtitle: "Deep-dives into AI architectures, full-stack development, and tech thoughts." },
-        gallery: { title: "Journey & Visual Moments", subtitle: "Behind-the-scenes snapshots of hackathons, speaking stages, and community sessions." },
-        testimonials: { title: "Feedback and Recommendations", subtitle: "Verified feedback from workshop participants and professional recommendations from collaborators." },
-        contact: { title: "Let's Connect & Collaborate", subtitle: "Have a project in mind, need technical consulting, or want to invite me as a speaker? Drop a message." }
+        experiences: { title: "Career Journey & Work Experience", subtitle: "" },
+        education: { title: "Academic Foundation & Education", subtitle: "" },
+        projects: { title: "Featured Projects & AI Systems", subtitle: "" },
+        talks: { title: "Speaking Engagements & Talks", subtitle: "" },
+        certifications: { title: "Professional Certifications", subtitle: "" },
+        awards: { title: "Honors & Achievements", subtitle: "" },
+        publications: { title: "Publications & Research", subtitle: "" },
+        blogs: { title: "Technical Articles & Blog", subtitle: "" },
+        gallery: { title: "Journey & Visual Moments", subtitle: "" },
+        testimonials: { title: "Feedback and Recommendations", subtitle: "" },
+        contact: { title: "Let's Connect & Collaborate", subtitle: "" }
     };
 
     // Ensure footer

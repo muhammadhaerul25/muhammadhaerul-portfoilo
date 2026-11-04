@@ -952,6 +952,10 @@ img {
   text-wrap: balance;
 }
 
+.section-head .section-title:last-child {
+  margin-bottom: 0;
+}
+
 .about-lead {
   font-size: clamp(1.95rem, 3.5vw, 2.75rem);
   line-height: 1.22;
