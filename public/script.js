@@ -393,7 +393,7 @@
       pubs_desc: "Code and write-ups released publicly so other engineers can learn from — or build on — the same systems.",
 
       talks_eyebrow: "07 — Talks & Workshops",
-      talks_title: "Sharing what works in production.",
+      talks_title: "Speaking Engagements, Seminars & Workshops",
 
       awards_eyebrow: "08 — Honors & Awards",
       awards_title: "Recognitions & hackathon wins.",
