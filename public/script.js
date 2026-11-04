@@ -1271,7 +1271,6 @@
             </div>
             <h3 class="p-card-title">${escapeHtml(p.name)}</h3>
             ${descHtml}
-            <div class="p-card-tags">${techTags}</div>
           </div>
           <div class="p-card-foot">
             ${demoBtn}
