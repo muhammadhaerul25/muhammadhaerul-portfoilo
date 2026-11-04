@@ -838,7 +838,10 @@
     // Re-render paginated sections
     if (typeof renderProjects === 'function') renderProjects(currentProjectFilter, currentProjectPage);
     if (typeof renderTalks === 'function') renderTalks(currentTalkPage);
-    if (typeof renderCertifications === 'function') renderCertifications(liveCertifications, currentCertPage);
+    if (typeof renderCertifications === 'function') {
+      renderCertifications(liveCertifications, currentCertPage);
+      if (typeof updateCertFilterCounts === 'function') updateCertFilterCounts();
+    }
     if (typeof renderTestimonials === 'function') renderTestimonials(currentFeedbackPage);
     if (typeof renderSkills === 'function' && Array.isArray(liveSkills) && liveSkills.length) renderSkills(liveSkills);
     if (typeof renderPublications === 'function' && Array.isArray(livePublications)) renderPublications(livePublications);
@@ -1351,6 +1354,7 @@
   // Talks Pagination State (3 rows x 3 columns = 9 per page)
   const CERTS_PER_PAGE = 9;
   let currentCertPage = 1;
+  let currentCertFilter = 'all';
   const TALKS_PER_PAGE = 9;
   let currentTalkPage = 1;
   let showAllTalks = false;
@@ -2633,6 +2637,7 @@
   // Initialize horizontal pill scrolls
   window.updateSkillsNavState = setupHorizontalFilterScroll('skillsFilterNav', 'skillsScrollPrev', 'skillsScrollNext');
   setupHorizontalFilterScroll('.project-filter-group');
+  window.updateCertNavState = setupHorizontalFilterScroll('certFilterNav', 'certScrollPrev', 'certScrollNext');
 
   // Flexible Certificate Multi-page / Document Resolver
   function getCertificatePages(cert, isId = false) {
@@ -2803,16 +2808,110 @@
     return [];
   }
 
-  // Render Certifications Grid Dynamically with 3x3 Pagination & Browse All
-  function renderCertifications(certifications = liveCertifications, page = currentCertPage) {
+  // Classification Filter Resolver for Certifications
+  function matchesCertClassification(cert, filter) {
+    if (!filter || filter === 'all') return true;
+    const title = (cert.title || '').toLowerCase();
+    const issuer = (cert.issuer || '').toLowerCase();
+    const cat = (cert.category || '').toLowerCase();
+    if (filter === 'language') {
+      return (issuer.includes('hackerrank') && (title.includes('python') || title.includes('sql'))) ||
+             title.includes('language') || title.includes('toefl') || title.includes('ielts') ||
+             cat === 'programming' || cat === 'database engineering';
+    }
+    if (filter === 'skill') {
+      return issuer.includes('hackerrank') || issuer.includes('pasas') || issuer.includes('data academy') ||
+             title.includes('specialist') || title.includes('verified skill') || cat === 'data visualization' ||
+             cat === 'database engineering' || cat === 'programming';
+    }
+    if (filter === 'program') {
+      return issuer.includes('digital talent') || issuer.includes('komdigi') || issuer.includes('kominfo') ||
+             issuer.includes('lppi') || issuer.includes('bank indonesia') || issuer.includes('kemendikbud') ||
+             issuer.includes('microsoft') || issuer.includes('google') ||
+             title.includes('digdaya') || title.includes('microcredential') || title.includes('elevate') ||
+             title.includes('it support') || title.includes('entrepreneurship') || title.includes('nasional');
+    }
+    if (filter === 'course') {
+      return issuer.includes('dicoding') || issuer.includes('deeplearning') || issuer.includes('udemy') ||
+             issuer.includes('ibm') || title.includes('specialization') || title.includes('prompt engineering') ||
+             title.includes('belajar') || title.includes('production');
+    }
+    return false;
+  }
+
+  function updateCertFilterCounts() {
+    const allCerts = Array.isArray(liveCertifications) ? liveCertifications : [];
+    const counts = {
+      all: allCerts.length,
+      program: allCerts.filter(c => matchesCertClassification(c, 'program')).length,
+      course: allCerts.filter(c => matchesCertClassification(c, 'course')).length,
+      skill: allCerts.filter(c => matchesCertClassification(c, 'skill')).length,
+      language: allCerts.filter(c => matchesCertClassification(c, 'language')).length
+    };
+    const pills = document.querySelectorAll('#certFilterNav .c-filter-pill');
+    pills.forEach(pill => {
+      const f = pill.getAttribute('data-filter') || 'all';
+      const countEl = pill.querySelector('.c-filter-count');
+      if (countEl && typeof counts[f] !== 'undefined') {
+        countEl.textContent = counts[f];
+      }
+    });
+  }
+
+  window.filterCertifications = function (filter, btn) {
+    currentCertFilter = filter || 'all';
+    currentCertPage = 1;
+
+    const pills = document.querySelectorAll('#certFilterNav .c-filter-pill');
+    pills.forEach(p => {
+      p.classList.remove('active');
+      p.setAttribute('aria-selected', 'false');
+    });
+    if (btn) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      if (typeof btn.scrollIntoView === 'function') {
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+      }
+    } else {
+      const activeBtn = document.querySelector(`#certFilterNav .c-filter-pill[data-filter="${currentCertFilter}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+        activeBtn.setAttribute('aria-selected', 'true');
+      }
+    }
+
+    renderCertifications();
+    if (typeof window.updateCertNavState === 'function') {
+      setTimeout(window.updateCertNavState, 80);
+    }
+  };
+
+  // Render Certifications Grid Dynamically with Classification Filtering & 3x3 Pagination
+  function renderCertifications(firstArg, secondArg) {
+    if (Array.isArray(firstArg)) {
+      liveCertifications = firstArg;
+    } else if (typeof firstArg === 'string') {
+      currentCertFilter = firstArg;
+    }
+    if (typeof secondArg === 'number') {
+      currentCertPage = secondArg;
+    } else if (typeof firstArg === 'number') {
+      currentCertPage = firstArg;
+    }
+
     const certGrid = document.getElementById('cert-grid');
     const paginationWrap = document.getElementById('certPaginationWrap');
     const paginationInfo = document.getElementById('certPaginationInfo');
     const paginationControls = document.getElementById('certPaginationControls');
-    if (!certGrid || !certifications || !certifications.length) return;
+    if (!certGrid) return;
 
-    currentCertPage = page;
-    const totalCerts = certifications.length;
+    const allCerts = (Array.isArray(liveCertifications) && liveCertifications.length)
+      ? liveCertifications
+      : [];
+
+    const filteredCerts = allCerts.filter(c => matchesCertClassification(c, currentCertFilter));
+    const totalCerts = filteredCerts.length;
     const totalPages = Math.ceil(totalCerts / CERTS_PER_PAGE) || 1;
 
     if (currentCertPage > totalPages) currentCertPage = totalPages;
@@ -2820,7 +2919,18 @@
 
     const startIndex = (currentCertPage - 1) * CERTS_PER_PAGE;
     const endIndex = Math.min(startIndex + CERTS_PER_PAGE, totalCerts);
-    const visibleCerts = certifications.slice(startIndex, endIndex);
+    const visibleCerts = filteredCerts.slice(startIndex, endIndex);
+
+    if (!visibleCerts.length) {
+      const isId = isIndonesian();
+      certGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; color: var(--text-secondary);">
+          <p style="font-size: 15px; margin: 0;">${isId ? 'Tidak ada sertifikat dalam klasifikasi ini.' : 'No certifications found in this classification.'}</p>
+        </div>
+      `;
+      if (paginationWrap) paginationWrap.style.display = 'none';
+      return;
+    }
 
     certGrid.innerHTML = visibleCerts.map(cert => {
       const skills = Array.isArray(cert.skills) ? cert.skills : [];
@@ -2955,31 +3065,33 @@
         : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalCerts}</strong> certifications`;
 
       let controlsHtml = '';
-      const prevDisabled = currentCertPage <= 1 ? 'disabled' : '';
-      controlsHtml += `
-        <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage - 1})" ${prevDisabled} aria-label="Previous Page">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      `;
-
-      for (let i = 1; i <= totalPages; i++) {
-        const activeClass = i === currentCertPage ? 'active' : '';
+      if (totalPages > 1) {
+        const prevDisabled = currentCertPage <= 1 ? 'disabled' : '';
         controlsHtml += `
-          <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeCertPage(${i})">${i}</button>
+          <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage - 1})" ${prevDisabled} aria-label="Previous Page">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+          const activeClass = i === currentCertPage ? 'active' : '';
+          controlsHtml += `
+            <button type="button" class="p-page-btn ${activeClass}" onclick="window.changeCertPage(${i})">${i}</button>
+          `;
+        }
+
+        const nextDisabled = currentCertPage >= totalPages ? 'disabled' : '';
+        controlsHtml += `
+          <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage + 1})" ${nextDisabled} aria-label="Next Page">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         `;
       }
-
-      const nextDisabled = currentCertPage >= totalPages ? 'disabled' : '';
-      controlsHtml += `
-        <button type="button" class="p-page-btn" onclick="window.changeCertPage(${currentCertPage + 1})" ${nextDisabled} aria-label="Next Page">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      `;
 
       controlsHtml += `
         <button type="button" class="p-page-toggle-btn" onclick="window.open('/certifications', '_blank')" title="Open certifications in a new dedicated page">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          <span>${isId ? 'Lihat Semua' : 'Browse All'} (${totalCerts})</span>
+          <span>${isId ? 'Lihat Semua' : 'Browse All'} (${allCerts.length})</span>
         </button>
       `;
 
@@ -2988,10 +3100,12 @@
   }
 
   window.changeCertPage = function (page) {
-    const totalPages = Math.ceil(((liveCertifications || []).length) / CERTS_PER_PAGE) || 1;
+    const allCerts = (Array.isArray(liveCertifications) && liveCertifications.length) ? liveCertifications : [];
+    const filteredCerts = allCerts.filter(c => matchesCertClassification(c, currentCertFilter));
+    const totalPages = Math.ceil(filteredCerts.length / CERTS_PER_PAGE) || 1;
     if (page < 1 || page > totalPages) return;
     currentCertPage = page;
-    renderCertifications(liveCertifications, page);
+    renderCertifications(currentCertFilter, page);
     const certSection = document.getElementById('certifications');
     if (certSection) certSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
@@ -4494,6 +4608,8 @@
         if (bootstrapData.certifications && bootstrapData.certifications.length) {
           liveCertifications = bootstrapData.certifications;
           renderCertifications(liveCertifications);
+          updateCertFilterCounts();
+          if (typeof window.updateCertNavState === 'function') setTimeout(window.updateCertNavState, 100);
         }
         if (bootstrapData.awards && bootstrapData.awards.length) {
           liveAwards = bootstrapData.awards;
@@ -4576,6 +4692,8 @@
       if (certRes.status === 'fulfilled' && certRes.value && certRes.value.data && certRes.value.data.length) {
         liveCertifications = certRes.value.data;
         renderCertifications(liveCertifications);
+        updateCertFilterCounts();
+        if (typeof window.updateCertNavState === 'function') setTimeout(window.updateCertNavState, 100);
       }
 
       if (awardRes.status === 'fulfilled' && awardRes.value && awardRes.value.data && awardRes.value.data.length) {
@@ -4715,126 +4833,126 @@
 
 })();
 
-  // Multi-page card navigation handlers
-  window.stepCertCard = function (certId, delta) {
-    const container = document.getElementById(`cert-prev-${certId}`);
-    if (!container) return;
-    const rawPages = container.getAttribute('data-pages');
-    if (!rawPages) return;
-    let pages = [];
-    try {
-      pages = JSON.parse(rawPages);
-    } catch (e) {
-      return;
-    }
-    if (!Array.isArray(pages) || pages.length <= 1) return;
+// Multi-page card navigation handlers
+window.stepCertCard = function (certId, delta) {
+  const container = document.getElementById(`cert-prev-${certId}`);
+  if (!container) return;
+  const rawPages = container.getAttribute('data-pages');
+  if (!rawPages) return;
+  let pages = [];
+  try {
+    pages = JSON.parse(rawPages);
+  } catch (e) {
+    return;
+  }
+  if (!Array.isArray(pages) || pages.length <= 1) return;
 
-    let currentIndex = parseInt(container.getAttribute('data-page-index') || '0', 10);
-    let newIndex = currentIndex + delta;
-    if (newIndex < 0) newIndex = 0;
-    if (newIndex >= pages.length) newIndex = pages.length - 1;
-    if (newIndex === currentIndex) return;
+  let currentIndex = parseInt(container.getAttribute('data-page-index') || '0', 10);
+  let newIndex = currentIndex + delta;
+  if (newIndex < 0) newIndex = 0;
+  if (newIndex >= pages.length) newIndex = pages.length - 1;
+  if (newIndex === currentIndex) return;
 
-    container.setAttribute('data-page-index', newIndex);
+  container.setAttribute('data-page-index', newIndex);
 
-    const targetPage = pages[newIndex];
-    const img = container.querySelector('img');
-    const certTitle = container.getAttribute('data-cert-title') || '';
-    const isId = typeof isIndonesian === 'function' ? isIndonesian() : false;
-    const pageTitle = `${isId ? 'Sertifikat' : 'Certificate'} — ${certTitle} (${isId ? 'Halaman' : 'Page'} ${newIndex + 1} / ${pages.length})`;
+  const targetPage = pages[newIndex];
+  const img = container.querySelector('img');
+  const certTitle = container.getAttribute('data-cert-title') || '';
+  const isId = typeof isIndonesian === 'function' ? isIndonesian() : false;
+  const pageTitle = `${isId ? 'Sertifikat' : 'Certificate'} — ${certTitle} (${isId ? 'Halaman' : 'Page'} ${newIndex + 1} / ${pages.length})`;
 
-    if (img) {
-      img.style.opacity = '0.35';
-      img.style.filter = 'blur(3px)';
-      img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
-      img.src = targetPage.url;
-      img.alt = pageTitle;
-      img.title = pageTitle;
-      img.onload = () => {
-        img.style.opacity = '1';
-        img.style.filter = 'none';
-      };
-    }
-    container.setAttribute('data-active-title', pageTitle);
+  if (img) {
+    img.style.opacity = '0.35';
+    img.style.filter = 'blur(3px)';
+    img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+    img.src = targetPage.url;
+    img.alt = pageTitle;
+    img.title = pageTitle;
+    img.onload = () => {
+      img.style.opacity = '1';
+      img.style.filter = 'none';
+    };
+  }
+  container.setAttribute('data-active-title', pageTitle);
 
-    const badgeText = container.querySelector('.card-page-text');
-    if (badgeText) {
-      badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
-    }
+  const badgeText = container.querySelector('.card-page-text');
+  if (badgeText) {
+    badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+  }
 
-    const prevBtn = container.querySelector('.card-media-nav-btn.prev');
-    const nextBtn = container.querySelector('.card-media-nav-btn.next');
-    if (prevBtn) prevBtn.disabled = (newIndex === 0);
-    if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
+  const prevBtn = container.querySelector('.card-media-nav-btn.prev');
+  const nextBtn = container.querySelector('.card-media-nav-btn.next');
+  if (prevBtn) prevBtn.disabled = (newIndex === 0);
+  if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
 
-    const zoomText = container.querySelector('.cert-zoom-text');
-    if (zoomText) {
-      zoomText.textContent = targetPage.type === 'curriculum'
-        ? (isId ? 'Lihat Kurikulum' : 'View Curriculum')
-        : (isId ? `Lihat Bukti Halaman ${newIndex + 1}` : `View Certificate Proof (p. ${newIndex + 1})`);
-    }
-  };
+  const zoomText = container.querySelector('.cert-zoom-text');
+  if (zoomText) {
+    zoomText.textContent = targetPage.type === 'curriculum'
+      ? (isId ? 'Lihat Kurikulum' : 'View Curriculum')
+      : (isId ? `Lihat Bukti Halaman ${newIndex + 1}` : `View Certificate Proof (p. ${newIndex + 1})`);
+  }
+};
 
-  window.stepTalkCard = function (talkId, delta) {
-    const wrap = document.getElementById(`talk-prev-${talkId}`);
-    if (!wrap) return;
-    const rawPages = wrap.getAttribute('data-pages');
-    if (!rawPages) return;
-    let pages = [];
-    try {
-      pages = JSON.parse(rawPages);
-    } catch (e) {
-      return;
-    }
-    if (!Array.isArray(pages) || pages.length <= 1) return;
+window.stepTalkCard = function (talkId, delta) {
+  const wrap = document.getElementById(`talk-prev-${talkId}`);
+  if (!wrap) return;
+  const rawPages = wrap.getAttribute('data-pages');
+  if (!rawPages) return;
+  let pages = [];
+  try {
+    pages = JSON.parse(rawPages);
+  } catch (e) {
+    return;
+  }
+  if (!Array.isArray(pages) || pages.length <= 1) return;
 
-    let currentIndex = parseInt(wrap.getAttribute('data-page-index') || '0', 10);
-    let newIndex = currentIndex + delta;
-    if (newIndex < 0) newIndex = 0;
-    if (newIndex >= pages.length) newIndex = pages.length - 1;
-    if (newIndex === currentIndex) return;
+  let currentIndex = parseInt(wrap.getAttribute('data-page-index') || '0', 10);
+  let newIndex = currentIndex + delta;
+  if (newIndex < 0) newIndex = 0;
+  if (newIndex >= pages.length) newIndex = pages.length - 1;
+  if (newIndex === currentIndex) return;
 
-    wrap.setAttribute('data-page-index', newIndex);
+  wrap.setAttribute('data-page-index', newIndex);
 
-    const targetMedia = pages[newIndex];
-    const eventTitle = wrap.getAttribute('data-talk-event') || '';
-    const isId = typeof isIndonesian === 'function' ? isIndonesian() : false;
-    const mediaTitle = `${eventTitle} (${targetMedia.label || (isId ? 'Halaman ' + (newIndex + 1) : 'Page ' + (newIndex + 1))})`;
+  const targetMedia = pages[newIndex];
+  const eventTitle = wrap.getAttribute('data-talk-event') || '';
+  const isId = typeof isIndonesian === 'function' ? isIndonesian() : false;
+  const mediaTitle = `${eventTitle} (${targetMedia.label || (isId ? 'Halaman ' + (newIndex + 1) : 'Page ' + (newIndex + 1))})`;
 
-    const img = wrap.querySelector('.talk-poster-img');
-    const backdrop = wrap.querySelector('.talk-poster-backdrop');
-    if (img) {
-      img.style.opacity = '0.35';
-      img.style.filter = 'blur(4px)';
-      img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
-      img.src = targetMedia.url;
-      img.alt = `Muhammad Haerul speaking at ${mediaTitle}`;
-      img.title = mediaTitle;
-      img.onload = () => {
-        img.style.opacity = '1';
-        img.style.filter = 'none';
-      };
-    }
-    if (backdrop) {
-      backdrop.style.backgroundImage = `url('${targetMedia.url}')`;
-    }
-    wrap.setAttribute('data-active-src', targetMedia.url);
-    wrap.setAttribute('data-active-title', mediaTitle);
+  const img = wrap.querySelector('.talk-poster-img');
+  const backdrop = wrap.querySelector('.talk-poster-backdrop');
+  if (img) {
+    img.style.opacity = '0.35';
+    img.style.filter = 'blur(4px)';
+    img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+    img.src = targetMedia.url;
+    img.alt = `Muhammad Haerul speaking at ${mediaTitle}`;
+    img.title = mediaTitle;
+    img.onload = () => {
+      img.style.opacity = '1';
+      img.style.filter = 'none';
+    };
+  }
+  if (backdrop) {
+    backdrop.style.backgroundImage = `url('${targetMedia.url}')`;
+  }
+  wrap.setAttribute('data-active-src', targetMedia.url);
+  wrap.setAttribute('data-active-title', mediaTitle);
 
-    const badgeText = wrap.querySelector('.card-page-text');
-    if (badgeText) {
-      badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
-    }
+  const badgeText = wrap.querySelector('.card-page-text');
+  if (badgeText) {
+    badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+  }
 
-    const prevBtn = wrap.querySelector('.card-media-nav-btn.prev');
-    const nextBtn = wrap.querySelector('.card-media-nav-btn.next');
-    if (prevBtn) prevBtn.disabled = (newIndex === 0);
-    if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
+  const prevBtn = wrap.querySelector('.card-media-nav-btn.prev');
+  const nextBtn = wrap.querySelector('.card-media-nav-btn.next');
+  if (prevBtn) prevBtn.disabled = (newIndex === 0);
+  if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
 
-    const zoomText = wrap.querySelector('.talk-zoom-text');
-    if (zoomText) {
-      zoomText.textContent = targetMedia.type === 'certificate'
-        ? (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof')
-        : (isId ? 'Lihat Gambar Lengkap' : 'View Full Image');
-    }
-  };
+  const zoomText = wrap.querySelector('.talk-zoom-text');
+  if (zoomText) {
+    zoomText.textContent = targetMedia.type === 'certificate'
+      ? (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof')
+      : (isId ? 'Lihat Gambar Lengkap' : 'View Full Image');
+  }
+};

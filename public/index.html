@@ -2677,6 +2677,49 @@
           <h2 class="section-title">Continuous, deliberate learning.</h2>
         </div>
 
+        <!-- Interactive Category Classification Filter Bar -->
+        <div class="cert-filter-bar reveal">
+          <div class="cert-filter-scroll-wrapper">
+            <button type="button" class="cert-scroll-arrow cert-scroll-prev" id="certScrollPrev" aria-label="Scroll left" tabindex="-1">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="cert-filter-nav" id="certFilterNav" role="tablist" aria-label="Filter certifications by classification">
+              <button class="c-filter-pill active" data-filter="all" role="tab" aria-selected="true" onclick="window.filterCertifications('all', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+                <span>All</span>
+                <span class="c-filter-count">20</span>
+              </button>
+              <button class="c-filter-pill" data-filter="program" role="tab" aria-selected="false" onclick="window.filterCertifications('program', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 3 6 3 6 3s6 0 6-3v-5"></path></svg>
+                <span>Program Certificate</span>
+                <span class="c-filter-count">9</span>
+              </button>
+              <button class="c-filter-pill" data-filter="course" role="tab" aria-selected="false" onclick="window.filterCertifications('course', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <span>Course Certificate</span>
+                <span class="c-filter-count">7</span>
+              </button>
+              <button class="c-filter-pill" data-filter="skill" role="tab" aria-selected="false" onclick="window.filterCertifications('skill', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span>Skill Certificate</span>
+                <span class="c-filter-count">4</span>
+              </button>
+              <button class="c-filter-pill" data-filter="language" role="tab" aria-selected="false" onclick="window.filterCertifications('language', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <span>Language Certificate</span>
+                <span class="c-filter-count">2</span>
+              </button>
+            </div>
+            <button type="button" class="cert-scroll-arrow cert-scroll-next" id="certScrollNext" aria-label="Scroll right" tabindex="-1">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
         <div class="cert-grid" id="cert-grid">
           <!-- Cert DIGDAYA Practitioner -->
           <div class="cert-card reveal">

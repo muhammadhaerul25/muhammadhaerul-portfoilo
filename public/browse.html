@@ -1033,6 +1033,36 @@
       }
     }
 
+    function matchesCertClassification(cert, filter) {
+      if (!filter || filter === 'all') return true;
+      const title = (cert.title || '').toLowerCase();
+      const issuer = (cert.issuer || '').toLowerCase();
+      const cat = (cert.category || '').toLowerCase();
+      if (filter === 'language') {
+        return (issuer.includes('hackerrank') && (title.includes('python') || title.includes('sql'))) ||
+               title.includes('language') || title.includes('toefl') || title.includes('ielts') ||
+               cat === 'programming' || cat === 'database engineering';
+      }
+      if (filter === 'skill') {
+        return issuer.includes('hackerrank') || issuer.includes('pasas') || issuer.includes('data academy') ||
+               title.includes('specialist') || title.includes('verified skill') || cat === 'data visualization' ||
+               cat === 'database engineering' || cat === 'programming';
+      }
+      if (filter === 'program') {
+        return issuer.includes('digital talent') || issuer.includes('komdigi') || issuer.includes('kominfo') ||
+               issuer.includes('lppi') || issuer.includes('bank indonesia') || issuer.includes('kemendikbud') ||
+               issuer.includes('microsoft') || issuer.includes('google') ||
+               title.includes('digdaya') || title.includes('microcredential') || title.includes('elevate') ||
+               title.includes('it support') || title.includes('entrepreneurship') || title.includes('nasional');
+      }
+      if (filter === 'course') {
+        return issuer.includes('dicoding') || issuer.includes('deeplearning') || issuer.includes('udemy') ||
+               issuer.includes('ibm') || title.includes('specialization') || title.includes('prompt engineering') ||
+               title.includes('belajar') || title.includes('production');
+      }
+      return false;
+    }
+
     // Render Active Collection
     function renderCollection() {
       if (!bootstrapData) return;
@@ -1278,12 +1308,17 @@
         const raw = (bootstrapData.certifications || []).slice().sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0));
         
         if (!filtersRow.dataset.rendered || filtersRow.dataset.collection !== 'certifications') {
+          const countProg = raw.filter(c => matchesCertClassification(c, 'program')).length;
+          const countCourse = raw.filter(c => matchesCertClassification(c, 'course')).length;
+          const countSkill = raw.filter(c => matchesCertClassification(c, 'skill')).length;
+          const countLang = raw.filter(c => matchesCertClassification(c, 'language')).length;
+
           filtersRow.innerHTML = `
             <button class="browse-filter-pill active" onclick="setCategoryFilter('all', this)">All (${raw.length})</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('genai', this)">Generative AI</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('ml', this)">Deep Learning & ML</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('data', this)">Data Science</button>
-            <button class="browse-filter-pill" onclick="setCategoryFilter('lead', this)">Banking & Leadership</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('program', this)">Program Certificate (${countProg})</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('course', this)">Course Certificate (${countCourse})</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('skill', this)">Skill Certificate (${countSkill})</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('language', this)">Language Certificate (${countLang})</button>
           `;
           filtersRow.dataset.rendered = 'true';
           filtersRow.dataset.collection = 'certifications';
@@ -1292,12 +1327,7 @@
         let filtered = raw.filter(cert => {
           const matchQ = !q || (cert.title || '').toLowerCase().includes(q) || (cert.issuer || '').toLowerCase().includes(q) || (cert.category || '').toLowerCase().includes(q) || (cert.skills || []).join(' ').toLowerCase().includes(q);
           if (!matchQ) return false;
-          const textAll = `${cert.title} ${cert.issuer} ${cert.category} ${(cert.skills||[]).join(' ')}`.toLowerCase();
-          if (activeCategoryFilter === 'genai') return textAll.includes('generative') || textAll.includes('prompt') || textAll.includes('langchain') || textAll.includes('llm');
-          if (activeCategoryFilter === 'ml') return textAll.includes('deep learning') || textAll.includes('machine learning') || textAll.includes('mlops');
-          if (activeCategoryFilter === 'data') return textAll.includes('data') || textAll.includes('sql') || textAll.includes('python');
-          if (activeCategoryFilter === 'lead') return textAll.includes('digdaya') || textAll.includes('banking') || textAll.includes('leadership') || textAll.includes('lppi') || textAll.includes('bank indonesia');
-          return true;
+          return matchesCertClassification(cert, activeCategoryFilter);
         });
 
         countEl.textContent = `Showing ${filtered.length} of ${raw.length} certifications`;
