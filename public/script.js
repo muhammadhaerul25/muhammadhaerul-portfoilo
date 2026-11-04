@@ -2661,9 +2661,9 @@
       const splitUrls = cert.image_url.split(/[,\n]+/).map(s => s.trim()).filter(Boolean);
       if (splitUrls.length > 1) {
         return splitUrls.map((url, idx) => ({
-          label: idx === 0 ? (isId ? 'Sertifikat' : 'Certificate') : (isId ? `Halaman ${idx + 1}` : `Page ${idx + 1}`),
+          label: idx === 0 ? (isId ? 'Sertifikat' : 'Certificate') : (isId ? 'Materi / Kurikulum' : 'Curriculum'),
           url,
-          type: idx === 0 ? 'certificate' : 'page'
+          type: idx === 0 ? 'certificate' : 'curriculum'
         }));
       }
     }
@@ -2756,6 +2756,34 @@
         {
           label: isId ? 'Kurikulum 3' : 'Curriculum 3',
           url: '/assets/certificates/cert-deep-learning-dts-page6.jpg',
+          type: 'curriculum'
+        }
+      ];
+    }
+    if (title.includes('supervisor') || (cert.credential_id && cert.credential_id.includes('344'))) {
+      return [
+        {
+          label: isId ? 'Sertifikat' : 'Certificate',
+          url: '/assets/certificates/cert-data-scientist-supervisor-dts-page1.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+          url: '/assets/certificates/cert-data-scientist-supervisor-dts-page2.jpg',
+          type: 'curriculum'
+        }
+      ];
+    }
+    if ((title.includes('associate data scientist') && (title.includes('python') || title.includes('dts') || title.includes('komdigi') || title.includes('nasional'))) || (cert.credential_id && cert.credential_id.includes('2667'))) {
+      return [
+        {
+          label: isId ? 'Sertifikat' : 'Certificate',
+          url: '/assets/certificates/cert-associate-data-scientist-dts-page1.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Materi / Kurikulum' : 'Curriculum',
+          url: '/assets/certificates/cert-associate-data-scientist-dts-page2.jpg',
           type: 'curriculum'
         }
       ];
