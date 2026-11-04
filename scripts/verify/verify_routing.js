@@ -163,6 +163,17 @@ async function runComprehensiveTests() {
             assert(res.statusCode === 200 && typeof res.body === 'string' && res.body.includes(pg.contains), `GET ${pg.path} serves valid HTML`);
         }
 
+        // 5. Progressive Web App (PWA) Endpoints & Headers
+        console.log('\n5. Testing Progressive Web App (PWA) Manifest, Service Worker & Offline Routes');
+        const manifestRes = await testRequest(server, '/manifest.json');
+        assert(manifestRes.statusCode === 200 && manifestRes.body && manifestRes.body.display === 'standalone' && Array.isArray(manifestRes.body.icons) && manifestRes.body.icons.length >= 10, 'GET /manifest.json returns valid Web App Manifest');
+
+        const swRes = await testRequest(server, '/sw.js');
+        assert(swRes.statusCode === 200 && typeof swRes.body === 'string' && swRes.body.includes('CACHE_VERSION') && swRes.headers['service-worker-allowed'] === '/', 'GET /sw.js serves active Service Worker with Service-Worker-Allowed: /');
+
+        const offlineRes = await testRequest(server, '/offline.html');
+        assert(offlineRes.statusCode === 200 && typeof offlineRes.body === 'string' && offlineRes.body.includes('Offline Mode'), 'GET /offline.html serves offline fallback page');
+
         console.log(`\n========================================`);
         console.log(`Total tests: ${passed + failed} | Passed: ${passed} | Failed: ${failed}`);
         console.log(`========================================\n`);
