@@ -1349,14 +1349,17 @@
             cert.issuer.toLowerCase().includes('kominfo') ||
             cert.issuer.toLowerCase().includes('komdigi')
           );
+          const isPasas = cert.issuer && cert.issuer.toLowerCase().includes('pasas');
           const issuerIconHtml = isLppi
             ? `<img src="/assets/certificates/logo-lppi.png" alt="LPPI Logo" class="cert-issuer-img">`
             : (isDicoding
                 ? `<img src="/assets/certificates/logo-dicoding.png" alt="Dicoding Logo" class="cert-issuer-img">`
                 : (isDts
                     ? `<img src="/assets/certificates/logo-dts.png" alt="Digitalent DTS Logo" class="cert-issuer-img">`
-                    : escapeHtml(getInitials(cert.issuer))));
-          const issuerIconClass = (isLppi || isDicoding || isDts) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
+                    : (isPasas
+                        ? `<img src="/assets/certificates/logo-pasas.png" alt="PASAS Institute Logo" class="cert-issuer-img">`
+                        : escapeHtml(getInitials(cert.issuer)))));
+          const issuerIconClass = (isLppi || isDicoding || isDts || isPasas) ? 'cert-issuer-icon has-logo' : 'cert-issuer-icon';
 
           const pages = getCertificatePages(cert, false);
           const hasPreview = pages.length > 0;
@@ -1916,6 +1919,15 @@
             label: isId ? 'Materi / Kurikulum' : 'Curriculum',
             url: '/assets/certificates/cert-associate-data-scientist-dts-page2.jpg',
             type: 'curriculum'
+          }
+        ];
+      }
+      if (title.includes('cisdv') || (cert.credential_id && cert.credential_id.includes('CISDV13854')) || (cert.issuer && cert.issuer.toLowerCase().includes('pasas'))) {
+        return [
+          {
+            label: isId ? 'Sertifikat' : 'Certificate',
+            url: cert.image_url || '/assets/certificates/cert-pasas-cisdv.jpg',
+            type: 'certificate'
           }
         ];
       }
