@@ -3220,11 +3220,11 @@
     if (paginationWrap && paginationInfo && paginationControls) {
       if (totalAwards <= AWARDS_PER_PAGE) {
         paginationWrap.style.display = totalAwards > 0 ? 'flex' : 'none';
-        paginationInfo.innerHTML = `Showing all <strong>${totalAwards}</strong> honors &amp; awards`;
+        paginationInfo.innerHTML = `Showing all <strong>${totalAwards}</strong> ${totalAwards === 1 ? 'award' : 'awards'}`;
         paginationControls.innerHTML = '';
       } else {
         paginationWrap.style.display = 'flex';
-        paginationInfo.innerHTML = `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalAwards}</strong> honors &amp; awards`;
+        paginationInfo.innerHTML = `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalAwards}</strong> awards`;
 
         let controlsHtml = '';
         const prevDisabled = currentAwardPage === 1 ? 'disabled' : '';
