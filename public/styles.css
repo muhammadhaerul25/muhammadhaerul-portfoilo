@@ -3165,13 +3165,16 @@ img {
 }
 
 .cert-scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
   width: 38px;
   height: 38px;
   min-width: 38px;
   border-radius: 50%;
   background: var(--surface, #ffffff);
   border: 1.5px solid var(--border);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   color: var(--text);
   display: inline-flex;
   align-items: center;
@@ -3181,17 +3184,24 @@ img {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: scale(0.9);
   flex-shrink: 0;
-  z-index: 5;
+  z-index: 10;
   padding: 0;
+}
+
+.cert-scroll-arrow.cert-scroll-prev {
+  left: 6px;
+}
+
+.cert-scroll-arrow.cert-scroll-next {
+  right: 6px;
 }
 
 .cert-scroll-arrow.is-visible {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: scale(1);
+  transform: translateY(-50%) scale(1);
 }
 
 .cert-scroll-arrow:hover {
@@ -3199,11 +3209,11 @@ img {
   color: var(--bg);
   border-color: var(--text);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
-  transform: scale(1.06);
+  transform: translateY(-50%) scale(1.06);
 }
 
 .cert-scroll-arrow:active {
-  transform: scale(0.94);
+  transform: translateY(-50%) scale(0.94);
 }
 
 [data-theme="dark"] .cert-scroll-arrow {
@@ -3229,7 +3239,9 @@ img {
   border-radius: 9999px;
   border: 1.5px solid var(--border);
   box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -6021,7 +6033,7 @@ img {
 .t-card-foot {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-top: 14px;
   border-top: 1px solid var(--border);
   font-size: 12px;
@@ -7140,13 +7152,16 @@ img {
 }
 
 .skills-scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
   width: 38px;
   height: 38px;
   min-width: 38px;
   border-radius: 50%;
   background: var(--surface, #ffffff);
   border: 1.5px solid var(--border);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   color: var(--text);
   display: inline-flex;
   align-items: center;
@@ -7156,17 +7171,24 @@ img {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: scale(0.9);
   flex-shrink: 0;
-  z-index: 5;
+  z-index: 10;
   padding: 0;
+}
+
+.skills-scroll-arrow.skills-scroll-prev {
+  left: 6px;
+}
+
+.skills-scroll-arrow.skills-scroll-next {
+  right: 6px;
 }
 
 .skills-scroll-arrow.is-visible {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: scale(1);
+  transform: translateY(-50%) scale(1);
 }
 
 .skills-scroll-arrow:hover {
@@ -7174,11 +7196,11 @@ img {
   color: var(--bg);
   border-color: var(--text);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
-  transform: scale(1.06);
+  transform: translateY(-50%) scale(1.06);
 }
 
 .skills-scroll-arrow:active {
-  transform: scale(0.94);
+  transform: translateY(-50%) scale(0.94);
 }
 
 [data-theme="dark"] .skills-scroll-arrow {
@@ -7204,7 +7226,9 @@ img {
   border-radius: 9999px;
   border: 1.5px solid var(--border);
   box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;

@@ -390,7 +390,18 @@
 
       pubs_eyebrow: "06 — Publications",
       pubs_title: "Open-source work, written up and shared.",
-      pubs_desc: "Code and write-ups released publicly so other engineers can learn from — or build on — the same systems.",
+            edu_desc: "Formal academic degree, computer science coursework, and honors.",
+      exp_desc: "Professional career roles, software engineering, and AI leadership.",
+      skills_desc: "Programming, Data Analytics, Computer Vision, NLP, Generative AI, and DevOps.",
+      projects_desc: "Production web apps, AI systems, computer vision models, and end-to-end case studies.",
+      pubs_desc: "Scientific papers, research publications, and open-source technical documentation.",
+      talks_desc: "Keynote speeches, seminars, workshops, technical training, and panel discussions.",
+      awards_desc: "National hackathon championships, competition awards, and industry recognitions.",
+      certs_desc: "Industry licenses, professional specializations, and verified credentials.",
+      blog_desc: "In-depth technical articles, engineering tutorials, and system architecture guides.",
+      gallery_desc: "Curated visual moments from stages, workshops, hackathons, and milestones.",
+      feedback_desc: "Authentic testimonials and peer impressions from workshop attendees and colleagues.",
+      contact_desc: "Collaboration inquiries, technical speaking invitations, and project consultations.",
 
       talks_eyebrow: "07 — Talks & Workshops",
       talks_title: "Speaking Engagements, Seminars & Workshops",
@@ -472,7 +483,18 @@
 
       pubs_eyebrow: "06 — Publikasi & Riset",
       pubs_title: "Karya ilmiah & sumber terbuka yang dibagikan.",
-      pubs_desc: "Kode dan tulisan ilmiah yang dirilis untuk publik agar pengembang lain dapat belajar dan mengembangkannya bersama.",
+            edu_desc: "Pendidikan formal, bidang studi informatika, dan capaian akademik.",
+      exp_desc: "Perjalanan karir profesional, rekayasa perangkat lunak, dan kepemimpinan AI.",
+      skills_desc: "Pemrograman, Analisis Data, Computer Vision, NLP, Generative AI, dan DevOps.",
+      projects_desc: "Aplikasi web produksi, sistem kecerdasan buatan, model visi komputer, dan studi kasus end-to-end.",
+      pubs_desc: "Karya ilmiah, publikasi penelitian, dan dokumentasi teknis sumber terbuka.",
+      talks_desc: "Seminar, lokakarya, konferensi, pelatihan teknis, dan dialog interaktif.",
+      awards_desc: "Juara kompetisi hackathon nasional, penghargaan inovasi, dan apresiasi industri.",
+      certs_desc: "Lisensi industri, sertifikasi keahlian, dan kredensial profesional terverifikasi.",
+      blog_desc: "Tulisan teknis mendalam, panduan arsitektur sistem, dan tutorial rekayasa perangkat lunak.",
+      gallery_desc: "Dokumentasi visual kegiatan dari panggung seminar, workshop, hackathon, dan pencapaian.",
+      feedback_desc: "Kesan autentik dan rekomendasi dari peserta lokakarya serta rekan profesional.",
+      contact_desc: "Kolaborasi rekayasa AI, undangan narasumber, dan konsultasi proyek.",
 
       talks_eyebrow: "07 — Seminar & Lokakarya",
       talks_title: "Berbagi wawasan & praktik terbaik di industri.",
@@ -732,6 +754,43 @@
         pubDesc.style.display = 'none';
       }
     }
+    // Helper to update section subtitle / description
+    function setSectionDesc(selector, defaultDesc, cfgDesc) {
+      const sec = document.querySelector(selector);
+      if (!sec) return;
+      let descEl = sec.querySelector('.section-desc');
+      const text = (lang === 'id' || !cfgDesc || !cfgDesc.trim()) ? defaultDesc : cfgDesc;
+      if (text) {
+        if (!descEl) {
+          const headEl = sec.querySelector('.section-head, .contact-left');
+          if (headEl) {
+            descEl = document.createElement('p');
+            descEl.className = 'section-desc';
+            headEl.appendChild(descEl);
+          }
+        }
+        if (descEl) {
+          descEl.textContent = text;
+          descEl.style.display = 'block';
+        }
+      } else if (descEl) {
+        descEl.style.display = 'none';
+      }
+    }
+
+    setSectionDesc('#education', t.edu_desc, secOverrides.education && secOverrides.education.subtitle);
+    setSectionDesc('#experience', t.exp_desc, (secOverrides.experiences || secOverrides.experience) && (secOverrides.experiences || secOverrides.experience).subtitle);
+    setSectionDesc('#skills', t.skills_desc, secOverrides.skills && secOverrides.skills.subtitle);
+    setSectionDesc('#projects', t.projects_desc, secOverrides.projects && secOverrides.projects.subtitle);
+    setSectionDesc('#publications', t.pubs_desc, secOverrides.publications && secOverrides.publications.subtitle);
+    setSectionDesc('#talks', t.talks_desc, secOverrides.talks && secOverrides.talks.subtitle);
+    setSectionDesc('#awards', t.awards_desc, secOverrides.awards && secOverrides.awards.subtitle);
+    setSectionDesc('#certifications', t.certs_desc, secOverrides.certifications && secOverrides.certifications.subtitle);
+    setSectionDesc('#blog', t.blog_desc, secOverrides.blogs && secOverrides.blogs.subtitle);
+    setSectionDesc('#gallery', t.gallery_desc, secOverrides.gallery && secOverrides.gallery.subtitle);
+    setSectionDesc('#testimonials', t.feedback_desc, secOverrides.testimonials && secOverrides.testimonials.subtitle);
+    setSectionDesc('#contact', t.contact_desc, secOverrides.contact && secOverrides.contact.subtitle);
+
     document.querySelectorAll('#publications .pub-zoom-btn span').forEach(el => {
       el.textContent = lang === 'id' ? 'Lihat Pratinjau' : 'View Full Preview';
     });
@@ -872,9 +931,9 @@
   }
 
   function formatName(str) {
-    if (!str || typeof str !== 'string') return 'Verified Attendee';
+    if (!str || typeof str !== 'string') return 'Attendee';
     const trimmed = str.trim();
-    if (!trimmed) return 'Verified Attendee';
+    if (!trimmed) return 'Attendee';
 
     if (trimmed.includes('@')) {
       const u = trimmed.split('@')[0];
@@ -883,7 +942,7 @@
     }
 
     const words = trimmed.split(/\s+/).filter(Boolean);
-    if (!words.length) return 'Verified Attendee';
+    if (!words.length) return 'Attendee';
 
     return words.slice(0, 2).map(w => {
       const clean = w.replace(/[^\p{L}\p{N}]/gu, '');
@@ -1733,12 +1792,6 @@
           </div>
 
           <div class="t-card-foot">
-            <span class="t-verified-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-              Verified Colleague
-            </span>
             <span class="t-foot-date">${escapeHtml(dateText)}</span>
           </div>
         </article>
@@ -1768,7 +1821,7 @@
     const scoreBig = document.querySelector('.t-score-big');
     if (scoreBig) scoreBig.textContent = avgScore;
     const scoreLbl = document.querySelector('.t-score-lbl');
-    if (scoreLbl) scoreLbl.textContent = `Average Rating across ${workshopFeedbacks.length} verified workshop reviews`;
+    if (scoreLbl) scoreLbl.textContent = `Average Rating across ${workshopFeedbacks.length} workshop reviews`;
 
     updateFeedbackFilterCounts();
 
@@ -1894,7 +1947,7 @@
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                       </svg>
-                      <span>${(f.source && f.source.toLowerCase().includes('linkedin')) ? 'Core Impact' : 'Highlight Materi'}</span>
+                      <span>${(f.source && f.source.toLowerCase().includes('linkedin')) ? 'Core Impact' : isIndonesian() ? 'Sorotan Pembelajaran' : 'Key Takeaway'}</span>
                     </div>
                     <p class="t-takeaway-text">“${escapeHtml(takeaway)}”</p>
                   </div>
@@ -1903,12 +1956,6 @@
             </div>
 
             <div class="t-card-foot">
-              <span class="t-verified-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-                ${(f.source && f.source.toLowerCase().includes('linkedin')) ? 'Verified Colleague' : 'Verified Attendee'}
-              </span>
               <span class="t-foot-date">${escapeHtml(dateText)}</span>
             </div>
           </article>
@@ -1924,12 +1971,12 @@
     if (paginationWrap && paginationInfo && paginationControls) {
       if (totalFeedbacks <= FEEDBACKS_PER_PAGE) {
         paginationWrap.style.display = totalFeedbacks > 0 ? 'flex' : 'none';
-        paginationInfo.innerHTML = `Showing all <strong>${totalFeedbacks}</strong> verified reviews`;
+        paginationInfo.innerHTML = `Showing all <strong>${totalFeedbacks}</strong> reviews`;
         paginationControls.innerHTML = '';
       } else {
         paginationWrap.style.display = 'flex';
         paginationInfo.innerHTML = showAllFeedbacks
-          ? `Showing all <strong>${totalFeedbacks}</strong> verified reviews`
+          ? `Showing all <strong>${totalFeedbacks}</strong> reviews`
           : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalFeedbacks}</strong> reviews`;
 
         let controlsHtml = '';
@@ -4761,7 +4808,9 @@
         const copyEl = document.querySelector('.footer-copy');
         if (copyEl) {
           const rawCopy = settings.footer.copyright;
-          if (rawCopy.includes('Muhammad Haerul')) {
+          if (rawCopy.includes('@muhammadhaerul.25')) {
+            copyEl.innerHTML = escapeHtml(rawCopy).replace('@muhammadhaerul.25', '<span class="footer-copy-name">@muhammadhaerul.25</span>');
+          } else if (rawCopy.includes('Muhammad Haerul')) {
             copyEl.innerHTML = escapeHtml(rawCopy).replace('Muhammad Haerul', '<span class="footer-copy-name">Muhammad Haerul</span>');
           } else {
             copyEl.textContent = rawCopy;
