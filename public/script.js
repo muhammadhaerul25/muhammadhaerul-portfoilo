@@ -1526,13 +1526,13 @@
     if (paginationWrap && paginationInfo && paginationControls) {
       if (totalTalks <= TALKS_PER_PAGE) {
         paginationWrap.style.display = totalTalks > 0 ? 'flex' : 'none';
-        paginationInfo.innerHTML = `Showing all <strong>${totalTalks}</strong> ${totalTalks === 1 ? 'keynote & workshop' : 'keynotes & workshops'}`;
+        paginationInfo.innerHTML = `Showing all <strong>${totalTalks}</strong> ${totalTalks === 1 ? 'talk' : 'talks'}`;
         paginationControls.innerHTML = '';
       } else {
         paginationWrap.style.display = 'flex';
         paginationInfo.innerHTML = showAllTalks
-          ? `Showing all <strong>${totalTalks}</strong> keynotes & workshops`
-          : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalTalks}</strong> keynotes & workshops`;
+          ? `Showing all <strong>${totalTalks}</strong> talks`
+          : `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalTalks}</strong> talks`;
 
         let controlsHtml = '';
         if (!showAllTalks) {
