@@ -3546,6 +3546,147 @@
     document.body.style.overflow = '';
   };
 
+  /* ============ RECOMMENDATION MODAL HANDLERS ============ */
+  window.updateCharCount = function (el, counterId, max) {
+    if (!el) return;
+    const counter = document.getElementById(counterId);
+    if (!counter) return;
+    const len = el.value.length;
+    counter.textContent = `${len} / ${max}`;
+    if (len >= max) {
+      counter.style.color = '#ef4444';
+    } else {
+      counter.style.color = '';
+    }
+  };
+
+  window.openRecommendationModal = function (e) {
+    if (e && (e.metaKey || e.ctrlKey || e.shiftKey)) return;
+    if (e && typeof e.preventDefault === 'function') e.preventDefault();
+    const overlay = document.getElementById('recommendationModalOverlay');
+    if (!overlay) {
+      window.location.href = '/form-recommendation.html';
+      return;
+    }
+    const alertBox = document.getElementById('recModalAlert');
+    if (alertBox) {
+      alertBox.style.display = 'none';
+      alertBox.textContent = '';
+      alertBox.className = 'rec-alert';
+    }
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const firstInput = document.getElementById('recFullName');
+    if (firstInput) setTimeout(() => firstInput.focus(), 150);
+  };
+
+  window.closeRecommendationModal = function () {
+    const overlay = document.getElementById('recommendationModalOverlay');
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  window.handleRecommendationSubmit = async function (e) {
+    if (e && typeof e.preventDefault === 'function') e.preventDefault();
+    const alertBox = document.getElementById('recModalAlert');
+    const submitBtn = document.getElementById('recSubmitBtn');
+    const btnText = document.getElementById('recSubmitBtnText');
+    const btnSpinner = document.getElementById('recSubmitBtnSpinner');
+
+    const fullName = (document.getElementById('recFullName')?.value || '').trim();
+    const email = (document.getElementById('recEmail')?.value || '').trim();
+    const role = (document.getElementById('recRole')?.value || '').trim();
+    const company = (document.getElementById('recCompany')?.value || '').trim();
+    const relationship = (document.getElementById('recRelationship')?.value || 'Colleague').trim();
+    const project = (document.getElementById('recProject')?.value || '').trim();
+    const headline = (document.getElementById('recHeadline')?.value || '').trim();
+    const message = (document.getElementById('recMessage')?.value || '').trim();
+
+    if (!fullName || !email || !role || !company || !headline || !message) {
+      if (alertBox) {
+        alertBox.className = 'rec-alert error';
+        alertBox.textContent = 'Please fill out all required fields marked with *';
+        alertBox.style.display = 'block';
+      }
+      return;
+    }
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (btnText) btnText.style.display = 'none';
+    if (btnSpinner) btnSpinner.style.display = 'inline-block';
+    if (alertBox) alertBox.style.display = 'none';
+
+    try {
+      const res = await fetch('/api/submit_recommendation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          namaLengkap: fullName,
+          email: email,
+          rating: 10,
+          role: role,
+          company: company,
+          relationship: relationship,
+          project: project,
+          headline: headline,
+          coreImpact: headline,
+          pesanKesan: message,
+          alasan: headline,
+          source: `${relationship} Recommendation · ${company}`
+        })
+      });
+
+      const json = await res.json();
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || 'Failed to submit recommendation.');
+      }
+
+      // Success
+      if (alertBox) {
+        alertBox.className = 'rec-alert success';
+        alertBox.textContent = 'Thank you! Your recommendation has been submitted successfully.';
+        alertBox.style.display = 'block';
+      }
+
+      // Reset form
+      const form = document.getElementById('recommendationModalForm');
+      if (form) form.reset();
+
+      // Show toast
+      if (typeof window.showToast === 'function') {
+        window.showToast('Recommendation submitted successfully! Thank you.');
+      }
+
+      // Refresh feedbacks live list
+      fetch('/api/get_feedback')
+        .then(r => r.json())
+        .then(fbData => {
+          if (fbData && fbData.data) {
+            liveFeedbacks = fbData.data;
+            if (typeof renderTestimonials === 'function') renderTestimonials();
+            if (typeof renderRecommendationCards === 'function') renderRecommendationCards();
+            if (typeof updateFeedbackFilterCounts === 'function') updateFeedbackFilterCounts();
+          }
+        })
+        .catch(() => {});
+
+      setTimeout(() => {
+        window.closeRecommendationModal();
+      }, 1600);
+
+    } catch (err) {
+      if (alertBox) {
+        alertBox.className = 'rec-alert error';
+        alertBox.textContent = err.message || 'An error occurred while submitting. Please try again.';
+        alertBox.style.display = 'block';
+      }
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnText) btnText.style.display = 'inline-block';
+      if (btnSpinner) btnSpinner.style.display = 'none';
+    }
+  };
+
   /* ============ TOAST NOTIFICATION ============ */
   let toastTimeout = null;
   window.showToast = function (msg) {

@@ -13,6 +13,11 @@ router.get('/feedbacks', feedbacksController.getFeedbacks);
 router.post('/feedback', submissionLimiter, feedbacksController.submitFeedback);
 router.get('/feedback', feedbacksController.getFeedbacks);
 
+// --- Recommendations Public Submission ---
+router.post('/submit_recommendation', submissionLimiter, feedbacksController.submitRecommendation);
+router.post('/recommendation', submissionLimiter, feedbacksController.submitRecommendation);
+router.post('/recommendations', submissionLimiter, feedbacksController.submitRecommendation);
+
 // --- Feedbacks Protected Management (Admin Protected) ---
 router.put('/update_feedback/:id', requireAdminAuth, validateIntParam('id'), feedbacksController.updateFeedback);
 router.delete('/delete_feedback/:id', requireAdminAuth, validateIntParam('id'), feedbacksController.deleteFeedback);

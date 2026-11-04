@@ -3,7 +3,7 @@ const cache = require('../utils/cache');
 const asyncHandler = require('../utils/asyncHandler');
 
 exports.submitFeedback = asyncHandler(async (req, res) => {
-    const { namaLengkap, email, rating, alasan, pesanKesan, materi } = req.body;
+    const { namaLengkap, email, rating, alasan, pesanKesan, materi, source } = req.body;
     if (!namaLengkap || !email || !rating || !alasan || !pesanKesan) {
         const err = new Error('All fields (namaLengkap, email, rating, alasan, pesanKesan) are required.');
         err.status = 400;
@@ -17,13 +17,51 @@ exports.submitFeedback = asyncHandler(async (req, res) => {
             rating: parseInt(rating, 10), 
             alasan: String(alasan).trim(), 
             pesan_kesan: String(pesanKesan).trim(), 
-            materi: materi ? String(materi).trim() : null 
+            materi: materi ? String(materi).trim() : null,
+            source: source ? String(source).trim() : null
         }
     });
 
+    cache.del('feedbacks:all');
     cache.del('feedback');
     cache.del('forms');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.status(201).json({ success: true, data: result });
+});
+
+exports.submitRecommendation = asyncHandler(async (req, res) => {
+    const { namaLengkap, email, rating, headline, coreImpact, pesanKesan, company, role, project, relationship, source } = req.body;
+    if (!namaLengkap || !email || !pesanKesan) {
+        const err = new Error('Name, email, and recommendation message are required.');
+        err.status = 400;
+        throw err;
+    }
+
+    const impactText = headline || coreImpact || (req.body.alasan ? String(req.body.alasan).trim() : '');
+    const companyText = [role, company].filter(Boolean).join(' at ') || company || role || 'Colleague';
+    const relText = relationship || 'Colleague';
+    const sourceFormatted = source || `${relText} Recommendation · ${companyText}`;
+    const materiFormatted = project || req.body.materi || 'Professional Collaboration';
+
+    const result = await prisma.feedbacks.create({
+        data: {
+            nama_lengkap: String(namaLengkap).trim(),
+            email: String(email).trim(),
+            rating: rating ? parseInt(rating, 10) : 10,
+            alasan: impactText ? String(impactText).trim() : String(pesanKesan).slice(0, 160).trim() + '...',
+            pesan_kesan: String(pesanKesan).trim(),
+            materi: materiFormatted ? String(materiFormatted).trim() : null,
+            source: sourceFormatted ? String(sourceFormatted).trim() : 'Colleague Recommendation'
+        }
+    });
+
+    cache.del('feedbacks:all');
+    cache.del('feedback');
+    cache.del('forms');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
+    res.status(201).json({ success: true, message: 'Recommendation submitted successfully.', data: result });
 });
 
 exports.getFeedbacks = asyncHandler(async (req, res) => {

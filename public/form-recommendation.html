@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem('mh_theme') || localStorage.getItem('mh-theme');
+                if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+                else document.documentElement.setAttribute('data-theme', 'light');
+            } catch(e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave a Recommendation — Muhammad Haerul</title>
+    <meta name="description" content="Endorse Muhammad Haerul's expertise, work ethic, and professional collaboration.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/webp" href="/favicon.webp">
+
+    <style>
+    /* ════════════════════════════════════════
+       RESET & TOKENS
+    ════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+        --g-blue:   #4285F4;
+        --g-green:  #34A853;
+        --g-yellow: #FBBC04;
+        --g-red:    #EA4335;
+        --in-blue:  #0A66C2;
+        --ink:      #202124;
+        --ink-2:    #3C4043;
+        --ink-3:    #5F6368;
+        --ink-4:    #9AA0A6;
+        --border:   #DADCE0;
+        --bg:       #F0F4FF;
+        --surface:  #FFFFFF;
+        --r-lg:     20px;
+        --r-md:     14px;
+        --r-sm:     10px;
+        --r-pill:   100px;
+        --t: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        --t-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    [data-theme="dark"] {
+        --ink:      #F8FAFC;
+        --ink-2:    #E2E8F0;
+        --ink-3:    #94A3B8;
+        --ink-4:    #64748B;
+        --border:   rgba(255, 255, 255, 0.12);
+        --bg:       #0A0E17;
+        --surface:  #141C2E;
+    }
+
+    body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        -webkit-font-smoothing: antialiased;
+        background-image:
+            radial-gradient(ellipse 600px 400px at 0% 0%, rgba(10,102,194,0.12) 0%, transparent 60%),
+            radial-gradient(ellipse 400px 300px at 100% 100%, rgba(66,133,244,0.08) 0%, transparent 60%);
+    }
+
+    .page-wrapper {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4px 6px;
+    }
+
+    .btn-back, .btn-theme {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        color: var(--ink-2);
+        padding: 8px 16px;
+        border-radius: var(--r-pill);
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--t);
+        cursor: pointer;
+    }
+    .btn-back:hover, .btn-theme:hover {
+        border-color: var(--in-blue);
+        color: var(--in-blue);
+        transform: translateY(-1px);
+    }
+
+    /* ════════════════════════════════════════
+       CARD
+    ════════════════════════════════════════ */
+    .card {
+        background: var(--surface);
+        width: 100%;
+        border-radius: var(--r-lg);
+        box-shadow: 0 4px 24px rgba(60,64,67,0.12), 0 1px 4px rgba(60,64,67,0.08);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .card-stripe {
+        height: 4px;
+        background: linear-gradient(90deg, #0A66C2 0%, #4285F4 33%, #34A853 66%, #0A66C2 100%);
+        background-size: 200% 100%;
+        animation: stripeShimmer 3s linear infinite;
+    }
+    @keyframes stripeShimmer {
+        0%   { background-position: 0% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    .card-body { padding: 36px 40px 40px; }
+
+    @media (max-width: 640px) {
+        body { padding: 12px; }
+        .card-body { padding: 24px 20px 28px; }
+    }
+
+    /* ════════════════════════════════════════
+       PROGRESS STEPS
+    ════════════════════════════════════════ */
+    .steps {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 32px;
+        padding: 0 4px;
+    }
+
+    .steps-track {
+        position: absolute;
+        top: 15px;
+        left: 36px;
+        right: 36px;
+        height: 3px;
+        background: #E8EAED;
+        border-radius: var(--r-pill);
+        z-index: 0;
+        overflow: hidden;
+    }
+    .steps-track-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--in-blue), #2563eb);
+        width: 0%;
+        transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: var(--r-pill);
+    }
+
+    .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        flex: 1;
+        position: relative;
+        z-index: 1;
+    }
+
+    .step-dot {
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.78rem; font-weight: 800;
+        background: var(--surface); color: var(--ink-4);
+        border: 2px solid #DADCE0;
+        box-shadow: 0 0 0 4px var(--surface);
+        transition: var(--t-spring);
+        position: relative; z-index: 1;
+        flex-shrink: 0;
+    }
+    .step.active .step-dot  {
+        background: var(--in-blue); border-color: var(--in-blue);
+        color: #fff;
+        box-shadow: 0 0 0 5px rgba(10,102,194,0.2), 0 2px 8px rgba(10,102,194,0.3);
+        transform: scale(1.05);
+    }
+    .step.done .step-dot  {
+        background: var(--in-blue); border-color: var(--in-blue);
+        color: #fff;
+        box-shadow: 0 0 0 4px var(--surface);
+    }
+
+    .step-label {
+        font-size: 0.73rem; font-weight: 700;
+        color: var(--ink-4); white-space: nowrap;
+        transition: var(--t);
+        letter-spacing: 0.01em;
+    }
+    .step.active .step-label { color: var(--in-blue); font-weight: 800; }
+    .step.done .step-label { color: var(--ink-2); font-weight: 700; }
+
+    /* ════════════════════════════════════════
+       STEP PANELS
+    ════════════════════════════════════════ */
+    .step-panel { display: none; animation: panelIn 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .step-panel.active { display: block; }
+    @keyframes panelIn {
+        from { opacity: 0; transform: translateX(18px); }
+        to   { opacity: 1; transform: translateX(0); }
+    }
+    .step-panel.back { animation: panelInBack 0.3s cubic-bezier(0.4,0,0.2,1); }
+    @keyframes panelInBack {
+        from { opacity: 0; transform: translateX(-18px); }
+        to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .step-head { margin-bottom: 24px; }
+    .step-eyebrow {
+        font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+        letter-spacing: 0.1em; color: var(--in-blue); margin-bottom: 6px;
+    }
+    .step-title {
+        font-family: 'Google Sans', 'Inter', sans-serif;
+        font-size: 1.5rem; font-weight: 700;
+        color: var(--ink); letter-spacing: -0.02em; line-height: 1.25;
+    }
+    .step-desc { font-size: 0.875rem; color: var(--ink-3); margin-top: 6px; line-height: 1.5; }
+
+    /* LinkedIn Banner */
+    .linkedin-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 14px 18px;
+        border-radius: var(--r-md);
+        background: rgba(10, 102, 194, 0.07);
+        border: 1px solid rgba(10, 102, 194, 0.2);
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+    }
+    .linkedin-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        min-width: 220px;
+    }
+    .linkedin-left div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .linkedin-left strong {
+        font-size: 13px;
+        color: var(--ink);
+    }
+    .linkedin-left span {
+        font-size: 12px;
+        color: var(--ink-3);
+    }
+    .linkedin-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        background: var(--in-blue);
+        padding: 7px 14px;
+        border-radius: var(--r-pill);
+        text-decoration: none;
+        transition: var(--t);
+        white-space: nowrap;
+    }
+    .linkedin-btn:hover {
+        background: #004182;
+        transform: translateY(-1px);
+    }
+
+    /* Forms */
+    .form-group {
+        margin-bottom: 18px;
+    }
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+    @media (max-width: 580px) {
+        .form-row { grid-template-columns: 1fr; }
+    }
+    .form-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 6px;
+    }
+    .form-label .req { color: var(--g-red); }
+    .form-input, .form-select, .form-textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: var(--r-sm);
+        border: 1.5px solid var(--border);
+        background: var(--surface);
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 0.9rem;
+        outline: none;
+        transition: var(--t);
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+        border-color: var(--in-blue);
+        box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.18);
+    }
+    .form-textarea {
+        resize: vertical;
+        min-height: 100px;
+        line-height: 1.55;
+    }
+    .char-count {
+        font-size: 0.72rem;
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--ink-4);
+    }
+
+    /* Live Preview Card */
+    .preview-card {
+        padding: 20px;
+        border-radius: var(--r-md);
+        background: rgba(10, 102, 194, 0.04);
+        border: 1.5px dashed rgba(10, 102, 194, 0.25);
+        margin-bottom: 22px;
+    }
+    .preview-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+    .preview-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #0A66C2;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+    }
+    .preview-name {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--ink);
+    }
+    .preview-role {
+        font-size: 12px;
+        color: var(--ink-3);
+    }
+    .preview-quote {
+        font-size: 13.5px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        font-style: italic;
+        margin-bottom: 10px;
+    }
+    .preview-impact {
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: rgba(10, 102, 194, 0.08);
+        font-size: 12.5px;
+        color: var(--in-blue);
+        font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 28px;
+    }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: var(--r-pill);
+        font-size: 0.88rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        transition: var(--t);
+        text-decoration: none;
+    }
+    .btn-primary {
+        background: var(--in-blue);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(10, 102, 194, 0.3);
+    }
+    .btn-primary:hover {
+        background: #004182;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(10, 102, 194, 0.4);
+    }
+    .btn-secondary {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        color: var(--ink-2);
+    }
+    .btn-secondary:hover {
+        background: var(--border);
+    }
+
+    /* Alert */
+    .alert {
+        padding: 12px 16px;
+        border-radius: var(--r-md);
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 18px;
+        display: none;
+    }
+    .alert.error { display: block; background: #FDE8E7; color: #C5221F; border: 1px solid #FACBC9; }
+    .alert.success { display: block; background: #E6F4EA; color: #137333; border: 1px solid #A8D5B5; }
+
+    /* Success State */
+    #success-state {
+        display: none;
+        text-align: center;
+        padding: 36px 20px 20px;
+    }
+    .success-icon {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0A66C2, #2563eb);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: #fff;
+        box-shadow: 0 8px 30px rgba(10, 102, 194, 0.35);
+        animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes pop {
+        from { transform: scale(0.4); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    .success-title {
+        font-family: 'Google Sans', 'Inter', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    .success-desc {
+        font-size: 0.9rem;
+        color: var(--ink-3);
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
+
+    .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Footer */
+    .card-footer {
+        padding: 14px 40px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.72rem;
+        color: var(--ink-4);
+        font-weight: 600;
+    }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="top-bar">
+        <a href="/#testimonials" class="btn-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Portfolio</span>
+        </a>
+        <button type="button" class="btn-theme" onclick="toggleTheme()" aria-label="Toggle theme">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <span>Theme</span>
+        </button>
+    </div>
+
+    <div class="card">
+        <div class="card-stripe"></div>
+        <div class="card-body">
+
+            <!-- Progress Steps -->
+            <div class="steps" id="steps-wrap">
+                <div class="steps-track">
+                    <div class="steps-track-fill" id="steps-progress"></div>
+                </div>
+                <div class="step active" id="step-ind-1">
+                    <div class="step-dot">1</div>
+                    <span class="step-label">Your Info</span>
+                </div>
+                <div class="step" id="step-ind-2">
+                    <div class="step-dot">2</div>
+                    <span class="step-label">Endorsement</span>
+                </div>
+                <div class="step" id="step-ind-3">
+                    <div class="step-dot">3</div>
+                    <span class="step-label">Review</span>
+                </div>
+            </div>
+
+            <div id="alert-box" class="alert"></div>
+
+            <!-- STEP 1: YOUR INFO -->
+            <div class="step-panel active" id="panel-1">
+                <div class="step-head">
+                    <div class="step-eyebrow">Step 1 of 3</div>
+                    <h2 class="step-title">Who is recommending?</h2>
+                    <p class="step-desc">Introduce yourself and your professional relationship with Muhammad Haerul.</p>
+                </div>
+
+                <div class="linkedin-card">
+                    <div class="linkedin-left">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0A66C2">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                        <div>
+                            <strong>Prefer writing directly on LinkedIn?</strong>
+                            <span>You can also endorse directly on Muhammad Haerul's official profile.</span>
+                        </div>
+                    </div>
+                    <a href="https://www.linkedin.com/in/muhammadhaerul" target="_blank" rel="noopener" class="linkedin-btn">
+                        Open LinkedIn ↗
+                    </a>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Full Name <span class="req">*</span></label>
+                        <input type="text" class="form-input" id="inp-name" placeholder="e.g. Rahmatullah R" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Work / Contact Email <span class="req">*</span></label>
+                        <input type="email" class="form-input" id="inp-email" placeholder="e.g. name@company.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Your Role / Position <span class="req">*</span></label>
+                        <input type="text" class="form-input" id="inp-role" placeholder="e.g. Senior Software Engineer / Lead" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company / Organization <span class="req">*</span></label>
+                        <input type="text" class="form-input" id="inp-company" placeholder="e.g. Infomedia Nusantara · SCREENESIA" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Professional Relationship <span class="req">*</span></label>
+                    <select class="form-select" id="inp-rel">
+                        <option value="Colleague">Colleague / Team Peer</option>
+                        <option value="Engineering Lead">Engineering Lead / Manager</option>
+                        <option value="Client / Partner">Client / Business Partner</option>
+                        <option value="Project Collaborator">Research / Project Collaborator</option>
+                        <option value="Mentee / Student">Mentee / Workshop Participant</option>
+                    </select>
+                </div>
+
+                <div class="btn-row" style="justify-content: flex-end;">
+                    <button type="button" class="btn btn-primary" onclick="goToStep(2)">
+                        <span>Continue</span>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: ENDORSEMENT -->
+            <div class="step-panel" id="panel-2">
+                <div class="step-head">
+                    <div class="step-eyebrow">Step 2 of 3</div>
+                    <h2 class="step-title">Your Recommendation</h2>
+                    <p class="step-desc">Detail your experience working together, key strengths, and project impact.</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Project or Domain of Collaboration</label>
+                    <input type="text" class="form-input" id="inp-project" placeholder="e.g. AI Engineering &amp; Full-Stack Systems, Medaka EL Project">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Core Impact / Summary Headline <span class="req">*</span></span>
+                        <span class="char-count" id="count-headline">0 / 180</span>
+                    </div>
+                    <input type="text" class="form-input" id="inp-headline" maxlength="180" placeholder="e.g. One of the most reliable and forward-thinking engineers..." oninput="updateCharCount('inp-headline', 'count-headline', 180)">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Full Written Recommendation <span class="req">*</span></span>
+                        <span class="char-count" id="count-msg">0 / 1200</span>
+                    </div>
+                    <textarea class="form-textarea" id="inp-msg" rows="5" maxlength="1200" placeholder="Share specific achievements, technical strengths, problem solving, teamwork, and deliverables..." oninput="updateCharCount('inp-msg', 'count-msg', 1200)"></textarea>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep(1, true)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="goToStep(3)">
+                        <span>Preview Recommendation</span>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 3: REVIEW & SUBMIT -->
+            <div class="step-panel" id="panel-3">
+                <div class="step-head">
+                    <div class="step-eyebrow">Step 3 of 3</div>
+                    <h2 class="step-title">Review &amp; Submit</h2>
+                    <p class="step-desc">Verify how your endorsement will appear on Muhammad Haerul's portfolio.</p>
+                </div>
+
+                <!-- Live Card Preview -->
+                <div class="preview-card" id="card-preview">
+                    <div class="preview-header">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div class="preview-avatar" id="prev-avatar">MH</div>
+                            <div>
+                                <div class="preview-name" id="prev-name">Name</div>
+                                <div class="preview-role" id="prev-role">Role · Company</div>
+                            </div>
+                        </div>
+                        <div style="font-size:11px; font-weight:700; color:#0A66C2; background:rgba(10,102,194,0.1); padding:4px 10px; border-radius:99px;">
+                            Recommended 👍
+                        </div>
+                    </div>
+                    <p class="preview-quote" id="prev-quote">“Recommendation text”</p>
+                    <div class="preview-impact" id="prev-impact">⭐ Core Impact</div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep(2, true)">Back to Edit</button>
+                    <button type="button" class="btn btn-primary" id="btn-submit" onclick="submitRecommendation()">
+                        <span id="btn-submit-text">Submit Recommendation</span>
+                        <div class="spinner" id="btn-submit-spinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUCCESS STATE -->
+            <div id="success-state">
+                <div class="success-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h2 class="success-title">Thank You for Your Endorsement!</h2>
+                <p class="success-desc">Your recommendation for Muhammad Haerul has been submitted and recorded. It is deeply appreciated!</p>
+                <a href="/#testimonials" class="btn btn-primary" style="display:inline-flex;">
+                    <span>View on Portfolio</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <span>Muhammad Haerul Digital Portfolio &bull; Peer Endorsements</span>
+        </div>
+    </div>
+</div>
+
+<script>
+var currentStep = 1;
+
+function toggleTheme() {
+    var cur = document.documentElement.getAttribute('data-theme');
+    var nxt = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nxt);
+    localStorage.setItem('mh_theme', nxt);
+}
+
+function updateCharCount(inpId, countId, max) {
+    var el = document.getElementById(inpId);
+    var cnt = document.getElementById(countId);
+    if (!el || !cnt) return;
+    var len = el.value.length;
+    cnt.textContent = len + ' / ' + max;
+    cnt.style.color = len >= max ? '#ef4444' : '';
+}
+
+function showAlert(msg, type) {
+    var b = document.getElementById('alert-box');
+    b.className = 'alert ' + (type || 'error');
+    b.textContent = msg;
+    b.style.display = 'block';
+    b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function clearAlert() {
+    var b = document.getElementById('alert-box');
+    b.style.display = 'none';
+    b.textContent = '';
+}
+
+function goToStep(target, isBack) {
+    clearAlert();
+    if (!isBack) {
+        if (currentStep === 1) {
+            var name = document.getElementById('inp-name').value.trim();
+            var email = document.getElementById('inp-email').value.trim();
+            var role = document.getElementById('inp-role').value.trim();
+            var company = document.getElementById('inp-company').value.trim();
+            if (!name) { showAlert('Please enter your full name.'); return; }
+            if (!email || !email.includes('@')) { showAlert('Please enter a valid work or professional email address.'); return; }
+            if (!role) { showAlert('Please enter your role or title.'); return; }
+            if (!company) { showAlert('Please enter your company or organization.'); return; }
+        } else if (currentStep === 2) {
+            var headline = document.getElementById('inp-headline').value.trim();
+            var msg = document.getElementById('inp-msg').value.trim();
+            if (!headline) { showAlert('Please enter a summary headline / core impact.'); return; }
+            if (!msg) { showAlert('Please write your detailed recommendation message.'); return; }
+
+            // Populate preview in Step 3
+            var name = document.getElementById('inp-name').value.trim();
+            var role = document.getElementById('inp-role').value.trim();
+            var company = document.getElementById('inp-company').value.trim();
+            var initials = name.split(/\s+/).slice(0, 2).map(function(s){ return s[0]; }).join('').toUpperCase() || 'MH';
+
+            document.getElementById('prev-avatar').textContent = initials;
+            document.getElementById('prev-name').textContent = name;
+            document.getElementById('prev-role').textContent = role + ' · ' + company;
+            document.getElementById('prev-quote').textContent = '“' + msg + '”';
+            document.getElementById('prev-impact').textContent = '⭐ ' + headline;
+        }
+    }
+
+    document.getElementById('panel-' + currentStep).classList.remove('active', 'back');
+    var next = document.getElementById('panel-' + target);
+    if (isBack) next.classList.add('back');
+    next.classList.add('active');
+
+    for (var i = 1; i <= 3; i++) {
+        var ind = document.getElementById('step-ind-' + i);
+        ind.classList.remove('active', 'done');
+        if (i < target) ind.classList.add('done');
+        if (i === target) ind.classList.add('active');
+    }
+
+    var prog = document.getElementById('steps-progress');
+    if (prog) {
+        prog.style.width = target === 1 ? '0%' : target === 2 ? '50%' : '100%';
+    }
+
+    currentStep = target;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function submitRecommendation() {
+    clearAlert();
+    var name = document.getElementById('inp-name').value.trim();
+    var email = document.getElementById('inp-email').value.trim();
+    var role = document.getElementById('inp-role').value.trim();
+    var company = document.getElementById('inp-company').value.trim();
+    var rel = document.getElementById('inp-rel').value;
+    var project = document.getElementById('inp-project').value.trim();
+    var headline = document.getElementById('inp-headline').value.trim();
+    var msg = document.getElementById('inp-msg').value.trim();
+
+    var btn = document.getElementById('btn-submit');
+    var txt = document.getElementById('btn-submit-text');
+    var sp = document.getElementById('btn-submit-spinner');
+
+    btn.disabled = true;
+    txt.style.display = 'none';
+    sp.style.display = 'inline-block';
+
+    try {
+        var res = await fetch('/api/submit_recommendation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                namaLengkap: name,
+                email: email,
+                rating: 10,
+                role: role,
+                company: company,
+                relationship: rel,
+                project: project,
+                headline: headline,
+                coreImpact: headline,
+                pesanKesan: msg,
+                alasan: headline,
+                source: rel + ' Recommendation · ' + company
+            })
+        });
+
+        var json = await res.json();
+        if (!res.ok || !json.success) {
+            throw new Error(json.message || 'Failed to submit recommendation.');
+        }
+
+        // Show success
+        document.getElementById('panel-1').style.display = 'none';
+        document.getElementById('panel-2').style.display = 'none';
+        document.getElementById('panel-3').style.display = 'none';
+        document.getElementById('steps-wrap').style.display = 'none';
+        document.getElementById('success-state').style.display = 'block';
+
+    } catch (err) {
+        showAlert(err.message || 'An error occurred while submitting.');
+        btn.disabled = false;
+        txt.style.display = 'inline-block';
+        sp.style.display = 'none';
+    }
+}
+</script>
+
+</body>
+</html>
