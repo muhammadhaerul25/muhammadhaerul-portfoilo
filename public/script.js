@@ -1581,6 +1581,27 @@
   // Helper to resolve multi-image pages for talks (Poster & Certificate / Plakat)
   function getTalkMediaPages(talk, isId) {
     if (!talk) return [];
+    const eventLower = (talk.event || '').toLowerCase();
+    const orgLower = (talk.organizer || '').toLowerCase();
+    const placeLower = (talk.place || '').toLowerCase();
+    const isUnsulbar = eventLower.includes('web engineering') || eventLower.includes('sulawesi barat') || eventLower.includes('unsulbar') || orgLower.includes('unsulbar') || placeLower.includes('majene');
+
+    // For Unsulbar: has no poster/flyer. Has real workshop documentation and official appreciation plaque.
+    if (isUnsulbar) {
+      return [
+        {
+          label: isId ? 'Dokumentasi Workshop' : 'Workshop Documentation',
+          url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp',
+          type: 'documentation'
+        },
+        {
+          label: isId ? 'Plakat Penghargaan' : 'Appreciation Plaque',
+          url: '/assets/certificates/cert-unsulbar-web-ai.jpg',
+          type: 'certificate'
+        }
+      ];
+    }
+
     const pages = [];
     const posterSrc = talk.poster_url || (talk.media && talk.media[0]) || null;
     if (posterSrc) {
@@ -1600,13 +1621,10 @@
       const cSlide = talk.slides.find(s => s.type === 'certificate' || /cert|sertifikat|plakat|piagam|certificate/i.test(s.label || ''));
       if (cSlide) certUrl = cSlide.url;
     }
-    const eventLower = (talk.event || '').toLowerCase();
     if (!certUrl && eventLower.includes('khouw kalbe')) {
       certUrl = '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg';
     } else if (!certUrl && (eventLower.includes('build with ai') || eventLower.includes('gdg'))) {
       certUrl = '/assets/certificates/cert-gdg-build-with-ai.jpg';
-    } else if (!certUrl && (eventLower.includes('web engineering') || eventLower.includes('sulawesi barat') || eventLower.includes('unsulbar'))) {
-      certUrl = '/assets/certificates/cert-unsulbar-web-ai.jpg';
     } else if (!certUrl && (eventLower.includes('cybersecurity') || eventLower.includes('bssn'))) {
       certUrl = '/assets/certificates/cert-bssn-cybersecurity.jpg';
     }
@@ -1659,7 +1677,22 @@
       });
     }
 
-    return pages;
+    // Deduplicate pages by normalized file key to eliminate any identical images
+    const seenMediaKeys = new Set();
+    const uniquePages = [];
+    pages.forEach(p => {
+      if (!p || !p.url) return;
+      const cleanUrl = p.url.split('?')[0].toLowerCase();
+      const baseName = cleanUrl.substring(cleanUrl.lastIndexOf('/') + 1).replace(/[0-9_-]/g, '');
+      const key = cleanUrl;
+      if (!seenMediaKeys.has(key) && !seenMediaKeys.has(baseName)) {
+        seenMediaKeys.add(key);
+        if (baseName.length > 6) seenMediaKeys.add(baseName);
+        uniquePages.push(p);
+      }
+    });
+
+    return uniquePages;
   }
 
   // Render Talks Grid with 3x3 Pagination
@@ -4529,11 +4562,10 @@
           { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-build-with-ai.webp', type: 'documentation' }
         ];
         itemTitle = 'Build with AI: AI-Driven Development';
-      } else if (sLower.includes('web-ai') || sLower.includes('web engineering') || aLower.includes('web engineering') || aLower.includes('sulawesi barat')) {
+      } else if (sLower.includes('web-ai') || sLower.includes('web engineering') || aLower.includes('web engineering') || aLower.includes('sulawesi barat') || aLower.includes('unsulbar')) {
         pages = [
-          { label: 'Poster', url: '/uploads/talks/whatsapp_image_2026_08_21_at_15_55_16_1787298986322.webp', type: 'poster' },
-          { label: 'Certificate', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' },
-          { label: 'Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' }
+          { label: 'Workshop Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' },
+          { label: 'Appreciation Plaque', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' }
         ];
         itemTitle = 'AI Web Engineering & Security Hands-on Workshop';
       } else if (sLower.includes('cybersecurity') || sLower.includes('bssn') || aLower.includes('cybersecurity')) {

@@ -57,7 +57,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=8.1">
+  <link rel="stylesheet" href="/styles.css?v=16.0">
   <style>
     .browse-page {
       min-height: 100vh;
@@ -2294,6 +2294,26 @@
 
 function getTalkMediaPages(talk, isId) {
       if (!talk) return [];
+      const eventLower = (talk.event || '').toLowerCase();
+      const orgLower = (talk.organizer || '').toLowerCase();
+      const placeLower = (talk.place || '').toLowerCase();
+      const isUnsulbar = eventLower.includes('web engineering') || eventLower.includes('sulawesi barat') || eventLower.includes('unsulbar') || orgLower.includes('unsulbar') || placeLower.includes('majene');
+
+      if (isUnsulbar) {
+        return [
+          {
+            label: isId ? 'Dokumentasi Workshop' : 'Workshop Documentation',
+            url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp',
+            type: 'documentation'
+          },
+          {
+            label: isId ? 'Plakat Penghargaan' : 'Appreciation Plaque',
+            url: '/assets/certificates/cert-unsulbar-web-ai.jpg',
+            type: 'certificate'
+          }
+        ];
+      }
+
       const pages = [];
       const posterSrc = talk.poster_url || (talk.media && talk.media[0]) || null;
       if (posterSrc) {
@@ -2311,13 +2331,10 @@ function getTalkMediaPages(talk, isId) {
         const cSlide = talk.slides.find(s => s.type === 'certificate' || /cert|sertifikat|plakat|piagam|certificate/i.test(s.label || ''));
         if (cSlide) certUrl = cSlide.url;
       }
-      const eventLower = (talk.event || '').toLowerCase();
       if (!certUrl && eventLower.includes('khouw kalbe')) {
         certUrl = '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg';
       } else if (!certUrl && (eventLower.includes('build with ai') || eventLower.includes('gdg'))) {
         certUrl = '/assets/certificates/cert-gdg-build-with-ai.jpg';
-      } else if (!certUrl && (eventLower.includes('web engineering') || eventLower.includes('sulawesi barat') || eventLower.includes('unsulbar'))) {
-        certUrl = '/assets/certificates/cert-unsulbar-web-ai.jpg';
       } else if (!certUrl && (eventLower.includes('cybersecurity') || eventLower.includes('bssn'))) {
         certUrl = '/assets/certificates/cert-bssn-cybersecurity.jpg';
       }
@@ -2843,11 +2860,10 @@ function getTalkMediaPages(talk, isId) {
             { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-build-with-ai.webp', type: 'documentation' }
           ];
           itemTitle = 'Build with AI: AI-Driven Development';
-        } else if (sLower.includes('web-ai') || sLower.includes('web engineering') || aLower.includes('web engineering') || aLower.includes('sulawesi barat')) {
+        } else if (sLower.includes('web-ai') || sLower.includes('web engineering') || aLower.includes('web engineering') || aLower.includes('sulawesi barat') || aLower.includes('unsulbar')) {
           pages = [
-            { label: 'Poster', url: '/uploads/talks/whatsapp_image_2026_08_21_at_15_55_16_1787298986322.webp', type: 'poster' },
-            { label: 'Certificate', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' },
-            { label: 'Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' }
+            { label: 'Workshop Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' },
+            { label: 'Appreciation Plaque', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' }
           ];
           itemTitle = 'AI Web Engineering & Security Hands-on Workshop';
         } else if (sLower.includes('cybersecurity') || sLower.includes('bssn') || aLower.includes('cybersecurity')) {
