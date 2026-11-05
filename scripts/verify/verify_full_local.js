@@ -243,8 +243,47 @@ async function runComprehensiveAudit() {
         });
         assert(deleteFormRes.status === 200 && deleteFormRes.body.success, 'Admin cleanly cleans up test form');
 
-        // --- 10. 404 & Error Handling ---
-        console.log('\nSECTION 10: 404 Routing & Error Handling');
+        // --- 10. Visual Gallery End-to-End CRUD Cycle ---
+        console.log('\nSECTION 10: Visual Gallery End-to-End CRUD Cycle');
+        const createGalRes = await request('/api/gallery', {
+            method: 'POST',
+            token: adminToken,
+            body: {
+                title: `Audit Gallery Photo ${timestamp}`,
+                description: 'Pre-check test photo',
+                category: 'Activity Documentation',
+                image_url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp',
+                date: 'November 2026',
+                location: 'Audit Venue',
+                tags: ['AI', 'Audit'],
+                sort_order: 999
+            }
+        });
+        assert(createGalRes.status === 201 && createGalRes.body.success && createGalRes.body.data.id, 'Admin creates gallery photo (POST 201)');
+        const galPhotoId = createGalRes.body.data.id;
+
+        const updateGalRes = await request(`/api/gallery/${galPhotoId}`, {
+            method: 'PUT',
+            token: adminToken,
+            body: {
+                title: `Audit Gallery Photo Updated ${timestamp}`,
+                category: 'Posters & Flyers',
+                sort_order: 10
+            }
+        });
+        assert(updateGalRes.status === 200 && updateGalRes.body.success && updateGalRes.body.data.category === 'Posters & Flyers', 'Admin updates gallery photo (PUT 200)');
+
+        const filterGalRes = await request(`/api/gallery?category=${encodeURIComponent('Posters & Flyers')}`);
+        assert(filterGalRes.status === 200 && filterGalRes.body.data.some(i => i.id === galPhotoId), 'Public can filter gallery photos by category');
+
+        const deleteGalRes = await request(`/api/gallery/${galPhotoId}`, {
+            method: 'DELETE',
+            token: adminToken
+        });
+        assert(deleteGalRes.status === 200 && deleteGalRes.body.success, 'Admin cleanly deletes gallery photo (DELETE 200)');
+
+        // --- 11. 404 & Error Handling ---
+        console.log('\nSECTION 11: 404 Routing & Error Handling');
         const notFoundRes = await request('/api/non-existent-route-999');
         assert(notFoundRes.status === 404 && notFoundRes.body.success === false, 'Non-existent API endpoint returns 404 JSON');
 
