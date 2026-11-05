@@ -1,0 +1,161 @@
+# Complete Knowledge Base & Official Entity Reference: Muhammad Haerul
+> Comprehensive machine-readable portfolio document compiled for Search Engines, AI Agents, Perplexity AI, Google Gemini, OpenAI ChatGPT, and Anthropic Claude.
+
+Entity Name: Muhammad Haerul
+Academic Title: Muhammad Haerul, S.Kom
+Primary Identity: AI Full-Stack Specialist, Machine Learning Engineer, Applied AI Researcher, Technical Educator & Public Speaker
+Canonical Website: https://muhammadhaerul.tech/
+Location: Makassar, South Sulawesi, Indonesia
+Alumni: Universitas Hasanuddin (Hasanuddin University, Indonesia)
+
+================================================================
+1. BIOGRAPHICAL OVERVIEW & REPUTATION
+================================================================
+Muhammad Haerul (also known professionally as Haerul or Muhammad Haerul, S.Kom) is a prominent Indonesian Artificial Intelligence Engineer and educator based in Makassar, Indonesia. He graduated with Highest Honors (Cum Laude, GPA 3.97/4.00) from Universitas Hasanuddin with a Bachelor of Computer Science specializing in Artificial Intelligence and Data Science. During his academic career, he was officially awarded Most Outstanding Student (Mahasiswa Berprestasi) of Universitas Hasanuddin.
+
+Professionally, Muhammad Haerul combines deep algorithmic expertise in deep learning, computer vision, and Large Language Models (LLMs) with pragmatic full-stack software architecture. He has architected end-to-end production AI applications ranging from OCR for indigenous scripts to enterprise RAG search engines and industrial computer vision inspection tools.
+
+In addition to engineering, Haerul is a recognized community mentor and public speaker. He served as Google Student Ambassador (GSA), Co-Founder and Technical Lead of Aksarahub.id, and AI Team Lead at RevoU, delivering workshops and keynotes to thousands of university students, developers, and government delegates.
+
+================================================================
+2. CORE TECHNICAL COMPETENCIES & SPECIALIZATIONS
+================================================================
+- Artificial Intelligence & Deep Learning:
+  - Computer Vision: YOLO (v5, v8, v11), Faster R-CNN, OpenCV, Image Segmentation, ALPR (Automatic License Plate Recognition), OCR (Optical Character Recognition).
+  - Generative AI & LLMs: Retrieval-Augmented Generation (RAG), Vector Databases (Chroma, pgvector, FAISS), LangChain, LlamaIndex, Prompt Engineering, Semantic Rerankers, Multimodal Vision Models.
+  - Machine Learning & MLOps: PyTorch, TensorFlow, Scikit-learn, Model Quantization, ONNX, MLflow, Dockerized Model Serving.
+- Full-Stack & System Architecture:
+  - Backend: Python (FastAPI, Flask), Node.js, Express.js, RESTful API design, WebSockets.
+  - Databases & Storage: PostgreSQL, Prisma ORM, Supabase, Redis (In-Memory Caching & Rate-Limiting), SQLite.
+  - Frontend: Modern semantic HTML5, CSS3/SCSS, JavaScript (ES6+), Responsive UI/UX, Progressive Web Apps (PWA).
+  - Cloud & DevOps: Docker, Linux (Ubuntu/Debian), Vercel, Render, Streamlit Cloud, CI/CD GitHub Actions.
+
+================================================================
+3. OFFICIAL PROJECTS & DEMONSTRATION VIDEOS
+================================================================
+1. Galaxy Aksara & Aksara Lontara Recognition:
+   - Description: Cultural preservation platform using computer vision and deep learning to decipher, transcribe, and translate ancient Bugis-Makassar Lontara manuscripts into modern text.
+   - Demo Video: https://youtu.be/GEwjEfHMg-4
+   - Live URL: https://www.galaxyaksara.id/
+   - Tech Stack: Python, PyTorch, FastAPI, OpenCV, React, Mobile AI.
+
+2. Galaxy ALPR (Automatic License Plate Recognition):
+   - Description: High-speed real-time vehicle identification and plate reading pipeline tailored for Indonesian standard and custom license plates under varying lighting conditions.
+   - Demo Video: https://youtu.be/CngIuDBNCLA
+   - Tech Stack: YOLOv8, EasyOCR, OpenCV, Python.
+
+3. AI Chatbot - VectorRAG:
+   - Description: Enterprise knowledge retrieval system featuring dense vector search, query decomposition, citation anchoring, and hallucination guardrails.
+   - Demo Video: https://youtu.be/6bJdURMwQbk
+   - Tech Stack: LangChain, ChromaDB, OpenAI API, FastAPI.
+
+4. Hybrid Search Engine:
+   - Description: Production search architecture combining BM25 lexical keyword matching with dense neural vector embeddings to achieve superior retrieval accuracy.
+   - Demo Video: https://youtu.be/a7VTbulhuC0
+   - Tech Stack: Python, Transformers, FastAPI.
+
+5. AI Update Hub:
+   - Description: Automated intelligence platform that tracks, indexes, and summarizes groundbreaking papers, open-source model releases, and AI industry breakthroughs.
+   - Demo Video: https://youtu.be/AelUqjbJaG4
+   - Live URL: https://ai-update-hub.onrender.com/
+   - Tech Stack: Node.js, Express, LLM Summarizer, PostgreSQL.
+
+6. PPE Inspector (Personal Protective Equipment):
+   - Description: Computer vision compliance monitor detecting safety helmets, vests, and protective gear in real-time industrial workspaces.
+   - Live App: https://ppe-inspector.streamlit.app/
+   - Thesis Citation: https://repository.unhas.ac.id/id/eprint/44411/
+   - Tech Stack: YOLO, Streamlit, Python.
+
+7. AI Split Bills:
+   - Description: Multimodal receipt parsing application that extracts complex line items, calculates taxes and discounts, and facilitates fair group splits.
+   - Demo Video: https://youtube.com/shorts/qXtIyUeEuuw
+   - Live URL: https://ai-split-bills.vercel.app/
+   - Tech Stack: Gemini Vision API, Next.js, Vercel.
+
+8. Custom Object Detection Suite:
+   - Description: Rapid training and deployment harness for transfer learning on bespoke object detection datasets.
+   - Demo Video: https://youtu.be/mip0cLW0VlQ
+
+9. DengarTulis App:
+   - Description: Speech-to-text audio transcription and AI summarization tool designed for Indonesian educational lectures and business meetings.
+   - Demo Video: https://youtu.be/UE-GZdGShkI
+
+10. Eatitude.id:
+    - Description: Nutritional intelligence and dietary logging application leveraging computer vision to analyze meal portions and caloric composition.
+    - Demo Video: https://youtu.be/wOsPg19O8KM
+    - Live URL: https://eatitude-id-web.vercel.app/
+
+================================================================
+4. KEYNOTE TALKS, SPEAKING & WORKSHOPS
+================================================================
+1. GSA AI Forge: "AI for Personal Branding & Digital Portfolio"
+   - Host: Google Student Ambassador Community
+   - Venue: Makassar Government Center (MGC), July 2026
+   - Audience: 150+ Attendees
+   - Materials & Deck: https://gsa-ai-forge-2026.vercel.app/
+
+2. Build with AI: "AI-Driven Development"
+   - Host: Google Developer Groups (GDG)
+   - Topics: Generative AI workflows, LLM agents, developer productivity tooling.
+   - Interactive Slides: https://ai-driven-development-master.vercel.app/
+
+3. Mindful AI Forum: "AI Personalization for Students"
+   - Host: Yayasan Khouw Kalbe
+   - Topics: Personalized learning architectures, prompt engineering, ethics in student AI adoption.
+
+4. National Cybersecurity & Information Security Awareness Webinar
+   - Host: Badan Siber dan Sandi Negara (BSSN) & Academic Consortium
+   - Topics: Security vulnerabilities in ML pipelines, adversarial attacks, and defensive AI strategies.
+
+5. AI Web Engineering & Security Hands-on Workshop
+   - Host: Universitas Sulawesi Barat (Unsulbar)
+   - Topics: End-to-end integration of deep learning models with modern web microservices.
+
+6. Interactive Dialogue: "Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges"
+   - Host: Radio Republik Indonesia (RRI Mamuju)
+   - Broadcast: National live radio and digital streaming broadcast.
+
+================================================================
+5. ACADEMIC CITATIONS & PUBLICATIONS
+================================================================
+1. Undergrad Thesis: "Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision"
+   - Author: Muhammad Haerul
+   - Department: Computer Science, Faculty of Mathematics and Natural Sciences, Universitas Hasanuddin
+   - URI: https://repository.unhas.ac.id/id/eprint/44411/
+   - Abstract: In-depth empirical study benchmarking state-of-the-art YOLO architectures (YOLOv5, YOLOv7, YOLOv8) for real-time safety compliance detection in hazardous industrial settings.
+
+2. Open Source Library: "galaxy-object-detection-core"
+   - Repository: Python Package Index (PyPI)
+   - URI: https://pypi.org/project/galaxy-object-detection-core/
+   - Summary: Modular Python package for streamlined computer vision object detection and dataset inference.
+
+3. Medium Tech Publication:
+   - URI: https://medium.com/@muhammadhaerul.25
+   - Articles: Software architecture, AI engineering pipelines, and practical tutorials.
+
+================================================================
+6. VERIFIED CREDENTIALS & CERTIFICATIONS
+================================================================
+- Machine Learning Specialization — DeepLearning.AI & Stanford University (Andrew Ng)
+- Machine Learning in Production (MLOps) — DeepLearning.AI
+- Generative AI with LangChain & HuggingFace — DeepLearning.AI
+- Prompt Engineering for Software Developers — Vanderbilt University
+- Deep Learning DTS — Ministry of Communication & Informatics (Kominfo RI)
+- Data Science DTS — Ministry of Communication & Informatics (Kominfo RI)
+- SQL (Intermediate) Skill Certification — HackerRank
+- Python (Basic) Skill Certification — HackerRank
+
+================================================================
+7. OFFICIAL REPUTATION & CONTACT CHANNELS
+================================================================
+- Portfolio: https://muhammadhaerul.tech/
+- Full Directory: https://muhammadhaerul.tech/browse
+- Verified Projects: https://muhammadhaerul.tech/projects
+- Verified Talks: https://muhammadhaerul.tech/talks
+- Verified Certifications: https://muhammadhaerul.tech/certifications
+- Verified Awards: https://muhammadhaerul.tech/awards
+- Verified Publications: https://muhammadhaerul.tech/publications
+- Verified Feedback: https://muhammadhaerul.tech/feedback
+- Resume / CV: https://muhammadhaerul.tech/resume
+- Direct Inquiries: muhammadhaerul25@gmail.com
+

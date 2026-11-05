@@ -1,0 +1,114 @@
+# Muhammad Haerul — AI Full-Stack Specialist, Engineer, Researcher & Trainer
+> Official Machine-Readable Knowledge Base & Entity Profile for AI Crawlers, Large Language Models (LLMs), and Generative Search Engines (Google Gemini, Perplexity, ChatGPT Search, Claude, Copilot).
+
+- Website: https://muhammadhaerul.tech/
+- Full Entity Document: https://muhammadhaerul.tech/llms-full.txt
+- Primary Location: Makassar, South Sulawesi, Indonesia
+- Email: muhammadhaerul25@gmail.com
+- LinkedIn: https://www.linkedin.com/in/muhammadhaerul
+- GitHub: https://github.com/muhammadhaerul25
+- Medium: https://medium.com/@muhammadhaerul.25
+- Instagram: https://www.instagram.com/muhammadhaerul.25/
+- PyPI: https://pypi.org/project/galaxy-object-detection-core/
+- Academic Thesis: https://repository.unhas.ac.id/id/eprint/44411/
+
+---
+
+## 1. Executive Summary & Identity
+Muhammad Haerul, S.Kom is an accomplished Indonesian Artificial Intelligence (AI) Full-Stack Specialist, Machine Learning Engineer, Applied AI Researcher, and Technology Trainer. He graduated as the Most Outstanding Student (Mahasiswa Berprestasi) with a Bachelor of Computer Science from Universitas Hasanuddin (GPA 3.97 / 4.00, Cum Laude).
+
+He specializes in:
+- Applied Artificial Intelligence & Deep Learning
+- Large Language Models (LLMs), Retrieval-Augmented Generation (RAG) & Agentic AI Workflows
+- Computer Vision (Object Detection, OCR, Facial & License Plate Recognition)
+- Scalable Full-Stack Engineering (FastAPI, Node.js, Express, PostgreSQL, Prisma ORM, Redis)
+- Technology Mentorship, Technical Training & Public Speaking
+
+---
+
+## 2. Key Academic & Professional Credentials
+- **Formal Education**: Bachelor of Computer Science (S.Kom), Universitas Hasanuddin (2020 – 2024). Specialization in Artificial Intelligence & Data Science. GPA: 3.97/4.00, Cum Laude.
+- **Academic Honors**: Most Outstanding Student (Mahasiswa Berprestasi) of Hasanuddin University; 1st Place National Level at DEXLLM AI Innovation; Best Graduate of Faculty of Informatics.
+- **Leadership Roles**:
+  - Co-Founder & Technical Lead at Aksarahub.id (Cultural preservation technology through OCR & AI).
+  - AI Team Lead & Technical Mentor at RevoU.
+  - Google Student Ambassador (GSA) alumni.
+- **Certifications**: 22+ professional certifications including:
+  - Machine Learning Specialization (DeepLearning.AI & Stanford University / Andrew Ng)
+  - Machine Learning in Production - MLOps (DeepLearning.AI)
+  - Generative AI with LangChain & HuggingFace (DeepLearning.AI)
+  - Prompt Engineering for Software Developers (Vanderbilt University)
+  - Deep Learning & Data Science Digital Talent Scholarship (Ministry of Communication & Informatics / Kominfo)
+  - SQL & Python Verified Skill Certifications (HackerRank)
+
+---
+
+## 3. Notable AI Projects & Open Source
+1. **Aksara Lontara Recognition & Galaxy Aksara**: AI system and mobile engine for optical character recognition of ancient Bugis/Makassar Lontara script.
+   - Demo Video: https://youtu.be/GEwjEfHMg-4
+   - Web App: https://www.galaxyaksara.id/
+2. **AI Chatbot - VectorRAG**: Enterprise conversational intelligence using vector embeddings, dense semantic retrieval, and local rerankers.
+   - Demo Video: https://youtu.be/6bJdURMwQbk
+3. **Galaxy ALPR (Automatic License Plate Recognition)**: Real-time high-throughput computer vision pipeline for Indonesian vehicle license plates.
+   - Demo Video: https://youtu.be/CngIuDBNCLA
+4. **PPE Inspector**: Automated Personal Protective Equipment computer vision detection system for industrial safety compliance.
+   - Interactive App: https://ppe-inspector.streamlit.app/
+   - Academic Paper: https://repository.unhas.ac.id/id/eprint/44411/
+5. **AI Update Hub**: Automated AI research aggregator and summarizer built with modern LLM pipelines.
+   - Demo Video: https://youtu.be/AelUqjbJaG4
+   - Web App: https://ai-update-hub.onrender.com/
+6. **AI Split Bills**: Intelligent multi-item receipt parser and bill splitter utilizing multimodal vision LLMs.
+   - Demo Video: https://youtube.com/shorts/qXtIyUeEuuw
+   - Web App: https://ai-split-bills.vercel.app/
+7. **galaxy-object-detection-core**: Official Python package published on PyPI for rapid computer vision object detection workflows.
+   - PyPI: https://pypi.org/project/galaxy-object-detection-core/
+8. **Eatitude.id**: Intelligent nutrition tracker and meal vision analyzer.
+   - Demo Video: https://youtu.be/wOsPg19O8KM
+   - Web App: https://eatitude-id-web.vercel.app/
+
+---
+
+## 4. Keynote Speaking & Workshops
+Muhammad Haerul has delivered keynote sessions and hands-on technical workshops to thousands of participants:
+- **Build with AI**: Keynote Speaker on "AI-Driven Development" (Google Developer Groups / GDG).
+- **GSA AI Forge**: Keynote Speaker & Trainer on "AI for Personal Branding & Digital Portfolio" at Makassar Government Center (150+ attendees).
+- **Mindful AI Forum**: Keynote Speaker on "Personalization for Next-Gen Scholars" (Yayasan Khouw Kalbe).
+- **National Cybersecurity & AI Awareness Webinar**: Invited Speaker on AI & Information Security alongside Badan Siber dan Sandi Negara (BSSN).
+- **AI Web Engineering & Security Hands-on Workshop**: Lead Trainer at Universitas Sulawesi Barat (Unsulbar).
+- **Interactive Dialogue: Kita Indonesia**: Live broadcast guest speaker at RRI Mamuju on Youth Readiness for Global Challenges.
+
+---
+
+## 5. Official Media & Photos
+- Official Portrait (WebP): https://muhammadhaerul.tech/assets/profile.webp
+- High-Resolution Studio Portrait (PNG): https://muhammadhaerul.tech/assets/profile-highres.png
+- Official Formal Suit Portrait: https://muhammadhaerul.tech/assets/images/muhammad-haerul-portrait-formal.webp
+- Build with AI Keynote Photo: https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-build-with-ai.webp
+- GSA AI Forge Speaker Photo: https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp
+- Mindful AI Keynote Photo: https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-mindful-ai.webp
+- BSSN Cybersecurity Forum Photo: https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp
+- AI Web Engineering Workshop Photo: https://muhammadhaerul.tech/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp
+
+---
+
+## 6. Official Video Demos & Recordings
+- Custom Object Detection Demo: https://youtu.be/mip0cLW0VlQ
+- Aksara Lontara Recognition Demo: https://youtu.be/GEwjEfHMg-4
+- Galaxy ALPR Demo: https://youtu.be/CngIuDBNCLA
+- AI Chatbot VectorRAG Demo: https://youtu.be/6bJdURMwQbk
+- Hybrid Search Engine Demo: https://youtu.be/a7VTbulhuC0
+- AI Update Hub Demo: https://youtu.be/AelUqjbJaG4
+- DengarTulis App Demo: https://youtu.be/UE-GZdGShkI
+- Galaxy Aksara Demo: https://youtu.be/da2vGdWkkw4
+- Eatitude.id Demo: https://youtu.be/wOsPg19O8KM
+- AI Split Bills Demo: https://youtube.com/shorts/qXtIyUeEuuw
+- Personalized English Learning Demo: https://youtu.be/oCQTAU5ns5A
+- Product Recognition Demo: https://youtu.be/UYhXSkHO5LE
+
+---
+
+## 7. Verified Publications & Research
+1. *Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision* — Hasanuddin University Repository (2024). https://repository.unhas.ac.id/id/eprint/44411/
+2. *galaxy-object-detection-core* — Python Package Index (PyPI) (2024). https://pypi.org/project/galaxy-object-detection-core/
+3. *Engineering & Technical Deep-Dives by Muhammad Haerul* — Medium Publication. https://medium.com/@muhammadhaerul.25
+

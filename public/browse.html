@@ -13,12 +13,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="pageTitle">Browse All · Muhammad Haerul</title>
-  <meta name="description" id="pageDesc" content="Explore complete works, talks, certifications, and feedback in Muhammad Haerul's digital portfolio.">
+  <meta name="description" id="pageDesc" content="Explore complete projects, speaking talks, certifications, research publications, and feedback in Muhammad Haerul's official digital portfolio.">
+  <meta name="keywords" content="Muhammad Haerul, projects Muhammad Haerul, talks Muhammad Haerul, foto Muhammad Haerul, video Muhammad Haerul, certifications Muhammad Haerul, awards Muhammad Haerul, publications Muhammad Haerul, AI Portfolio, Machine Learning Engineer">
+  <meta name="author" content="Muhammad Haerul">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://muhammadhaerul.tech/browse">
+  <link rel="alternate" type="text/plain" href="https://muhammadhaerul.tech/llms.txt" title="LLM Machine-Readable Context (GEO)">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muhammadhaerul.tech/browse">
+  <meta property="og:title" content="Browse All Works, Talks & Credentials · Muhammad Haerul">
+  <meta property="og:description" content="Explore complete projects, speaking talks, certifications, publications, and verified credentials of Muhammad Haerul, AI Full-Stack Specialist.">
+  <meta property="og:image" content="https://muhammadhaerul.tech/assets/profile.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:alt" content="Muhammad Haerul — Official Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://muhammadhaerul.tech/browse">
+  <meta name="twitter:title" content="Browse All Works, Talks & Credentials · Muhammad Haerul">
+  <meta name="twitter:description" content="Explore complete projects, speaking talks, certifications, publications, and verified credentials of Muhammad Haerul.">
+  <meta name="twitter:image" content="https://muhammadhaerul.tech/assets/profile.png">
+
+  <!-- Schema.org CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Browse All Works & Credentials · Muhammad Haerul",
+    "description": "Comprehensive directory of AI projects, keynote talks, publications, and credentials of Muhammad Haerul.",
+    "url": "https://muhammadhaerul.tech/browse",
+    "author": {
+      "@type": "Person",
+      "name": "Muhammad Haerul",
+      "url": "https://muhammadhaerul.tech/",
+      "jobTitle": "AI Full-Stack Specialist, Engineer, Researcher & Trainer"
+    }
+  }
+  </script>
   <link rel="icon" type="image/webp" href="/favicon.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=7.7">
+  <link rel="stylesheet" href="/styles.css?v=8.1">
   <style>
     .browse-page {
       min-height: 100vh;
@@ -845,10 +884,38 @@
   </div>
 
   <!-- Lightbox Modal -->
-  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
-    <button type="button" class="lightbox-close" onclick="closeLightbox()" aria-label="Close preview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
-    <img id="lightboxImg" src="" alt="Certificate" onclick="event.stopPropagation()" decoding="async">
-    <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Media Lightbox">
+    <button type="button" class="lightbox-nav-btn prev" id="lightboxPrevBtn" onclick="event.stopPropagation(); window.prevLightboxImage();"
+      aria-label="Previous image" style="display:none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <div class="lightbox-content-wrap" onclick="event.stopPropagation();" style="position:relative; display:flex; flex-direction:column; align-items:center;">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="Enlarged media" decoding="async">
+      
+      <!-- Multi-page counter badge -->
+      <div class="lightbox-page-badge" id="lightboxPageBadge" style="display:none;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        <span id="lightboxPageText">1 / 2</span>
+        <span class="lightbox-page-divider">·</span>
+        <span id="lightboxPageLabel">Certificate</span>
+      </div>
+
+      <div class="lightbox-caption" id="lightboxCaption" style="display:none;"></div>
+    </div>
+    <button type="button" class="lightbox-nav-btn next" id="lightboxNextBtn" onclick="event.stopPropagation(); window.nextLightboxImage();"
+      aria-label="Next image" style="display:none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    <button type="button" class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Close lightbox">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
   </div>
 
   <!-- Footer -->
@@ -878,6 +945,35 @@
         btn.setAttribute('aria-expanded', 'false');
         const label = btn.querySelector('.rm-label');
         if (label) label.textContent = 'Read more';
+      }
+    };
+
+    // Toggle Feedback Translation in Browse View
+    window.toggleBrowseFeedbackTranslation = function(btn) {
+      if (!btn) return;
+      const card = btn.closest('.b-feedback-card');
+      if (!card) return;
+      const isShowingOrig = btn.getAttribute('data-showing-orig') === 'true';
+      const mainEl = card.querySelector('.b-fb-primary-quote');
+      const subEl = card.querySelector('.b-fb-sub-quote');
+      const labelEl = btn.querySelector('.t-trans-label');
+
+      if (isShowingOrig) {
+        const enMain = btn.getAttribute('data-en-main') || '';
+        const enSub = btn.getAttribute('data-en-sub') || '';
+        if (mainEl) mainEl.textContent = `"${enMain}"`;
+        if (subEl) subEl.textContent = enSub ? `"${enSub}"` : '';
+        btn.setAttribute('data-showing-orig', 'false');
+        btn.classList.remove('is-showing-original');
+        if (labelEl) labelEl.textContent = 'See original';
+      } else {
+        const origMain = btn.getAttribute('data-orig-main') || '';
+        const origSub = btn.getAttribute('data-orig-sub') || '';
+        if (mainEl) mainEl.textContent = `"${origMain}"`;
+        if (subEl) subEl.textContent = origSub ? `"${origSub}"` : '';
+        btn.setAttribute('data-showing-orig', 'true');
+        btn.classList.add('is-showing-original');
+        if (labelEl) labelEl.textContent = 'See translation';
       }
     };
 
@@ -930,13 +1026,13 @@
       projects: {
         eyebrow: '05 — Featured & Case-Study Projects',
         title: 'Selected work, built end-to-end.',
-        subtitle: '17 production-grade systems and case studies spanning Agentic AI workflows, RAG chatbots, YOLO & DETR computer vision pipelines, speech transcription, and full-stack web architectures.',
+        subtitle: 'Production-grade systems and case studies spanning Agentic AI workflows, RAG applications, computer vision pipelines, speech recognition, and modern web architectures.',
         searchPlaceholder: 'Search projects by name, technology, or keywords…'
       },
       talks: {
         eyebrow: '07 — Speaking & Workshops',
         title: 'Speaking Engagements, Seminars & Workshops',
-        subtitle: '15+ keynote speeches, university seminars, and hands-on workshops empowering 2,000+ engineers, students, and professionals across Indonesia in Generative AI, Deep Learning, and Data Science.',
+        subtitle: 'Keynote speeches, university seminars, and hands-on technical workshops empowering developers, students, and professionals in Generative AI, Deep Learning, and Data Science.',
         searchPlaceholder: 'Search talks by title, organizer, topic, or place…'
       },
       awards: {
@@ -944,8 +1040,8 @@
         eyebrowId: '08 — Honors & Awards',
         title: 'Competitions, grants, and recognitions.',
         titleId: 'Competitions, grants, and recognitions.',
-        subtitle: '24 national and regional accolades across AI innovation, startup hackathons, data science competitions, keynote speaking recognitions, and academic excellence.',
-        subtitleId: '24 national and regional accolades across AI innovation, startup hackathons, data science competitions, keynote speaking recognitions, and academic excellence.',
+        subtitle: 'National and regional accolades across AI innovation, startup hackathons, data science competitions, and academic excellence.',
+        subtitleId: 'National and regional accolades across AI innovation, startup hackathons, data science competitions, and academic excellence.',
         searchPlaceholder: 'Search awards by title, issuer, or tags…'
       },
       certifications: {
@@ -953,8 +1049,8 @@
         eyebrowId: '09 — Licences & Certifications',
         title: 'Continuous, deliberate learning.',
         titleId: 'Continuous, deliberate learning.',
-        subtitle: '22 verified credentials across Program, Course, Skill, and Language certifications issued by British Council, Bank Indonesia, Komdigi DTS, DeepLearning.AI, IBM, Google, Microsoft, and Dicoding.',
-        subtitleId: '22 verified credentials across Program, Course, Skill, and Language certifications issued by British Council, Bank Indonesia, Komdigi DTS, DeepLearning.AI, IBM, Google, Microsoft, and Dicoding.',
+        subtitle: 'Verified credentials across professional programs, courses, and technical specializations issued by leading industry and academic institutions.',
+        subtitleId: 'Verified credentials across professional programs, courses, and technical specializations issued by leading industry and academic institutions.',
         searchPlaceholder: 'Search credentials by title, issuer, or skills…'
       },
       publications: {
@@ -962,8 +1058,8 @@
         eyebrowId: '10 — Research & Open Source',
         title: 'Research papers, PyPI packages, and publications.',
         titleId: 'Research papers, PyPI packages, and publications.',
-        subtitle: 'Published IEEE computer vision research on Faster R-CNN and DETR industrial PPE detection alongside open-source Python packages on PyPI for automated vision dataset pipelines.',
-        subtitleId: 'Published IEEE computer vision research on Faster R-CNN and DETR industrial PPE detection alongside open-source Python packages on PyPI for automated vision dataset pipelines.',
+        subtitle: 'Published scientific research, open-source Python packages on PyPI, and in-depth engineering guides on applied AI and computer vision.',
+        subtitleId: 'Published scientific research, open-source Python packages on PyPI, and in-depth engineering guides on applied AI and computer vision.',
         searchPlaceholder: 'Search publications by title, publisher, or keywords…'
       },
       feedbacks: {
@@ -971,8 +1067,8 @@
         eyebrowId: '11 — Feedbacks & Testimonials',
         title: 'What collaborators and participants say.',
         titleId: 'What collaborators and participants say.',
-        subtitle: 'Verified LinkedIn recommendations from engineering colleagues and 9.4/10 average-rated reviews from workshop attendees, mentees, and project collaborators.',
-        subtitleId: 'Verified LinkedIn recommendations from engineering colleagues and 9.4/10 average-rated reviews from workshop attendees, mentees, and project collaborators.',
+        subtitle: 'Verified LinkedIn recommendations from engineering colleagues alongside authentic reviews from workshop attendees, mentees, and collaborators.',
+        subtitleId: 'Verified LinkedIn recommendations from engineering colleagues alongside authentic reviews from workshop attendees, mentees, and collaborators.',
         searchPlaceholder: 'Search feedbacks by name, review text, or topic…'
       }
     };
@@ -1201,7 +1297,7 @@
               <div class="p-card-media" style="height:210px; background:#0F172A; position:relative; overflow:hidden;">
                 ${ytId ? `
                   <div class="p-video-wrapper" onclick="openVideoModal('${ytId}', '${escapeHtml(p.name)}')" style="cursor:pointer; width:100%; height:100%;">
-                    <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${escapeHtml(p.name)}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease;" decoding="async">
+                    <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="Muhammad Haerul — ${escapeHtml(p.name)} AI Video Demo" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease;" decoding="async">
                     <div class="p-video-overlay" style="position:absolute; inset:0; background:rgba(15,23,42,0.4); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
                       <div class="p-play-btn" style="width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.95); color:#0F172A; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,0.3);"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg></div>
                       <span class="p-video-badge" style="font-size:0.75rem; font-weight:800; color:#FFF; background:rgba(0,0,0,0.6); padding:4px 12px; border-radius:9999px; backdrop-filter:blur(4px);">Watch Demo</span>
@@ -1209,7 +1305,7 @@
                   </div>
                 ` : (p.thumbnailUrl ? `
                   <div style="width:100%; height:100%;">
-                    <img src="${escapeHtml(p.thumbnailUrl)}" alt="${escapeHtml(p.name)}" style="width:100%; height:100%; object-fit:cover;" decoding="async">
+                    <img src="${escapeHtml(p.thumbnailUrl)}" alt="Muhammad Haerul — ${escapeHtml(p.name)} Project Thumbnail" style="width:100%; height:100%; object-fit:cover;" decoding="async">
                   </div>
                 ` : `
                   <div style="display:flex; align-items:center; justify-content:center; height:100%; color:var(--text-secondary); font-size:0.85rem; font-weight:700;">
@@ -1284,23 +1380,17 @@
                 title="Click to view full image"
                 style="cursor:zoom-in;">
                 <img class="b-talk-blur-bg" src="${escapeHtml(initialMedia.url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                <img class="b-talk-main-img" src="${escapeHtml(initialMedia.url)}" alt="${escapeHtml(t.event)}" loading="lazy" decoding="async">
+                <img class="b-talk-main-img" src="${escapeHtml(initialMedia.url)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" loading="lazy" decoding="async">
                 ${hasMediaTabs ? `
-                  <div class="talk-media-tabs" role="tablist" aria-label="Talk Media Tabs" onclick="event.stopPropagation();">
-                    ${pages.map((p, idx) => `
-                      <button type="button"
-                        class="talk-tab-btn ${idx === 0 ? 'active' : ''}"
-                        role="tab"
-                        aria-selected="${idx === 0 ? 'true' : 'false'}"
-                        onclick="event.stopPropagation(); window.switchBrowseTalkPage('${escapeHtml(t.id)}', '${escapeHtml(p.url)}', this, '${escapeHtml(t.event)} (${escapeHtml(p.label)})')">
-                        ${p.type === 'certificate' ? `
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                        ` : `
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                        `}
-                        <span>${escapeHtml(p.label)}</span>
-                      </button>
-                    `).join('')}
+                  <button type="button" class="card-media-nav-btn prev" aria-label="Previous Page" onclick="event.stopPropagation(); window.stepBrowseTalkCard('${escapeHtml(t.id)}', -1)" disabled>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  </button>
+                  <button type="button" class="card-media-nav-btn next" aria-label="Next Page" onclick="event.stopPropagation(); window.stepBrowseTalkCard('${escapeHtml(t.id)}', 1)">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+                  <div class="card-page-badge" aria-label="Page 1 of ${pages.length}">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    <span class="card-page-text">1 / ${pages.length}</span>
                   </div>
                 ` : ''}
                 <div class="b-media-zoom-overlay">
@@ -1396,7 +1486,7 @@
                       title="Click to view full certificate proof"
                       style="cursor:zoom-in;">
                       <img class="b-media-blur-bg" src="${escapeHtml(initialPage.url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                      <img class="b-media-main-img" src="${escapeHtml(initialPage.url)}" alt="${escapeHtml(cert.title)}" loading="lazy" decoding="async">
+                      <img class="b-media-main-img" src="${escapeHtml(initialPage.url)}" alt="Sertifikat Muhammad Haerul — ${escapeHtml(cert.title)}" title="Muhammad Haerul — ${escapeHtml(cert.title)}" loading="lazy" decoding="async">
                       ${pages.length > 1 ? `
                         <button type="button" class="card-media-nav-btn prev" aria-label="Previous Page" onclick="event.stopPropagation(); window.stepBrowseCertCard('${escapeHtml(cert.id)}', -1)" disabled>
                           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1514,20 +1604,40 @@
                 ${(() => {
                   const mainText = (f.pesan_kesan || f.alasan || '').trim();
                   const subText = (f.pesan_kesan && f.alasan && f.pesan_kesan !== f.alasan) ? f.alasan.trim() : '';
+                  const origMain = (f.pesan_kesan_original || f.alasan_original || '').trim();
+                  const origSub = (f.pesan_kesan_original && f.alasan_original && f.pesan_kesan_original !== f.alasan_original) ? f.alasan_original.trim() : '';
+                  const hasTranslation = Boolean(origMain && (origMain !== mainText || origSub !== subText));
                   const isLongFb = mainText.length > 140;
                   const fbId = `b-fb-${f.id || Math.random().toString(36).substring(2, 9)}`;
-                  return isLongFb ? `
-                    <div class="clamp-text-wrapper is-clamped" id="${fbId}">
-                      <p style="font-size:0.92rem; color:var(--text-primary); line-height:1.6; margin-bottom:6px; font-weight:500;">"${escapeHtml(mainText)}"</p>
-                      ${subText ? `<p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.55; font-style:italic; margin:4px 0 0 0;">"${escapeHtml(subText)}"</p>` : ''}
-                    </div>
-                    <button type="button" class="card-read-more-btn" onclick="window.toggleCardReadMore(this, '${fbId}')" aria-expanded="false">
-                      <span class="rm-label">Read more</span>
-                      <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                  ` : `
-                    <p style="font-size:0.92rem; color:var(--text-primary); line-height:1.6; margin-bottom:6px; font-weight:500;">"${escapeHtml(mainText)}"</p>
-                    ${subText ? `<p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.55; font-style:italic; margin:4px 0 0 0;">"${escapeHtml(subText)}"</p>` : ''}
+                  return `
+                    ${isLongFb ? `
+                      <div class="clamp-text-wrapper is-clamped" id="${fbId}">
+                        <p class="b-fb-primary-quote" style="font-size:0.92rem; color:var(--text-primary); line-height:1.6; margin-bottom:6px; font-weight:500;">"${escapeHtml(mainText)}"</p>
+                        ${subText ? `<p class="b-fb-sub-quote" style="font-size:0.86rem; color:var(--text-secondary); line-height:1.55; font-style:italic; margin:4px 0 0 0;">"${escapeHtml(subText)}"</p>` : ''}
+                      </div>
+                      <button type="button" class="card-read-more-btn" onclick="window.toggleCardReadMore(this, '${fbId}')" aria-expanded="false">
+                        <span class="rm-label">Read more</span>
+                        <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </button>
+                    ` : `
+                      <p class="b-fb-primary-quote" style="font-size:0.92rem; color:var(--text-primary); line-height:1.6; margin-bottom:6px; font-weight:500;">"${escapeHtml(mainText)}"</p>
+                      ${subText ? `<p class="b-fb-sub-quote" style="font-size:0.86rem; color:var(--text-secondary); line-height:1.55; font-style:italic; margin:4px 0 0 0;">"${escapeHtml(subText)}"</p>` : ''}
+                    `}
+                    ${hasTranslation ? `
+                      <div class="t-translate-bar" style="margin-top:8px;">
+                        <button type="button" class="t-translate-btn" onclick="window.toggleBrowseFeedbackTranslation(this)"
+                          data-showing-orig="false"
+                          data-en-main="${escapeHtml(mainText)}"
+                          data-orig-main="${escapeHtml(origMain)}"
+                          data-en-sub="${escapeHtml(subText)}"
+                          data-orig-sub="${escapeHtml(origSub)}">
+                          <svg class="t-translate-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/>
+                          </svg>
+                          <span class="t-trans-label">See original</span>
+                        </button>
+                      </div>
+                    ` : ''}
                   `;
                 })()}
               </div>
@@ -1586,6 +1696,10 @@
         grid.innerHTML = filtered.map(award => {
           const chips = Array.isArray(award.chips) ? award.chips : (typeof award.chips === 'string' ? award.chips.split(',').map(s=>s.trim()).filter(Boolean) : []);
           const badgeText = award.badge_text || 'Honor';
+          const pages = getAwardPages(award, false);
+          const hasImage = pages.length > 0;
+          const initialPage = pages[0] || null;
+          const hasMultiplePages = pages.length > 1;
 
           return `
             <div class="award-card reveal in-view" style="display:flex; flex-direction:column; justify-content:space-between; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:24px; position:relative;">
@@ -1612,10 +1726,29 @@
                   ` : ''}
                 </div>
 
-                ${award.image_url ? `
-                  <div class="b-media-preview" onclick="openLightbox('${escapeHtml(award.image_url)}', '${escapeHtml(award.title)}')" title="Click to view full certificate proof" style="cursor:zoom-in;">
-                    <img class="b-media-blur-bg" src="${escapeHtml(award.image_url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                    <img class="b-media-main-img" src="${escapeHtml(award.image_url)}" alt="${escapeHtml(award.title)}" loading="lazy" decoding="async">
+                ${hasImage ? `
+                  <div class="b-media-preview" id="browse-award-prev-${escapeHtml(award.id)}"
+                    data-active-title="Honor & Award — ${escapeHtml(award.title)}${hasMultiplePages ? ' (' + escapeHtml(initialPage.label) + ')' : ''}"
+                    data-pages="${escapeHtml(JSON.stringify(pages))}"
+                    data-page-index="0"
+                    data-award-title="${escapeHtml(award.title)}"
+                    onclick="openLightbox(this.querySelector('.b-media-main-img').src, this.getAttribute('data-active-title') || '${escapeHtml(award.title)}', this)"
+                    title="Click to view full certificate proof"
+                    style="cursor:zoom-in;">
+                    <img class="b-media-blur-bg" src="${escapeHtml(initialPage.url)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                    <img class="b-media-main-img" src="${escapeHtml(initialPage.url)}" alt="Penghargaan Muhammad Haerul — ${escapeHtml(award.title)}" title="Muhammad Haerul — ${escapeHtml(award.title)}" loading="lazy" decoding="async">
+                    ${hasMultiplePages ? `
+                      <button type="button" class="card-media-nav-btn prev" aria-label="Previous Page" onclick="event.stopPropagation(); window.stepBrowseAwardCard('${escapeHtml(award.id)}', -1)" disabled>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                      </button>
+                      <button type="button" class="card-media-nav-btn next" aria-label="Next Page" onclick="event.stopPropagation(); window.stepBrowseAwardCard('${escapeHtml(award.id)}', 1)">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                      </button>
+                      <div class="card-page-badge" aria-label="Page 1 of ${pages.length}">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        <span class="card-page-text">1 / ${pages.length}</span>
+                      </div>
+                    ` : ''}
                     <div class="b-media-zoom-overlay">
                       <span class="b-zoom-btn">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -1636,13 +1769,9 @@
                 ` : ''}
               </div>
 
-              <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; font-size:0.75rem;">
-                <span style="display:inline-flex; align-items:center; gap:5px; font-weight:800; color:#0F9D58;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  Official Recognition
-                </span>
-                ${award.image_url ? `
-                  <span style="color:var(--blue); font-weight:700; cursor:pointer;" onclick="openLightbox('${escapeHtml(award.image_url)}', '${escapeHtml(award.title)}')">View Certificate →</span>
+              <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; align-items:center; font-size:0.75rem;">
+                ${hasImage ? `
+                  <span style="color:var(--blue); font-weight:700; cursor:pointer;" onclick="openLightbox('${escapeHtml(initialPage.url)}', '${escapeHtml(award.title)}')">View Certificate →</span>
                 ` : `
                   <span style="color:var(--text-secondary); font-weight:600;">Verified on Record</span>
                 `}
@@ -1693,27 +1822,45 @@
         }
 
         grid.innerHTML = filtered.map(pub => {
+          const accent = pub.accent_color || 'var(--blue)';
+          const publisher = pub.publisher || 'Open Publication';
+          const link = pub.link ? escapeHtml(pub.link) : '';
+          const pubLower = (publisher + ' ' + (pub.title || '')).toLowerCase();
+
+          let pubLogoHtml = `
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          `;
+
+          if (pubLower.includes('hasanuddin') || pubLower.includes('unhas')) {
+            pubLogoHtml = `<img src="/assets/images/logos/unhas-logo.png" alt="Hasanuddin University" style="width:24px; height:24px; object-fit:contain;" decoding="async">`;
+          } else if (pubLower.includes('pypi') || pubLower.includes('python')) {
+            pubLogoHtml = `<img src="/assets/images/pypi.svg" alt="Python Package Index (PyPI)" style="width:20px; height:20px; object-fit:contain;" decoding="async">`;
+          } else if (pubLower.includes('medium')) {
+            pubLogoHtml = `<img src="/assets/images/medium.svg" alt="Medium" style="width:20px; height:20px; object-fit:contain; filter: var(--medium-logo-filter, none);" decoding="async">`;
+          }
+
           const pubDescText = (pub.description || '').trim();
           const isLongPubDesc = pubDescText.length > 120;
           const pubDescId = `b-pub-desc-${pub.id || Math.random().toString(36).substring(2, 9)}`;
           const pubDescHtml = pubDescText ? (isLongPubDesc ? `
             <div class="clamp-text-wrapper is-clamped" id="${pubDescId}">
-              <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.55; margin:0 0 4px 0;">${escapeHtml(pubDescText)}</p>
+              <p class="pub-description">${escapeHtml(pubDescText)}</p>
             </div>
-            <button type="button" class="card-read-more-btn" onclick="window.toggleCardReadMore(this, '${pubDescId}')" aria-expanded="false" style="margin-bottom:12px;">
+            <button type="button" class="card-read-more-btn" onclick="event.stopPropagation(); window.toggleCardReadMore(this, '${pubDescId}')" aria-expanded="false">
               <span class="rm-label">Read more</span>
               <svg class="rm-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-          ` : `
-            <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.55; margin-bottom:16px;">${escapeHtml(pubDescText)}</p>
-          `) : '';
+          ` : `<p class="pub-description">${escapeHtml(pubDescText)}</p>`) : '';
 
           const thumb = pub.image_url || pub.thumbnail_url || pub.cover_image || '';
           const previewHtml = thumb ? `
                 <div class="pub-card-preview b-pub-media"
-                  onclick="event.stopPropagation(); window.openLightbox('${escapeHtml(thumb)}', '${escapeHtml(pub.title)} — ${escapeHtml(pub.publisher || 'Publication')}');"
+                  onclick="event.stopPropagation(); window.openLightbox('${escapeHtml(thumb)}', '${escapeHtml(pub.title)} — ${escapeHtml(publisher)}');"
                   title="Click to view full preview">
-                  <img src="${escapeHtml(thumb)}" alt="${escapeHtml(pub.title)}" loading="lazy" decoding="async">
+                  <img src="${escapeHtml(thumb)}" alt="Publikasi Ilmiah Muhammad Haerul — ${escapeHtml(pub.title)}" title="Muhammad Haerul — ${escapeHtml(pub.title)}" loading="lazy" decoding="async">
                   <div class="pub-media-overlay">
                     <span class="pub-zoom-btn">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -1724,40 +1871,35 @@
           ` : '';
 
           return `
-            <div class="publication-card reveal in-view" style="display:flex; flex-direction:column; justify-content:space-between; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:24px;">
-              <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:10px;">
-                  <div style="display:flex; align-items:center; gap:10px; min-width:0;">
-                    <span style="width:36px; height:36px; border-radius:10px; background:var(--bg); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--blue); flex-shrink:0;">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    </span>
-                    <span style="font-size:0.85rem; font-weight:800; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(pub.publisher || 'Publication')}</span>
+            <article class="publication-card reveal in-view" ${link ? `onclick="window.open('${link}','_blank','noopener')"` : ''} style="${link ? 'cursor:pointer;' : ''}">
+              <div class="pub-card-top">
+                <div class="pub-badge-wrap">
+                  <span class="pub-icon" style="--accent:${escapeHtml(accent)}">
+                    ${pubLogoHtml}
+                  </span>
+                  <div class="pub-meta-col">
+                    <span class="pub-publisher">${escapeHtml(publisher)}</span>
                   </div>
-                  ${pub.date ? `<span class="browse-date-pill ${getYearBadgeClass(pub.date)}" style="flex-shrink:0;">${escapeHtml(pub.date)}</span>` : ''}
                 </div>
+                ${pub.date ? `<span class="pub-date ${getYearBadgeClass(pub.date)}">${escapeHtml(pub.date)}</span>` : ''}
+              </div>
 
-                ${previewHtml}
+              ${previewHtml}
 
-                <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-primary); line-height:1.3; margin-bottom:10px;">
-                  ${escapeHtml(pub.title)}
-                </h3>
-
+              <div class="pub-card-mid">
+                <h3 class="pub-title">${escapeHtml(pub.title)}</h3>
                 ${pubDescHtml}
               </div>
 
-              <div style="margin-top:auto; padding-top:14px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
-                <span style="display:inline-flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:800; color:#0F9D58;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  Verified Public Work
-                </span>
-                ${pub.link ? `
-                  <a href="${escapeHtml(pub.link)}" target="_blank" rel="noopener" class="btn btn-small btn-primary" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:0.8rem; padding:6px 14px; border-radius:100px;">
-                    <span>Open Work</span>
+              <div class="pub-card-bottom">
+                ${link ? `
+                  <a href="${link}" target="_blank" rel="noopener" class="pub-link-btn" onclick="event.stopPropagation();">
+                    <span>Read Publication</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M7 7h10v10"/></svg>
                   </a>
                 ` : ''}
               </div>
-            </div>
+            </article>
           `;
         }).join('');
       }
@@ -2072,7 +2214,85 @@
     }
 
     
-    function getTalkMediaPages(talk, isId) {
+        // Flexible Award Multi-Certificate / Document Resolver
+    function getAwardPages(award, isId = false) {
+      if (!award) return [];
+      if (Array.isArray(award.pages) && award.pages.length > 0) {
+        return award.pages.map((p, idx) => {
+          if (typeof p === 'string') {
+            return {
+              label: idx === 0 ? 'Finalist Certificate' : `Certificate ${idx + 1}`,
+              url: p,
+              type: 'certificate'
+            };
+          }
+          return {
+            label: p.label || (idx === 0 ? 'Finalist Certificate' : `Certificate ${idx + 1}`),
+            url: p.url || p.src,
+            type: p.type || 'certificate'
+          };
+        });
+      }
+
+      const titleLower = (award.title || '').toLowerCase();
+      const id = award.id || '';
+      if (titleLower.includes('talent hub') || id === 'cmvup56uc000oggb9t3aqzmkb') {
+        return [
+          {
+            label: 'Finalist Certificate',
+            url: award.image_url || '/assets/images/awards/award_img_4.jpg',
+            type: 'certificate'
+          },
+          {
+            label: 'Recognition Certificate',
+            url: '/assets/certificates/cert-ai-talent-hub-pertamina-page2.jpg',
+            type: 'certificate'
+          }
+        ];
+      }
+
+      if (titleLower.includes('international cultural') || id === 'cmvup576t000xggb99dmyo0by') {
+        return [
+          {
+            label: 'Participant Certificate',
+            url: award.image_url || '/assets/images/awards/award_img_new_9.jpg',
+            type: 'certificate'
+          },
+          {
+            label: 'Award Certificate',
+            url: '/assets/certificates/cert-international-cultural-program-page2.jpg',
+            type: 'certificate'
+          }
+        ];
+      }
+
+      if (titleLower.includes('outstanding student') || id === 'cmvup57at0010ggb91mht8tfo') {
+        return [
+          {
+            label: 'Achievement Certificate',
+            url: award.image_url || '/assets/images/awards/award_img_new_1.jpg',
+            type: 'certificate'
+          },
+          {
+            label: 'Recognition Certificate',
+            url: '/assets/certificates/cert-outstanding-student-unhas-page2.jpg',
+            type: 'certificate'
+          }
+        ];
+      }
+
+      if (award.image_url) {
+        return [{
+          label: 'Certificate',
+          url: award.image_url,
+          type: 'certificate'
+        }];
+      }
+
+      return [];
+    }
+
+function getTalkMediaPages(talk, isId) {
       if (!talk) return [];
       const pages = [];
       const posterSrc = talk.poster_url || (talk.media && talk.media[0]) || null;
@@ -2091,14 +2311,54 @@
         const cSlide = talk.slides.find(s => s.type === 'certificate' || /cert|sertifikat|plakat|piagam|certificate/i.test(s.label || ''));
         if (cSlide) certUrl = cSlide.url;
       }
-      if (!certUrl && (talk.event || '').toLowerCase().includes('khouw kalbe')) {
+      const eventLower = (talk.event || '').toLowerCase();
+      if (!certUrl && eventLower.includes('khouw kalbe')) {
         certUrl = '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg';
+      } else if (!certUrl && (eventLower.includes('build with ai') || eventLower.includes('gdg'))) {
+        certUrl = '/assets/certificates/cert-gdg-build-with-ai.jpg';
+      } else if (!certUrl && (eventLower.includes('web engineering') || eventLower.includes('sulawesi barat') || eventLower.includes('unsulbar'))) {
+        certUrl = '/assets/certificates/cert-unsulbar-web-ai.jpg';
+      } else if (!certUrl && (eventLower.includes('cybersecurity') || eventLower.includes('bssn'))) {
+        certUrl = '/assets/certificates/cert-bssn-cybersecurity.jpg';
       }
+
       if (certUrl && certUrl !== posterSrc) {
         pages.push({
           label: isId ? 'Sertifikat' : 'Certificate',
           url: certUrl,
           type: 'certificate'
+        });
+      }
+
+      // Also include any other documentation photos in talk.gallery if present
+      if (Array.isArray(talk.gallery)) {
+        const extraCerts = [];
+        const docImgs = [];
+        talk.gallery.forEach(img => {
+          if (!img || img === posterSrc || img === certUrl) return;
+          if (/cert|sertifikat|plakat|piagam|certificate/i.test(img)) {
+            if (!extraCerts.includes(img) && !pages.some(p => p.url === img)) {
+              extraCerts.push(img);
+            }
+          } else {
+            if (!docImgs.includes(img) && !pages.some(p => p.url === img)) {
+              docImgs.push(img);
+            }
+          }
+        });
+
+        extraCerts.forEach((img, idx) => {
+          const label = extraCerts.length > 1
+            ? (isId ? `Sertifikat ${idx + 1}` : `Certificate ${idx + 1}`)
+            : (isId ? 'Sertifikat' : 'Certificate');
+          pages.push({ label, url: img, type: 'certificate' });
+        });
+
+        docImgs.forEach((img, idx) => {
+          const label = docImgs.length > 1
+            ? (isId ? `Dokumentasi ${idx + 1}` : `Documentation ${idx + 1}`)
+            : (isId ? 'Dokumentasi' : 'Documentation');
+          pages.push({ label, url: img, type: 'documentation' });
         });
       }
       if (!pages.length && certUrl) {
@@ -2131,6 +2391,53 @@
       const targetPage = pages[newIndex];
       const certTitle = container.getAttribute('data-cert-title') || '';
       const pageTitle = `Certificate — ${certTitle} (Page ${newIndex + 1} / ${pages.length})`;
+
+      const mainImg = container.querySelector('.b-media-main-img');
+      const blurImg = container.querySelector('.b-media-blur-bg');
+      if (mainImg) {
+        mainImg.style.opacity = '0.35';
+        mainImg.style.filter = 'blur(4px)';
+        mainImg.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+        mainImg.src = targetPage.url;
+        mainImg.alt = pageTitle;
+        mainImg.title = pageTitle;
+        mainImg.onload = () => {
+          mainImg.style.opacity = '1';
+          mainImg.style.filter = 'none';
+        };
+      }
+      if (blurImg) blurImg.src = targetPage.url;
+      container.setAttribute('data-active-title', pageTitle);
+
+      const badgeText = container.querySelector('.card-page-text');
+      if (badgeText) badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+
+      const prevBtn = container.querySelector('.card-media-nav-btn.prev');
+      const nextBtn = container.querySelector('.card-media-nav-btn.next');
+      if (prevBtn) prevBtn.disabled = (newIndex === 0);
+      if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
+    };
+
+    
+    window.stepBrowseAwardCard = function(awardId, delta) {
+      const container = document.getElementById(`browse-award-prev-${awardId}`);
+      if (!container) return;
+      const rawPages = container.getAttribute('data-pages');
+      if (!rawPages) return;
+      let pages = [];
+      try { pages = JSON.parse(rawPages); } catch(e) { return; }
+      if (!Array.isArray(pages) || pages.length <= 1) return;
+
+      let currentIndex = parseInt(container.getAttribute('data-page-index') || '0', 10);
+      let newIndex = currentIndex + delta;
+      if (newIndex < 0) newIndex = 0;
+      if (newIndex >= pages.length) newIndex = pages.length - 1;
+      if (newIndex === currentIndex) return;
+
+      container.setAttribute('data-page-index', newIndex);
+      const targetPage = pages[newIndex];
+      const awardTitle = container.getAttribute('data-award-title') || '';
+      const pageTitle = `Honor & Award — ${awardTitle} (${targetPage.label || 'Page ' + (newIndex + 1)})`;
 
       const mainImg = container.querySelector('.b-media-main-img');
       const blurImg = container.querySelector('.b-media-blur-bg');
@@ -2394,32 +2701,272 @@
       }
     }
 
-    // Lightbox Handlers
-    function openLightbox(src, caption) {
+    // Lightbox Handlers with Multi-page Item Isolation
+    let currentLightboxPages = [];
+    let currentLightboxPageIndex = 0;
+    let currentLightboxItemTitle = '';
+    let currentLightboxHostId = null;
+
+    function renderBrowseLightboxPage() {
       const overlay = document.getElementById('lightboxOverlay');
       const img = document.getElementById('lightboxImg');
+      const prevBtn = document.getElementById('lightboxPrevBtn');
+      const nextBtn = document.getElementById('lightboxNextBtn');
+      const pageBadge = document.getElementById('lightboxPageBadge');
+      const pageText = document.getElementById('lightboxPageText');
+      const pageLabel = document.getElementById('lightboxPageLabel');
       const cap = document.getElementById('lightboxCaption');
-      if (overlay && img) {
-        img.src = src;
-        if (cap) cap.textContent = caption || '';
-        overlay.classList.add('open');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+      if (!overlay || !img) return;
+
+      if (currentLightboxPages.length > 1) {
+        overlay.classList.remove('lightbox-no-nav');
+        const page = currentLightboxPages[currentLightboxPageIndex];
+        if (!page) return;
+
+        img.src = page.url;
+        const displayTitle = currentLightboxItemTitle || 'Media';
+        const displayLabel = page.label || 'Page';
+        img.alt = `${displayTitle} — ${displayLabel}`;
+
+        if (prevBtn) {
+          prevBtn.style.display = 'flex';
+          prevBtn.disabled = (currentLightboxPageIndex === 0);
+        }
+        if (nextBtn) {
+          nextBtn.style.display = 'flex';
+          nextBtn.disabled = (currentLightboxPageIndex === currentLightboxPages.length - 1);
+        }
+        if (pageBadge) {
+          pageBadge.style.display = 'inline-flex';
+          if (pageText) pageText.textContent = `${currentLightboxPageIndex + 1} / ${currentLightboxPages.length}`;
+          if (pageLabel) pageLabel.textContent = displayLabel;
+        }
+        if (cap) {
+          cap.style.display = 'block';
+          cap.textContent = `${displayTitle} · ${displayLabel}`;
+        }
+      } else {
+        overlay.classList.add('lightbox-no-nav');
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        if (pageBadge) pageBadge.style.display = 'none';
+        if (cap) {
+          cap.style.display = currentLightboxItemTitle ? 'block' : 'none';
+          cap.textContent = currentLightboxItemTitle || '';
+        }
       }
     }
+
+    function syncBrowseCardToPage(hostId, pageIndex) {
+      if (!hostId) return;
+      try {
+        if (hostId.startsWith('browse-cert-prev-')) {
+          const id = hostId.replace('browse-cert-prev-', '');
+          const container = document.getElementById(hostId);
+          const current = parseInt(container?.getAttribute('data-page-index') || '0', 10);
+          if (container && current !== pageIndex && typeof window.stepBrowseCertCard === 'function') {
+            window.stepBrowseCertCard(id, pageIndex - current);
+          }
+        } else if (hostId.startsWith('browse-award-prev-')) {
+          const id = hostId.replace('browse-award-prev-', '');
+          const container = document.getElementById(hostId);
+          const current = parseInt(container?.getAttribute('data-page-index') || '0', 10);
+          if (container && current !== pageIndex && typeof window.stepBrowseAwardCard === 'function') {
+            window.stepBrowseAwardCard(id, pageIndex - current);
+          }
+        } else if (hostId.startsWith('browse-talk-prev-')) {
+          const id = hostId.replace('browse-talk-prev-', '');
+          const container = document.getElementById(hostId);
+          const current = parseInt(container?.getAttribute('data-page-index') || '0', 10);
+          if (container && current !== pageIndex && typeof window.stepBrowseTalkCard === 'function') {
+            window.stepBrowseTalkCard(id, pageIndex - current);
+          }
+        }
+      } catch (_) {}
+    }
+
+    function openLightbox(src, caption, triggerElOrPages, initialIdx) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      if (!overlay || !img || !src) return;
+
+      let pages = null;
+      let currentIdx = 0;
+      let itemTitle = caption || '';
+      let hostEl = null;
+
+      if (Array.isArray(triggerElOrPages) && triggerElOrPages.length > 0) {
+        pages = triggerElOrPages;
+        currentIdx = typeof initialIdx === 'number' ? initialIdx : 0;
+      } else if (triggerElOrPages && triggerElOrPages.nodeType) {
+        hostEl = triggerElOrPages;
+      } else if (typeof window !== 'undefined' && window.event && window.event.target) {
+        const t = window.event.target;
+        hostEl = (t.getAttribute && t.getAttribute('data-pages')) ? t : (t.closest ? t.closest('[data-pages]') : null);
+      }
+
+      if (hostEl && !pages) {
+        const raw = hostEl.getAttribute('data-pages');
+        if (raw) {
+          try { pages = JSON.parse(raw); } catch (_) {}
+        }
+        currentIdx = parseInt(hostEl.getAttribute('data-page-index') || '0', 10);
+        itemTitle = hostEl.getAttribute('data-cert-title') || hostEl.getAttribute('data-award-title') || hostEl.getAttribute('data-talk-event') || caption || '';
+      }
+
+      // Fallback resolver
+      if (!pages || !pages.length) {
+        const sLower = (src || '').toLowerCase();
+        const aLower = (caption || '').toLowerCase();
+        if (sLower.includes('talent hub') || sLower.includes('award_img_4') || sLower.includes('cert-ai-talent-hub') || aLower.includes('talent hub')) {
+          pages = [
+            { label: 'Finalist Certificate', url: '/assets/images/awards/award_img_4.jpg', type: 'certificate' },
+            { label: 'Recognition Certificate', url: '/assets/certificates/cert-ai-talent-hub-pertamina-page2.jpg', type: 'certificate' }
+          ];
+          itemTitle = 'Top 20 AI Talent Hub Indonesia 2025';
+        } else if (sLower.includes('international-cultural') || sLower.includes('award_img_new_9') || aLower.includes('international cultural')) {
+          pages = [
+            { label: 'Participant Certificate', url: '/assets/images/awards/award_img_new_9.jpg', type: 'certificate' },
+            { label: 'Award Certificate', url: '/assets/certificates/cert-international-cultural-program-page2.jpg', type: 'certificate' }
+          ];
+          itemTitle = 'International Cultural Program Awardee 2023';
+        } else if (sLower.includes('outstanding-student') || sLower.includes('award_img_new_1') || aLower.includes('outstanding student')) {
+          pages = [
+            { label: 'Achievement Certificate', url: '/assets/images/awards/award_img_new_1.jpg', type: 'certificate' },
+            { label: 'Recognition Certificate', url: '/assets/certificates/cert-outstanding-student-unhas-page2.jpg', type: 'certificate' }
+          ];
+          itemTitle = 'The Most Outstanding Student of Information Systems Department 2022';
+        } else if (sLower.includes('build-with-ai') || sLower.includes('build with ai') || aLower.includes('build with ai')) {
+          pages = [
+            { label: 'Poster', url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp', type: 'poster' },
+            { label: 'Certificate', url: '/assets/certificates/cert-gdg-build-with-ai.jpg', type: 'certificate' },
+            { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-build-with-ai.webp', type: 'documentation' }
+          ];
+          itemTitle = 'Build with AI: AI-Driven Development';
+        } else if (sLower.includes('web-ai') || sLower.includes('web engineering') || aLower.includes('web engineering') || aLower.includes('sulawesi barat')) {
+          pages = [
+            { label: 'Poster', url: '/uploads/talks/whatsapp_image_2026_08_21_at_15_55_16_1787298986322.webp', type: 'poster' },
+            { label: 'Certificate', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' },
+            { label: 'Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' }
+          ];
+          itemTitle = 'AI Web Engineering & Security Hands-on Workshop';
+        } else if (sLower.includes('cybersecurity') || sLower.includes('bssn') || aLower.includes('cybersecurity')) {
+          pages = [
+            { label: 'Poster', url: '/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp', type: 'poster' },
+            { label: 'Certificate', url: '/assets/certificates/cert-bssn-cybersecurity.jpg', type: 'certificate' },
+            { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp', type: 'documentation' }
+          ];
+          itemTitle = 'National Cybersecurity & Information Security Awareness Webinar';
+        } else if (sLower.includes('khouw') || sLower.includes('kalbe') || aLower.includes('mindful ai')) {
+          pages = [
+            { label: 'Poster', url: '/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp', type: 'poster' },
+            { label: 'Certificate', url: '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg', type: 'certificate' },
+            { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-mindful-ai.webp', type: 'documentation' }
+          ];
+          itemTitle = 'Mindful AI: AI Personalization for Students';
+        } else if (sLower.includes('gsa') || sLower.includes('forge') || aLower.includes('gsa ai forge') || aLower.includes('personal branding')) {
+          pages = [
+            { label: 'Poster', url: '/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp', type: 'poster' },
+            { label: 'Documentation 1', url: '/assets/images/gsa-ai-forge-doc-1.jpg', type: 'documentation' },
+            { label: 'Documentation 2', url: '/assets/images/gsa-ai-forge-doc-2.jpg', type: 'documentation' },
+            { label: 'Documentation 3', url: '/assets/images/gsa-ai-forge-doc-3.jpg', type: 'documentation' }
+          ];
+          itemTitle = 'GSA AI Forge: AI for Personal Branding & Digital Portfolio';
+        } else if (sLower.includes('digdaya') || aLower.includes('digdaya')) {
+          pages = [
+            { label: 'Certificate', url: '/assets/certificates/cert-digdaya-practitioner-bi-page1.jpg?v=2', type: 'certificate' },
+            { label: 'Curriculum', url: '/assets/certificates/cert-digdaya-practitioner-bi-page2.jpg?v=2', type: 'curriculum' }
+          ];
+          itemTitle = 'Digdaya x Hackathon Practitioner Training';
+        } else if (sLower.includes('englishscore') || aLower.includes('englishscore')) {
+          pages = [
+            { label: 'Certificate & Score', url: '/assets/certificates/cert-englishscore-british-council-page1.jpg?v=2', type: 'certificate' },
+            { label: 'CEFR Breakdown', url: '/assets/certificates/cert-englishscore-british-council-page2.jpg?v=2', type: 'curriculum' }
+          ];
+          itemTitle = 'EnglishScore Professional Certification';
+        } else if (sLower.includes('large-language-model') || sLower.includes('dex-page')) {
+          pages = [
+            { label: 'Certificate 1', url: '/assets/certificates/cert-large-language-model-nasional-dex-page1.jpg?v=2', type: 'certificate' },
+            { label: 'Certificate 2', url: '/assets/certificates/cert-large-language-model-nasional-dex-page2.jpg?v=2', type: 'certificate' }
+          ];
+          itemTitle = 'Large Language Model Practitioner';
+        }
+      }
+
+      if (pages && Array.isArray(pages) && pages.length > 1) {
+        const matchIdx = pages.findIndex(p => p.url === src);
+        if (matchIdx !== -1) currentIdx = matchIdx;
+
+        currentLightboxPages = pages;
+        currentLightboxPageIndex = currentIdx;
+        currentLightboxItemTitle = itemTitle;
+        currentLightboxHostId = hostEl ? hostEl.id : null;
+        renderBrowseLightboxPage();
+      } else {
+        currentLightboxPages = [];
+        currentLightboxPageIndex = 0;
+        currentLightboxItemTitle = itemTitle;
+        currentLightboxHostId = null;
+        img.src = src;
+        img.alt = caption || 'Image';
+        renderBrowseLightboxPage();
+      }
+
+      overlay.classList.add('open');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    window.prevLightboxImage = function() {
+      const overlay = document.getElementById('lightboxOverlay');
+      if (!overlay || overlay.classList.contains('lightbox-no-nav')) return;
+
+      if (currentLightboxPages.length > 1 && currentLightboxPageIndex > 0) {
+        currentLightboxPageIndex--;
+        renderBrowseLightboxPage();
+        if (currentLightboxHostId) {
+          syncBrowseCardToPage(currentLightboxHostId, currentLightboxPageIndex);
+        }
+      }
+    };
+
+    window.nextLightboxImage = function() {
+      const overlay = document.getElementById('lightboxOverlay');
+      if (!overlay || overlay.classList.contains('lightbox-no-nav')) return;
+
+      if (currentLightboxPages.length > 1 && currentLightboxPageIndex < currentLightboxPages.length - 1) {
+        currentLightboxPageIndex++;
+        renderBrowseLightboxPage();
+        if (currentLightboxHostId) {
+          syncBrowseCardToPage(currentLightboxHostId, currentLightboxPageIndex);
+        }
+      }
+    };
+
     function closeLightbox() {
       const overlay = document.getElementById('lightboxOverlay');
       if (overlay) {
         overlay.classList.remove('open');
         overlay.classList.remove('active');
+        overlay.classList.remove('lightbox-no-nav');
         document.body.style.overflow = '';
       }
+      currentLightboxPages = [];
+      currentLightboxHostId = null;
     }
 
     document.addEventListener('keydown', e => {
+      const overlay = document.getElementById('lightboxOverlay');
+      const isLightboxActive = overlay && (overlay.classList.contains('active') || overlay.classList.contains('open'));
+      const isNoNav = overlay && overlay.classList.contains('lightbox-no-nav');
+
       if (e.key === 'Escape') {
         closeVideoModal();
         closeLightbox();
+      } else if (isLightboxActive && !isNoNav && e.key === 'ArrowLeft') {
+        window.prevLightboxImage();
+      } else if (isLightboxActive && !isNoNav && e.key === 'ArrowRight') {
+        window.nextLightboxImage();
       }
     });
 

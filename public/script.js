@@ -476,13 +476,13 @@
       about_eyebrow: "01 — Profile",
       about_title: "AI Full-Stack Engineer with 4 Years of Experiences",
       about_bio1: "AI Full-Stack Engineer with a strong foundation in Applied Deep Learning, Agentic Workflows, and scalable modern web architectures. Bridging theoretical machine learning research into production-grade systems that deliver measurable business outcomes.",
-      about_bio2: "Passionate about open-source education, technical training, and developer community building. Have trained 2,000+ engineers, students, and professionals across Indonesia in Generative AI, PyTorch, and full-stack software development.",
+      about_bio2: "Passionate about open-source education, technical training, and developer community building. Actively training and mentoring engineers, students, and professionals across Indonesia in Generative AI, PyTorch, and full-stack software development.",
       about_fact_exp: "Experience",
       about_fact_exp_val: "3+ Years in AI & Full-Stack",
       about_fact_spec: "Specialization",
       about_fact_spec_val: "Agentic AI, LLM Systems & Computer Vision",
       about_fact_edu: "Formal Education",
-      about_fact_edu_val: "Formal Academic Degree — Bachelor of Computer Science, Specializing in Artificial Intelligence and Data Science",
+      about_fact_edu_val: "Bachelor of Computer Science",
       about_fact_loc: "Location",
       about_fact_loc_val: "Makassar & Remote Worldwide",
 
@@ -500,17 +500,17 @@
 
       pubs_eyebrow: "06 — Publications",
       pubs_title: "Open-source work, written up and shared.",
-      edu_desc: "Formal academic degree — Bachelor of Computer Science specializing in Artificial Intelligence and Data Science at Universitas Hasanuddin (GPA 3.97/4.00, Cum Laude, 3× Most Outstanding Student).",
-      exp_desc: "4+ years of professional experience across 11 roles at Telkom Indonesia, Bank Indonesia, Infomedia Nusantara, Paper.id, XL Axiata, RevoU, and AksaraHub—shipping enterprise AI, LLM OCR, and computer vision pipelines.",
-      skills_desc: "End-to-end technical stack across 9 core domains: Programming, Data Analytics, Computer Vision, NLP, Generative AI, AI Agents, Full-Stack Development, Database Engineering, and Cloud MLOps.",
-      projects_desc: "17 production-grade systems and case studies spanning Agentic AI workflows, RAG chatbots, YOLO & DETR computer vision pipelines, speech transcription, and full-stack web architectures.",
-      pubs_desc: "Published IEEE computer vision research on Faster R-CNN and DETR industrial PPE detection alongside open-source Python packages on PyPI for automated vision dataset pipelines.",
-      talks_desc: "15+ keynote speeches, university seminars, and hands-on workshops empowering 2,000+ engineers, students, and professionals across Indonesia in Generative AI, Deep Learning, and Data Science.",
-      awards_desc: "24 national and regional accolades across AI innovation, startup hackathons, data science competitions, keynote speaking recognitions, and academic excellence.",
-      certs_desc: "22 verified credentials across Program, Course, Skill, and Language certifications issued by British Council, Bank Indonesia, Komdigi DTS, DeepLearning.AI, IBM, Google, Microsoft, and Dicoding.",
+      edu_desc: "Bachelor of Computer Science specializing in Artificial Intelligence and Data Science at Universitas Hasanuddin (GPA 3.97/4.00, Cum Laude, Most Outstanding Student).",
+      exp_desc: "Professional engineering journey across AI software, machine learning research, and technical leadership—shipping production AI systems, LLM OCR, and computer vision pipelines.",
+      skills_desc: "End-to-end technical stack spanning core domains: Programming, Data Analytics, Computer Vision, NLP, Generative AI, AI Agents, Full-Stack Engineering, and Cloud MLOps.",
+      projects_desc: "Production-grade systems and case studies spanning Agentic AI workflows, RAG applications, computer vision pipelines, speech recognition, and modern web architectures.",
+      pubs_desc: "Published scientific research, open-source Python packages on PyPI, and in-depth engineering guides on applied AI and computer vision.",
+      talks_desc: "Keynote speeches, university seminars, and hands-on technical workshops empowering developers, students, and professionals in Generative AI, Deep Learning, and Data Science.",
+      awards_desc: "National and regional accolades across AI innovation, startup hackathons, data science competitions, and academic excellence.",
+      certs_desc: "Verified credentials across professional programs, courses, and technical specializations issued by leading industry and academic institutions.",
       blog_desc: "In-depth technical write-ups, engineering tutorials, and architecture guides on Large Language Models, Agentic AI workflows, Computer Vision, and production software systems.",
-      gallery_desc: "18 curated visual highlights capturing keynote talks, corporate AI training sessions, national competition victories, and academic milestones.",
-      feedback_desc: "Verified LinkedIn recommendations from engineering colleagues and 9.4/10 average-rated reviews from workshop attendees, mentees, and project collaborators.",
+      gallery_desc: "Curated visual highlights capturing keynote talks, hands-on AI training sessions, competition victories, and professional milestones.",
+      feedback_desc: "Verified LinkedIn recommendations from engineering colleagues alongside authentic reviews from workshop attendees, mentees, and collaborators.",
       contact_desc: "Available for end-to-end AI engineering, applied machine learning research collaborations, corporate AI training, and technical speaking engagements.",
 
       talks_eyebrow: "07 — Talks & Workshops",
@@ -569,13 +569,13 @@
       about_eyebrow: "01 — Profil Singkat",
       about_title: "AI Full-Stack Engineer dengan Pengalaman 4 Tahun",
       about_bio1: "AI Full-Stack Engineer dengan fondasi mendalam di bidang Applied Deep Learning, Agentic Workflows, dan arsitektur web modern berkinerja tinggi. Menerjemahkan riset teoritis machine learning ke sistem siap produksi yang memberikan dampak bisnis terukur.",
-      about_bio2: "Memiliki dedikasi tinggi terhadap edukasi open-source, pelatihan teknis, dan pengembangan komunitas pengembang. Telah melatih 2.000+ insinyur, mahasiswa, dan profesional di seluruh Indonesia dalam Generative AI, PyTorch, dan rekayasa full-stack software.",
+      about_bio2: "Memiliki dedikasi tinggi terhadap edukasi open-source, pelatihan teknis, dan pengembangan komunitas pengembang. Aktif melatih dan membimbing mahasiswa, insinyur, dan profesional di seluruh Indonesia dalam Generative AI, PyTorch, dan rekayasa perangkat lunak.",
       about_fact_exp: "Pengalaman",
       about_fact_exp_val: "3+ Tahun di AI & Full-Stack",
       about_fact_spec: "Spesialisasi",
       about_fact_spec_val: "Agentic AI, Sistem LLM & Computer Vision",
       about_fact_edu: "Pendidikan Formal",
-      about_fact_edu_val: "Teknik Informatika, Universitas Hasanuddin",
+      about_fact_edu_val: "Bachelor of Computer Science",
       about_fact_loc: "Lokasi",
       about_fact_loc_val: "Makassar & Remote Worldwide",
 
@@ -1183,6 +1183,37 @@
     }
   };
 
+  // Toggle Feedback Translation (IG / Twitter Style: See original / See translation)
+  window.toggleFeedbackTranslation = function (btn) {
+    if (!btn) return;
+    const card = btn.closest('.t-card');
+    if (!card) return;
+    const isShowingOrig = btn.getAttribute('data-showing-orig') === 'true';
+    const quoteEl = card.querySelector('.t-primary-quote');
+    const takeawayEl = card.querySelector('.t-takeaway-text');
+    const labelEl = btn.querySelector('.t-trans-label');
+
+    if (isShowingOrig) {
+      // Revert to English translation
+      const enQuote = btn.getAttribute('data-en-quote') || '';
+      const enTakeaway = btn.getAttribute('data-en-takeaway') || '';
+      if (quoteEl) quoteEl.textContent = `“${enQuote}”`;
+      if (takeawayEl) takeawayEl.textContent = `“${enTakeaway}”`;
+      btn.setAttribute('data-showing-orig', 'false');
+      btn.classList.remove('is-showing-original');
+      if (labelEl) labelEl.textContent = 'See original';
+    } else {
+      // Show original Indonesian
+      const origQuote = btn.getAttribute('data-orig-quote') || '';
+      const origTakeaway = btn.getAttribute('data-orig-takeaway') || '';
+      if (quoteEl) quoteEl.textContent = `“${origQuote}”`;
+      if (takeawayEl) takeawayEl.textContent = `“${origTakeaway}”`;
+      btn.setAttribute('data-showing-orig', 'true');
+      btn.classList.add('is-showing-original');
+      if (labelEl) labelEl.textContent = 'See translation';
+    }
+  };
+
   // Toggle Read More / Read Less for Skill Specialization Cards (shows/hides bullet sub-lists)
   window.toggleSkillCardDetails = function (btn) {
     if (!btn) return;
@@ -1362,8 +1393,8 @@
       if (ytId) {
         mediaHeader = `
           <div class="p-card-media" id="p-media-${p.id}">
-            <div class="p-video-wrapper" onclick="window.playCardVideo('${p.id}', '${ytId}')" role="button" tabindex="0" aria-label="Play ${escapeHtml(p.name)} video demo">
-              <img class="p-video-thumb" src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${escapeHtml(p.name)} Demo Thumbnail" loading="lazy" / decoding="async">
+            <div class="p-video-wrapper" onclick="window.playCardVideo('${p.id}', '${ytId}')" role="button" tabindex="0" aria-label="Play Muhammad Haerul's ${escapeHtml(p.name)} video demo">
+              <img class="p-video-thumb" src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="Muhammad Haerul — ${escapeHtml(p.name)} AI Video Demo" loading="lazy" decoding="async">
               <div class="p-video-overlay">
                 <div class="p-play-btn" title="Play Video Demo">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
@@ -1379,7 +1410,7 @@
       } else if (p.thumbnailUrl) {
         mediaHeader = `
           <div class="p-card-media" id="p-media-${p.id}" style="cursor:pointer;" onclick="openProjectModal('${p.id}')">
-            <img class="p-video-thumb" src="${escapeHtml(p.thumbnailUrl)}" alt="${escapeHtml(p.name)} Thumbnail" loading="lazy" style="width:100%; height:100%; object-fit:cover;" / decoding="async">
+            <img class="p-video-thumb" src="${escapeHtml(p.thumbnailUrl)}" alt="Muhammad Haerul — ${escapeHtml(p.name)} Project Thumbnail" loading="lazy" style="width:100%; height:100%; object-fit:cover;" decoding="async">
             <div class="p-video-overlay" style="background:rgba(0,0,0,0.18);">
               <span class="p-video-badge" style="background:rgba(0,0,0,0.72); color:#fff;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -1569,8 +1600,15 @@
       const cSlide = talk.slides.find(s => s.type === 'certificate' || /cert|sertifikat|plakat|piagam|certificate/i.test(s.label || ''));
       if (cSlide) certUrl = cSlide.url;
     }
-    if (!certUrl && (talk.event || '').toLowerCase().includes('khouw kalbe')) {
+    const eventLower = (talk.event || '').toLowerCase();
+    if (!certUrl && eventLower.includes('khouw kalbe')) {
       certUrl = '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg';
+    } else if (!certUrl && (eventLower.includes('build with ai') || eventLower.includes('gdg'))) {
+      certUrl = '/assets/certificates/cert-gdg-build-with-ai.jpg';
+    } else if (!certUrl && (eventLower.includes('web engineering') || eventLower.includes('sulawesi barat') || eventLower.includes('unsulbar'))) {
+      certUrl = '/assets/certificates/cert-unsulbar-web-ai.jpg';
+    } else if (!certUrl && (eventLower.includes('cybersecurity') || eventLower.includes('bssn'))) {
+      certUrl = '/assets/certificates/cert-bssn-cybersecurity.jpg';
     }
 
     if (certUrl && certUrl !== posterSrc) {
@@ -1578,6 +1616,38 @@
         label: isId ? 'Sertifikat' : 'Certificate',
         url: certUrl,
         type: 'certificate'
+      });
+    }
+
+    // Also include any other documentation photos in talk.gallery if present
+    if (Array.isArray(talk.gallery)) {
+      const extraCerts = [];
+      const docImgs = [];
+      talk.gallery.forEach(img => {
+        if (!img || img === posterSrc || img === certUrl) return;
+        if (/cert|sertifikat|plakat|piagam|certificate/i.test(img)) {
+          if (!extraCerts.includes(img) && !pages.some(p => p.url === img)) {
+            extraCerts.push(img);
+          }
+        } else {
+          if (!docImgs.includes(img) && !pages.some(p => p.url === img)) {
+            docImgs.push(img);
+          }
+        }
+      });
+
+      extraCerts.forEach((img, idx) => {
+        const label = extraCerts.length > 1
+          ? (isId ? `Sertifikat ${idx + 1}` : `Certificate ${idx + 1}`)
+          : (isId ? 'Sertifikat' : 'Certificate');
+        pages.push({ label, url: img, type: 'certificate' });
+      });
+
+      docImgs.forEach((img, idx) => {
+        const label = docImgs.length > 1
+          ? (isId ? `Dokumentasi ${idx + 1}` : `Documentation ${idx + 1}`)
+          : (isId ? 'Dokumentasi' : 'Documentation');
+        pages.push({ label, url: img, type: 'documentation' });
       });
     }
 
@@ -1652,21 +1722,15 @@
             <div class="talk-poster-backdrop" style="background-image: url('${escapeHtml(initialMedia.url)}');"></div>
             <img class="talk-poster-img" src="${escapeHtml(initialMedia.url)}" alt="Muhammad Haerul speaking at ${escapeHtml(t.event)} — AI Trainer &amp; Full-Stack Engineer" title="Muhammad Haerul — ${escapeHtml(t.event)}" onerror="this.src='/favicon.webp'" decoding="async">
             ${hasMediaTabs ? `
-              <div class="talk-media-tabs" role="tablist" aria-label="Talk Media Tabs" onclick="event.stopPropagation();">
-                ${mediaPages.map((p, idx) => `
-                  <button type="button"
-                    class="talk-tab-btn ${idx === 0 ? 'active' : ''}"
-                    role="tab"
-                    aria-selected="${idx === 0 ? 'true' : 'false'}"
-                    onclick="event.stopPropagation(); window.switchTalkPage('${escapeHtml(t.id)}', '${escapeHtml(p.url)}', this, '${escapeHtml(t.event)} (${escapeHtml(p.label)})')">
-                    ${p.type === 'certificate' ? `
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    ` : `
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                    `}
-                    <span>${escapeHtml(p.label)}</span>
-                  </button>
-                `).join('')}
+              <button type="button" class="card-media-nav-btn prev" aria-label="Previous Page" onclick="event.stopPropagation(); window.stepTalkCard('${escapeHtml(t.id)}', -1)" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="card-media-nav-btn next" aria-label="Next Page" onclick="event.stopPropagation(); window.stepTalkCard('${escapeHtml(t.id)}', 1)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="card-page-badge" aria-label="Page 1 of ${mediaPages.length}">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span class="card-page-text">1 / ${mediaPages.length}</span>
               </div>
             ` : ''}
             <div class="talk-poster-overlay">
@@ -2020,6 +2084,25 @@
           mainQuote = pesan || alasan || 'The session material was highly insightful and practical!';
         }
 
+        const pesanOrig = f.pesan_kesan_original ? f.pesan_kesan_original.trim() : '';
+        const alasanOrig = f.alasan_original ? f.alasan_original.trim() : '';
+        let mainQuoteOrig = '';
+        let takeawayOrig = '';
+
+        if (pesanOrig && alasanOrig) {
+          if (pesanOrig.length < 15 && alasanOrig.length > pesanOrig.length) {
+            mainQuoteOrig = alasanOrig;
+            takeawayOrig = pesanOrig;
+          } else {
+            mainQuoteOrig = pesanOrig;
+            takeawayOrig = alasanOrig;
+          }
+        } else {
+          mainQuoteOrig = pesanOrig || alasanOrig || '';
+        }
+
+        const hasTranslation = Boolean(mainQuoteOrig && (mainQuoteOrig !== mainQuote || (takeawayOrig && takeawayOrig !== takeaway)));
+
         const isLongQuote = mainQuote.length > 140;
         const qId = `t-q-${f.id || Math.random().toString(36).substring(2, 9)}`;
 
@@ -2073,6 +2156,22 @@
                       <span>${(f.source && f.source.toLowerCase().includes('linkedin')) ? 'Core Impact' : isIndonesian() ? 'Sorotan Pembelajaran' : 'Key Takeaway'}</span>
                     </div>
                     <p class="t-takeaway-text">“${escapeHtml(takeaway)}”</p>
+                  </div>
+                ` : ''}
+
+                ${hasTranslation ? `
+                  <div class="t-translate-bar">
+                    <button type="button" class="t-translate-btn" onclick="window.toggleFeedbackTranslation(this)"
+                      data-showing-orig="false"
+                      data-en-quote="${escapeHtml(mainQuote)}"
+                      data-orig-quote="${escapeHtml(mainQuoteOrig)}"
+                      data-en-takeaway="${escapeHtml(takeaway)}"
+                      data-orig-takeaway="${escapeHtml(takeawayOrig)}">
+                      <svg class="t-translate-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/>
+                      </svg>
+                      <span class="t-trans-label">See original</span>
+                    </button>
                   </div>
                 ` : ''}
               </div>
@@ -3412,6 +3511,84 @@
   const AWARDS_PER_PAGE = 9;
   let currentAwardPage = 1;
 
+    // Flexible Award Multi-Certificate / Document Resolver
+  function getAwardPages(aw, isId = false) {
+    if (!aw) return [];
+    if (Array.isArray(aw.pages) && aw.pages.length > 0) {
+      return aw.pages.map((p, idx) => {
+        if (typeof p === 'string') {
+          return {
+            label: idx === 0 ? (isId ? 'Sertifikat Finalis' : 'Finalist Certificate') : (isId ? `Sertifikat ${idx + 1}` : `Certificate ${idx + 1}`),
+            url: p,
+            type: 'certificate'
+          };
+        }
+        return {
+          label: (isId && p.label_id) ? p.label_id : (p.label || (isId ? `Sertifikat ${idx + 1}` : `Certificate ${idx + 1}`)),
+          url: p.url || p.src,
+          type: p.type || 'certificate'
+        };
+      });
+    }
+
+    const titleLower = (aw.title || '').toLowerCase();
+    const id = aw.id || '';
+    if (titleLower.includes('talent hub') || id === 'cmvup56uc000oggb9t3aqzmkb') {
+      return [
+        {
+          label: isId ? 'Sertifikat Finalis' : 'Finalist Certificate',
+          url: aw.image_url || '/assets/images/awards/award_img_4.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Sertifikat Penghargaan' : 'Recognition Certificate',
+          url: '/assets/certificates/cert-ai-talent-hub-pertamina-page2.jpg',
+          type: 'certificate'
+        }
+      ];
+    }
+
+    if (titleLower.includes('international cultural') || id === 'cmvup576t000xggb99dmyo0by') {
+      return [
+        {
+          label: isId ? 'Sertifikat Peserta' : 'Participant Certificate',
+          url: aw.image_url || '/assets/images/awards/award_img_new_9.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Sertifikat Penghargaan' : 'Award Certificate',
+          url: '/assets/certificates/cert-international-cultural-program-page2.jpg',
+          type: 'certificate'
+        }
+      ];
+    }
+
+    if (titleLower.includes('outstanding student') || id === 'cmvup57at0010ggb91mht8tfo') {
+      return [
+        {
+          label: isId ? 'Sertifikat Prestasi' : 'Achievement Certificate',
+          url: aw.image_url || '/assets/images/awards/award_img_new_1.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Sertifikat Penghargaan' : 'Recognition Certificate',
+          url: '/assets/certificates/cert-outstanding-student-unhas-page2.jpg',
+          type: 'certificate'
+        }
+      ];
+    }
+
+    if (aw.image_url) {
+      return [{
+        label: isId ? 'Sertifikat' : 'Certificate',
+        url: aw.image_url,
+        type: 'certificate'
+      }];
+    }
+
+    return [];
+  }
+
   function renderAwards(awardsOrPage = liveAwards, page = currentAwardPage) {
     if (typeof awardsOrPage === 'number') {
       page = awardsOrPage;
@@ -3443,11 +3620,25 @@
 
     awardsGrid.innerHTML = displayedAwards.map(aw => {
       const color = aw.badge_color || 'blue';
-      const hasImage = Boolean(aw.image_url);
+      const isId = isIndonesian();
+      const pages = getAwardPages(aw, isId);
+      const hasImage = pages.length > 0;
+      const initialPage = pages[0] || null;
+      const hasMultiplePages = pages.length > 1;
 
       return `
         <article class="award-card accent-${escapeHtml(color)} reveal in-view">
-          <div class="award-insignia-banner ${hasImage ? 'has-cert-img' : ''}" ${hasImage ? `onclick="window.openLightbox('${escapeHtml(aw.image_url)}', '${escapeHtml(aw.title)}')" style="cursor:zoom-in;" title="Click to view full certificate proof"` : ''}>
+          <div class="award-insignia-banner ${hasImage ? 'has-cert-img' : ''}" id="award-prev-${escapeHtml(aw.id)}"
+            ${hasImage ? `
+              data-pages="${escapeHtml(JSON.stringify(pages))}"
+              data-page-index="0"
+              data-award-title="${escapeHtml(aw.title)}"
+              data-active-src="${escapeHtml(initialPage.url)}"
+              data-active-title="${escapeHtml(aw.title)}${hasMultiplePages ? ' (' + escapeHtml(initialPage.label) + ')' : ''}"
+              onclick="window.openLightbox(this.getAttribute('data-active-src') || '${escapeHtml(initialPage.url)}', this.getAttribute('data-active-title') || '${escapeHtml(aw.title)}', this)"
+              style="cursor:zoom-in;"
+              title="${isId ? 'Klik untuk memperbesar bukti sertifikat' : 'Click to view full certificate proof'}"
+            ` : ''}>
             ${!hasImage ? `
               <span class="award-badge-pill ${escapeHtml(color)}" style="display:inline-flex; align-items:center; gap:6px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7"/><path d="M14 14.66V17c0 .55.45 1 1 1h2"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
@@ -3455,7 +3646,19 @@
               </span>
             ` : ''}
             ${hasImage ? `
-              <img src="${escapeHtml(aw.image_url)}" alt="${escapeHtml(aw.title)}" class="award-cert-img" loading="lazy" / decoding="async">
+              <img src="${escapeHtml(initialPage.url)}" alt="Penghargaan Muhammad Haerul — ${escapeHtml(aw.title)}" title="Muhammad Haerul — ${escapeHtml(aw.title)}" class="award-cert-img" loading="lazy" decoding="async">
+              ${hasMultiplePages ? `
+                <button type="button" class="card-media-nav-btn prev" aria-label="Previous Page" onclick="event.stopPropagation(); window.stepAwardCard('${escapeHtml(aw.id)}', -1)" disabled>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button type="button" class="card-media-nav-btn next" aria-label="Next Page" onclick="event.stopPropagation(); window.stepAwardCard('${escapeHtml(aw.id)}', 1)">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+                <div class="card-page-badge" aria-label="Page 1 of ${pages.length}">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <span class="card-page-text">1 / ${pages.length}</span>
+                </div>
+              ` : ''}
               <div class="award-cert-overlay">
                 <span class="award-cert-zoom-btn">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -4184,57 +4387,279 @@
     }
   };
 
-  window.openLightbox = function (src, alt) {
+  // Multi-page Item & Gallery Lightbox Engine
+  let currentLightboxMode = 'single'; // 'item-pages' | 'gallery' | 'single'
+  let currentLightboxPages = [];
+  let currentLightboxPageIndex = 0;
+  let currentLightboxItemTitle = '';
+  let currentLightboxHostId = null;
+
+  function renderLightboxCurrentPage() {
+    const overlay = document.getElementById('lightboxOverlay');
+    const img = document.getElementById('lightboxImg');
+    const prevBtn = document.getElementById('lightboxPrevBtn');
+    const nextBtn = document.getElementById('lightboxNextBtn');
+    const pageBadge = document.getElementById('lightboxPageBadge');
+    const pageText = document.getElementById('lightboxPageText');
+    const pageLabel = document.getElementById('lightboxPageLabel');
+    const caption = document.getElementById('lightboxCaption');
+    if (!overlay || !img) return;
+
+    if (currentLightboxMode === 'item-pages' && currentLightboxPages.length > 1) {
+      overlay.classList.remove('lightbox-no-nav');
+      const page = currentLightboxPages[currentLightboxPageIndex];
+      if (!page) return;
+
+      img.src = page.url;
+      const displayTitle = currentLightboxItemTitle || 'Media';
+      const displayLabel = page.label || (page.type === 'curriculum' ? 'Curriculum' : 'Certificate');
+      img.alt = `${displayTitle} — ${displayLabel}`;
+
+      if (prevBtn) {
+        prevBtn.style.display = 'flex';
+        prevBtn.disabled = (currentLightboxPageIndex === 0);
+      }
+      if (nextBtn) {
+        nextBtn.style.display = 'flex';
+        nextBtn.disabled = (currentLightboxPageIndex === currentLightboxPages.length - 1);
+      }
+      if (pageBadge) {
+        pageBadge.style.display = 'inline-flex';
+        if (pageText) pageText.textContent = `${currentLightboxPageIndex + 1} / ${currentLightboxPages.length}`;
+        if (pageLabel) pageLabel.textContent = displayLabel;
+      }
+      if (caption) {
+        caption.style.display = 'block';
+        caption.textContent = `${displayTitle} · ${displayLabel}`;
+      }
+    } else if (currentLightboxMode === 'gallery' && lightboxImages.length > 1) {
+      overlay.classList.remove('lightbox-no-nav');
+      const item = lightboxImages[currentLightboxIdx];
+      if (!item) return;
+
+      img.src = item.src;
+      img.alt = item.alt || 'Gallery Image';
+
+      if (prevBtn) {
+        prevBtn.style.display = 'flex';
+        prevBtn.disabled = false;
+      }
+      if (nextBtn) {
+        nextBtn.style.display = 'flex';
+        nextBtn.disabled = false;
+      }
+      if (pageBadge) {
+        pageBadge.style.display = 'inline-flex';
+        if (pageText) pageText.textContent = `${currentLightboxIdx + 1} / ${lightboxImages.length}`;
+        if (pageLabel) pageLabel.textContent = 'Gallery';
+      }
+      if (caption) {
+        caption.style.display = item.alt ? 'block' : 'none';
+        caption.textContent = item.alt || '';
+      }
+    } else {
+      // Standalone single image
+      overlay.classList.add('lightbox-no-nav');
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (pageBadge) pageBadge.style.display = 'none';
+      if (caption) {
+        caption.style.display = currentLightboxItemTitle ? 'block' : 'none';
+        caption.textContent = currentLightboxItemTitle || '';
+      }
+    }
+  }
+
+  window.openLightbox = function (src, alt, triggerElOrPages, initialIdx) {
     if (!src) return;
     const overlay = document.getElementById('lightboxOverlay');
     const img = document.getElementById('lightboxImg');
     if (!overlay || !img) return;
 
-    // Detect standalone certificate/award/speaker/talk images - disable next/previous buttons completely
-    const isStandalone = /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|khouw|kalbe|saveclip|whatsapp/i.test(src) ||
-      /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|speaking|attendee/i.test(alt || '');
+    let pages = null;
+    let currentIdx = 0;
+    let itemTitle = alt || '';
+    let hostEl = null;
 
-    if (isStandalone) {
-      overlay.classList.add('lightbox-no-nav');
-    } else {
-      overlay.classList.remove('lightbox-no-nav');
-      updateLightboxList();
-      currentLightboxIdx = lightboxImages.findIndex(item => item.src === src);
-      if (currentLightboxIdx === -1) {
-        lightboxImages.push({ src, alt: alt || 'Image' });
-        currentLightboxIdx = lightboxImages.length - 1;
+    if (Array.isArray(triggerElOrPages) && triggerElOrPages.length > 0) {
+      pages = triggerElOrPages;
+      currentIdx = typeof initialIdx === 'number' ? initialIdx : 0;
+    } else if (triggerElOrPages && triggerElOrPages.nodeType) {
+      hostEl = triggerElOrPages;
+    } else if (typeof window !== 'undefined' && window.event && window.event.target) {
+      const t = window.event.target;
+      hostEl = (t.getAttribute && t.getAttribute('data-pages')) ? t : (t.closest ? t.closest('[data-pages]') : null);
+    }
+
+    if (hostEl && !pages) {
+      const raw = hostEl.getAttribute('data-pages');
+      if (raw) {
+        try { pages = JSON.parse(raw); } catch (_) {}
+      }
+      currentIdx = parseInt(hostEl.getAttribute('data-page-index') || '0', 10);
+      itemTitle = hostEl.getAttribute('data-cert-title') || hostEl.getAttribute('data-award-title') || hostEl.getAttribute('data-talk-event') || alt || '';
+    }
+
+    // Fallback resolver for multi-page certificates, awards, and talks if data-pages was not on host
+    if (!pages || !pages.length) {
+      const sLower = (src || '').toLowerCase();
+      const aLower = (alt || '').toLowerCase();
+      if (sLower.includes('talent hub') || sLower.includes('award_img_4') || sLower.includes('cert-ai-talent-hub') || aLower.includes('talent hub')) {
+        pages = [
+          { label: 'Finalist Certificate', url: '/assets/images/awards/award_img_4.jpg', type: 'certificate' },
+          { label: 'Recognition Certificate', url: '/assets/certificates/cert-ai-talent-hub-pertamina-page2.jpg', type: 'certificate' }
+        ];
+        itemTitle = 'Top 20 AI Talent Hub Indonesia 2025';
+      } else if (sLower.includes('international-cultural') || sLower.includes('award_img_new_9') || aLower.includes('international cultural')) {
+        pages = [
+          { label: 'Participant Certificate', url: '/assets/images/awards/award_img_new_9.jpg', type: 'certificate' },
+          { label: 'Award Certificate', url: '/assets/certificates/cert-international-cultural-program-page2.jpg', type: 'certificate' }
+        ];
+        itemTitle = 'International Cultural Program Awardee 2023';
+      } else if (sLower.includes('outstanding-student') || sLower.includes('award_img_new_1') || aLower.includes('outstanding student')) {
+        pages = [
+          { label: 'Achievement Certificate', url: '/assets/images/awards/award_img_new_1.jpg', type: 'certificate' },
+          { label: 'Recognition Certificate', url: '/assets/certificates/cert-outstanding-student-unhas-page2.jpg', type: 'certificate' }
+        ];
+        itemTitle = 'The Most Outstanding Student of Information Systems Department 2022';
+      } else if (sLower.includes('build-with-ai') || sLower.includes('build with ai') || aLower.includes('build with ai')) {
+        pages = [
+          { label: 'Poster', url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp', type: 'poster' },
+          { label: 'Certificate', url: '/assets/certificates/cert-gdg-build-with-ai.jpg', type: 'certificate' },
+          { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-build-with-ai.webp', type: 'documentation' }
+        ];
+        itemTitle = 'Build with AI: AI-Driven Development';
+      } else if (sLower.includes('web-ai') || sLower.includes('web engineering') || aLower.includes('web engineering') || aLower.includes('sulawesi barat')) {
+        pages = [
+          { label: 'Poster', url: '/uploads/talks/whatsapp_image_2026_08_21_at_15_55_16_1787298986322.webp', type: 'poster' },
+          { label: 'Certificate', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' },
+          { label: 'Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' }
+        ];
+        itemTitle = 'AI Web Engineering & Security Hands-on Workshop';
+      } else if (sLower.includes('cybersecurity') || sLower.includes('bssn') || aLower.includes('cybersecurity')) {
+        pages = [
+          { label: 'Poster', url: '/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp', type: 'poster' },
+          { label: 'Certificate', url: '/assets/certificates/cert-bssn-cybersecurity.jpg', type: 'certificate' },
+          { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp', type: 'documentation' }
+        ];
+        itemTitle = 'National Cybersecurity & Information Security Awareness Webinar';
+      } else if (sLower.includes('khouw') || sLower.includes('kalbe') || aLower.includes('mindful ai')) {
+        pages = [
+          { label: 'Poster', url: '/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp', type: 'poster' },
+          { label: 'Certificate', url: '/assets/images/talks_cert_yayasan_khouw_kalbe_mindful_ai.jpg', type: 'certificate' },
+          { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-mindful-ai.webp', type: 'documentation' }
+        ];
+        itemTitle = 'Mindful AI: AI Personalization for Students';
+      } else if (sLower.includes('gsa') || sLower.includes('forge') || aLower.includes('gsa ai forge') || aLower.includes('personal branding')) {
+        pages = [
+          { label: 'Poster', url: '/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp', type: 'poster' },
+          { label: 'Documentation 1', url: '/assets/images/gsa-ai-forge-doc-1.jpg', type: 'documentation' },
+          { label: 'Documentation 2', url: '/assets/images/gsa-ai-forge-doc-2.jpg', type: 'documentation' },
+          { label: 'Documentation 3', url: '/assets/images/gsa-ai-forge-doc-3.jpg', type: 'documentation' }
+        ];
+        itemTitle = 'GSA AI Forge: AI for Personal Branding & Digital Portfolio';
+      } else if (sLower.includes('digdaya') || aLower.includes('digdaya')) {
+        pages = [
+          { label: 'Certificate', url: '/assets/certificates/cert-digdaya-practitioner-bi-page1.jpg?v=2', type: 'certificate' },
+          { label: 'Curriculum', url: '/assets/certificates/cert-digdaya-practitioner-bi-page2.jpg?v=2', type: 'curriculum' }
+        ];
+        itemTitle = 'Digdaya x Hackathon Practitioner Training';
+      } else if (sLower.includes('englishscore') || aLower.includes('englishscore')) {
+        pages = [
+          { label: 'Certificate & Score', url: '/assets/certificates/cert-englishscore-british-council-page1.jpg?v=2', type: 'certificate' },
+          { label: 'CEFR Breakdown', url: '/assets/certificates/cert-englishscore-british-council-page2.jpg?v=2', type: 'curriculum' }
+        ];
+        itemTitle = 'EnglishScore Professional Certification';
+      } else if (sLower.includes('large-language-model') || sLower.includes('dex-page')) {
+        pages = [
+          { label: 'Certificate 1', url: '/assets/certificates/cert-large-language-model-nasional-dex-page1.jpg?v=2', type: 'certificate' },
+          { label: 'Certificate 2', url: '/assets/certificates/cert-large-language-model-nasional-dex-page2.jpg?v=2', type: 'certificate' }
+        ];
+        itemTitle = 'Large Language Model Practitioner';
       }
     }
 
-    img.src = src;
-    img.alt = alt || 'Image';
+    if (pages && Array.isArray(pages) && pages.length > 1) {
+      const matchIdx = pages.findIndex(p => p.url === src);
+      if (matchIdx !== -1) currentIdx = matchIdx;
+
+      currentLightboxMode = 'item-pages';
+      currentLightboxPages = pages;
+      currentLightboxPageIndex = currentIdx;
+      currentLightboxItemTitle = itemTitle;
+      currentLightboxHostId = hostEl ? hostEl.id : null;
+      renderLightboxCurrentPage();
+    } else {
+      const isStandalone = /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|khouw|kalbe|saveclip|whatsapp/i.test(src) ||
+        /cert|sertifikat|credential|award|proof|finalis|talk|speaker|webinar|workshop|keynote|poster|plakat|piagam|speaking|attendee/i.test(alt || '');
+
+      if (isStandalone) {
+        currentLightboxMode = 'single';
+        currentLightboxPages = [];
+        currentLightboxPageIndex = 0;
+        currentLightboxItemTitle = itemTitle;
+        currentLightboxHostId = null;
+        img.src = src;
+        img.alt = alt || 'Image';
+        renderLightboxCurrentPage();
+      } else {
+        currentLightboxMode = 'gallery';
+        currentLightboxPages = [];
+        currentLightboxHostId = null;
+        updateLightboxList();
+        currentLightboxIdx = lightboxImages.findIndex(item => item.src === src);
+        if (currentLightboxIdx === -1) {
+          lightboxImages.push({ src, alt: alt || 'Image' });
+          currentLightboxIdx = lightboxImages.length - 1;
+        }
+        renderLightboxCurrentPage();
+      }
+    }
+
     overlay.classList.add('active');
+    overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
 
   window.prevLightboxImage = function () {
     const overlay = document.getElementById('lightboxOverlay');
-    if (overlay && overlay.classList.contains('lightbox-no-nav')) return;
-    if (!lightboxImages.length) return;
-    currentLightboxIdx = (currentLightboxIdx - 1 + lightboxImages.length) % lightboxImages.length;
-    const item = lightboxImages[currentLightboxIdx];
-    const img = document.getElementById('lightboxImg');
-    if (img && item) {
-      img.src = item.src;
-      img.alt = item.alt;
+    if (!overlay || overlay.classList.contains('lightbox-no-nav')) return;
+
+    if (currentLightboxMode === 'item-pages') {
+      if (currentLightboxPageIndex > 0) {
+        currentLightboxPageIndex--;
+        renderLightboxCurrentPage();
+        if (currentLightboxHostId && typeof syncCardToPage === 'function') {
+          syncCardToPage(currentLightboxHostId, currentLightboxPageIndex);
+        }
+      }
+      return;
+    }
+
+    if (currentLightboxMode === 'gallery' && lightboxImages.length) {
+      currentLightboxIdx = (currentLightboxIdx - 1 + lightboxImages.length) % lightboxImages.length;
+      renderLightboxCurrentPage();
     }
   };
 
   window.nextLightboxImage = function () {
     const overlay = document.getElementById('lightboxOverlay');
-    if (overlay && overlay.classList.contains('lightbox-no-nav')) return;
-    if (!lightboxImages.length) return;
-    currentLightboxIdx = (currentLightboxIdx + 1) % lightboxImages.length;
-    const item = lightboxImages[currentLightboxIdx];
-    const img = document.getElementById('lightboxImg');
-    if (img && item) {
-      img.src = item.src;
-      img.alt = item.alt;
+    if (!overlay || overlay.classList.contains('lightbox-no-nav')) return;
+
+    if (currentLightboxMode === 'item-pages') {
+      if (currentLightboxPageIndex < currentLightboxPages.length - 1) {
+        currentLightboxPageIndex++;
+        renderLightboxCurrentPage();
+        if (currentLightboxHostId && typeof syncCardToPage === 'function') {
+          syncCardToPage(currentLightboxHostId, currentLightboxPageIndex);
+        }
+      }
+      return;
+    }
+
+    if (currentLightboxMode === 'gallery' && lightboxImages.length) {
+      currentLightboxIdx = (currentLightboxIdx + 1) % lightboxImages.length;
+      renderLightboxCurrentPage();
     }
   };
 
@@ -4242,8 +4667,12 @@
     const overlay = document.getElementById('lightboxOverlay');
     if (overlay) {
       overlay.classList.remove('active');
+      overlay.classList.remove('open');
       overlay.classList.remove('lightbox-no-nav');
     }
+    currentLightboxMode = 'single';
+    currentLightboxPages = [];
+    currentLightboxHostId = null;
     document.body.style.overflow = '';
   };
 
@@ -4274,6 +4703,7 @@
     const titleText = escapeHtml(item.title);
     const captionText = item.description ? escapeHtml(item.description) : '';
     const imgUrl = escapeHtml(item.image_url);
+    const categoryText = item.category ? escapeHtml(item.category) : '';
 
     return `
       <article class="gallery-card" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
@@ -4290,10 +4720,200 @@
             <h3 class="gallery-card-title">${titleText}</h3>
             ${dateText ? `<span class="gallery-card-date">${dateText}</span>` : ''}
           </div>
+          ${categoryText ? `<span class="gallery-card-category-badge">${categoryText}</span>` : ''}
           ${captionText ? `<p class="gallery-card-caption">${captionText}</p>` : ''}
         </div>
       </article>
     `;
+  }
+
+  function getTalkFlyers() {
+    const list = Array.isArray(liveTalks) ? liveTalks : [];
+    const flyers = [];
+    list.forEach(t => {
+      const eventName = (t.event || '').toLowerCase();
+      const placeName = (t.place || '').toLowerCase();
+      const orgName = (t.organizer || '').toLowerCase();
+
+      // Kecuali yang di unsulbar, karena ga ada posternya
+      if (eventName.includes('unsulbar') || placeName.includes('unsulbar') || placeName.includes('majene') || orgName.includes('unsulbar')) {
+        return;
+      }
+
+      // Ambil gambar pertama (poster_url atau gallery[0])
+      const flyerImg = t.poster_url || (Array.isArray(t.gallery) && t.gallery[0]);
+      if (!flyerImg) return;
+      if (/cert|sertifikat|plakat|piagam/i.test(flyerImg)) return;
+
+      let dateText = '';
+      if (t.date) {
+        const d = new Date(t.date);
+        if (!isNaN(d.getTime())) {
+          const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          dateText = months[d.getMonth()] + ' ' + d.getFullYear();
+        } else {
+          dateText = String(t.date);
+        }
+      }
+
+      flyers.push({
+        id: t.id,
+        title: t.event,
+        description: t.organizer ? `Event Flyer · ${t.organizer}` : 'Official Event Flyer',
+        image_url: flyerImg,
+        date: dateText,
+        category: 'Posters & Flyers',
+        badge: 'Event Flyer'
+      });
+    });
+
+    // Also include high-res Mindful AI flyer if in liveGallery
+    if (Array.isArray(liveGallery)) {
+      const hd = liveGallery.find(i => (i.image_url || '').includes('mindful-ai-poster-hd'));
+      if (hd && !flyers.some(f => f.image_url === hd.image_url)) {
+        flyers.push(hd);
+      }
+    }
+
+    return flyers;
+  }
+
+  function getAwardCertificates() {
+    const list = Array.isArray(liveAwards) ? liveAwards : [];
+    const certs = [];
+    list.forEach(aw => {
+      let img = null;
+      // Ambil certificate dari honor and awards section (mostly dari gambar pertama)
+      if (typeof getAwardPages === 'function') {
+        const pages = getAwardPages(aw);
+        if (pages && pages.length > 0 && pages[0].url) {
+          img = pages[0].url;
+        }
+      }
+      if (!img && aw.image_url) {
+        img = aw.image_url;
+      }
+      if (!img) return;
+
+      certs.push({
+        id: aw.id,
+        title: aw.title,
+        description: aw.issuer ? `Honors & Award · ${aw.issuer}` : (aw.description || 'Verified Honor & Award Certificate'),
+        image_url: img,
+        date: aw.metric_tag || '',
+        category: 'Certificates & Awards',
+        badge: aw.badge_text || 'Honor & Award'
+      });
+    });
+
+    // Fallback if liveAwards is not yet loaded but liveGallery has items
+    if (certs.length === 0 && Array.isArray(liveGallery)) {
+      return liveGallery.filter(i => {
+        const c = (i.category || '').toLowerCase();
+        const img = (i.image_url || '').toLowerCase();
+        return c.includes('cert') || c.includes('award') || img.includes('award') || img.includes('cert');
+      });
+    }
+
+    return certs;
+  }
+
+  function getActivityDocumentationPhotos() {
+    const list = Array.isArray(liveTalks) ? liveTalks : [];
+    const photos = [];
+    const seenUrls = new Set();
+
+    // 1. Ambil foto kegiatan nyata dari talks.gallery (foto asli, bukan flyer/poster/sertifikat)
+    list.forEach(t => {
+      if (Array.isArray(t.gallery)) {
+        t.gallery.forEach(img => {
+          if (!img || seenUrls.has(img)) return;
+          // Filter ketat: buang poster, flyer, sertifikat, dan piagam
+          if (/cert|sertifikat|plakat|piagam|flyer|poster|saveclip|dialog-interaktif/i.test(img)) return;
+
+          seenUrls.add(img);
+          let title = t.event;
+          let desc = 'Authentic Activity Documentation · ' + (t.place || t.organizer || 'On-site');
+          let dateStr = '';
+          if (t.date) {
+            const d = new Date(t.date);
+            if (!isNaN(d.getTime())) {
+              const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+              dateStr = months[d.getMonth()] + ' ' + d.getFullYear();
+            } else {
+              dateStr = String(t.date);
+            }
+          }
+
+          if (img.includes('gsa-ai-forge-doc-1')) {
+            title = 'GSA AI Forge: Hands-on Prompting & Portfolio Architecture';
+            desc = 'Live stage moment at Makassar Government Center presenting AI architectures.';
+          } else if (img.includes('gsa-ai-forge-doc-2')) {
+            title = 'GSA AI Forge: Direct Participant Mentorship & Code Review';
+            desc = 'Interactive 1-on-1 mentorship session guiding attendees on AI integrations.';
+          } else if (img.includes('gsa-ai-forge-doc-3')) {
+            title = 'GSA AI Forge: Full Cohort Celebration with 150+ Attendees';
+            desc = 'Cohort celebration photo with all 150+ attendees and community organizers.';
+          } else if (img.includes('workshop-ai-web-engineering')) {
+            title = 'AI Web Engineering Hands-on Workshop with 50+ Participants';
+            desc = 'Real photo documenting hands-on training with faculty and students at Unsulbar.';
+          } else if (img.includes('speaker-build-with-ai')) {
+            title = 'Build with AI: Stage Keynote Delivery at UC Makassar';
+            desc = 'On-stage keynote presentation on generative AI and agentic workflows.';
+          } else if (img.includes('speaker-bssn-cybersecurity')) {
+            title = 'National Cybersecurity Forum: Live Speaker Presentation';
+            desc = 'Live speaker moment sharing defensive generative AI frameworks.';
+          } else if (img.includes('speaker-mindful-ai')) {
+            title = 'Mindful AI: Live Scholar Interactive Masterclass';
+            desc = 'Live session moment presenting intelligent study workflows for students.';
+          }
+
+          photos.push({
+            id: t.id + '-' + photos.length,
+            title,
+            description: desc,
+            image_url: img,
+            date: dateStr,
+            category: 'Activity Documentation',
+            badge: 'Real Activity Photo'
+          });
+        });
+      }
+    });
+
+    // 2. Tambahkan foto stage dokumentasi asli GSA AI Forge
+    const gsaSpeakerImg = '/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp';
+    if (!seenUrls.has(gsaSpeakerImg)) {
+      seenUrls.add(gsaSpeakerImg);
+      photos.push({
+        id: 'gsa-speaker-stage',
+        title: 'GSA AI Forge: Keynote Stage Delivery',
+        description: 'Stage documentation leading AI workflows at Makassar Government Center.',
+        image_url: gsaSpeakerImg,
+        date: 'July 2026',
+        category: 'Activity Documentation',
+        badge: 'Real Activity Photo'
+      });
+    }
+
+    // 3. Fallback jika liveGallery memiliki foto dokumentasi nyata
+    if (Array.isArray(liveGallery)) {
+      liveGallery.forEach(i => {
+        const img = (i.image_url || '').toLowerCase();
+        const cat = (i.category || '').toLowerCase();
+        if (seenUrls.has(i.image_url)) return;
+        // Eksklusi ketat: tidak ada sertifikat, tidak ada flyer/poster
+        if (/cert|award|sertifikat|plakat|piagam|flyer|poster|saveclip/i.test(img)) return;
+        if (cat.includes('cert') || cat.includes('award') || cat.includes('poster') || cat.includes('flyer')) return;
+
+        if (cat.includes('doc') || cat.includes('activ') || cat.includes('photo') || img.includes('doc') || img.includes('workshop')) {
+          seenUrls.add(i.image_url);
+          photos.push(i);
+        }
+      });
+    }
+
+    return photos;
   }
 
   function renderGallery(filter = 'All') {
@@ -4303,75 +4923,88 @@
     if (!track1 || !track2) return;
 
     currentGalleryFilter = filter;
-    liveGallery = sortItemsByDateDesc(liveGallery || [], 'date');
-    const items = (!filter || filter === 'All')
-      ? liveGallery
-      : liveGallery.filter(item => (item.category || '').toLowerCase() === filter.toLowerCase());
 
-    if (!items || items.length === 0) {
-      track1.innerHTML = `
-        <div style="padding: 40px 24px; text-align: center; width: 100%;">
-          <p style="color: var(--text-secondary); font-size: 0.9rem;">No moments found in this category.</p>
-        </div>
-      `;
-      track2.innerHTML = '';
-      if (track3) track3.innerHTML = '';
-      return;
+    const wrap1 = document.getElementById('galleryRowWrap1');
+    const wrap2 = document.getElementById('galleryRowWrap2');
+    const wrap3 = document.getElementById('galleryRowWrap3');
+
+    const f = (filter || 'All').replace(/&amp;/g, '&').toLowerCase().trim();
+
+    // Show or hide row wrappers according to active filter
+    if (wrap1 && wrap2 && wrap3) {
+      if (f === 'all') {
+        wrap1.style.display = '';
+        wrap2.style.display = '';
+        wrap3.style.display = '';
+      } else if (f.includes('poster') || f.includes('flyer')) {
+        wrap1.style.display = '';
+        wrap2.style.display = 'none';
+        wrap3.style.display = 'none';
+      } else if (f.includes('cert') || f.includes('award') || f.includes('honor')) {
+        wrap1.style.display = 'none';
+        wrap2.style.display = '';
+        wrap3.style.display = 'none';
+      } else if (f.includes('doc') || f.includes('activ') || f.includes('photo')) {
+        wrap1.style.display = 'none';
+        wrap2.style.display = 'none';
+        wrap3.style.display = '';
+      }
     }
 
-    // Build seamless infinite loop sequence for 3 dynamic rows
-    // Track 1: Original Order
-    let seq1 = [...items];
-    while (seq1.length < 8) {
-      seq1 = seq1.concat(items);
-    }
-    const loopItems1 = seq1.concat(seq1);
+    // Row 1: Khusus untuk flyer aja (ambil dari talks section, gambar pertama, kecuali Unsulbar)
+    const posters = getTalkFlyers();
 
-    // Track 2: Staggered offset by 1/2
-    let seq2 = [...items];
-    if (seq2.length > 2) {
-      const half = Math.floor(seq2.length / 2);
-      seq2 = seq2.slice(half).concat(seq2.slice(0, half));
-    }
-    while (seq2.length < 8) {
-      seq2 = seq2.concat(items);
-    }
-    const loopItems2 = seq2.concat(seq2);
+    // Row 2: Khusus certificate dari honors & awards section (mostly dari gambar pertama)
+    const certsAndAwards = getAwardCertificates();
 
-    // Track 3: Staggered offset by 1/3 (Rich variety)
-    let seq3 = [...items];
-    if (seq3.length > 2) {
-      const third = Math.floor(seq3.length / 3);
-      seq3 = seq3.slice(third).concat(seq3.slice(0, third)).reverse();
-    }
-    while (seq3.length < 8) {
-      seq3 = seq3.concat(items);
-    }
-    const loopItems3 = seq3.concat(seq3);
+    // Row 3: Khusus foto kegiatan nyata (foto-foto asli, bukan hasil desain poster/flyer atau sertifikat)
+    const activityDocs = getActivityDocumentationPhotos();
 
-    track1.innerHTML = loopItems1.map(item => buildGalleryCardHtml(item)).join('');
-    track2.innerHTML = loopItems2.map(item => buildGalleryCardHtml(item)).join('');
-    if (track3) {
-      track3.innerHTML = loopItems3.map(item => buildGalleryCardHtml(item)).join('');
+    function createLoopSequence(itemList, minCount = 8) {
+      if (!itemList || itemList.length === 0) return [];
+      let seq = [...itemList];
+      while (seq.length < minCount) {
+        seq = seq.concat(itemList);
+      }
+      return seq.concat(seq);
+    }
+
+    const loop1 = createLoopSequence(posters);
+    const loop2 = createLoopSequence(certsAndAwards);
+    const loop3 = createLoopSequence(activityDocs);
+
+    if (loop1.length) track1.innerHTML = loop1.map(item => buildGalleryCardHtml(item)).join('');
+    if (loop2.length) track2.innerHTML = loop2.map(item => buildGalleryCardHtml(item)).join('');
+    if (track3 && loop3.length) {
+      track3.innerHTML = loop3.map(item => buildGalleryCardHtml(item)).join('');
     }
   }
 
   function updateGalleryFilterCounts() {
-    if (!liveGallery) return;
     const allCountEl = document.querySelector('.gallery-tab[data-category="All"] .gallery-tab-count');
-    if (allCountEl) allCountEl.textContent = liveGallery.length;
+    const flyers = getTalkFlyers();
+    const awardsCerts = getAwardCertificates();
+    const docs = getActivityDocumentationPhotos();
+
+    const totalCount = flyers.length + awardsCerts.length + docs.length;
+    if (allCountEl) allCountEl.textContent = totalCount;
 
     const tabs = document.querySelectorAll('.gallery-tab[data-category]:not([data-category="All"])');
     tabs.forEach(tab => {
-      const cat = tab.getAttribute('data-category');
+      const cat = (tab.getAttribute('data-category') || '').replace(/&amp;/g, '&').toLowerCase();
       const countEl = tab.querySelector('.gallery-tab-count');
-      const count = liveGallery.filter(i => (i.category || '').toLowerCase() === cat.toLowerCase()).length;
-      if (countEl) countEl.textContent = count;
-      if (count === 0) {
-        tab.style.display = 'none';
+      let count = 0;
+      if (cat.includes('poster') || cat.includes('flyer')) {
+        count = flyers.length;
+      } else if (cat.includes('cert') || cat.includes('award') || cat.includes('honor')) {
+        count = awardsCerts.length;
+      } else if (cat.includes('doc') || cat.includes('activ') || cat.includes('photo')) {
+        count = docs.length;
       } else {
-        tab.style.display = 'inline-flex';
+        count = (liveGallery || []).filter(i => (i.category || '').toLowerCase() === cat).length;
       }
+      if (countEl) countEl.textContent = count;
+      tab.style.display = count === 0 ? 'none' : 'inline-flex';
     });
   }
 
@@ -5105,6 +5738,7 @@
         if (bootstrapData.talks) {
           liveTalks = bootstrapData.talks;
           renderTalks();
+          if (typeof renderGallery === 'function') renderGallery(currentGalleryFilter || 'All');
         }
         if (bootstrapData.feedbacks) {
           liveFeedbacks = bootstrapData.feedbacks;
@@ -5131,6 +5765,8 @@
         if (bootstrapData.awards && bootstrapData.awards.length) {
           liveAwards = bootstrapData.awards;
           renderAwards(liveAwards);
+          if (typeof renderGallery === 'function') renderGallery(currentGalleryFilter || 'All');
+          if (typeof updateGalleryFilterCounts === 'function') updateGalleryFilterCounts();
         }
         if (bootstrapData.gallery && bootstrapData.gallery.length) {
           liveGallery = bootstrapData.gallery;
@@ -5472,4 +6108,82 @@ window.stepTalkCard = function (talkId, delta) {
       ? (isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof')
       : (isId ? 'Lihat Gambar Lengkap' : 'View Full Image');
   }
+};
+
+
+// Helper to keep card preview in sync when navigating inside lightbox
+function syncCardToPage(hostId, pageIndex) {
+  if (!hostId) return;
+  try {
+    if (hostId.startsWith('cert-prev-')) {
+      const id = hostId.replace('cert-prev-', '');
+      const container = document.getElementById(hostId);
+      const current = parseInt(container?.getAttribute('data-page-index') || '0', 10);
+      if (container && current !== pageIndex && typeof window.stepCertCard === 'function') {
+        window.stepCertCard(id, pageIndex - current);
+      }
+    } else if (hostId.startsWith('award-prev-')) {
+      const id = hostId.replace('award-prev-', '');
+      const container = document.getElementById(hostId);
+      const current = parseInt(container?.getAttribute('data-page-index') || '0', 10);
+      if (container && current !== pageIndex && typeof window.stepAwardCard === 'function') {
+        window.stepAwardCard(id, pageIndex - current);
+      }
+    } else if (hostId.startsWith('talk-prev-')) {
+      const id = hostId.replace('talk-prev-', '');
+      const container = document.getElementById(hostId);
+      const current = parseInt(container?.getAttribute('data-page-index') || '0', 10);
+      if (container && current !== pageIndex && typeof window.stepTalkCard === 'function') {
+        window.stepTalkCard(id, pageIndex - current);
+      }
+    }
+  } catch (_) {}
+}
+
+window.stepAwardCard = function (awardId, delta) {
+  const container = document.getElementById(`award-prev-${awardId}`);
+  if (!container) return;
+  const rawPages = container.getAttribute('data-pages');
+  if (!rawPages) return;
+  let pages = [];
+  try { pages = JSON.parse(rawPages); } catch(e) { return; }
+  if (!Array.isArray(pages) || pages.length <= 1) return;
+
+  let currentIndex = parseInt(container.getAttribute('data-page-index') || '0', 10);
+  let newIndex = currentIndex + delta;
+  if (newIndex < 0) newIndex = 0;
+  if (newIndex >= pages.length) newIndex = pages.length - 1;
+  if (newIndex === currentIndex) return;
+
+  container.setAttribute('data-page-index', newIndex);
+  const targetPage = pages[newIndex];
+  const awardTitle = container.getAttribute('data-award-title') || '';
+  const isId = typeof isIndonesian === 'function' ? isIndonesian() : false;
+  const pageTitle = `${awardTitle} (${targetPage.label || (isId ? 'Halaman ' + (newIndex + 1) : 'Page ' + (newIndex + 1))})`;
+
+  const img = container.querySelector('.award-cert-img');
+  if (img) {
+    img.style.opacity = '0.35';
+    img.style.filter = 'blur(3px)';
+    img.style.transition = 'opacity 0.2s ease, filter 0.2s ease';
+    img.src = targetPage.url;
+    img.alt = pageTitle;
+    img.title = pageTitle;
+    img.onload = () => {
+      img.style.opacity = '1';
+      img.style.filter = 'none';
+    };
+  }
+  container.setAttribute('data-active-src', targetPage.url);
+  container.setAttribute('data-active-title', pageTitle);
+
+  const badgeText = container.querySelector('.card-page-text');
+  if (badgeText) {
+    badgeText.textContent = `${newIndex + 1} / ${pages.length}`;
+  }
+
+  const prevBtn = container.querySelector('.card-media-nav-btn.prev');
+  const nextBtn = container.querySelector('.card-media-nav-btn.next');
+  if (prevBtn) prevBtn.disabled = (newIndex === 0);
+  if (nextBtn) nextBtn.disabled = (newIndex === pages.length - 1);
 };

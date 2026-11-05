@@ -1,3 +1,14 @@
+# ================================================================
+# Robots.txt for Muhammad Haerul Portfolio (https://muhammadhaerul.tech/)
+# Optimized for Google, Bing, Google Images, Google Video, and Generative AI (GEO)
+# ================================================================
+
+# 1. Google Core Web & Media Crawlers
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+Allow: /uploads/
+
 User-agent: Googlebot-Image
 Allow: /
 Allow: /assets/
@@ -8,14 +19,80 @@ Allow: /*.jpg$
 Allow: /*.jpeg$
 Allow: /*.svg$
 
+User-agent: Googlebot-Video
+Allow: /
+Allow: /assets/
+Allow: /uploads/
+
+# 2. Bing & Microsoft Indexing
+User-agent: Bingbot
+Allow: /
+Allow: /assets/
+Allow: /uploads/
+
+User-agent: msnbot-media
+Allow: /
+
+# 3. Generative Engine Optimization (GEO) & AI Search Engines
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /assets/
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# 4. General Web Crawlers
 User-agent: *
 Allow: /
 Allow: /feedback
+Allow: /form-feedbacks
 Allow: /form/
+Allow: /browse
+Allow: /projects
+Allow: /talks
+Allow: /certifications
+Allow: /awards
+Allow: /publications
+Allow: /resume
 Allow: /assets/
 Allow: /uploads/
 Disallow: /dashboard
 Disallow: /api/auth/
 Disallow: /api/contact/
 
+# 5. Sitemaps & Machine-Readable Knowledge
 Sitemap: https://muhammadhaerul.tech/sitemap.xml
+# LLMs Specification: https://muhammadhaerul.tech/llms.txt

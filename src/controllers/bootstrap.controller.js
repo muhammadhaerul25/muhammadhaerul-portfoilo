@@ -69,7 +69,7 @@ const getPortfolioBootstrap = asyncHandler(async (req, res) => {
         prisma.project.findMany(),
         prisma.talk.findMany({ orderBy: [{ date: 'desc' }, { created_at: 'desc' }] }),
         prisma.feedbacks.findMany({
-            select: { id: true, nama_lengkap: true, email: true, rating: true, alasan: true, pesan_kesan: true, created_at: true, source: true, materi: true },
+            select: { id: true, nama_lengkap: true, email: true, rating: true, alasan: true, pesan_kesan: true, alasan_original: true, pesan_kesan_original: true, created_at: true, source: true, materi: true },
             orderBy: { created_at: 'desc' }
         }),
         prisma.experience.findMany({ orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }] }),

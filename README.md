@@ -13,9 +13,14 @@ Live Production: **[https://www.muhammadhaerul.tech](https://www.muhammadhaerul.
   - Consistent year-based color-coded timeline badges and markers across Work Experience, Certifications, Talks, Awards, and Publications.
   - Multi-page certificate and talk media viewer with interactive zoom, rotation, and curriculum page switching.
 
-- **Comprehensive Admin Dashboard (`/dashboard`)**:
-  - Hero statistics displaying attendee reach, average ratings, and real-time visitor analytics.
+- **Comprehensive Admin Dashboard & Analytics (`/dashboard`)**:
+  - Live Visitor Intelligence & Telemetry: Real-time tracking of total pageviews, unique visitors, 14-day traffic trend bar chart, top-visited pages/sections, and device/browser distribution.
   - Symmetrical metric cards for managing Projects, Talks, Forms, Feedbacks, Certifications, Awards, Publications, Articles, Gallery, and Site Settings.
+
+- **Cutting-Edge SEO & Generative Engine Optimization (GEO)**:
+  - Official `llms.txt` and `llms-full.txt` knowledge base standards for AI crawlers (Perplexity, ChatGPT Search, Google Gemini / AI Overviews, Claude).
+  - Rich Schema.org JSON-LD graph (`Person`, `WebSite`, `ProfilePage`, `ImageObject`, `VideoObject`, `FAQPage`, `BreadcrumbList`).
+  - Google Image & Google Video XML Sitemap covering all official portraits, speaking photos, and 12 project demonstration videos.
 
 - **Interactive Feedback Forms & Custom Survey Builder (`/feedback`, `/form/:slug`)**:
   - Standardized speaker session feedback forms mapped to PostgreSQL `feedbacks`.
@@ -41,17 +46,22 @@ Live Production: **[https://www.muhammadhaerul.tech](https://www.muhammadhaerul.
 │   │   └── talks/                   # Speaking posters, certificates & event photos
 │   ├── index.html                   # Main bilingual portfolio page
 │   ├── browse.html                  # Unified directory browser (/projects, /talks, /certifications, etc.)
-│   ├── dashboard.html               # Single-Page Admin Dashboard UI
+│   ├── dashboard.html               # Single-Page Admin Dashboard & Analytics UI
 │   ├── form-feedbacks.html          # Public speaking feedback submission form
+│   ├── form-recommendation.html     # Colleague & mentee recommendation form
 │   ├── form-renderer.html           # Dynamic custom form renderer
+│   ├── llms.txt                     # Standard machine-readable context for AI search (GEO)
+│   ├── llms-full.txt                # Full-depth knowledge base for LLM crawlers & RAG
+│   ├── sitemap.xml                  # Multi-namespace XML sitemap (Pages, Images, Videos)
+│   ├── robots.txt                   # Crawler directives optimized for Google, Bing & AI bots
 │   ├── styles.css                   # Unified design system & responsive styles
 │   └── script.js                    # Client-side state, i18n, rendering & modals
 ├── scripts/
-│   ├── db/                          # Database schema checks & table setup utilities
-│   ├── maintenance/                 # WebP conversion, PDF generator & index optimizer
+│   ├── db/                          # Active database inspection & setup utilities
+│   ├── maintenance/                 # Operational tools (Sitemap generator, WebP, PDF resume)
 │   ├── seed/                        # Initial data & admin seed scripts
-│   ├── verify/                      # Automated route & backend optimization checks
-│   └── _archive/                    # Historical one-off migration scripts
+│   ├── verify/                      # Automated comprehensive local audit & health checks
+│   └── _archive/                    # Historical migration patches & inspection scripts
 ├── src/
 │   ├── config/
 │   │   └── db.js                    # Prisma Pg adapter & connection pool configuration
@@ -98,9 +108,11 @@ npm run db:push
 # Start development server with live reload
 npm run dev
 
-# Verify database connectivity & routes
-npm run db:check
-npm run verify:routes
+# Run comprehensive local audit & health pre-checks (65+ tests)
+npm run audit
+
+# Generate multi-media XML sitemap (Images + Videos)
+npm run sitemap:generate
 ```
 
 ---
