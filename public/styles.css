@@ -6753,6 +6753,48 @@ img {
   background: var(--surface-2);
 }
 
+/* ============ ROW 1 (POSTERS & FLYERS) NATURAL PORTRAIT RATIO ============ */
+#galleryRowWrap1 .gallery-card,
+#galleryTrack1 .gallery-card,
+.gallery-stream-row-wrap[data-row-category="Posters & Flyers"] .gallery-card,
+.gallery-stream-row-wrap[data-row-category="Posters &amp; Flyers"] .gallery-card,
+.gallery-card.is-poster-card {
+  width: 295px;
+}
+
+#galleryRowWrap1 .gallery-card-thumb-wrap,
+#galleryTrack1 .gallery-card-thumb-wrap,
+.gallery-stream-row-wrap[data-row-category="Posters & Flyers"] .gallery-card-thumb-wrap,
+.gallery-stream-row-wrap[data-row-category="Posters &amp; Flyers"] .gallery-card-thumb-wrap,
+.gallery-card-thumb-wrap.is-poster-thumb {
+  aspect-ratio: 3 / 4;
+  background: #0d1117;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#galleryRowWrap1 .gallery-card-thumb,
+#galleryTrack1 .gallery-card-thumb,
+.gallery-stream-row-wrap[data-row-category="Posters & Flyers"] .gallery-card-thumb,
+.gallery-stream-row-wrap[data-row-category="Posters &amp; Flyers"] .gallery-card-thumb,
+.gallery-card-thumb.is-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+@media (max-width: 768px) {
+  #galleryRowWrap1 .gallery-card,
+  #galleryTrack1 .gallery-card,
+  .gallery-stream-row-wrap[data-row-category="Posters & Flyers"] .gallery-card,
+  .gallery-stream-row-wrap[data-row-category="Posters &amp; Flyers"] .gallery-card,
+  .gallery-card.is-poster-card {
+    width: 250px;
+  }
+}
+
 .gallery-card-thumb {
   width: 100%;
   height: 100%;

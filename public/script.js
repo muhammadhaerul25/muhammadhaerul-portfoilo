@@ -4736,11 +4736,12 @@
     const captionText = item.description ? escapeHtml(item.description) : '';
     const imgUrl = escapeHtml(item.image_url);
     const categoryText = item.category ? escapeHtml(item.category) : '';
+    const isPoster = categoryText.toLowerCase().includes('poster') || categoryText.toLowerCase().includes('flyer');
 
     return `
-      <article class="gallery-card" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
-        <div class="gallery-card-thumb-wrap">
-          <img class="gallery-card-thumb" src="${imgUrl}" alt="Muhammad Haerul — ${titleText}" title="Muhammad Haerul — ${titleText}" loading="lazy" decoding="async">
+      <article class="gallery-card ${isPoster ? 'is-poster-card' : ''}" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
+        <div class="gallery-card-thumb-wrap ${isPoster ? 'is-poster-thumb' : ''}">
+          <img class="gallery-card-thumb ${isPoster ? 'is-poster-img' : ''}" src="${imgUrl}" alt="Muhammad Haerul — ${titleText}" title="Muhammad Haerul — ${titleText}" loading="lazy" decoding="async">
           <div class="gallery-zoom-overlay">
             <div class="gallery-zoom-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
