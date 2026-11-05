@@ -5140,8 +5140,6 @@
                         <option value="Posters &amp; Flyers">Row 1: Posters &amp; Flyers</option>
                         <option value="Certificates &amp; Awards">Row 2: Certificates &amp; Awards</option>
                         <option value="Activity Documentation">Row 3: Activity Documentation</option>
-                        <option value="Speaking &amp; Workshops">Speaking &amp; Workshops</option>
-                        <option value="Campus &amp; Honors">Campus &amp; Honors</option>
                     </select>
                     <button class="btn btn-primary" onclick="openGalleryDrawer(null)" style="flex-shrink:0;">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -5850,7 +5848,7 @@
                                     </div>
                                     <div class="hero-glimpse-caption">
                                         <div class="hero-glimpse-meta">
-                                            <span id="sim-card-tag" class="hero-glimpse-tag">SPEAKING &amp; WORKSHOPS</span>
+                                            <span id="sim-card-tag" class="hero-glimpse-tag">POSTERS &amp; FLYERS</span>
                                             <span id="sim-card-date" class="hero-glimpse-date">May 2026</span>
                                         </div>
                                         <h4 id="sim-card-title" class="hero-glimpse-title">Build with AI: AI-Driven Development Keynote</h4>
@@ -7337,8 +7335,6 @@
                         <option value="Posters &amp; Flyers">Row 1: Posters &amp; Flyers</option>
                         <option value="Certificates &amp; Awards">Row 2: Certificates &amp; Awards</option>
                         <option value="Activity Documentation">Row 3: Activity Documentation</option>
-                        <option value="Speaking &amp; Workshops">Speaking &amp; Workshops</option>
-                        <option value="Campus &amp; Honors">Campus &amp; Honors</option>
                         <option value="Projects &amp; AI">Projects &amp; AI</option>
                         <option value="General">General</option>
                     </select>
@@ -14154,7 +14150,7 @@ async function loadImageSlideshowSettings() {
                 {
                     id: 'default-1',
                     title: 'Build with AI: AI-Driven Development Keynote',
-                    category: 'SPEAKING & WORKSHOPS',
+                    category: 'POSTERS & FLYERS',
                     date: 'May 2026',
                     image_url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp'
                 },
@@ -18180,7 +18176,7 @@ function openGalleryDrawer(item) {
     document.getElementById('gal-id').value = item ? item.id : '';
     document.getElementById('gallery-drawer-title').textContent = item ? 'Edit Gallery Photo' : 'Add Photo to Gallery';
     document.getElementById('gal-title').value = item ? (item.title || '') : '';
-    document.getElementById('gal-category').value = item ? (item.category || 'Speaking & Workshops') : 'Speaking & Workshops';
+    document.getElementById('gal-category').value = item ? (item.category || 'Posters & Flyers') : 'Posters & Flyers';
     document.getElementById('gal-image-url').value = item ? (item.image_url || '') : '';
     document.getElementById('gal-date').value = item ? (item.date || '') : '';
     document.getElementById('gal-location').value = item ? (item.location || '') : '';
