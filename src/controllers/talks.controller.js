@@ -30,13 +30,16 @@ exports.createTalk = asyncHandler(async (req, res) => {
         throw err;
     }
 
+    const parsedDate = date && !isNaN(new Date(date).getTime()) ? new Date(date) : null;
+    const parsedPeserta = (jumlah_peserta != null && !isNaN(parseInt(jumlah_peserta, 10))) ? parseInt(jumlah_peserta, 10) : null;
+
     const talk = await prisma.talk.create({
         data: {
             event: String(event).trim(),
             organizer: organizer ? String(organizer).trim() : null,
             place: place ? String(place).trim() : null,
-            date: date ? new Date(date) : null,
-            jumlah_peserta: jumlah_peserta ? parseInt(jumlah_peserta, 10) : null,
+            date: parsedDate,
+            jumlah_peserta: parsedPeserta,
             poster_url: poster_url ? String(poster_url).trim() : null,
             slides: slides || [],
             topics: Array.isArray(topics) ? topics : [],
@@ -65,14 +68,17 @@ exports.updateTalk = asyncHandler(async (req, res) => {
         throw err;
     }
 
+    const parsedDate = date ? (!isNaN(new Date(date).getTime()) ? new Date(date) : null) : null;
+    const parsedPeserta = (jumlah_peserta != null && !isNaN(parseInt(jumlah_peserta, 10))) ? parseInt(jumlah_peserta, 10) : null;
+
     const talk = await prisma.talk.update({
         where: { id },
         data: {
             event: String(event).trim(),
             organizer: organizer ? String(organizer).trim() : null,
             place: place ? String(place).trim() : null,
-            date: date ? new Date(date) : null,
-            jumlah_peserta: jumlah_peserta ? parseInt(jumlah_peserta, 10) : null,
+            date: parsedDate,
+            jumlah_peserta: parsedPeserta,
             poster_url: poster_url ? String(poster_url).trim() : null,
             slides: slides !== undefined ? slides : existing.slides,
             topics: Array.isArray(topics) ? topics : existing.topics,

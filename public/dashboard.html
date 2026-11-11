@@ -5696,7 +5696,7 @@
                         </div>
 
                         <div style="display:flex; justify-content:flex-end; margin-top:8px;">
-                            <button type="button" class="btn btn-primary" onclick="saveLanguageSettings()" style="padding:11px 26px; font-size:0.88rem; font-weight:700; border-radius:var(--r-pill);">
+                            <button type="button" class="btn btn-primary" onclick="saveLanguageSettings(this)" style="padding:11px 26px; font-size:0.88rem; font-weight:700; border-radius:var(--r-pill);">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                                 <span>Save Language Settings</span>
                             </button>
@@ -7962,24 +7962,52 @@
 </div>
 
 <script>
-// Attach Admin Session Bearer Token automatically
+// Attach Admin Session Bearer Token & Credentials automatically across all requests
 var _origFetch = window.fetch;
-window.fetch = function(url, options) {
-    options = options || {};
-    options.headers = options.headers || {};
+window.fetch = function(input, init) {
+    init = init || {};
     var token = localStorage.getItem('mh_admin_token');
+    var isReq = typeof Request !== 'undefined' && input instanceof Request;
+
     if (token) {
-        if (options.headers instanceof Headers) {
-            if (!options.headers.has('Authorization')) {
-                options.headers.set('Authorization', 'Bearer ' + token);
-            }
-        } else if (typeof options.headers === 'object') {
-            if (!options.headers['Authorization']) {
-                options.headers['Authorization'] = 'Bearer ' + token;
+        if (isReq) {
+            try {
+                if (!input.headers.has('Authorization')) {
+                    input.headers.set('Authorization', 'Bearer ' + token);
+                }
+            } catch (e) {}
+        } else {
+            init.headers = init.headers || {};
+            if (init.headers instanceof Headers) {
+                if (!init.headers.has('Authorization')) {
+                    init.headers.set('Authorization', 'Bearer ' + token);
+                }
+            } else if (typeof init.headers === 'object') {
+                if (!init.headers['Authorization']) {
+                    init.headers['Authorization'] = 'Bearer ' + token;
+                }
             }
         }
     }
-    return _origFetch.call(this, url, options);
+    if (!init.credentials && !isReq) {
+        init.credentials = 'same-origin';
+    }
+
+    return _origFetch.call(this, input, init).then(function(res) {
+        if (res && res.status === 401) {
+            var urlStr = typeof input === 'string' ? input : (input && input.url ? input.url : '');
+            if (urlStr.includes('/api/') && !urlStr.includes('/api/auth/me') && !urlStr.includes('/api/auth/config')) {
+                console.warn('[401 Unauthorized API Response]:', urlStr);
+                if (typeof showToast === 'function') {
+                    showToast('Session expired or authentication required. Please sign in.', 'error');
+                }
+                if (typeof openAdminModal === 'function') {
+                    openAdminModal();
+                }
+            }
+        }
+        return res;
+    });
 };
 
 var allData = [], activeFilter = 'all', dataLoaded = false;
@@ -8915,8 +8943,7 @@ function buildProjectCardOverview(p) {
     }
     
     var descHtml = renderProjectDesc(p.description, 'ov-' + p.id);
-    var pJson = JSON.stringify(p).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    return '<div class="project-card">' + mediaHtml + '<div class="project-content"><div><div class="project-head"><div class="project-title">' + esc(p.name) + '</div></div>' + descHtml + '</div><div class="project-tech-stack">' + techsHtml + '</div><div style="margin-top:auto; padding-top:12px; display:flex; justify-content:flex-end;"><button class="btn-talk view" onclick="openProjectViewModal('+pJson+')">View</button></div></div></div>';
+    return '<div class="project-card">' + mediaHtml + '<div class="project-content"><div><div class="project-head"><div class="project-title">' + esc(p.name) + '</div></div>' + descHtml + '</div><div class="project-tech-stack">' + techsHtml + '</div><div style="margin-top:auto; padding-top:12px; display:flex; justify-content:flex-end;"><button class="btn-talk view" onclick="openProjectViewModalById(\'' + p.id + '\')">View</button></div></div></div>';
 }
 
 function buildTalkCardOverview(t) {
@@ -8931,8 +8958,7 @@ function buildTalkCardOverview(t) {
             (topicsList.length > 3 ? '<span class="talk-topic-tag" style="background:var(--line-soft);color:var(--ink-3);font-size:0.68rem;font-weight:700;">+' + (topicsList.length - 3) + ' more</span>' : '') +
           '</div>'
         : '';
-    var tJson = JSON.stringify(t).replace(/"/g,'&quot;');
-    return '<div class="talk-card overview-talk-card" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer; display:flex; flex-direction:row; align-items:flex-start; gap:16px; padding:18px; border-radius:var(--r-lg); border:1.5px solid var(--line); background:var(--surface);" title="Click to view details">' +
+    return '<div class="talk-card overview-talk-card" onclick="openTalkViewModalById(\'' + t.id + '\')" style="cursor:pointer; display:flex; flex-direction:row; align-items:flex-start; gap:16px; padding:18px; border-radius:var(--r-lg); border:1.5px solid var(--line); background:var(--surface);" title="Click to view details">' +
         '<div class="talk-poster" style="width:110px; height:150px; flex-shrink:0; border-radius:12px; overflow:hidden; position:relative; background:#f1f3f4; align-self:flex-start;">' +
             (t.poster_url ? '<img src="'+esc(t.poster_url)+'" loading="lazy" style="width:100%; height:100%; object-fit:cover;">' : '<div style="width:100%;height:100%;display:grid;place-items:center;font-size:2.2rem;">🎤</div>') +
             '<div class="talk-poster-overlay"></div>' +
@@ -9044,26 +9070,34 @@ function toggleShowHidden() {
 }
 
 function confirmDeleteFeedback(id, name) {
-    showConfirm('Delete feedback from "' + (name || 'Anonymous') + '"? This action cannot be undone.', async function() {
-        try {
-            var res = await fetch('/api/feedbacks/' + id, { method: 'DELETE' });
-            var json = await res.json();
-            if (json.success) {
-                allData = allData.filter(function(d){ return d.id !== id; });
-                var hiddenSet = getHiddenFeedbackIds();
-                if (hiddenSet.has(Number(id))) {
-                    hiddenSet.delete(Number(id));
-                    saveHiddenFeedbackIds(hiddenSet);
+    var fb = (allData || []).find(function(d){ return Number(d.id) === Number(id); });
+    var title = name || (fb ? fb.nama_lengkap : 'Anonymous');
+    showConfirm({
+        title: 'Delete Feedback Entry?',
+        itemTitle: title,
+        message: 'This session feedback and its rating will be permanently removed. This action cannot be undone.',
+        confirmText: 'Delete Feedback',
+        onConfirm: async function() {
+            try {
+                var res = await fetch('/api/feedbacks/' + id, { method: 'DELETE' });
+                var json = await res.json();
+                if (res.ok && json.success !== false) {
+                    allData = allData.filter(function(d){ return d.id !== id; });
+                    var hiddenSet = getHiddenFeedbackIds();
+                    if (hiddenSet.has(Number(id))) {
+                        hiddenSet.delete(Number(id));
+                        saveHiddenFeedbackIds(hiddenSet);
+                    }
+                    applyFilters();
+                    updateOverviewStatsAfterDelete();
+                    showToast('Feedback deleted successfully.', 'success');
+                } else {
+                    showToast(json.error || 'Failed to delete feedback.', 'error');
                 }
-                applyFilters();
-                updateOverviewStatsAfterDelete();
-                showToast('Feedback deleted successfully.');
-            } else {
-                showToast(json.error || 'Failed to delete feedback.');
+            } catch(e) {
+                console.error('Delete feedback error:', e);
+                showToast('Network error while deleting feedback.', 'error');
             }
-        } catch(e) {
-            console.error('Delete feedback error:', e);
-            showToast('Failed to delete feedback.');
         }
     });
 }
@@ -9203,21 +9237,48 @@ async function loadMateri() {
 }
 
 async function addMateri(ev) {
-    ev.preventDefault();
-    var input=document.getElementById('materiName'), name=input.value.trim();
+    if (ev && ev.preventDefault) ev.preventDefault();
+    var input = document.getElementById('materiName');
+    var name = input ? input.value.trim() : '';
     if (!name) return;
     try {
-        await fetch('/api/materi',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});
-        input.value=''; await loadMateri(); showToast('Topic added.');
-    } catch(e) { showToast('Failed to add topic.'); }
+        var res = await fetch('/api/materi', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name })
+        });
+        var json = await res.json();
+        if (res.ok && json.success !== false) {
+            if (input) input.value = '';
+            await loadMateri();
+            showToast('Speaking topic added successfully! ✅', 'success');
+        } else {
+            showToast(json.error || 'Failed to add topic.', 'error');
+        }
+    } catch(e) {
+        showToast('Network error while adding topic.', 'error');
+    }
 }
 
 async function deleteMateri(id) {
-    showConfirm('Delete this topic?', async function() {
-        try {
-            await fetch('/api/materi/'+id,{method:'DELETE'});
-            await loadMateri(); showToast('Topic deleted.');
-        } catch(e) { showToast('Failed to delete.'); }
+    showConfirm({
+        title: 'Delete Speaking Topic?',
+        message: 'This topic option will be removed from feedback dropdowns.',
+        confirmText: 'Delete Topic',
+        onConfirm: async function() {
+            try {
+                var res = await fetch('/api/materi/' + id, { method: 'DELETE' });
+                var json = await res.json();
+                if (res.ok && json.success !== false) {
+                    await loadMateri();
+                    showToast('Topic deleted successfully.', 'success');
+                } else {
+                    showToast(json.error || 'Failed to delete topic.', 'error');
+                }
+            } catch(e) {
+                showToast('Network error while deleting topic.', 'error');
+            }
+        }
     });
 }
 
@@ -9740,14 +9801,24 @@ function exportResponsesCSV() {
 }
 
 async function confirmDeleteResponse(rid) {
-    showConfirm('Delete this response? This cannot be undone.', async function() {
-        try {
-            await fetch('/api/forms/' + currentRespForm.id + '/responses/' + rid, { method: 'DELETE' });
-            showToast('Response deleted.');
-            await openFormResponses(currentRespForm.id);
-            await loadForms();
-        } catch(e) {
-            showToast('Failed to delete response.');
+    showConfirm({
+        title: 'Delete Submitted Response?',
+        message: 'This response entry will be permanently removed. This action cannot be undone.',
+        confirmText: 'Delete Response',
+        onConfirm: async function() {
+            try {
+                var res = await fetch('/api/forms/' + currentRespForm.id + '/responses/' + rid, { method: 'DELETE' });
+                var json = await res.json();
+                if (res.ok && json.success !== false) {
+                    showToast('Response deleted successfully.', 'success');
+                    await openFormResponses(currentRespForm.id);
+                    await loadForms();
+                } else {
+                    showToast(json.error || 'Failed to delete response.', 'error');
+                }
+            } catch(e) {
+                showToast('Network error while deleting response.', 'error');
+            }
         }
     });
 }
@@ -9889,7 +9960,7 @@ async function saveFormAndClose() {
 
 async function deleteField(fid) {
     if (selectedFormType === 'feedback') {
-        showToast('Feedback form fields are standardized and constant.');
+        showToast('Feedback form fields are standardized and constant.', 'warning');
         return;
     }
     if (!activeFBFormId) {
@@ -9897,13 +9968,26 @@ async function deleteField(fid) {
         renderDrawerFields(pendingFields);
         return;
     }
-    showConfirm('Remove this field?', async function() {
-        await fetch('/api/forms/'+activeFBFormId+'/fields/'+fid, { method:'DELETE' });
-        // Refresh builder
-        var res  = await fetch('/api/forms/'+activeFBSlug);
-        var json = await res.json();
-        if (json.data) renderDrawerFields(json.data.fields||[]);
-        showToast('Field removed.');
+    showConfirm({
+        title: 'Remove Question Field?',
+        message: 'Are you sure you want to remove this question from the form?',
+        confirmText: 'Remove Field',
+        onConfirm: async function() {
+            try {
+                var res = await fetch('/api/forms/' + activeFBFormId + '/fields/' + fid, { method: 'DELETE' });
+                var json = await res.json();
+                if (res.ok && json.success !== false) {
+                    var fres = await fetch('/api/forms/' + activeFBSlug);
+                    var fjson = await fres.json();
+                    if (fjson.data) renderDrawerFields(fjson.data.fields || []);
+                    showToast('Field removed successfully.', 'success');
+                } else {
+                    showToast(json.error || 'Failed to remove field.', 'error');
+                }
+            } catch(e) {
+                showToast('Network error while removing field.', 'error');
+            }
+        }
     });
 }
 
@@ -10074,18 +10158,28 @@ async function addField() {
 
 /* ── Delete Form ── */
 function openDeleteFormModal(id, title) {
-    showConfirm('Delete "' + title + '"? All responses and questions will also be deleted. This cannot be undone.', function() {
-        deleteForm(id);
+    showConfirm({
+        title: 'Delete Dynamic Form?',
+        itemTitle: title,
+        message: 'All questions, settings, and submitted responses will be permanently deleted. This cannot be undone.',
+        confirmText: 'Delete Form',
+        onConfirm: function() {
+            deleteForm(id);
+        }
     });
 }
 async function deleteForm(id) {
     try {
-        // Optimistic instant removal from UI
+        var res = await fetch('/api/forms/' + id, { method: 'DELETE' });
+        var json = await res.json();
+        if (!res.ok || json.success === false) {
+            throw new Error(json.error || 'Failed to delete form');
+        }
+        
         allFormsList = allFormsList.filter(function(f){ return f.id !== id; });
         delete formsDataMap[id];
         renderFormsGrid();
         
-        // Instant stat counters update
         var totalForms = allFormsList.length;
         var totalResponses = allFormsList.reduce(function(acc, f){ return acc + (Number(f.response_count) || 0); }, 0);
         var elTotal = document.getElementById('fstat-total');
@@ -10093,16 +10187,12 @@ async function deleteForm(id) {
         if (elTotal) animateCount(elTotal, totalForms, '', false);
         if (elResp) animateCount(elResp, totalResponses, '', false);
 
-        var res = await fetch('/api/forms/' + id, { method: 'DELETE' });
-        var json = await res.json();
-        if (!res.ok) throw new Error(json.error || 'Failed to delete form');
-        
         activeFBFormId = null; 
         activeFBSlug = null;
-        showToast('Form deleted successfully.');
+        showToast('Form deleted successfully.', 'success');
         await loadForms();
     } catch(e) {
-        showToast('Failed to delete form.');
+        showToast(e.message || 'Failed to delete form.', 'error');
         await loadForms();
     }
 }
@@ -10173,15 +10263,36 @@ function removeTopic(i) {
     renderTopics();
 }
 
+var _talkMap = {};
+
 async function loadTalks() {
     try {
         var res = await fetch('/api/talks');
         var json = await res.json();
         allTalks = (json.data || []).sort(function(a,b){ return (b.date ? new Date(b.date).getTime() : 0) - (a.date ? new Date(a.date).getTime() : 0); });
         talksLoaded = true;
+        _talkMap = {};
+        allTalks.forEach(function(t){ _talkMap[t.id] = t; });
         renderTalksGrid();
         updateTalksStats();
-    } catch(e) { console.error(e); }
+    } catch(e) {
+        console.error('Failed to load talks:', e);
+    }
+}
+
+function openTalkDrawerById(id) {
+    var t = _talkMap[id];
+    if (t) openTalkDrawer(t);
+}
+
+function openTalkViewModalById(id) {
+    var t = _talkMap[id];
+    if (t) openTalkViewModal(t);
+}
+
+function duplicateTalkById(id) {
+    var t = _talkMap[id];
+    if (t) duplicateTalk(t);
 }
 
 function updateTalksStats() {
@@ -10257,7 +10368,7 @@ function renderTalksGrid() {
             : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
 
         return '<div class="talk-card" style="animation-delay:'+delay+'ms;' + (!isVis ? 'opacity:0.75; border:1.5px dashed var(--line);' : '') + '">' +
-            '<div class="talk-poster" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer;" title="Click to view talk details">' +
+            '<div class="talk-poster" onclick="openTalkViewModalById(\''+t.id+'\')" style="cursor:pointer;" title="Click to view talk details">' +
                 (t.poster_url
                     ? '<img src="'+esc(t.poster_url)+'" alt="'+esc(t.event)+'" loading="lazy">'
                     : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E8F0FE 0%,#d2e3fc 100%);color:var(--g-blue);"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>'
@@ -10266,7 +10377,7 @@ function renderTalksGrid() {
             '</div>' +
             '<div class="talk-body">' +
                 '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">' +
-                    '<div class="talk-event" onclick="openTalkViewModal('+tJson+')" style="cursor:pointer; flex:1;" title="Click to view talk details">'+esc(t.event)+'</div>' +
+                    '<div class="talk-event" onclick="openTalkViewModalById(\''+t.id+'\')" style="cursor:pointer; flex:1;" title="Click to view talk details">'+esc(t.event)+'</div>' +
                     visBadge +
                 '</div>' +
                 attendeesHtml +
@@ -10303,10 +10414,10 @@ function renderTalksGrid() {
             '</div>' +
             '<div class="talk-side">' +
                 '<button type="button" class="btn-talk" onclick="toggleItemVisibility(\'talks\',\''+t.id+'\',this)" title="'+(isVis?'Hide from portfolio':'Show on portfolio')+'" style="'+(isVis?'':'color:var(--g-blue);font-weight:700;')+'">'+(isVis?'Hide':'Show')+'</button>' +
-                '<button class="btn-talk view" onclick="openTalkViewModal('+tJson+')">View</button>' +
-                '<button class="btn-talk edit" onclick="openTalkDrawer('+tJson+')">Edit</button>' +
-                '<button class="btn-talk clone" onclick="duplicateTalk('+tJson+')" title="Duplicate Talk">Clone</button>' +
-                '<button class="btn-talk del" onclick="confirmDeleteTalk(\''+t.id+'\',\''+esc(t.event)+'\')" >Delete</button>' +
+                '<button class="btn-talk view" onclick="openTalkViewModalById(\''+t.id+'\')">View</button>' +
+                '<button class="btn-talk edit" onclick="openTalkDrawerById(\''+t.id+'\')">Edit</button>' +
+                '<button class="btn-talk clone" onclick="duplicateTalkById(\''+t.id+'\')" title="Duplicate Talk">Clone</button>' +
+                '<button class="btn-talk del" onclick="confirmDeleteTalk(\''+t.id+'\')" >Delete</button>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -10315,8 +10426,9 @@ function renderTalksGrid() {
 function duplicateTalk(talk) {
     if (!talk) return;
     if (typeof talk === 'string') {
-        try { talk = JSON.parse(talk); } catch(e){}
+        talk = _talkMap[talk] || (function(){ try { return JSON.parse(talk); } catch(e){ return null; } })();
     }
+    if (!talk) return;
     var clone = JSON.parse(JSON.stringify(talk));
     delete clone.id;
     clone.event = (clone.event || '') + ' (Copy)';
@@ -10338,7 +10450,7 @@ var talkEditId = null;
 /* ── Drawer ── */
 function openTalkDrawer(talk) {
     if (typeof talk === 'string') {
-        try { talk = JSON.parse(talk); } catch(e){}
+        talk = _talkMap[talk] || (function(){ try { return JSON.parse(talk); } catch(e){ return null; } })();
     }
     talkEditId = talk ? talk.id : null;
     talkDrawerMode = talk ? 'edit' : 'create';
@@ -10619,9 +10731,11 @@ async function uploadThumbnail() {
 }
 
 async function confirmDeleteTalk(id, name) {
+    var t = _talkMap && _talkMap[id];
+    var title = name || (t ? t.event : 'this talk');
     showConfirm({
         title: 'Delete Speaking Engagement?',
-        itemTitle: name,
+        itemTitle: title,
         message: 'This talk and all associated topics, slides, and event media will be permanently deleted.',
         confirmText: 'Delete Talk',
         onConfirm: async function() {
@@ -10642,7 +10756,7 @@ var currentViewingTalk = null;
 
 function openTalkViewModal(t) {
     if (typeof t === 'string') {
-        try { t = JSON.parse(t); } catch(e){}
+        t = _talkMap[t] || (function(){ try { return JSON.parse(t); } catch(e){ return null; } })();
     }
     if (!t) return;
     currentViewingTalk = t;
@@ -10796,18 +10910,37 @@ function sortProjectsByDate(projects) {
     });
 }
 
+var _projectMap = {};
+
 async function loadProjects() {
     try {
         var res = await fetch('/api/projects');
         var json = await res.json();
         allProjects = sortProjectsByDate(json.data || []);
         projectsLoaded = true;
+        _projectMap = {};
+        allProjects.forEach(function(p){ _projectMap[p.id] = p; });
         updateProjectsStats();
         renderProjectsGrid();
     } catch(e) {
         console.error('Error loading projects', e);
-        showToast('Failed to load projects');
+        showToast('Failed to load projects', 'error');
     }
+}
+
+function openProjectDrawerById(id) {
+    var p = _projectMap[id];
+    if (p) openProjectDrawer(p);
+}
+
+function openProjectViewModalById(id) {
+    var p = _projectMap[id];
+    if (p) openProjectViewModal(p);
+}
+
+function duplicateProjectById(id) {
+    var p = _projectMap[id];
+    if (p) duplicateProject(p);
 }
 
 function getTechIcon(name) {
@@ -11087,10 +11220,10 @@ function renderProjectsGrid() {
                     '<div class="project-links">' + linksHtml + '</div>' +
                     '<div class="project-manage">' +
                         '<button type="button" class="btn-talk" onclick="toggleItemVisibility(\'projects\',\''+p.id+'\',this)" title="'+(isVis?'Hide from portfolio':'Show on portfolio')+'" style="'+(isVis?'':'color:var(--g-blue);font-weight:700;')+'">'+(isVis?'Hide':'Show')+'</button>' +
-                        '<button class="btn-talk view" onclick="openProjectViewModal('+pJson+')">View</button>' +
-                        '<button class="btn-talk edit" onclick="openProjectDrawer('+pJson+')">Edit</button>' +
-                        '<button class="btn-talk clone" onclick="duplicateProject('+pJson+')" title="Duplicate Project">Clone</button>' +
-                        '<button class="btn-talk del" onclick="confirmDeleteProject(\''+p.id+'\',\''+esc(p.name)+'\')" >Delete</button>' +
+                        '<button class="btn-talk view" onclick="openProjectViewModalById(\''+p.id+'\')">View</button>' +
+                        '<button class="btn-talk edit" onclick="openProjectDrawerById(\''+p.id+'\')">Edit</button>' +
+                        '<button class="btn-talk clone" onclick="duplicateProjectById(\''+p.id+'\')" title="Duplicate Project">Clone</button>' +
+                        '<button class="btn-talk del" onclick="confirmDeleteProject(\''+p.id+'\')" >Delete</button>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
@@ -11101,8 +11234,9 @@ function renderProjectsGrid() {
 function duplicateProject(project) {
     if (!project) return;
     if (typeof project === 'string') {
-        try { project = JSON.parse(project); } catch(e){}
+        project = _projectMap[project] || (function(){ try { return JSON.parse(project); } catch(e){ return null; } })();
     }
+    if (!project) return;
     var clone = JSON.parse(JSON.stringify(project));
     delete clone.id;
     clone.name = (clone.name || '') + ' (Copy)';
@@ -11117,7 +11251,7 @@ function duplicateProject(project) {
 
 function openProjectViewModal(p) {
     if (typeof p === 'string') {
-        try { p = JSON.parse(p); } catch(e){}
+        p = _projectMap[p] || (function(){ try { return JSON.parse(p); } catch(e){ return null; } })();
     }
     if (!p) return;
 
@@ -11222,7 +11356,7 @@ function openProjectViewModal(p) {
     document.getElementById('project-view-footer').innerHTML = 
         '<button class="btn-sm-ghost" onclick="closeProjectViewModal()">Close</button>' +
         '<div style="display:flex;gap:8px;">' +
-            '<button class="btn btn-ghost" style="padding:8px 16px;font-size:0.82rem;display:inline-flex;align-items:center;gap:6px;" onclick="closeProjectViewModal(); openProjectDrawer('+pJson+')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Edit Project</button>' +
+            '<button class="btn btn-ghost" style="padding:8px 16px;font-size:0.82rem;display:inline-flex;align-items:center;gap:6px;" onclick="closeProjectViewModal(); openProjectDrawerById(\''+p.id+'\')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Edit Project</button>' +
             (visitUrl ? '<a href="'+esc(visitUrl)+'" target="_blank" rel="noopener" class="btn btn-primary" style="padding:8px 16px;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Visit Project ↗</a>' : '') +
         '</div>';
 
@@ -11319,6 +11453,9 @@ function clearProjectDates() {
 }
 
 function openProjectDrawer(project) {
+    if (typeof project === 'string') {
+        project = _projectMap[project] || (function(){ try { return JSON.parse(project); } catch(e){ return null; } })();
+    }
     projectDrawerMode = project ? 'edit' : 'create';
     projectEditId = project ? project.id : null;
     
@@ -11514,8 +11651,11 @@ async function saveProject() {
     setBtnLoading(saveBtn, true, 'Saving…');
     
     try {
-        var res = await fetch(url, { method, headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-        if (!res.ok) throw new Error('Save failed');
+        var res = await fetch(url, { method: method, headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+        var data = await res.json();
+        if (!res.ok || data.success === false) {
+            throw new Error(data.error || 'Failed to save project');
+        }
         setBtnLoading(saveBtn, false, null, true);
         showToast(projectDrawerMode === 'edit' ? 'Project updated successfully! ✅' : 'Project added successfully! 🎉', 'success');
         setTimeout(function() {
@@ -11524,14 +11664,16 @@ async function saveProject() {
         await loadProjects();
     } catch(e) {
         setBtnLoading(saveBtn, false);
-        showToast('Failed to save project.', 'error');
+        showToast(e.message || 'Failed to save project.', 'error');
     }
 }
 
 async function confirmDeleteProject(id, name) {
+    var p = _projectMap && _projectMap[id];
+    var title = name || (p ? p.name : 'this project');
     showConfirm({
         title: 'Delete Showcase Project?',
-        itemTitle: name,
+        itemTitle: title,
         message: 'This project and its tech stack mapping will be permanently removed from your portfolio.',
         confirmText: 'Delete Project',
         onConfirm: async function() {
@@ -12616,17 +12758,23 @@ async function handleRemoveAdmin(email) {
         itemTitle: email,
         message: 'This user will no longer be able to sign in or manage the portfolio. You can re-authorize this account at any time.',
         confirmText: 'Revoke Access',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/auth/admins/' + encodeURIComponent(email), {
-                method: 'DELETE'
-            });
-            var data = await res.json();
+            try {
+                var res = await fetch('/api/auth/admins/' + encodeURIComponent(email), {
+                    method: 'DELETE'
+                });
+                var data = await res.json();
 
-            if (res.ok && data.success) {
-                showToast('Access revoked for ' + email, 'success');
-                loadAdminList();
-            } else {
-                showToast(data.error || 'Failed to revoke access.', 'error');
+                if (res.ok && data.success) {
+                    showToast('Access revoked for ' + email, 'success');
+                    loadAdminList();
+                } else {
+                    showToast(data.error || 'Failed to revoke access.', 'error');
+                }
+            } catch(err) {
+                console.error('Revoke admin error:', err);
+                showToast('Network error while revoking admin access', 'error');
             }
         }
     });
@@ -13788,7 +13936,12 @@ async function loadLanguageSettings() {
     }
 }
 
-async function saveLanguageSettings() {
+async function saveLanguageSettings(btn) {
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Saving...';
+    }
+
     var chk = document.getElementById('cfg-bilingual-enabled');
     var isEnabled = chk ? chk.checked : true;
     var langRadio = document.querySelector('input[name="default-lang"]:checked');
@@ -13821,6 +13974,11 @@ async function saveLanguageSettings() {
     } catch (err) {
         console.error('Save language settings error:', err);
         showToast('Error saving language settings: ' + err.message, 'error');
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span>Save Language Settings</span>';
+        }
     }
 }
 
@@ -15794,8 +15952,8 @@ async function saveSkillDomain() {
 }
 
 async function deleteSkillDomain(id) {
-    var domainItem = (skillsData || []).find(s => s.id === id);
-    var domainTitle = domainItem ? domainItem.domain : 'this skill domain';
+    var domainItem = (_skillMap && _skillMap[id]) || (skillsData || []).find(function(s){ return s.id === id; });
+    var domainTitle = domainItem ? (domainItem.category || domainItem.domain || 'this skill domain') : 'this skill domain';
     showConfirm({
         title: 'Delete Skill Domain?',
         itemTitle: domainTitle,
@@ -15803,13 +15961,18 @@ async function deleteSkillDomain(id) {
         confirmText: 'Delete Domain',
         confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/skills/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Skill domain deleted successfully! 🗑️', 'success');
-                await loadSkills();
-            } else {
-                showToast(data.error || 'Failed to delete skill domain', 'error');
+            try {
+                var res = await fetch('/api/skills/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Skill domain deleted successfully! 🗑️', 'success');
+                    await loadSkills();
+                } else {
+                    showToast(data.error || 'Failed to delete skill domain', 'error');
+                }
+            } catch(err) {
+                console.error('Delete skill error:', err);
+                showToast('Network error while deleting skill domain', 'error');
             }
         }
     });
@@ -16286,7 +16449,26 @@ function openExperienceDrawer(exp) {
     document.getElementById('exp-current').checked = exp ? !!exp.is_current : false;
     document.getElementById('exp-color').value = exp ? (exp.accent_color || 'var(--blue)') : 'var(--blue)';
     document.getElementById('exp-stack').value = exp && exp.stack ? exp.stack.join(', ') : '';
-    document.getElementById('exp-sort').value = exp ? (exp.sort_order || 0) : 0;
+    document.getElementById('exp-sort').value = exp ? (exp.sort_order || 0) : (experiencesData.length + 1);
+
+    var expCurEl = document.getElementById('exp-current');
+    var expEndEl = document.getElementById('exp-end');
+    if (expCurEl && expEndEl) {
+        var onCurChange = function() {
+            if (expCurEl.checked) {
+                expEndEl.disabled = true;
+                expEndEl.dataset.prevVal = expEndEl.value;
+                expEndEl.value = '';
+                expEndEl.placeholder = 'Present (Current)';
+            } else {
+                expEndEl.disabled = false;
+                expEndEl.value = expEndEl.dataset.prevVal || '';
+                expEndEl.placeholder = 'e.g. 2024-12 or Dec 2024';
+            }
+        };
+        expCurEl.onchange = onCurChange;
+        onCurChange();
+    }
 
     var rawDesc = exp ? (exp.description || '') : '';
     document.getElementById('exp-desc').value = rawDesc;
@@ -16323,6 +16505,9 @@ async function saveExperience() {
     var start_date = document.getElementById('exp-start').value.trim();
     var end_date = document.getElementById('exp-end').value.trim();
     var is_current = document.getElementById('exp-current').checked;
+    if (is_current) {
+        end_date = null;
+    }
     var accent_color = document.getElementById('exp-color').value;
     var stackStr = document.getElementById('exp-stack').value;
     var stack = stackStr.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
@@ -16360,21 +16545,27 @@ async function saveExperience() {
 }
 
 async function deleteExperience(id) {
-    var exp = _expMap[id];
+    var exp = (_expMap && _expMap[id]) || (experiencesData || []).find(function(e){ return e.id === id; });
     var title = exp ? (exp.role + (exp.company ? ' at ' + exp.company : '')) : 'this experience';
     showConfirm({
         title: 'Delete Experience?',
         itemTitle: title,
         message: 'This work experience will be permanently removed from your portfolio.',
         confirmText: 'Delete Experience',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/experiences/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Experience deleted', 'success');
-                await loadExperiences();
-            } else {
-                showToast(data.error || 'Delete failed', 'error');
+            try {
+                var res = await fetch('/api/experiences/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Experience deleted', 'success');
+                    await loadExperiences();
+                } else {
+                    showToast(data.error || 'Delete failed', 'error');
+                }
+            } catch(err) {
+                console.error('Delete experience error:', err);
+                showToast('Network error while deleting experience', 'error');
             }
         }
     });
@@ -17427,7 +17618,7 @@ function openEducationDrawer(edu) {
     document.getElementById('edu-activities').value = edu && edu.activities ? edu.activities.join('\n') : '';
     document.getElementById('edu-awards-summary').value = edu ? (edu.awards_summary || '') : '';
     renderEduAwardsRows(parseEduAwards(edu ? edu.awards_summary : ''));
-    document.getElementById('edu-sort').value = edu ? (edu.sort_order || 0) : 0;
+    document.getElementById('edu-sort').value = edu ? (edu.sort_order || 0) : (educationsData.length + 1);
 
     updateEduLogoPreview();
 
@@ -17494,21 +17685,27 @@ async function saveEducation() {
 }
 
 async function deleteEducation(id) {
-    var edu = _eduMap[id];
+    var edu = (_eduMap && _eduMap[id]) || (educationsData || []).find(function(e){ return e.id === id; });
     var title = edu ? (edu.degree + (edu.institution ? ' at ' + edu.institution : '')) : 'this education record';
     showConfirm({
         title: 'Delete Education Record?',
         itemTitle: title,
         message: 'This education record will be permanently removed from your portfolio.',
         confirmText: 'Delete Education',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/educations/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Education record deleted', 'success');
-                await loadEducations();
-            } else {
-                showToast(data.error || 'Delete failed', 'error');
+            try {
+                var res = await fetch('/api/educations/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Education record deleted', 'success');
+                    await loadEducations();
+                } else {
+                    showToast(data.error || 'Delete failed', 'error');
+                }
+            } catch(err) {
+                console.error('Delete education error:', err);
+                showToast('Network error while deleting education record', 'error');
             }
         }
     });
@@ -17639,7 +17836,7 @@ function openCertificationDrawer(cert) {
     updateCertImagePreview();
     document.getElementById('cert-cred-id').value = cert ? (cert.credential_id || '') : '';
     document.getElementById('cert-color').value = cert ? (cert.accent_color || 'var(--blue)') : 'var(--blue)';
-    document.getElementById('cert-sort').value = cert ? (cert.sort_order || 0) : 0;
+    document.getElementById('cert-sort').value = cert ? (cert.sort_order || 0) : (certificationsData.length + 1);
 
     document.getElementById('cert-backdrop').classList.add('open');
     document.getElementById('cert-drawer').classList.add('open');
@@ -17737,21 +17934,27 @@ async function saveCertification() {
 }
 
 async function deleteCertification(id) {
-    var cert = _certMap[id];
+    var cert = (_certMap && _certMap[id]) || (certificationsData || []).find(function(c){ return c.id === id; });
     var title = cert ? (cert.title + (cert.issuer ? ' from ' + cert.issuer : '')) : 'this certification';
     showConfirm({
         title: 'Delete Certification?',
         itemTitle: title,
         message: 'This certification record will be permanently removed from your portfolio.',
         confirmText: 'Delete Certification',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/certifications/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Certification deleted', 'success');
-                await loadCertifications();
-            } else {
-                showToast(data.error || 'Delete failed', 'error');
+            try {
+                var res = await fetch('/api/certifications/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Certification deleted', 'success');
+                    await loadCertifications();
+                } else {
+                    showToast(data.error || 'Delete failed', 'error');
+                }
+            } catch(err) {
+                console.error('Delete certification error:', err);
+                showToast('Network error while deleting certification', 'error');
             }
         }
     });
@@ -17818,7 +18021,12 @@ function renderAwardsGrid() {
             return '<span style="background:var(--sidebar-hover); color:var(--ink-2); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:12px; border:1px solid var(--sidebar-border);">' + esc(c) + '</span>';
         }).join('');
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:20px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface); box-shadow:var(--shadow-sm);">' +
+        var isVis = isItemVisible('awards', aw.id);
+        var visBadge = isVis
+            ? '<span style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:20px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface); box-shadow:var(--shadow-sm);' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             (aw.image_url ? '<div style="width:100%; aspect-ratio:16/10.5; max-height:220px; border-radius:10px; overflow:hidden; border:1.5px solid var(--sidebar-border); background:radial-gradient(circle at 50% 50%, #171b26 0%, #0a0d14 100%); display:flex; align-items:center; justify-content:center; padding:8px; margin-bottom:4px; cursor:zoom-in;" onclick="window.open(\'' + esc(aw.image_url) + '\', \'_blank\')" title="Click to view full certificate proof"><img src="' + esc(aw.image_url) + '" style="width:100%; height:100%; object-fit:contain; border-radius:6px; box-shadow:0 4px 14px rgba(0,0,0,0.4); display:block;" alt="' + esc(aw.title) + '" /></div>' : '') +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
                 '<div style="flex:1;">' +
@@ -17826,13 +18034,23 @@ function renderAwardsGrid() {
                     '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:3px;">' + esc(aw.issuer) + '</div>' +
                     (aw.metric_tag ? '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:3px;">' + esc(aw.metric_tag) + '</div>' : '') +
                 '</div>' +
-                (aw.badge_text ? '<span style="background:var(--g-yellow-soft); color:var(--ink); font-size:0.72rem; font-weight:800; padding:3px 10px; border-radius:10px; border:1px solid rgba(251,188,4,0.4); flex-shrink:0;">' + esc(aw.badge_text) + '</span>' : '') +
+                '<div style="display:flex; align-items:center; gap:6px;">' +
+                    visBadge +
+                    (aw.badge_text ? '<span style="background:var(--g-yellow-soft); color:var(--ink); font-size:0.72rem; font-weight:800; padding:3px 10px; border-radius:10px; border:1px solid rgba(251,188,4,0.4); flex-shrink:0;">' + esc(aw.badge_text) + '</span>' : '') +
+                '</div>' +
             '</div>' +
             (aw.description ? '<div style="font-size:0.84rem; color:var(--ink-2); line-height:1.5;">' + esc(aw.description) + '</div>' : '') +
             (chipsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;">' + chipsPills + '</div>' : '') +
-            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
-                '<button class="btn-sm-ghost" onclick="openAwardDrawerById(\'' + aw.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
-                '<button class="btn-sm-ghost" onclick="deleteAward(\'' + aw.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '<div style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<div>' +
+                    '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'awards\', \'' + aw.id + '\', this)" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer;" title="' + (isVis ? 'Hide from portfolio' : 'Show on portfolio') + '">' +
+                        (isVis ? 'Hide' : 'Show') +
+                    '</button>' +
+                '</div>' +
+                '<div style="display:flex; gap:8px;">' +
+                    '<button class="btn-sm-ghost" onclick="openAwardDrawerById(\'' + aw.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deleteAward(\'' + aw.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -17853,7 +18071,7 @@ function openAwardDrawer(aw) {
     document.getElementById('award-color').value = aw ? (aw.badge_color || 'blue') : 'blue';
     document.getElementById('award-chips').value = aw && aw.chips ? aw.chips.join(', ') : '';
     document.getElementById('award-desc').value = aw ? (aw.description || '') : '';
-    document.getElementById('award-sort').value = aw ? (aw.sort_order || 0) : 0;
+    document.getElementById('award-sort').value = aw ? (aw.sort_order || 0) : (awardsData.length + 1);
 
     document.getElementById('award-backdrop').classList.add('open');
     document.getElementById('award-drawer').classList.add('open');
@@ -17914,21 +18132,27 @@ async function saveAward() {
 }
 
 async function deleteAward(id) {
-    var aw = _awardMap[id];
+    var aw = (_awardMap && _awardMap[id]) || (awardsData || []).find(function(a){ return a.id === id; });
     var title = aw ? (aw.title + (aw.issuer ? ' from ' + aw.issuer : '')) : 'this award';
     showConfirm({
         title: 'Delete Award?',
         itemTitle: title,
         message: 'This honor/award will be permanently removed from your portfolio.',
         confirmText: 'Delete Award',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/awards/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Award deleted', 'success');
-                await loadAwards();
-            } else {
-                showToast(data.error || 'Delete failed', 'error');
+            try {
+                var res = await fetch('/api/awards/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Award deleted', 'success');
+                    await loadAwards();
+                } else {
+                    showToast(data.error || 'Delete failed', 'error');
+                }
+            } catch(err) {
+                console.error('Delete award error:', err);
+                showToast('Network error while deleting award', 'error');
             }
         }
     });
@@ -18044,11 +18268,13 @@ async function toggleMessageStatus(id, newStatus) {
         });
         var data = await res.json();
         if (data.success) {
-            showToast('Message marked as ' + newStatus);
+            showToast('Message marked as ' + newStatus, 'success');
             await loadInbox();
+        } else {
+            showToast(data.error || 'Failed to update message status', 'error');
         }
     } catch(err) {
-        showToast('Failed to update message status');
+        showToast('Failed to update message status', 'error');
     }
 }
 
@@ -18060,14 +18286,20 @@ async function deleteMessage(id) {
         itemTitle: sender,
         message: 'This message will be permanently deleted from your contact inbox.',
         confirmText: 'Delete Inquiry',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/contact/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Inquiry message deleted', 'success');
-                await loadInbox();
-            } else {
-                showToast(data.error || 'Failed to delete message', 'error');
+            try {
+                var res = await fetch('/api/contact/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Inquiry message deleted', 'success');
+                    await loadInbox();
+                } else {
+                    showToast(data.error || 'Failed to delete message', 'error');
+                }
+            } catch(err) {
+                console.error('Delete message error:', err);
+                showToast('Network error while deleting inquiry message', 'error');
             }
         }
     });
@@ -18142,13 +18374,21 @@ function renderGalleryGrid() {
             return '<span class="badge" style="font-size:0.7rem; padding:2px 8px; background:var(--surface-2); border:1px solid var(--line);">' + escapeHtml(t) + '</span>';
         }).join(' ');
 
+        var isVis = isItemVisible('gallery', item.id);
+        var visBadge = isVis
+            ? '<span class="badge" style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span class="badge" style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
         var dateStr = item.date ? escapeHtml(item.date) : '';
         var locStr = item.location ? '📍 ' + escapeHtml(item.location) : '';
 
-        return '<div class="card" style="display:flex; flex-direction:column; overflow:hidden; border:1.5px solid var(--line); border-radius:var(--r-card); background:var(--surface);">' +
+        return '<div class="card" style="display:flex; flex-direction:column; overflow:hidden; border:1.5px solid var(--line); border-radius:var(--r-card); background:var(--surface);' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             '<div style="position:relative; width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--surface-2);">' +
                 '<img src="' + escapeHtml(item.image_url) + '" alt="' + escapeHtml(item.title) + '" style="width:100%; height:100%; object-fit:cover;">' +
-                '<span class="badge" style="position:absolute; top:10px; left:10px; background:rgba(15,23,42,0.85); color:#fff; font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:var(--r-pill);">' + escapeHtml(item.category || 'General') + '</span>' +
+                '<div style="position:absolute; top:10px; left:10px; display:flex; gap:6px; align-items:center;">' +
+                    '<span class="badge" style="background:rgba(15,23,42,0.85); color:#fff; font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:var(--r-pill);">' + escapeHtml(item.category || 'General') + '</span>' +
+                    visBadge +
+                '</div>' +
             '</div>' +
             '<div style="padding:18px; display:flex; flex-direction:column; flex:1;">' +
                 '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:0.78rem; color:var(--text-tertiary);">' +
@@ -18158,10 +18398,17 @@ function renderGalleryGrid() {
                 '<h4 style="font-size:1rem; font-weight:700; margin-bottom:8px; line-height:1.4; color:var(--text);">' + escapeHtml(item.title) + '</h4>' +
                 (item.description ? '<p style="font-size:0.84rem; color:var(--text-secondary); line-height:1.5; margin-bottom:12px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">' + escapeHtml(item.description) + '</p>' : '') +
                 (tagsHtml ? '<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px;">' + tagsHtml + '</div>' : '') +
-                '<div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:flex-end; gap:8px;">' +
-                    '<button class="btn-sm-ghost" onclick="window.open(\'' + escapeHtml(item.image_url) + '\', \'_blank\')" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);" title="View Full Image">Preview</button>' +
-                    '<button class="btn-sm-ghost" onclick="openGalleryDrawerById(\'' + item.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
-                    '<button class="btn-sm-ghost" onclick="deleteGalleryItem(\'' + item.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.3); background:rgba(234,67,53,0.08); color:var(--g-red);">Delete</button>' +
+                '<div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:8px;">' +
+                    '<div>' +
+                        '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'gallery\', \'' + item.id + '\', this)" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer;" title="' + (isVis ? 'Hide from portfolio' : 'Show on portfolio') + '">' +
+                            (isVis ? 'Hide' : 'Show') +
+                        '</button>' +
+                    '</div>' +
+                    '<div style="display:flex; gap:8px;">' +
+                        '<button class="btn-sm-ghost" onclick="window.open(\'' + escapeHtml(item.image_url) + '\', \'_blank\')" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);" title="View Full Image">Preview</button>' +
+                        '<button class="btn-sm-ghost" onclick="openGalleryDrawerById(\'' + item.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                        '<button class="btn-sm-ghost" onclick="deleteGalleryItem(\'' + item.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.3); background:rgba(234,67,53,0.08); color:var(--g-red);">Delete</button>' +
+                    '</div>' +
                 '</div>' +
             '</div>' +
         '</div>';
@@ -18182,7 +18429,7 @@ function openGalleryDrawer(item) {
     document.getElementById('gal-location').value = item ? (item.location || '') : '';
     document.getElementById('gal-tags').value = item && item.tags ? item.tags.join(', ') : '';
     document.getElementById('gal-desc').value = item ? (item.description || '') : '';
-    document.getElementById('gal-sort').value = item ? (item.sort_order || 0) : 0;
+    document.getElementById('gal-sort').value = item ? (item.sort_order || 0) : (galleryData.length + 1);
 
     var fileInput = document.getElementById('gal-file-input');
     if (fileInput) fileInput.value = '';
@@ -18317,21 +18564,27 @@ async function saveGalleryItem() {
 }
 
 async function deleteGalleryItem(id) {
-    var item = _galleryMap[id];
+    var item = (_galleryMap && _galleryMap[id]) || (galleryData || []).find(function(g){ return g.id === id; });
     var title = item ? item.title : 'this gallery photo';
     showConfirm({
         title: 'Delete Photo from Gallery?',
         itemTitle: title,
         message: 'This photo will be removed from your public visual gallery.',
         confirmText: 'Delete Photo',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/gallery/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Photo deleted from gallery', 'success');
-                await loadGallery();
-            } else {
-                showToast(data.error || 'Delete failed', 'error');
+            try {
+                var res = await fetch('/api/gallery/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Photo deleted from gallery', 'success');
+                    await loadGallery();
+                } else {
+                    showToast(data.error || 'Delete failed', 'error');
+                }
+            } catch(err) {
+                console.error('Delete gallery item error:', err);
+                showToast('Network error while deleting gallery photo', 'error');
             }
         }
     });
@@ -18391,7 +18644,12 @@ function renderPublicationsGrid() {
     if (empty) empty.style.display = 'none';
 
     grid.innerHTML = filtered.map(function(pub) {
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+        var isVis = isItemVisible('publications', pub.id);
+        var visBadge = isVis
+            ? '<span style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:12px; padding:22px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
                 '<div style="flex:1;">' +
                     '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
@@ -18401,12 +18659,22 @@ function renderPublicationsGrid() {
                     (pub.publisher ? '<div style="font-size:0.86rem; font-weight:700; color:var(--g-blue); margin-top:2px;">' + esc(pub.publisher) + '</div>' : '') +
                     (pub.date ? '<div style="font-size:0.75rem; color:var(--ink-4); margin-top:2px;">' + esc(pub.date) + '</div>' : '') +
                 '</div>' +
+                '<div style="display:flex; align-items:center; gap:6px;">' +
+                    visBadge +
+                '</div>' +
             '</div>' +
             (pub.description ? '<p style="font-size:0.86rem; color:var(--ink-3); line-height:1.55; margin:0;">' + esc(pub.description) + '</p>' : '') +
             (pub.link ? '<div style="font-size:0.78rem; margin-top:auto;"><a href="' + esc(pub.link) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 View Repository / Paper ↗</a></div>' : '') +
-            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
-                '<button class="btn-sm-ghost" onclick="openPublicationDrawerById(\'' + pub.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
-                '<button class="btn-sm-ghost" onclick="deletePublication(\'' + pub.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '<div style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<div>' +
+                    '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'publications\', \'' + pub.id + '\', this)" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer;" title="' + (isVis ? 'Hide from portfolio' : 'Show on portfolio') + '">' +
+                        (isVis ? 'Hide' : 'Show') +
+                    '</button>' +
+                '</div>' +
+                '<div style="display:flex; gap:8px;">' +
+                    '<button class="btn-sm-ghost" onclick="openPublicationDrawerById(\'' + pub.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deletePublication(\'' + pub.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -18423,7 +18691,7 @@ function openPublicationDrawer(pub) {
     document.getElementById('pub-date').value = pub ? (pub.date || '') : '';
     document.getElementById('pub-publisher').value = pub ? (pub.publisher || '') : '';
     document.getElementById('pub-color').value = pub ? (pub.accent_color || 'var(--blue)') : 'var(--blue)';
-    document.getElementById('pub-sort').value = pub ? (pub.sort_order || 0) : 0;
+    document.getElementById('pub-sort').value = pub ? (pub.sort_order || 0) : (publicationsData.length + 1);
     document.getElementById('pub-link').value = pub ? (pub.link || '') : '';
     document.getElementById('pub-desc').value = pub ? (pub.description || '') : '';
 
@@ -18487,21 +18755,27 @@ async function savePublication() {
 }
 
 async function deletePublication(id) {
-    var pub = _pubMap[id];
+    var pub = (_pubMap && _pubMap[id]) || (publicationsData || []).find(function(p){ return p.id === id; });
     var title = pub ? pub.title : 'this publication';
     showConfirm({
         title: 'Delete Publication?',
         itemTitle: title,
         message: 'This publication record will be permanently deleted from your portfolio.',
         confirmText: 'Delete Publication',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/publications/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Publication deleted', 'success');
-                await loadPublications();
-            } else {
-                showToast(data.error || 'Delete failed', 'error');
+            try {
+                var res = await fetch('/api/publications/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Publication deleted', 'success');
+                    await loadPublications();
+                } else {
+                    showToast(data.error || 'Delete failed', 'error');
+                }
+            } catch(err) {
+                console.error('Delete publication error:', err);
+                showToast('Network error while deleting publication', 'error');
             }
         }
     });
@@ -18655,11 +18929,16 @@ function renderBlogsGrid() {
             ? '<span style="background:rgba(234,67,53,0.1); color:var(--g-red); font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.25);">Draft</span>'
             : '<span style="background:rgba(52,168,83,0.1); color:var(--g-green); font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.25);">Published</span>';
 
+        var isVis = isItemVisible('blogs', blog.id);
+        var visBadge = isVis
+            ? '<span style="font-size:0.68rem; font-weight:800; background:var(--g-green-soft); color:var(--g-green); padding:2px 8px; border-radius:10px; border:1px solid rgba(52,168,83,0.3); display:inline-flex; align-items:center; gap:3px;">👁️ Visible</span>'
+            : '<span style="font-size:0.68rem; font-weight:800; background:var(--g-red-soft); color:var(--g-red); padding:2px 8px; border-radius:10px; border:1px solid rgba(234,67,53,0.3); display:inline-flex; align-items:center; gap:3px;">🚫 Hidden</span>';
+
         var coverThumb = blog.cover_image
             ? '<div style="height:130px; border-radius:8px; overflow:hidden; margin-bottom:12px; background:#F1F3F4;"><img src="' + esc(blog.cover_image) + '" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.display=\'none\'"></div>'
             : '';
 
-        return '<div class="project-card" style="display:flex; flex-direction:column; gap:10px; padding:20px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);">' +
+        return '<div class="project-card" style="display:flex; flex-direction:column; gap:10px; padding:20px; border:1.5px solid var(--sidebar-border); border-radius:var(--r-md); background:var(--surface);' + (!isVis ? 'opacity:0.75; border-style:dashed;' : '') + '">' +
             coverThumb +
             '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">' +
                 '<div style="flex:1;">' +
@@ -18671,6 +18950,7 @@ function renderBlogsGrid() {
                     '</div>' +
                 '</div>' +
                 '<div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0;">' +
+                    visBadge +
                     (blog.badge ? '<span style="background:rgba(66,133,244,0.1); color:var(--g-blue); font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:10px; border:1px solid rgba(66,133,244,0.25);">' + esc(blog.badge) + '</span>' : '') +
                     statusBadge +
                 '</div>' +
@@ -18678,9 +18958,16 @@ function renderBlogsGrid() {
             (blog.excerpt ? '<p style="font-size:0.86rem; color:var(--ink-3); line-height:1.55; margin:0;">' + esc(blog.excerpt) + '</p>' : '') +
             (tagsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px;">' + tagsPills + '</div>' : '') +
             (blog.link ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(blog.link) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 Read External Link ↗</a></div>' : '') +
-            '<div style="display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
-                '<button class="btn-sm-ghost" onclick="openBlogDrawerById(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
-                '<button class="btn-sm-ghost" onclick="deleteBlog(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+            '<div style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
+                '<div>' +
+                    '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'blogs\', \'' + blog.id + '\', this)" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer;" title="' + (isVis ? 'Hide from portfolio' : 'Show on portfolio') + '">' +
+                        (isVis ? 'Hide' : 'Show') +
+                    '</button>' +
+                '</div>' +
+                '<div style="display:flex; gap:8px;">' +
+                    '<button class="btn-sm-ghost" onclick="openBlogDrawerById(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:var(--r-pill); border:1.5px solid var(--line); background:var(--surface);">Edit</button>' +
+                    '<button class="btn-sm-ghost" onclick="deleteBlog(\'' + blog.id + '\')" style="font-size:0.78rem; font-weight:700; padding:6px 14px; color:var(--g-red); border-radius:var(--r-pill); border:1.5px solid rgba(234,67,53,0.2); background:var(--g-red-soft);">Delete</button>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -18700,7 +18987,7 @@ function openBlogDrawer(blog) {
     document.getElementById('blog-status').value = blog ? (blog.status || 'published') : 'published';
     document.getElementById('blog-cover-url').value = blog ? (blog.cover_image || '') : '';
     document.getElementById('blog-art-type').value = blog ? (blog.art_type || 'rag-pattern') : 'rag-pattern';
-    document.getElementById('blog-sort').value = blog ? (blog.sort_order || 0) : 0;
+    document.getElementById('blog-sort').value = blog ? (blog.sort_order || 0) : (blogsData.length + 1);
     document.getElementById('blog-link').value = blog ? (blog.link || '') : '';
     document.getElementById('blog-tags').value = blog ? (blog.tags || []).join(', ') : '';
     document.getElementById('blog-excerpt').value = blog ? (blog.excerpt || '') : '';
@@ -18817,21 +19104,27 @@ async function saveBlog() {
 }
 
 async function deleteBlog(id) {
-    var blog = _blogMap[id];
+    var blog = (_blogMap && _blogMap[id]) || (blogsData || []).find(function(b){ return b.id === id; });
     var title = blog ? blog.title : 'this blog article';
     showConfirm({
         title: 'Delete Blog Article?',
         itemTitle: title,
         message: 'This article will be permanently removed from your portfolio publication list.',
         confirmText: 'Delete Article',
+        confirmType: 'danger',
         onConfirm: async function() {
-            var res = await fetch('/api/blogs/' + id, { method: 'DELETE' });
-            var data = await res.json();
-            if (data.success) {
-                showToast('Article deleted', 'success');
-                await loadBlogs();
-            } else {
-                showToast(data.error || 'Delete failed', 'error');
+            try {
+                var res = await fetch('/api/blogs/' + id, { method: 'DELETE' });
+                var data = await res.json();
+                if (data.success) {
+                    showToast('Article deleted', 'success');
+                    await loadBlogs();
+                } else {
+                    showToast(data.error || 'Delete failed', 'error');
+                }
+            } catch(err) {
+                console.error('Delete blog error:', err);
+                showToast('Network error while deleting article', 'error');
             }
         }
     });
