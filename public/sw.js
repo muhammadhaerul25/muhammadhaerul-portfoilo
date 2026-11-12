@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'mh-pwa-v1.2';
+const CACHE_VERSION = 'mh-pwa-v2.3';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const API_CACHE = `${CACHE_VERSION}-api`;
@@ -8,9 +8,9 @@ const PRECACHE_ASSETS = [
   '/index.html',
   '/browse.html',
   '/offline.html',
-  '/styles.css?v=8.4',
-  '/script.js?v=8.4',
-  '/pwa.js?v=1.2',
+  '/styles.css?v=18.0',
+  '/script.js?v=18.0',
+  '/pwa.js?v=1.3',
   '/manifest.json',
   '/favicon.webp',
   '/favicon.png',
@@ -35,7 +35,7 @@ self.addEventListener('install', (event) => {
                 return cache.put(url, res);
               }
             })
-            .catch(() => {})
+            .catch(() => { })
         )
       );
     })

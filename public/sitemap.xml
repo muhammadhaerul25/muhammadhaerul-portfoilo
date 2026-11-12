@@ -55,6 +55,13 @@
       <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
     </image:image>
 
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp</image:loc>
+      <image:title>Muhammad Haerul — Foto On-site AIoT Engineer di XL Axiata Tower Jakarta</image:title>
+      <image:caption>Foto portrait Muhammad Haerul di kantor pusat PT XL Axiata Tbk Jakarta saat berkarier sebagai AIoT Engineer.</image:caption>
+      <image:geo_location>Jakarta, Indonesia</image:geo_location>
+    </image:image>
+
     <!-- ── KEYNOTE SPEAKER & WORKSHOP DOCUMENTATION ── -->
     <image:image>
       <image:loc>https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-build-with-ai.webp</image:loc>
@@ -124,6 +131,45 @@
       <image:title>Muhammad Haerul — Dialog Interaktif Radio Republik Indonesia (RRI Mamuju)</image:title>
       <image:caption>Dokumentasi narasumber dialog interaktif Kita Indonesia bersama Muhammad Haerul tentang kesiapan pemuda menghadapi tantangan AI global.</image:caption>
       <image:geo_location>Mamuju, West Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/xl-axiata-aiot-documentation.webp</image:loc>
+      <image:title>Muhammad Haerul — 5G AIoT Engineering &amp; Edge Computer Vision Lab Documentation</image:title>
+      <image:caption>Foto dokumentasi on-site Muhammad Haerul sebagai AIoT Engineer di XL Axiata X-Camp Jakarta mengembangkan sistem edge computer vision dan IoT monitoring.</image:caption>
+      <image:geo_location>Jakarta, Indonesia</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/awards/open-the-gate-hackathon-champion-photo.webp</image:loc>
+      <image:title>Muhammad Haerul — 1st Place Winner Champion of Open The Gate Hackathon 2025</image:title>
+      <image:caption>Dokumentasi kemenangan Juara 1 Muhammad Haerul pada ajang Open The Gate Hackathon 2025 BSS Parking (Galaxy Developer).</image:caption>
+      <image:geo_location>Indonesia</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/images/awards/makassar-hackathon-2024-runner-up-photo.webp</image:loc>
+      <image:title>Muhammad Haerul — 2nd Place Winner of Makassar Hackathon 2024 Dispora</image:title>
+      <image:caption>Dokumentasi podium kemenangan Juara 2 (Runner-Up) Muhammad Haerul pada Makassar Hackathon 2024 oleh Dispora Makassar dan Binar Academy.</image:caption>
+      <image:geo_location>Makassar, South Sulawesi, Indonesia</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-msib-kemendikbud-ai-engineer.webp</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — AI Engineer MSIB Kemendikbudristek</image:title>
+      <image:caption>Sertifikat resmi kelulusan program MSIB Studi Independen AI Engineer Kemendikbudristek diraih oleh Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-teaching-assistant-matematika-unhas.webp</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — Asisten Dosen Matematika Komputasi Universitas Hasanuddin</image:title>
+      <image:caption>Surat keterangan dan sertifikat resmi Asisten Dosen Laboratorium Matematika &amp; Komputasi FMIPA Universitas Hasanuddin atas nama Muhammad Haerul.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://muhammadhaerul.tech/assets/certificates/cert-xl-axiata-internship-completion.webp</image:loc>
+      <image:title>Sertifikat Muhammad Haerul — AIoT Engineer Internship Completion XL Axiata</image:title>
+      <image:caption>Sertifikat resmi penyelesaian magang AIoT Engineer di PT XL Axiata Tbk diraih oleh Muhammad Haerul.</image:caption>
     </image:image>
 
     <!-- ── VERIFIED ACADEMIC & PROFESSIONAL CERTIFICATES ── -->

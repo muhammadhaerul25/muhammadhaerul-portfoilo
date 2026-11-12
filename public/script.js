@@ -1590,14 +1590,14 @@
     if (isUnsulbar) {
       return [
         {
-          label: isId ? 'Dokumentasi Workshop' : 'Workshop Documentation',
-          url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp',
-          type: 'documentation'
-        },
-        {
           label: isId ? 'Plakat Penghargaan' : 'Appreciation Plaque',
           url: '/assets/certificates/cert-unsulbar-web-ai.jpg',
           type: 'certificate'
+        },
+        {
+          label: isId ? 'Dokumentasi Workshop' : 'Workshop Documentation',
+          url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp',
+          type: 'documentation'
         }
       ];
     }
@@ -1932,7 +1932,7 @@
       const initials = getInitials(f.nama_lengkap);
       const displayName = f.nama_lengkap ? f.nama_lengkap.trim() : 'Engineering Colleague';
       let companyText = (f.source || '').replace(/^LinkedIn Recommendation\s*[·•-]?\s*/i, '').trim();
-      if (!companyText) companyText = 'Infomedia Nusantara · SCREENESIA';
+      if (!companyText) companyText = 'AI & ML Engineer · Galaxy Developer';
       companyText = companyText.replace(/\s*\/\s*/g, ' · ');
       const dateText = f.created_at ? new Date(f.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jul 2026';
 
@@ -2484,6 +2484,34 @@
       if (exp.location) metaParts.push(exp.location);
       const metaStr = metaParts.map(p => ` <span class="timeline-loc">· ${escapeHtml(p)}</span>`).join('');
 
+      const isXlAxiata = (exp.company && exp.company.toLowerCase().includes('xl axiata')) || (exp.role && exp.role.toLowerCase().includes('aiot'));
+      const mediaHtml = isXlAxiata ? `
+        <div class="timeline-media-wrap">
+          <div class="timeline-media-eyebrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Attached Documentation (2 Photos)</span>
+          </div>
+          <div class="timeline-media-grid">
+            <div class="timeline-media-card" onclick="window.openLightbox('/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp', 'Muhammad Haerul — AI Engineer at XL Axiata', this)" role="button" tabindex="0" aria-label="View XL Axiata Office Portrait in Full Screen" title="Click to view full screen">
+              <div class="timeline-media-thumb-wrap">
+                <img class="timeline-media-thumb" src="/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp" alt="Muhammad Haerul at XL Axiata Tower" loading="lazy" decoding="async">
+                <div class="timeline-media-zoom-overlay">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-media-card" onclick="window.openLightbox('/assets/images/xl-axiata-aiot-documentation.webp', '5G AI-IoT Use Case Development &amp; Edge Computer Vision Lab — XL Axiata (X-Camp)', this)" role="button" tabindex="0" aria-label="View XL Axiata Lab Documentation in Full Screen" title="Click to view full screen">
+              <div class="timeline-media-thumb-wrap">
+                <img class="timeline-media-thumb" src="/assets/images/xl-axiata-aiot-documentation.webp" alt="5G AI-IoT Engineering at XL Axiata X-Camp" loading="lazy" decoding="async">
+                <div class="timeline-media-zoom-overlay">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ` : '';
+
       return `
         <div class="timeline-item reveal in-view" style="--accent:${escapeHtml(accent)}">
           <div class="timeline-marker" style="--accent:${escapeHtml(accent)}"></div>
@@ -2501,6 +2529,7 @@
               </div>
             </div>
             ${formatExperienceDescriptionHtml(exp.description, accent, exp.id)}
+            ${mediaHtml}
           </div>
         </div>
       `;
@@ -3611,6 +3640,36 @@
       ];
     }
 
+    if (titleLower.includes('open the gate') || id === 'cmvup56zo000sggb9c6u8tdvr') {
+      return [
+        {
+          label: isId ? 'Sertifikat Juara 1' : 'Winner Certificate',
+          url: aw.image_url || '/assets/images/awards/award_img_3.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Dokumentasi Pemenang' : 'Winner Documentation',
+          url: '/assets/images/open-the-gate-hackathon-champion-photo.webp',
+          type: 'documentation'
+        }
+      ];
+    }
+
+    if (titleLower.includes('makassar hackathon') || id === 'cmvup572t000uggb95ri4o0w0') {
+      return [
+        {
+          label: isId ? 'Sertifikat Juara 2' : '2nd Place Certificate',
+          url: aw.image_url || '/assets/images/awards/award_img_2.jpg',
+          type: 'certificate'
+        },
+        {
+          label: isId ? 'Dokumentasi Pemenang' : 'Winner Documentation',
+          url: '/assets/images/awards/makassar-hackathon-2024-runner-up-photo.webp',
+          type: 'documentation'
+        }
+      ];
+    }
+
     if (aw.image_url) {
       return [{
         label: isId ? 'Sertifikat' : 'Certificate',
@@ -3692,7 +3751,7 @@
                   <span class="card-page-text">1 / ${pages.length}</span>
                 </div>
               ` : ''}
-              <div class="award-cert-overlay">
+              <div class="award-cert-overlay" style="align-items:flex-end !important; justify-content:flex-start !important; padding:8px 10px !important;">
                 <span class="award-cert-zoom-btn">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                   <span class="award-zoom-text">${isId ? 'Lihat Bukti Sertifikat' : 'View Certificate Proof'}</span>
@@ -4555,24 +4614,34 @@
           { label: 'Recognition Certificate', url: '/assets/certificates/cert-outstanding-student-unhas-page2.jpg', type: 'certificate' }
         ];
         itemTitle = 'The Most Outstanding Student of Information Systems Department 2022';
+      } else if (sLower.includes('open the gate') || sLower.includes('award_img_3') || aLower.includes('open the gate')) {
+        pages = [
+          { label: 'Winner Certificate', url: '/assets/images/awards/award_img_3.jpg', type: 'certificate' },
+          { label: 'Winner Documentation', url: '/assets/images/open-the-gate-hackathon-champion-photo.webp', type: 'documentation' }
+        ];
+        itemTitle = '1st Place Winner of Open The Gate Hackathon 2025';
+      } else if (sLower.includes('makassar hackathon') || sLower.includes('award_img_2') || aLower.includes('makassar hackathon')) {
+        pages = [
+          { label: '2nd Place Certificate', url: '/assets/images/awards/award_img_2.jpg', type: 'certificate' },
+          { label: 'Winner Documentation', url: '/assets/images/awards/makassar-hackathon-2024-runner-up-photo.webp', type: 'documentation' }
+        ];
+        itemTitle = '2nd Place Winner of Makassar Hackathon 2024';
       } else if (sLower.includes('build-with-ai') || sLower.includes('build with ai') || aLower.includes('build with ai')) {
         pages = [
           { label: 'Poster', url: '/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp', type: 'poster' },
-          { label: 'Certificate', url: '/assets/certificates/cert-gdg-build-with-ai.jpg', type: 'certificate' },
-          { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-build-with-ai.webp', type: 'documentation' }
+          { label: 'Certificate', url: '/assets/certificates/cert-gdg-build-with-ai.jpg', type: 'certificate' }
         ];
         itemTitle = 'Build with AI: AI-Driven Development';
       } else if (sLower.includes('web-ai') || sLower.includes('web engineering') || aLower.includes('web engineering') || aLower.includes('sulawesi barat') || aLower.includes('unsulbar')) {
         pages = [
-          { label: 'Workshop Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' },
-          { label: 'Appreciation Plaque', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' }
+          { label: 'Appreciation Plaque', url: '/assets/certificates/cert-unsulbar-web-ai.jpg', type: 'certificate' },
+          { label: 'Workshop Documentation', url: '/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp', type: 'documentation' }
         ];
         itemTitle = 'AI Web Engineering & Security Hands-on Workshop';
       } else if (sLower.includes('cybersecurity') || sLower.includes('bssn') || aLower.includes('cybersecurity')) {
         pages = [
           { label: 'Poster', url: '/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp', type: 'poster' },
-          { label: 'Certificate', url: '/assets/certificates/cert-bssn-cybersecurity.jpg', type: 'certificate' },
-          { label: 'Documentation', url: '/assets/images/muhammad-haerul-speaker-bssn-cybersecurity.webp', type: 'documentation' }
+          { label: 'Certificate', url: '/assets/certificates/cert-bssn-cybersecurity.jpg', type: 'certificate' }
         ];
         itemTitle = 'National Cybersecurity & Information Security Awareness Webinar';
       } else if (sLower.includes('khouw') || sLower.includes('kalbe') || aLower.includes('mindful ai')) {
@@ -4730,6 +4799,69 @@
   let currentGalleryFilter = 'All';
   let isGalleryMotionPaused = false;
 
+  const GALLERY_MONTH_MAP = {
+    jan: 0, january: 0, januari: 0,
+    feb: 1, february: 1, februari: 1,
+    mar: 2, march: 2, maret: 2,
+    apr: 3, april: 3,
+    may: 4, mei: 4,
+    jun: 5, june: 5, juni: 5,
+    jul: 6, july: 6, juli: 6,
+    aug: 7, august: 7, agustus: 7, agu: 7,
+    sep: 8, sept: 8, september: 8,
+    oct: 9, october: 9, oktober: 9, okt: 9,
+    nov: 10, november: 10, nopember: 10,
+    dec: 11, december: 11, desember: 11, des: 11
+  };
+
+  function parseGalleryDateScore(raw) {
+    if (!raw) return 0;
+    if (raw instanceof Date) return raw.getTime();
+    const s = String(raw).trim();
+    if (!s) return 0;
+    if (/present|current|now|sekarang/i.test(s)) return Date.UTC(2099, 11, 31);
+
+    const mFull = s.match(/([a-zA-Z]+)\s+(\d{1,2}),?\s+(\d{4})/);
+    if (mFull && GALLERY_MONTH_MAP[mFull[1].toLowerCase()] !== undefined) {
+      return Date.UTC(parseInt(mFull[3], 10), GALLERY_MONTH_MAP[mFull[1].toLowerCase()], parseInt(mFull[2], 10));
+    }
+
+    const mDayMonthYear = s.match(/(\d{1,2})\s+([a-zA-Z]+)\s+(\d{4})/);
+    if (mDayMonthYear && GALLERY_MONTH_MAP[mDayMonthYear[2].toLowerCase()] !== undefined) {
+      return Date.UTC(parseInt(mDayMonthYear[3], 10), GALLERY_MONTH_MAP[mDayMonthYear[2].toLowerCase()], parseInt(mDayMonthYear[1], 10));
+    }
+
+    const mMonthYear = s.match(/([a-zA-Z]+)\s+(\d{4})/);
+    if (mMonthYear && GALLERY_MONTH_MAP[mMonthYear[1].toLowerCase()] !== undefined) {
+      return Date.UTC(parseInt(mMonthYear[2], 10), GALLERY_MONTH_MAP[mMonthYear[1].toLowerCase()], 1);
+    }
+
+    const mIso = s.match(/^(\d{4})-(\d{1,2})(?:-(\d{1,2}))?/);
+    if (mIso) {
+      return Date.UTC(parseInt(mIso[1], 10), parseInt(mIso[2], 10) - 1, mIso[3] ? parseInt(mIso[3], 10) : 1);
+    }
+
+    const parsed = Date.parse(s);
+    if (!isNaN(parsed)) return parsed;
+
+    const mYear = s.match(/\b(19|20)\d{2}\b/);
+    if (mYear) return Date.UTC(parseInt(mYear[0], 10), 0, 1);
+
+    return 0;
+  }
+
+  function sortGalleryItemsByDateDesc(items) {
+    if (!Array.isArray(items)) return [];
+    return items.slice().sort((a, b) => {
+      const scoreA = parseGalleryDateScore(a && a.date);
+      const scoreB = parseGalleryDateScore(b && b.date);
+      if (scoreA !== scoreB) return scoreB - scoreA;
+      const sortA = (a && typeof a.sort_order === 'number') ? a.sort_order : 9999;
+      const sortB = (b && typeof b.sort_order === 'number') ? b.sort_order : 9999;
+      return sortA - sortB;
+    });
+  }
+
   function buildGalleryCardHtml(item) {
     const dateText = item.date ? escapeHtml(item.date) : '';
     const titleText = escapeHtml(item.title);
@@ -4737,11 +4869,12 @@
     const imgUrl = escapeHtml(item.image_url);
     const categoryText = item.category ? escapeHtml(item.category) : '';
     const isPoster = categoryText.toLowerCase().includes('poster') || categoryText.toLowerCase().includes('flyer');
+    const isPortrait = categoryText.toLowerCase().includes('portrait') || categoryText.toLowerCase().includes('profile');
 
     return `
-      <article class="gallery-card ${isPoster ? 'is-poster-card' : ''}" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
-        <div class="gallery-card-thumb-wrap ${isPoster ? 'is-poster-thumb' : ''}">
-          <img class="gallery-card-thumb ${isPoster ? 'is-poster-img' : ''}" src="${imgUrl}" alt="Muhammad Haerul — ${titleText}" title="Muhammad Haerul — ${titleText}" loading="lazy" decoding="async">
+      <article class="gallery-card ${isPoster ? 'is-poster-card' : ''} ${isPortrait ? 'is-portrait-card' : ''}" onclick="window.openLightbox('${imgUrl}', '${titleText}')" role="button" tabindex="0" aria-label="${titleText}">
+        <div class="gallery-card-thumb-wrap ${isPoster ? 'is-poster-thumb' : ''} ${isPortrait ? 'is-portrait-thumb' : ''}">
+          <img class="gallery-card-thumb ${isPoster ? 'is-poster-img' : ''} ${isPortrait ? 'is-portrait-img' : ''}" src="${imgUrl}" alt="Muhammad Haerul — ${titleText}" title="Muhammad Haerul — ${titleText}" loading="lazy" decoding="async">
           <div class="gallery-zoom-overlay">
             <div class="gallery-zoom-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -4753,8 +4886,6 @@
             <h3 class="gallery-card-title">${titleText}</h3>
             ${dateText ? `<span class="gallery-card-date">${dateText}</span>` : ''}
           </div>
-          ${categoryText ? `<span class="gallery-card-category-badge">${categoryText}</span>` : ''}
-          ${captionText ? `<p class="gallery-card-caption">${captionText}</p>` : ''}
         </div>
       </article>
     `;
@@ -4799,14 +4930,6 @@
         badge: 'Event Flyer'
       });
     });
-
-    // Also include high-res Mindful AI flyer if in liveGallery
-    if (Array.isArray(liveGallery)) {
-      const hd = liveGallery.find(i => (i.image_url || '').includes('mindful-ai-poster-hd'));
-      if (hd && !flyers.some(f => f.image_url === hd.image_url)) {
-        flyers.push(hd);
-      }
-    }
 
     return flyers;
   }
@@ -4861,8 +4984,8 @@
       if (Array.isArray(t.gallery)) {
         t.gallery.forEach(img => {
           if (!img || seenUrls.has(img)) return;
-          // Filter ketat: buang poster, flyer, sertifikat, dan piagam
-          if (/cert|sertifikat|plakat|piagam|flyer|poster|saveclip|dialog-interaktif/i.test(img)) return;
+          // Filter ketat: buang poster, flyer, sertifikat, piagam, dan screenshot webinar virtual
+          if (/cert|sertifikat|plakat|piagam|flyer|poster|saveclip|dialog-interaktif|speaker-build-with-ai|speaker-bssn-cybersecurity|speaker-gsa-ai-forge|speaker-mindful-ai|mindful-ai|licdn\.com|zoom/i.test(img)) return;
 
           seenUrls.add(img);
           let title = t.event;
@@ -4890,15 +5013,6 @@
           } else if (img.includes('workshop-ai-web-engineering')) {
             title = 'AI Web Engineering Hands-on Workshop with 50+ Participants';
             desc = 'Real photo documenting hands-on training with faculty and students at Unsulbar.';
-          } else if (img.includes('speaker-build-with-ai')) {
-            title = 'Build with AI: Stage Keynote Delivery at UC Makassar';
-            desc = 'On-stage keynote presentation on generative AI and agentic workflows.';
-          } else if (img.includes('speaker-bssn-cybersecurity')) {
-            title = 'National Cybersecurity Forum: Live Speaker Presentation';
-            desc = 'Live speaker moment sharing defensive generative AI frameworks.';
-          } else if (img.includes('speaker-mindful-ai')) {
-            title = 'Mindful AI: Live Scholar Interactive Masterclass';
-            desc = 'Live session moment presenting intelligent study workflows for students.';
           }
 
           photos.push({
@@ -4914,42 +5028,87 @@
       }
     });
 
-    // 2. Tambahkan foto stage dokumentasi asli GSA AI Forge
-    const gsaSpeakerImg = '/assets/images/muhammad-haerul-speaker-gsa-ai-forge.webp';
-    if (!seenUrls.has(gsaSpeakerImg)) {
-      seenUrls.add(gsaSpeakerImg);
-      photos.push({
-        id: 'gsa-speaker-stage',
-        title: 'GSA AI Forge: Keynote Stage Delivery',
-        description: 'Stage documentation leading AI workflows at Makassar Government Center.',
-        image_url: gsaSpeakerImg,
-        date: 'July 2026',
-        category: 'Activity Documentation',
-        badge: 'Real Activity Photo'
-      });
-    }
-
-    // 3. Fallback jika liveGallery memiliki foto dokumentasi nyata
+    // 2. Fallback jika liveGallery memiliki foto dokumentasi nyata
     if (Array.isArray(liveGallery)) {
       liveGallery.forEach(i => {
         const img = (i.image_url || '').toLowerCase();
         const cat = (i.category || '').toLowerCase();
         if (seenUrls.has(i.image_url)) return;
-        // Eksklusi ketat: tidak ada sertifikat, tidak ada flyer/poster
-        if (/cert|award|sertifikat|plakat|piagam|flyer|poster|saveclip/i.test(img)) return;
-        if (cat.includes('cert') || cat.includes('award') || cat.includes('poster') || cat.includes('flyer')) return;
+        // Eksklusi ketat: tidak ada sertifikat, tidak ada flyer/poster, tidak ada foto profil/potret pribadi, tidak ada screenshot zoom/webinar
+        if (/cert|award|sertifikat|plakat|piagam|flyer|poster|saveclip|speaker-build-with-ai|speaker-bssn-cybersecurity|speaker-gsa-ai-forge|speaker-mindful-ai|mindful-ai|licdn\.com|zoom|portrait|profile/i.test(img)) return;
+        if (cat.includes('cert') || cat.includes('award') || cat.includes('poster') || cat.includes('flyer') || cat.includes('portrait') || cat.includes('profile') || cat.includes('personal')) return;
 
-        if (cat.includes('doc') || cat.includes('activ') || cat.includes('photo') || img.includes('doc') || img.includes('workshop')) {
+        if (cat.includes('doc') || cat.includes('activ') || cat.includes('photo') || img.includes('doc') || img.includes('workshop') || img.includes('xl-axiata-aiot')) {
           seenUrls.add(i.image_url);
           photos.push(i);
         }
       });
     }
 
+    // 3. Tambahkan foto dokumentasi resmi 5G AIoT Engineering di XL Axiata
+    const xlImg = '/assets/images/xl-axiata-aiot-documentation.webp';
+    if (!seenUrls.has(xlImg)) {
+      seenUrls.add(xlImg);
+      photos.push({
+        id: 'xl-axiata-aiot-doc',
+        title: '5G AIoT Engineering & Edge Computer Vision Lab — XL Axiata',
+        description: 'Authentic engineering documentation: Muhammad Haerul developing edge computer vision models and AIoT monitoring systems at XL Axiata X-Camp.',
+        image_url: xlImg,
+        date: 'December 2023',
+        location: 'XL Axiata Tower, Jakarta · X-Camp',
+        category: 'Activity Documentation',
+        badge: 'Real Activity Photo'
+      });
+    }
+
+    // 4. Tambahkan foto dokumentasi resmi 1st Place Winner Open The Gate Hackathon
+    const otgImg = '/assets/images/open-the-gate-hackathon-champion-photo.webp';
+    if (!seenUrls.has(otgImg)) {
+      seenUrls.add(otgImg);
+      photos.push({
+        id: 'open-the-gate-hack-doc',
+        title: '1st Place Champion: Open The Gate Hackathon 2025 — BSS Parking',
+        description: 'Authentic stage & team documentation: Muhammad Haerul and Galaxy Developer team winning 1st Place at Open The Gate Hackathon 2025.',
+        image_url: otgImg,
+        date: 'June 2025',
+        location: 'PT Bahana Security Sistem (BSS Parking), Jakarta',
+        category: 'Activity Documentation',
+        badge: 'Real Activity Photo'
+      });
+    }
+
     return photos;
   }
 
+  function getPersonalProfilePortraits() {
+    // 1. Ambil dari liveGallery jika ada kategori Personal Portraits
+    if (Array.isArray(liveGallery) && liveGallery.length > 0) {
+      const dbPortraits = liveGallery.filter(i => {
+        const c = (i.category || '').toLowerCase();
+        return c.includes('portrait') || c.includes('profile') || c.includes('personal');
+      });
+      if (dbPortraits.length > 0) {
+        return dbPortraits.sort((a, b) => (a.sort_order || 999) - (b.sort_order || 999));
+      }
+    }
+
+    // 2. Curated fallback list
+    return [
+      {
+        id: 'portrait-xl-axiata-office',
+        title: 'AI Engineer at XL Axiata',
+        category: 'Personal Portraits',
+        date: 'December 2023',
+        location: 'XL Axiata Tower, Jakarta',
+        description: 'Authentic workplace portrait of Muhammad Haerul on-site at XL Axiata headquarters during the 5G AIoT engineering program.',
+        image_url: '/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp',
+        badge: 'Workplace Portrait'
+      }
+    ];
+  }
+
   function renderGallery(filter = 'All') {
+    const track0 = document.getElementById('galleryTrack0');
     const track1 = document.getElementById('galleryTrack1');
     const track2 = document.getElementById('galleryTrack2');
     const track3 = document.getElementById('galleryTrack3');
@@ -4957,6 +5116,7 @@
 
     currentGalleryFilter = filter;
 
+    const wrap0 = document.getElementById('galleryRowWrap0');
     const wrap1 = document.getElementById('galleryRowWrap1');
     const wrap2 = document.getElementById('galleryRowWrap2');
     const wrap3 = document.getElementById('galleryRowWrap3');
@@ -4966,32 +5126,49 @@
     // Show or hide row wrappers according to active filter
     if (wrap1 && wrap2 && wrap3) {
       if (f === 'all') {
+        if (wrap0) wrap0.style.display = '';
         wrap1.style.display = '';
         wrap2.style.display = '';
         wrap3.style.display = '';
+      } else if (f.includes('portrait') || f.includes('profile') || f.includes('person')) {
+        if (wrap0) wrap0.style.display = '';
+        wrap1.style.display = 'none';
+        wrap2.style.display = 'none';
+        wrap3.style.display = 'none';
       } else if (f.includes('poster') || f.includes('flyer')) {
+        if (wrap0) wrap0.style.display = 'none';
         wrap1.style.display = '';
         wrap2.style.display = 'none';
         wrap3.style.display = 'none';
       } else if (f.includes('cert') || f.includes('award') || f.includes('honor')) {
+        if (wrap0) wrap0.style.display = 'none';
         wrap1.style.display = 'none';
         wrap2.style.display = '';
         wrap3.style.display = 'none';
       } else if (f.includes('doc') || f.includes('activ') || f.includes('photo')) {
+        if (wrap0) wrap0.style.display = 'none';
         wrap1.style.display = 'none';
         wrap2.style.display = 'none';
         wrap3.style.display = '';
+      } else {
+        if (wrap0) wrap0.style.display = 'none';
+        wrap1.style.display = 'none';
+        wrap2.style.display = 'none';
+        wrap3.style.display = 'none';
       }
     }
 
-    // Row 1: Khusus untuk flyer aja (ambil dari talks section, gambar pertama, kecuali Unsulbar)
-    const posters = getTalkFlyers();
+    // Row 0: Khusus Personal & Profile Portraits (formal, wisuda, speaker, workplace) — Sorted descending by date
+    const personalPortraits = sortGalleryItemsByDateDesc(getPersonalProfilePortraits());
 
-    // Row 2: Khusus certificate dari honors & awards section (mostly dari gambar pertama)
-    const certsAndAwards = getAwardCertificates();
+    // Row 1: Khusus untuk flyer aja (ambil dari talks section, gambar pertama, kecuali Unsulbar) — Sorted descending by date
+    const posters = sortGalleryItemsByDateDesc(getTalkFlyers());
 
-    // Row 3: Khusus foto kegiatan nyata (foto-foto asli, bukan hasil desain poster/flyer atau sertifikat)
-    const activityDocs = getActivityDocumentationPhotos();
+    // Row 2: Khusus certificate dari honors & awards section (mostly dari gambar pertama) — Sorted descending by date
+    const certsAndAwards = sortGalleryItemsByDateDesc(getAwardCertificates());
+
+    // Row 3: Khusus foto kegiatan nyata (foto-foto asli, bukan hasil desain poster/flyer atau sertifikat) — Sorted descending by date
+    const activityDocs = sortGalleryItemsByDateDesc(getActivityDocumentationPhotos());
 
     function createLoopSequence(itemList, minCount = 8) {
       if (!itemList || itemList.length === 0) return [];
@@ -5002,10 +5179,12 @@
       return seq.concat(seq);
     }
 
+    const loop0 = createLoopSequence(personalPortraits);
     const loop1 = createLoopSequence(posters);
     const loop2 = createLoopSequence(certsAndAwards);
     const loop3 = createLoopSequence(activityDocs);
 
+    if (track0 && loop0.length) track0.innerHTML = loop0.map(item => buildGalleryCardHtml(item)).join('');
     if (loop1.length) track1.innerHTML = loop1.map(item => buildGalleryCardHtml(item)).join('');
     if (loop2.length) track2.innerHTML = loop2.map(item => buildGalleryCardHtml(item)).join('');
     if (track3 && loop3.length) {
@@ -5015,11 +5194,12 @@
 
   function updateGalleryFilterCounts() {
     const allCountEl = document.querySelector('.gallery-tab[data-category="All"] .gallery-tab-count');
+    const portraits = getPersonalProfilePortraits();
     const flyers = getTalkFlyers();
     const awardsCerts = getAwardCertificates();
     const docs = getActivityDocumentationPhotos();
 
-    const totalCount = flyers.length + awardsCerts.length + docs.length;
+    const totalCount = portraits.length + flyers.length + awardsCerts.length + docs.length;
     if (allCountEl) allCountEl.textContent = totalCount;
 
     const tabs = document.querySelectorAll('.gallery-tab[data-category]:not([data-category="All"])');
@@ -5027,7 +5207,9 @@
       const cat = (tab.getAttribute('data-category') || '').replace(/&amp;/g, '&').toLowerCase();
       const countEl = tab.querySelector('.gallery-tab-count');
       let count = 0;
-      if (cat.includes('poster') || cat.includes('flyer')) {
+      if (cat.includes('portrait') || cat.includes('profile') || cat.includes('person')) {
+        count = portraits.length;
+      } else if (cat.includes('poster') || cat.includes('flyer')) {
         count = flyers.length;
       } else if (cat.includes('cert') || cat.includes('award') || cat.includes('honor')) {
         count = awardsCerts.length;
