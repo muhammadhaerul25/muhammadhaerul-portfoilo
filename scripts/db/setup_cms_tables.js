@@ -105,7 +105,7 @@ async function setupAndSeed() {
       {
         role: 'Co-Founder (AI & Product Lead)',
         company: 'AksaraHub Nusantara',
-        location: 'Hybrid',
+        location: 'Makassar, Indonesia',
         start_date: 'Jan 2026',
         end_date: 'Present',
         is_current: true,

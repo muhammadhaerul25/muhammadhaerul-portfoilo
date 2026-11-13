@@ -50,6 +50,8 @@ const createExperience = asyncHandler(async (req, res) => {
     });
 
     cache.del('experiences');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.status(201).json({ success: true, data: exp, message: 'Experience created successfully' });
 });
 
@@ -82,6 +84,8 @@ const updateExperience = asyncHandler(async (req, res) => {
     });
 
     cache.del('experiences');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.json({ success: true, data: updated, message: 'Experience updated successfully' });
 });
 
@@ -95,6 +99,8 @@ const deleteExperience = asyncHandler(async (req, res) => {
 
     await prisma.experience.delete({ where: { id } });
     cache.del('experiences');
+    cache.del('portfolio:bootstrap');
+    cache.del('portfolio_bootstrap');
     res.json({ success: true, message: 'Experience deleted successfully' });
 });
 
