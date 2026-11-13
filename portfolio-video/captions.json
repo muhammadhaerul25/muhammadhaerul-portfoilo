@@ -1,0 +1,69 @@
+{
+  "language": "en",
+  "captions": [
+    {
+      "scene": "hook",
+      "startFrame": 0,
+      "endFrame": 119,
+      "en": "I build, research and teach AI.",
+      "id": "Saya membangun, meneliti, dan mengajarkan AI."
+    },
+    {
+      "scene": "who",
+      "startFrame": 120,
+      "endFrame": 239,
+      "en": "AI Full-Stack Specialist — Engineer, Researcher, Trainer.",
+      "id": "Spesialis AI Full-Stack — Engineer, Peneliti, Pengajar."
+    },
+    {
+      "scene": "who-stats",
+      "startFrame": 240,
+      "endFrame": 359,
+      "en": "4+ Years AI Experience · 20+ Shipped Projects · 1,560+ Attendees.",
+      "id": "Pengalaman AI 4+ Tahun · 20+ Proyek Rilis · 1.560+ Peserta."
+    },
+    {
+      "scene": "build-experience",
+      "startFrame": 360,
+      "endFrame": 599,
+      "en": "Building production AI systems: AksaraHub, Paper.id KYC/KYB, and XL Axiata.",
+      "id": "Membangun sistem AI produksi: AksaraHub, Paper.id KYC/KYB, dan XL Axiata."
+    },
+    {
+      "scene": "build-projects",
+      "startFrame": 600,
+      "endFrame": 839,
+      "en": "Real-world impact: Deep Learning OCR, Multimodal Vision, and Edge AI.",
+      "id": "Dampak nyata: Deep Learning OCR, Multimodal Vision, dan Edge AI."
+    },
+    {
+      "scene": "research",
+      "startFrame": 840,
+      "endFrame": 1139,
+      "en": "Published research, PyPI packages, and engineering technical writing.",
+      "id": "Penelitian terpublikasi, paket PyPI, dan panduan rekayasa teknis."
+    },
+    {
+      "scene": "teach",
+      "startFrame": 1140,
+      "endFrame": 1499,
+      "en": "Empowering 1,560+ attendees across 6+ hands-on talks and masterclasses.",
+      "id": "Memberdayakan 1.560+ peserta di lebih dari 6 sesi workshop dan kelas AI."
+    },
+    {
+      "scene": "proof",
+      "startFrame": 1500,
+      "endFrame": 1559,
+      "en": "Top 20 AI Talent Hub Indonesia · Hackathon Champion.",
+      "id": "Top 20 AI Talent Hub Indonesia · Juara Hackathon."
+    },
+    {
+      "scene": "cta",
+      "startFrame": 1560,
+      "endFrame": 1799,
+      "en": "muhammadhaerul.tech — Let's build something that ships.",
+      "id": "muhammadhaerul.tech — Mari bangun solusi AI nyata bersama."
+    }
+  ]
+}
+

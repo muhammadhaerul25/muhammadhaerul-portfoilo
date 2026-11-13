@@ -1,0 +1,32 @@
+{
+  "name": "muhammadhaerul-portfolio-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "60-second vertical (1080x1920) Instagram Reels portfolio showreel for Muhammad Haerul, S.Kom. built with Playwright + Remotion + FFmpeg.",
+  "type": "module",
+  "scripts": {
+    "capture": "tsx scripts/capture-site.ts",
+    "validate": "tsx scripts/validate-assets.ts",
+    "studio": "remotion studio src/index.ts",
+    "render": "tsx scripts/render.ts",
+    "verify": "tsx scripts/verify-output.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.2.8",
+    "@remotion/bundler": "4.0.543",
+    "@remotion/cli": "4.0.543",
+    "@remotion/renderer": "4.0.543",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.543"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.0",
+    "@types/react": "19.2.2",
+    "playwright": "1.59.1",
+    "sharp": "0.34.4",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  }
+}

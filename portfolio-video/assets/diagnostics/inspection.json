@@ -1,0 +1,1593 @@
+{
+  "title": "Muhammad Haerul — AI Full-Stack Specialist (Engineer, Researcher, and Trainer)",
+  "viewport": "430x932",
+  "scrollHeight": 26347,
+  "docWidth": 430,
+  "nav": [
+    {
+      "text": "Muhammad Haerul",
+      "href": "#top"
+    },
+    {
+      "text": "Profile",
+      "href": "#about"
+    },
+    {
+      "text": "Education",
+      "href": "#education"
+    },
+    {
+      "text": "Experiences",
+      "href": "#experience"
+    },
+    {
+      "text": "Skills",
+      "href": "#skills"
+    },
+    {
+      "text": "Projects",
+      "href": "#projects"
+    },
+    {
+      "text": "Publications",
+      "href": "#publications"
+    },
+    {
+      "text": "Talks",
+      "href": "#talks"
+    },
+    {
+      "text": "Awards",
+      "href": "#awards"
+    },
+    {
+      "text": "Certifications",
+      "href": "#certifications"
+    },
+    {
+      "text": "Blog",
+      "href": "#blog"
+    },
+    {
+      "text": "Gallery",
+      "href": "#gallery"
+    },
+    {
+      "text": "Feedbacks",
+      "href": "#testimonials"
+    },
+    {
+      "text": "Let's talk",
+      "href": "#contact"
+    }
+  ],
+  "sections": [
+    {
+      "id": "hero",
+      "top": 0,
+      "height": 932,
+      "textLength": 281,
+      "headings": [],
+      "duplicateHeadings": [],
+      "images": [],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "AI FULL-STACK SPECIALIST I build, research and teach AI solutions for real-world use cases View my work 4+ Yrs AI Experience 20+ Shipped Projects 22+ Certifications 21+ Honors & Awards 3+ Publications 6+ Talks Delivered 1560+ Workshop Attendees 9.5★ Satisfaction Scroll to explore",
+      "wanted": true
+    },
+    {
+      "id": "about",
+      "top": 932,
+      "height": 2028,
+      "textLength": 1465,
+      "headings": [
+        "AI Full-Stack Specialist with 4 Years of Experiences"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/profile.webp",
+          "alt": "Muhammad Haerul — AI Full-Stack Specialist (Engineer, Researcher, and Trainer) Official Portrait Photo",
+          "natural": "717x1024",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "01 — PROFILE NAME Muhammad Haerul, S.Kom ROLE AI Full-Stack Specialist (Engineer, Researcher, and Trainer) EDUCATION Bachelor of Computer Science EXPERIENCE 4+ years in AI and Data Science AREA OF EXPERTISE Artificial Intelligence Application Data Analytics Computer Vision Natural Language Processing Generative AI AI Agents AI Full-Stack Specialist with 4 Years of Experiences My work sits at the intersection of AI engineering, applied research, product development, and education technology. I develop end-to-end AI solutions, from data preparation and model development to application integration and deployment, while exploring new approaches to make AI more practical, reliable, and impactful. Beyond engineering, I help individuals and organizations understand, adopt, and apply AI through training, mentorship, and hands-on learning. I enjoy bridging the gap between AI research and real-world implementation, translating emerging technologies into useful products and empowering people to use AI with confidence. My experience spans industry, public-sector digital transformation, and AI education, with a particular interest in responsible AI, data, and technology that addresses meaningful challenges. My mission is to build, research, and teach AI solutions that create real value — building intelligent systems and dependable software architectures that ship to make AI more accessible, practical, and impactful for people, businesses, and society.",
+      "wanted": false
+    },
+    {
+      "id": "education",
+      "top": 2960,
+      "height": 1087,
+      "textLength": 0,
+      "headings": [
+        "Academic Foundation",
+        "Bachelor of Computer Science"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/unhas-logo.png",
+          "alt": "Universitas Hasanuddin Logo",
+          "natural": "256x306",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "",
+      "wanted": false
+    },
+    {
+      "id": "experience",
+      "top": 4047,
+      "height": 5855,
+      "textLength": 0,
+      "headings": [
+        "Career Journey & Work Experience",
+        "Co-Founder (AI & Product Lead)",
+        "AI Trainer",
+        "AI Engineer",
+        "Computer Vision Engineer",
+        "AIoT Engineer",
+        "AI Software Engineer"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/aksarahub-logo.png",
+          "alt": "AksaraHub Nusantara",
+          "natural": "1080x220",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/revou-logo.png",
+          "alt": "RevoU",
+          "natural": "480x480",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/paper-id-logo.png",
+          "alt": "Paper.id",
+          "natural": "1080x1080",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/masa-research-logo.png",
+          "alt": "Masa Research",
+          "natural": "400x400",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/xl-axiata-logo.jpg",
+          "alt": "XL Axiata",
+          "natural": "800x540",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul at XL Axiata Tower",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/xl-axiata-aiot-documentation.webp",
+          "alt": "5G AI-IoT Engineering at XL Axiata X-Camp",
+          "natural": "1280x853",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/kemendikbud-logo.svg",
+          "alt": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+          "natural": "400x400",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "",
+      "wanted": true
+    },
+    {
+      "id": "skills",
+      "top": 9903,
+      "height": 3563,
+      "textLength": 1500,
+      "headings": [
+        "Depth where it matters, range where it helps.",
+        "Programming",
+        "Data Analytics and Engineering",
+        "Computer Vision",
+        "Natural Language Processing",
+        "Generative AI",
+        "AI Agents",
+        "Software Development",
+        "Database Management",
+        "Development and Operations"
+      ],
+      "duplicateHeadings": [],
+      "images": [],
+      "brokenImages": [],
+      "overflowingElements": 41,
+      "excerpt": "04 — CORE SKILLS Depth where it matters, range where it helps. End-to-end technical stack spanning core domains: Programming, Data Analytics, Computer Vision, NLP, Generative AI, AI Agents, Full-Stack Engineering, and Cloud MLOps. All 9 Programming 3 Data Analytics and Engineering 3 Computer Vision 3 Natural Language Processing 3 Generative AI 3 AI Agents 3 Software Development 3 Database Management 3 Development and Operations 3 SPECIALIZATION Programming Python JavaScript & TypeScript SQL & Bash Scripting Read more SPECIALIZATION Data Analytics and Engineering Feature Engineering & ETL Data Warehousing & Big Data Statistical Analysis & Insights Read more SPECIALIZATION Computer Vision Object Detection & Tracking OCR & Document AI Image Segmentation & Edge AI Read more SPECIALIZATION Natural Language Processing Transformer Architectures Semantic Search & Embeddings Text Preprocessing & Local NLP Read more SPECIALIZATION Generative AI LLM Integration & Orchestration Prompt Engineering & Evaluation Multimodal & Local LLMs Read more SPECIALIZATION AI Agents Autonomous Workflows Tool & Function Calling Workflow Automation Read more SPECIALIZATION Software Development High-Performance APIs Interactive AI Frontends Architecture & Systems Read more SPECIALIZATION Database Management Relational Databases Vector Databases for RAG NoSQL & Graph Databases Read more SPECIALIZATION Development and Operations Containerization & Edge Cloud Infrastructure CI/CD & Version Control Read more",
+      "wanted": false
+    },
+    {
+      "id": "projects",
+      "top": 13465,
+      "height": 5487,
+      "textLength": 5083,
+      "headings": [
+        "Featured Projects & AI Systems",
+        "Aksara Lontara Recognition",
+        "DengarTulis App (AI-Powered Transcription)",
+        "AI Update Hub",
+        "AI Split Bills",
+        "Eatitude.id",
+        "Galaxy Aksara",
+        "Galaxy ALPR (Automatic License Plate Recognition)",
+        "AI Chatbot - VectorRAG",
+        "Custom Object Detection"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://img.youtube.com/vi/GEwjEfHMg-4/hqdefault.jpg",
+          "alt": "Muhammad Haerul — Aksara Lontara Recognition AI Video Demo",
+          "natural": "480x360",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/UE-GZdGShkI/hqdefault.jpg",
+          "alt": "Muhammad Haerul — DengarTulis App (AI-Powered Transcription) AI Video Demo",
+          "natural": "480x360",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/AelUqjbJaG4/hqdefault.jpg",
+          "alt": "Muhammad Haerul — AI Update Hub AI Video Demo",
+          "natural": "480x360",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/qXtIyUeEuuw/hqdefault.jpg",
+          "alt": "Muhammad Haerul — AI Split Bills AI Video Demo",
+          "natural": "480x360",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/wOsPg19O8KM/hqdefault.jpg",
+          "alt": "Muhammad Haerul — Eatitude.id AI Video Demo",
+          "natural": "480x360",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/da2vGdWkkw4/hqdefault.jpg",
+          "alt": "Muhammad Haerul — Galaxy Aksara AI Video Demo",
+          "natural": "480x360",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/CngIuDBNCLA/hqdefault.jpg",
+          "alt": "Muhammad Haerul — Galaxy ALPR (Automatic License Plate Recognition) AI Video Demo",
+          "natural": "480x360",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/6bJdURMwQbk/hqdefault.jpg",
+          "alt": "Muhammad Haerul — AI Chatbot - VectorRAG AI Video Demo",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://img.youtube.com/vi/mip0cLW0VlQ/hqdefault.jpg",
+          "alt": "Muhammad Haerul — Custom Object Detection AI Video Demo",
+          "natural": "0x0",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 31,
+      "excerpt": "05 — PROJECTS Featured Projects & AI Systems Production-grade systems and case studies spanning Agentic AI workflows, RAG applications, computer vision pipelines, speech recognition, and modern web architectures. All Projects 20 Full-Stack Development 15 Data Science & Analytics 5 Computer Vision 7 Natural Language Processing 5 Generative AI & LLMs 9 AI Agents & Automation 4 Watch Demo May 2026 – Jun 2026 Aksara Lontara Recognition Aksara Lontara Character Recognition is an intelligent web application engineered to bridge ancient cultural heritage with modern artificial intelligence. The platform provides an interactive, digital canvas where users can hand-draw traditional Aksara Lontara characters—the historic script of South Sulawesi, Indonesia—and receive instant, real-time machine learning transliterations into the Latin alphabet. Read more Demo Details Watch Demo Feb 2026 DengarTulis App (AI-Powered Transcription) DengarTulis is an end-to-end audio and video intelligence web application that transforms spoken recordings into high-accuracy transcripts and structured AI summaries. Powered by React, FastAPI, and OpenAI Whisper, it streamlines meeting documentation, lecture note-taking, and media indexing in a single workflow. Read more Demo Details Watch Demo Jan 2026 AI Update Hub AI Update Hub is a full-stack intelligence aggregation web platform engineered to track, categorize, and summarize real-time developments across the global artificial intelligence ecosystem. It c",
+      "wanted": true
+    },
+    {
+      "id": "publications",
+      "top": 18952,
+      "height": 910,
+      "textLength": 0,
+      "headings": [
+        "Publications & Research",
+        "Muhammad Haerul's on Medium",
+        "Galaxy Object Detection",
+        "Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/medium.svg",
+          "alt": "Medium",
+          "natural": "150x150",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/pypi.svg",
+          "alt": "Python Package Index (PyPI)",
+          "natural": "150x150",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/logos/unhas-logo.png",
+          "alt": "Hasanuddin University",
+          "natural": "256x306",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "",
+      "wanted": true
+    },
+    {
+      "id": "talks",
+      "top": 19862,
+      "height": 910,
+      "textLength": 0,
+      "headings": [
+        "Speaking Engagements, Seminars & Workshops",
+        "Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+        "Mindful AI: AI Personalization for Students",
+        "GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+        "Build with AI: AI-Driven Development",
+        "AI Web Engineering & Security Hands-on Workshop",
+        "National Cybersecurity & Information Security Awareness Webinar"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/talk-rri-mamuju-dialog-interaktif.jpg",
+          "alt": "Muhammad Haerul speaking at Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges — AI Trainer & Full-Stack Engineer",
+          "natural": "819x1024",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp",
+          "alt": "Muhammad Haerul speaking at Mindful AI: AI Personalization for Students — AI Trainer & Full-Stack Engineer",
+          "natural": "1920x2560",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp",
+          "alt": "Muhammad Haerul speaking at GSA AI Forge: AI for Personal Branding & Digital Portfolio — AI Trainer & Full-Stack Engineer",
+          "natural": "1440x1920",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp",
+          "alt": "Muhammad Haerul speaking at Build with AI: AI-Driven Development — AI Trainer & Full-Stack Engineer",
+          "natural": "1350x1687",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-unsulbar-web-ai.jpg",
+          "alt": "Muhammad Haerul speaking at AI Web Engineering & Security Hands-on Workshop — AI Trainer & Full-Stack Engineer",
+          "natural": "450x800",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp",
+          "alt": "Muhammad Haerul speaking at National Cybersecurity & Information Security Awareness Webinar — AI Trainer & Full-Stack Engineer",
+          "natural": "904x1280",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 6,
+      "excerpt": "",
+      "wanted": true
+    },
+    {
+      "id": "awards",
+      "top": 20772,
+      "height": 910,
+      "textLength": 0,
+      "headings": [
+        "Honors & Awards",
+        "Award for Innovation in the Nusantara Cultural Website Competition",
+        "Top 20 AI Talent Hub Indonesia 2025",
+        "Award for Innovation in Developing Aksara Batak Website",
+        "Best Creativity AI Hackathon TechnoArt 2025",
+        "1st Place Winner of Open The Gate Hackathon 2025",
+        "2nd Place Winner of Makassar Hackathon 2024",
+        "Software Development Scholarship Awardee 2024",
+        "Certificate of Completion: AIoT Engineering — PT XL Axiata Tbk",
+        "International Cultural Program Awardee 2023"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_5.jpg",
+          "alt": "Penghargaan Muhammad Haerul — Award for Innovation in the Nusantara Cultural Website Competition",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_4.jpg",
+          "alt": "Penghargaan Muhammad Haerul — Top 20 AI Talent Hub Indonesia 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_aksara_batak.jpg",
+          "alt": "Penghargaan Muhammad Haerul — Award for Innovation in Developing Aksara Batak Website",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_5.jpg",
+          "alt": "Penghargaan Muhammad Haerul — Best Creativity AI Hackathon TechnoArt 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_3.jpg",
+          "alt": "Penghargaan Muhammad Haerul — 1st Place Winner of Open The Gate Hackathon 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_2.jpg",
+          "alt": "Penghargaan Muhammad Haerul — 2nd Place Winner of Makassar Hackathon 2024",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_software_dev_scholarship_2024.jpg",
+          "alt": "Penghargaan Muhammad Haerul — Software Development Scholarship Awardee 2024",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-xl-axiata-internship-completion.webp",
+          "alt": "Penghargaan Muhammad Haerul — Certificate of Completion: AIoT Engineering — PT XL Axiata Tbk",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_9.jpg",
+          "alt": "Penghargaan Muhammad Haerul — International Cultural Program Awardee 2023",
+          "natural": "0x0",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "",
+      "wanted": true
+    },
+    {
+      "id": "certifications",
+      "top": 21682,
+      "height": 910,
+      "textLength": 0,
+      "headings": [
+        "Professional Certifications",
+        "EnglishScore - British Council Core Skills",
+        "Hackathon DIGDAYA BI - Practitioner Phase",
+        "Hackathon DIGDAYA BI - Essential Phase",
+        "Prompt Engineering for Software Developers",
+        "UX Design Fundamentals",
+        "Large Language Model - DEX - Nasional",
+        "Deep Learning - DEX - Nasional",
+        "Data Science - DEX - Nasional",
+        "GARUDA AI For Microsoft Elevate"
+      ],
+      "duplicateHeadings": [],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-british-council.png?v=2",
+          "alt": "British Council Logo",
+          "natural": "160x160",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-englishscore-british-council-page1.jpg?v=2",
+          "alt": "Sertifikat Muhammad Haerul — EnglishScore - British Council Core Skills (British Council)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-lppi.png?v=2",
+          "alt": "Bank Indonesia x LPPI Logo",
+          "natural": "425x204",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-digdaya-practitioner.jpg",
+          "alt": "Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Practitioner Phase (Bank Indonesia x LPPI)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-lppi.png?v=2",
+          "alt": "Bank Indonesia x LPPI Logo",
+          "natural": "425x204",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-digdaya-essential.jpg",
+          "alt": "Sertifikat Muhammad Haerul — Hackathon DIGDAYA BI - Essential Phase (Bank Indonesia x LPPI)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-dicoding.png?v=2",
+          "alt": "Dicoding Indonesia Logo",
+          "natural": "189x52",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-prompt-engineering.jpg",
+          "alt": "Sertifikat Muhammad Haerul — Prompt Engineering for Software Developers (Dicoding Indonesia)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-dicoding.png?v=2",
+          "alt": "Dicoding Indonesia Logo",
+          "natural": "189x52",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-ux-design.jpg",
+          "alt": "Sertifikat Muhammad Haerul — UX Design Fundamentals (Dicoding Indonesia)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-dts.png?v=2",
+          "alt": "Digital Talent Scholarship Logo",
+          "natural": "300x284",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-llm-dex-nasional-page1.jpg?v=2",
+          "alt": "Sertifikat Muhammad Haerul — Large Language Model - DEX - Nasional (Digital Talent Scholarship)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-dts.png?v=2",
+          "alt": "Digital Talent Scholarship Logo",
+          "natural": "300x284",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-deep-learning-dts-page1.jpg",
+          "alt": "Sertifikat Muhammad Haerul — Deep Learning - DEX - Nasional (Digital Talent Scholarship)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-dts.png?v=2",
+          "alt": "Digital Talent Scholarship Logo",
+          "natural": "300x284",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-associate-data-scientist-dts-page1.jpg?v=2",
+          "alt": "Sertifikat Muhammad Haerul — Data Science - DEX - Nasional (Digital Talent Scholarship)",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/logo-microsoft.svg?v=2",
+          "alt": "Microsoft Logo",
+          "natural": "24x24",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-garuda-ai-microsoft-elevate.jpg",
+          "alt": "Sertifikat Muhammad Haerul — GARUDA AI For Microsoft Elevate (Microsoft Indonesia x Binar)",
+          "natural": "0x0",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 14,
+      "excerpt": "",
+      "wanted": true
+    },
+    {
+      "id": "blog",
+      "top": 13500,
+      "height": 0,
+      "textLength": 239,
+      "headings": [
+        "Technical Articles & Blog"
+      ],
+      "duplicateHeadings": [],
+      "images": [],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "10 — Blog & Insights Technical Articles & Blog In-depth technical write-ups, engineering tutorials, and architecture guides on Large Language Models, Agentic AI workflows, Computer Vision, and production software systems.",
+      "wanted": false
+    },
+    {
+      "id": "gallery",
+      "top": 22592,
+      "height": 910,
+      "textLength": 0,
+      "headings": [
+        "Journey & Visual Moments",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "AI Engineer at XL Axiata",
+        "Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+        "Mindful AI: AI Personalization for Students",
+        "GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+        "Build with AI: AI-Driven Development",
+        "National Cybersecurity & Information Security Awareness Webinar",
+        "Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+        "Mindful AI: AI Personalization for Students",
+        "GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+        "Build with AI: AI-Driven Development",
+        "National Cybersecurity & Information Security Awareness Webinar",
+        "Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+        "Mindful AI: AI Personalization for Students",
+        "GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+        "Build with AI: AI-Driven Development",
+        "National Cybersecurity & Information Security Awareness Webinar",
+        "Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+        "Mindful AI: AI Personalization for Students",
+        "GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+        "Build with AI: AI-Driven Development",
+        "National Cybersecurity & Information Security Awareness Webinar",
+        "Award for Innovation in the Nusantara Cultural Website Competition",
+        "Top 20 AI Talent Hub Indonesia 2025",
+        "Award for Innovation in Developing Aksara Batak Website",
+        "Best Creativity AI Hackathon TechnoArt 2025",
+        "1st Place Winner of Open The Gate Hackathon 2025",
+        "2nd Place Winner of Makassar Hackathon 2024",
+        "Software Development Scholarship Awardee 2024",
+        "Certificate of Completion: AIoT Engineering — PT XL Axiata Tbk",
+        "International Cultural Program Awardee 2023",
+        "Sertifikat MSIB Batch 4: AI Software Engineer — Kemendikbudristek RI",
+        "Academic Teaching Assistant: Basic Mathematics I — Universitas Hasanuddin",
+        "Finalist of Competitive Programming Competition Gemastik 2022",
+        "Semifinalist of Machine Learning Healthkathon BPJS Kesehatan 2022",
+        "The Most Outstanding Student of Information Systems Department 2022",
+        "Participant of Statistics Team Competition (STC) Logika UI 2022",
+        "1st Place of National Essay Management Festival 2021",
+        "Finalist Hasanuddin Mathematics Competition 2021",
+        "Evaluation Team Assistant of Electronic-Based Public Service Assessment",
+        "Quarter Finalist of Medical Science Olympic 2019",
+        "Finalist of National Science Olympic 2019",
+        "Award for Innovation in the Nusantara Cultural Website Competition",
+        "Top 20 AI Talent Hub Indonesia 2025",
+        "Award for Innovation in Developing Aksara Batak Website"
+      ],
+      "duplicateHeadings": [
+        "AI Engineer at XL Axiata",
+        "Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+        "Mindful AI: AI Personalization for Students",
+        "GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+        "Build with AI: AI-Driven Development",
+        "National Cybersecurity & Information Security Awareness Webinar",
+        "Award for Innovation in the Nusantara Cultural Website Competition",
+        "Top 20 AI Talent Hub Indonesia 2025",
+        "Award for Innovation in Developing Aksara Batak Website",
+        "Best Creativity AI Hackathon TechnoArt 2025",
+        "1st Place Winner of Open The Gate Hackathon 2025",
+        "2nd Place Winner of Makassar Hackathon 2024",
+        "Software Development Scholarship Awardee 2024",
+        "Certificate of Completion: AIoT Engineering — PT XL Axiata Tbk",
+        "International Cultural Program Awardee 2023",
+        "Sertifikat MSIB Batch 4: AI Software Engineer — Kemendikbudristek RI",
+        "Academic Teaching Assistant: Basic Mathematics I — Universitas Hasanuddin",
+        "Finalist of Competitive Programming Competition Gemastik 2022",
+        "Semifinalist of Machine Learning Healthkathon BPJS Kesehatan 2022",
+        "The Most Outstanding Student of Information Systems Department 2022",
+        "Participant of Statistics Team Competition (STC) Logika UI 2022",
+        "1st Place of National Essay Management Festival 2021",
+        "Finalist Hasanuddin Mathematics Competition 2021",
+        "Evaluation Team Assistant of Electronic-Based Public Service Assessment",
+        "Quarter Finalist of Medical Science Olympic 2019",
+        "Finalist of National Science Olympic 2019",
+        "GSA AI Forge: Hands-on Prompting & Portfolio Architecture",
+        "GSA AI Forge: Direct Participant Mentorship & Code Review",
+        "GSA AI Forge: Full Cohort Celebration with 150+ Attendees",
+        "AI Web Engineering Hands-on Workshop with 50+ Participants",
+        "1st Place Winner: Open The Gate Hackathon 2025 — BSS Parking",
+        "5G AIoT Engineering & Edge Computer Vision Lab — XL Axiata"
+      ],
+      "images": [
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+          "alt": "Muhammad Haerul — AI Engineer at XL Axiata",
+          "natural": "1600x2133",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/talk-rri-mamuju-dialog-interaktif.jpg",
+          "alt": "Muhammad Haerul — Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+          "natural": "819x1024",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp",
+          "alt": "Muhammad Haerul — Mindful AI: AI Personalization for Students",
+          "natural": "1920x2560",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp",
+          "alt": "Muhammad Haerul — GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+          "natural": "1440x1920",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp",
+          "alt": "Muhammad Haerul — Build with AI: AI-Driven Development",
+          "natural": "1350x1687",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp",
+          "alt": "Muhammad Haerul — National Cybersecurity & Information Security Awareness Webinar",
+          "natural": "904x1280",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/talk-rri-mamuju-dialog-interaktif.jpg",
+          "alt": "Muhammad Haerul — Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+          "natural": "819x1024",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp",
+          "alt": "Muhammad Haerul — Mindful AI: AI Personalization for Students",
+          "natural": "1920x2560",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp",
+          "alt": "Muhammad Haerul — GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+          "natural": "1440x1920",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp",
+          "alt": "Muhammad Haerul — Build with AI: AI-Driven Development",
+          "natural": "1350x1687",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp",
+          "alt": "Muhammad Haerul — National Cybersecurity & Information Security Awareness Webinar",
+          "natural": "904x1280",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/talk-rri-mamuju-dialog-interaktif.jpg",
+          "alt": "Muhammad Haerul — Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+          "natural": "819x1024",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp",
+          "alt": "Muhammad Haerul — Mindful AI: AI Personalization for Students",
+          "natural": "1920x2560",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp",
+          "alt": "Muhammad Haerul — GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+          "natural": "1440x1920",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp",
+          "alt": "Muhammad Haerul — Build with AI: AI-Driven Development",
+          "natural": "1350x1687",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp",
+          "alt": "Muhammad Haerul — National Cybersecurity & Information Security Awareness Webinar",
+          "natural": "904x1280",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/talk-rri-mamuju-dialog-interaktif.jpg",
+          "alt": "Muhammad Haerul — Interactive Dialogue: Kita Indonesia – Upgrading Skills & Mindset: Youth Readiness for Global Challenges",
+          "natural": "819x1024",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_775154220_18087205625558486_2093555353223423387_n_1787290933586.webp",
+          "alt": "Muhammad Haerul — Mindful AI: AI Personalization for Students",
+          "natural": "1920x2560",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_752916423_18047968217611708_109289192688503691_n_1787293047380.webp",
+          "alt": "Muhammad Haerul — GSA AI Forge: AI for Personal Branding & Digital Portfolio",
+          "natural": "1440x1920",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/saveclip_app_671241768_18351262810240133_2482393838735247827_n_1787292713669.webp",
+          "alt": "Muhammad Haerul — Build with AI: AI-Driven Development",
+          "natural": "1350x1687",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/uploads/talks/whatsapp_image_2026_08_21_at_14_20_26_1787293332557.webp",
+          "alt": "Muhammad Haerul — National Cybersecurity & Information Security Awareness Webinar",
+          "natural": "904x1280",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_5.jpg",
+          "alt": "Muhammad Haerul — Award for Innovation in the Nusantara Cultural Website Competition",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_4.jpg",
+          "alt": "Muhammad Haerul — Top 20 AI Talent Hub Indonesia 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_aksara_batak.jpg",
+          "alt": "Muhammad Haerul — Award for Innovation in Developing Aksara Batak Website",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_5.jpg",
+          "alt": "Muhammad Haerul — Best Creativity AI Hackathon TechnoArt 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_3.jpg",
+          "alt": "Muhammad Haerul — 1st Place Winner of Open The Gate Hackathon 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_2.jpg",
+          "alt": "Muhammad Haerul — 2nd Place Winner of Makassar Hackathon 2024",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_software_dev_scholarship_2024.jpg",
+          "alt": "Muhammad Haerul — Software Development Scholarship Awardee 2024",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-xl-axiata-internship-completion.webp",
+          "alt": "Muhammad Haerul — Certificate of Completion: AIoT Engineering — PT XL Axiata Tbk",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_9.jpg",
+          "alt": "Muhammad Haerul — International Cultural Program Awardee 2023",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-msib-kemendikbud-ai-engineer.webp",
+          "alt": "Muhammad Haerul — Sertifikat MSIB Batch 4: AI Software Engineer — Kemendikbudristek RI",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-teaching-assistant-matematika-unhas.webp",
+          "alt": "Muhammad Haerul — Academic Teaching Assistant: Basic Mathematics I — Universitas Hasanuddin",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_7.jpg",
+          "alt": "Muhammad Haerul — Finalist of Competitive Programming Competition Gemastik 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_1.jpg",
+          "alt": "Muhammad Haerul — Semifinalist of Machine Learning Healthkathon BPJS Kesehatan 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_1.jpg",
+          "alt": "Muhammad Haerul — The Most Outstanding Student of Information Systems Department 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_8.jpg",
+          "alt": "Muhammad Haerul — Participant of Statistics Team Competition (STC) Logika UI 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_2.jpg",
+          "alt": "Muhammad Haerul — 1st Place of National Essay Management Festival 2021",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_6.jpg",
+          "alt": "Muhammad Haerul — Finalist Hasanuddin Mathematics Competition 2021",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-kemenpanrb-evaluation-assistant.jpg",
+          "alt": "Muhammad Haerul — Evaluation Team Assistant of Electronic-Based Public Service Assessment",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_3.jpg",
+          "alt": "Muhammad Haerul — Quarter Finalist of Medical Science Olympic 2019",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_4.jpg",
+          "alt": "Muhammad Haerul — Finalist of National Science Olympic 2019",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_5.jpg",
+          "alt": "Muhammad Haerul — Award for Innovation in the Nusantara Cultural Website Competition",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_4.jpg",
+          "alt": "Muhammad Haerul — Top 20 AI Talent Hub Indonesia 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_aksara_batak.jpg",
+          "alt": "Muhammad Haerul — Award for Innovation in Developing Aksara Batak Website",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_5.jpg",
+          "alt": "Muhammad Haerul — Best Creativity AI Hackathon TechnoArt 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_3.jpg",
+          "alt": "Muhammad Haerul — 1st Place Winner of Open The Gate Hackathon 2025",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_2.jpg",
+          "alt": "Muhammad Haerul — 2nd Place Winner of Makassar Hackathon 2024",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_software_dev_scholarship_2024.jpg",
+          "alt": "Muhammad Haerul — Software Development Scholarship Awardee 2024",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-xl-axiata-internship-completion.webp",
+          "alt": "Muhammad Haerul — Certificate of Completion: AIoT Engineering — PT XL Axiata Tbk",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_9.jpg",
+          "alt": "Muhammad Haerul — International Cultural Program Awardee 2023",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-msib-kemendikbud-ai-engineer.webp",
+          "alt": "Muhammad Haerul — Sertifikat MSIB Batch 4: AI Software Engineer — Kemendikbudristek RI",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-teaching-assistant-matematika-unhas.webp",
+          "alt": "Muhammad Haerul — Academic Teaching Assistant: Basic Mathematics I — Universitas Hasanuddin",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_7.jpg",
+          "alt": "Muhammad Haerul — Finalist of Competitive Programming Competition Gemastik 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_1.jpg",
+          "alt": "Muhammad Haerul — Semifinalist of Machine Learning Healthkathon BPJS Kesehatan 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_1.jpg",
+          "alt": "Muhammad Haerul — The Most Outstanding Student of Information Systems Department 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_8.jpg",
+          "alt": "Muhammad Haerul — Participant of Statistics Team Competition (STC) Logika UI 2022",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_2.jpg",
+          "alt": "Muhammad Haerul — 1st Place of National Essay Management Festival 2021",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_6.jpg",
+          "alt": "Muhammad Haerul — Finalist Hasanuddin Mathematics Competition 2021",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/certificates/cert-kemenpanrb-evaluation-assistant.jpg",
+          "alt": "Muhammad Haerul — Evaluation Team Assistant of Electronic-Based Public Service Assessment",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_3.jpg",
+          "alt": "Muhammad Haerul — Quarter Finalist of Medical Science Olympic 2019",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/awards/award_img_new_4.jpg",
+          "alt": "Muhammad Haerul — Finalist of National Science Olympic 2019",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-1.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Hands-on Prompting & Portfolio Architecture",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-2.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Direct Participant Mentorship & Code Review",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-3.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Full Cohort Celebration with 150+ Attendees",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp",
+          "alt": "Muhammad Haerul — AI Web Engineering Hands-on Workshop with 50+ Participants",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/open-the-gate-hackathon-champion-photo.webp",
+          "alt": "Muhammad Haerul — 1st Place Winner: Open The Gate Hackathon 2025 — BSS Parking",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/xl-axiata-aiot-documentation.webp",
+          "alt": "Muhammad Haerul — 5G AIoT Engineering & Edge Computer Vision Lab — XL Axiata",
+          "natural": "1280x853",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-1.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Hands-on Prompting & Portfolio Architecture",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-2.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Direct Participant Mentorship & Code Review",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-3.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Full Cohort Celebration with 150+ Attendees",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp",
+          "alt": "Muhammad Haerul — AI Web Engineering Hands-on Workshop with 50+ Participants",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/open-the-gate-hackathon-champion-photo.webp",
+          "alt": "Muhammad Haerul — 1st Place Winner: Open The Gate Hackathon 2025 — BSS Parking",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/xl-axiata-aiot-documentation.webp",
+          "alt": "Muhammad Haerul — 5G AIoT Engineering & Edge Computer Vision Lab — XL Axiata",
+          "natural": "1280x853",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-1.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Hands-on Prompting & Portfolio Architecture",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-2.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Direct Participant Mentorship & Code Review",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-3.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Full Cohort Celebration with 150+ Attendees",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp",
+          "alt": "Muhammad Haerul — AI Web Engineering Hands-on Workshop with 50+ Participants",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/open-the-gate-hackathon-champion-photo.webp",
+          "alt": "Muhammad Haerul — 1st Place Winner: Open The Gate Hackathon 2025 — BSS Parking",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/xl-axiata-aiot-documentation.webp",
+          "alt": "Muhammad Haerul — 5G AIoT Engineering & Edge Computer Vision Lab — XL Axiata",
+          "natural": "1280x853",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-1.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Hands-on Prompting & Portfolio Architecture",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-2.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Direct Participant Mentorship & Code Review",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/gsa-ai-forge-doc-3.jpg",
+          "alt": "Muhammad Haerul — GSA AI Forge: Full Cohort Celebration with 150+ Attendees",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/muhammad-haerul-workshop-ai-web-engineering.webp",
+          "alt": "Muhammad Haerul — AI Web Engineering Hands-on Workshop with 50+ Participants",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/open-the-gate-hackathon-champion-photo.webp",
+          "alt": "Muhammad Haerul — 1st Place Winner: Open The Gate Hackathon 2025 — BSS Parking",
+          "natural": "0x0",
+          "broken": false
+        },
+        {
+          "src": "https://www.muhammadhaerul.tech/assets/images/xl-axiata-aiot-documentation.webp",
+          "alt": "Muhammad Haerul — 5G AIoT Engineering & Edge Computer Vision Lab — XL Axiata",
+          "natural": "1280x853",
+          "broken": false
+        }
+      ],
+      "brokenImages": [],
+      "overflowingElements": 1173,
+      "excerpt": "",
+      "wanted": false
+    },
+    {
+      "id": "testimonials",
+      "top": 23502,
+      "height": 912,
+      "textLength": 0,
+      "headings": [
+        "Feedback and Recommendations",
+        "Workshop & Session Feedback",
+        "Recommendations"
+      ],
+      "duplicateHeadings": [],
+      "images": [],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "",
+      "wanted": false
+    },
+    {
+      "id": "contact",
+      "top": 24414,
+      "height": 911,
+      "textLength": 0,
+      "headings": [
+        "Let's Connect & Collaborate"
+      ],
+      "duplicateHeadings": [],
+      "images": [],
+      "brokenImages": [],
+      "overflowingElements": 0,
+      "excerpt": "",
+      "wanted": false
+    }
+  ],
+  "links": [
+    "https://www.muhammadhaerul.tech/#top",
+    "https://www.muhammadhaerul.tech/#about",
+    "https://www.muhammadhaerul.tech/#education",
+    "https://www.muhammadhaerul.tech/#experience",
+    "https://www.muhammadhaerul.tech/#skills",
+    "https://www.muhammadhaerul.tech/#projects",
+    "https://www.muhammadhaerul.tech/#publications",
+    "https://www.muhammadhaerul.tech/#talks",
+    "https://www.muhammadhaerul.tech/#awards",
+    "https://www.muhammadhaerul.tech/#certifications",
+    "https://www.muhammadhaerul.tech/#blog",
+    "https://www.muhammadhaerul.tech/#gallery",
+    "https://www.muhammadhaerul.tech/#testimonials",
+    "https://www.muhammadhaerul.tech/#contact",
+    "https://github.com/muhammadhaerul25",
+    "https://linkedin.com/in/muhammadhaerul",
+    "https://www.instagram.com/muhammadhaerul.25/",
+    "https://www.muhammadhaerul.tech/#trust",
+    "https://ai-update-hub.onrender.com/",
+    "https://ai-split-bills.vercel.app/",
+    "https://eatitude-id-web.vercel.app/",
+    "https://www.galaxyaksara.id/",
+    "https://medium.com/@muhammadhaerul.25",
+    "https://pypi.org/project/galaxy-object-detection-core/",
+    "https://repository.unhas.ac.id/id/eprint/44411/",
+    "https://drive.google.com/file/d/1iY3R1cBMLewmLaxXx-Z-QZkIn9n027nZ/view?usp=sharing",
+    "https://gsa-ai-forge-2026.vercel.app/",
+    "https://ai-driven-development-master.vercel.app/",
+    "https://drive.google.com/file/d/1vLklTZpZSXtqPcMHHiwYCypnknGPlLK2/view?usp=sharing",
+    "https://drive.google.com/file/d/1NZHAtxrqkfMWa3ANV6ecTUfmJrpzeqcv/view?usp=sharing",
+    "https://www.englishscore.com/verify",
+    "https://credsverse.com/credentials/3a11fcca-1ca9-45fc-992e-364e9b87479f?preview=1",
+    "https://credsverse.com/credentials/bdaca536-9e17-49a3-adbf-77c89f1755ae?preview=1",
+    "https://www.dicoding.com/certificates/MEPJO7536Z3V",
+    "https://www.dicoding.com/certificates/53XE16E99ZRN",
+    "https://drive.google.com/file/d/1z2_Of9aLKx2a_rA7oUSjmfsEEs1aDUEk/view?usp=sharing",
+    "https://drive.google.com/file/d/1tAduPIP3uGSCi38ZMnvrueKgEOGnOWe9/view?usp=sharing",
+    "https://media.licdn.com/dms/image/v2/D562DAQG3lja0cnGaJQ/profile-treasury-document-images_1280/B56Zw4H6e7HYAU-/1/1770468127164?e=1794441600&v=beta&t=EvXjJzac4NWIyLzWaD969Hb__rgWUFSZ8wxPaIfbYGE",
+    "https://www.muhammadhaerul.tech/form-feedbacks.html",
+    "https://www.muhammadhaerul.tech/form-recommendation.html"
+  ],
+  "fixedElements": [
+    "div#scrollProgress.scroll-progress",
+    "header#nav.nav scrolled",
+    "nav#navLinks.nav-links",
+    "div#projectModalOverlay.mh-modal-overlay",
+    "div#talkModalOverlay.mh-modal-overlay",
+    "div#recommendationModalOverlay.mh-modal-overlay",
+    "div#lightboxOverlay.lightbox-overlay",
+    "div#portfolioToast.portfolio-toast"
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "linkResults": [
+    {
+      "url": "https://www.muhammadhaerul.tech/#top",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#about",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#education",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#experience",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#skills",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#projects",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#publications",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#talks",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#awards",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#certifications",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#blog",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#gallery",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#testimonials",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#contact",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/muhammadhaerul25",
+      "status": 200
+    },
+    {
+      "url": "https://linkedin.com/in/muhammadhaerul",
+      "status": 999
+    },
+    {
+      "url": "https://www.instagram.com/muhammadhaerul.25/",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/#trust",
+      "status": 200
+    },
+    {
+      "url": "https://ai-update-hub.onrender.com/",
+      "status": "apiRequestContext.fetch: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - → GET https"
+    },
+    {
+      "url": "https://ai-split-bills.vercel.app/",
+      "status": 200
+    },
+    {
+      "url": "https://eatitude-id-web.vercel.app/",
+      "status": 200
+    },
+    {
+      "url": "https://www.galaxyaksara.id/",
+      "status": "apiRequestContext.fetch: getaddrinfo ENOTFOUND www.galaxyaksara.id\nCall log:\n\u001b[2"
+    },
+    {
+      "url": "https://medium.com/@muhammadhaerul.25",
+      "status": 200
+    },
+    {
+      "url": "https://pypi.org/project/galaxy-object-detection-core/",
+      "status": 200
+    },
+    {
+      "url": "https://repository.unhas.ac.id/id/eprint/44411/",
+      "status": 200
+    },
+    {
+      "url": "https://drive.google.com/file/d/1iY3R1cBMLewmLaxXx-Z-QZkIn9n027nZ/view?usp=sharing",
+      "status": 200
+    },
+    {
+      "url": "https://gsa-ai-forge-2026.vercel.app/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-driven-development-master.vercel.app/",
+      "status": 200
+    },
+    {
+      "url": "https://drive.google.com/file/d/1vLklTZpZSXtqPcMHHiwYCypnknGPlLK2/view?usp=sharing",
+      "status": 200
+    },
+    {
+      "url": "https://drive.google.com/file/d/1NZHAtxrqkfMWa3ANV6ecTUfmJrpzeqcv/view?usp=sharing",
+      "status": 200
+    },
+    {
+      "url": "https://www.englishscore.com/verify",
+      "status": 200
+    },
+    {
+      "url": "https://credsverse.com/credentials/3a11fcca-1ca9-45fc-992e-364e9b87479f?preview=1",
+      "status": 200
+    },
+    {
+      "url": "https://credsverse.com/credentials/bdaca536-9e17-49a3-adbf-77c89f1755ae?preview=1",
+      "status": 200
+    },
+    {
+      "url": "https://www.dicoding.com/certificates/MEPJO7536Z3V",
+      "status": 200
+    },
+    {
+      "url": "https://www.dicoding.com/certificates/53XE16E99ZRN",
+      "status": 200
+    },
+    {
+      "url": "https://drive.google.com/file/d/1z2_Of9aLKx2a_rA7oUSjmfsEEs1aDUEk/view?usp=sharing",
+      "status": 200
+    },
+    {
+      "url": "https://drive.google.com/file/d/1tAduPIP3uGSCi38ZMnvrueKgEOGnOWe9/view?usp=sharing",
+      "status": 200
+    },
+    {
+      "url": "https://media.licdn.com/dms/image/v2/D562DAQG3lja0cnGaJQ/profile-treasury-document-images_1280/B56Zw4H6e7HYAU-/1/1770468127164?e=1794441600&v=beta&t=EvXjJzac4NWIyLzWaD969Hb__rgWUFSZ8wxPaIfbYGE",
+      "status": 403
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/form-feedbacks.html",
+      "status": 200
+    },
+    {
+      "url": "https://www.muhammadhaerul.tech/form-recommendation.html",
+      "status": 200
+    }
+  ],
+  "brokenLinks": [
+    {
+      "url": "https://linkedin.com/in/muhammadhaerul",
+      "status": 999
+    },
+    {
+      "url": "https://ai-update-hub.onrender.com/",
+      "status": "apiRequestContext.fetch: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - → GET https"
+    },
+    {
+      "url": "https://www.galaxyaksara.id/",
+      "status": "apiRequestContext.fetch: getaddrinfo ENOTFOUND www.galaxyaksara.id\nCall log:\n\u001b[2"
+    },
+    {
+      "url": "https://media.licdn.com/dms/image/v2/D562DAQG3lja0cnGaJQ/profile-treasury-document-images_1280/B56Zw4H6e7HYAU-/1/1770468127164?e=1794441600&v=beta&t=EvXjJzac4NWIyLzWaD969Hb__rgWUFSZ8wxPaIfbYGE",
+      "status": 403
+    }
+  ]
+}
