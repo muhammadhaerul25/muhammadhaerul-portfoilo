@@ -6,7 +6,7 @@ Config.setVideoImageFormat('png');
 Config.setPixelFormat('yuv420p');
 Config.setCodec('h264');
 Config.setCrf(14);
-Config.setConcurrency(null);
+Config.setConcurrency(1);
 Config.setChromiumOpenGlRenderer('angle');
 Config.setOverwriteOutput(true);
 

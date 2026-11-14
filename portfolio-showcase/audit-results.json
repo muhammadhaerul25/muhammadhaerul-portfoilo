@@ -1,0 +1,4683 @@
+{
+  "url": "https://www.muhammadhaerul.tech/",
+  "timestamp": "2026-11-13T15:13:41.383Z",
+  "profiles": {},
+  "issuesAE": {
+    "gallery": {
+      "totalTrack0Cards": 16,
+      "uniqueTrack0Thumbs": [
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp"
+      ],
+      "allTrack0Thumbs": [
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp",
+        "/assets/images/muhammad-haerul-xl-axiata-office-portrait.webp"
+      ]
+    },
+    "certificates": {
+      "kemenpanInPub": 0,
+      "kemenpanInAwards": 0
+    },
+    "mediumPublication": {
+      "mediumTitle": "Muhammad Haerul's on Medium",
+      "allPubTitles": [
+        "Muhammad Haerul's on Medium",
+        "Galaxy Object Detection",
+        "Development and Comparison of PPE Detection Models in Industrial Workers Based on Computer Vision"
+      ]
+    },
+    "awards": {
+      "totalCards": 9,
+      "uniqueCount": 9,
+      "uniqueTitles": [
+        "Award for Innovation in the Nusantara Cultural Website Competition",
+        "Top 20 AI Talent Hub Indonesia 2025",
+        "Award for Innovation in Developing Aksara Batak Website",
+        "Best Creativity AI Hackathon TechnoArt 2025",
+        "1st Place Winner of Open The Gate Hackathon 2025",
+        "2nd Place Winner of Makassar Hackathon 2024",
+        "Software Development Scholarship Awardee 2024",
+        "Certificate of Completion: AIoT Engineering — PT XL Axiata Tbk",
+        "International Cultural Program Awardee 2023"
+      ]
+    },
+    "ogImages": [
+      "https://muhammadhaerul.tech/assets/profile.png",
+      "https://muhammadhaerul.tech/assets/images/muhammad-haerul-portrait-formal.webp",
+      "https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-build-with-ai.webp",
+      "https://muhammadhaerul.tech/assets/images/muhammad-haerul-speaker-mindful-ai.webp"
+    ]
+  },
+  "networkFailures": [],
+  "consoleErrors": [],
+  "touchTargetViolations": {
+    "ipad": [
+      {
+        "tag": "A",
+        "id": null,
+        "className": "nav-brand",
+        "text": "Muhammad Haerul",
+        "width": 141.8,
+        "height": 31.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "themeToggle",
+        "className": "theme-toggle",
+        "text": "",
+        "width": 36,
+        "height": 36,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "btn btn-small btn-primary",
+        "text": "Let's talk",
+        "width": 97.3,
+        "height": 41.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "navBurger",
+        "className": "nav-burger",
+        "text": "",
+        "width": 22,
+        "height": 14,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": "heroScrollCue",
+        "className": "hero-scroll-cue",
+        "text": "Scroll to explore",
+        "width": 156.6,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "timeline-projects-toggle-btn",
+        "text": "Read more",
+        "width": 109.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "timeline-projects-toggle-btn",
+        "text": "Read more",
+        "width": 109.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "timeline-projects-toggle-btn",
+        "text": "Read more",
+        "width": 109.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "skillsScrollPrev",
+        "className": "skills-scroll-arrow skills-scroll-prev",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill active",
+        "text": "All\n          9",
+        "width": 102.8,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Programming\n              3",
+        "width": 170.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Data Analytics and Engineering",
+        "width": 282.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Computer Vision\n              ",
+        "width": 191.1,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Natural Language Processing\n  ",
+        "width": 270.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Generative AI\n              3",
+        "width": 171,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "AI Agents\n              3",
+        "width": 147,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Software Development\n         ",
+        "width": 229.2,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Database Management\n          ",
+        "width": 231.4,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Development and Operations\n   ",
+        "width": 268.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "skillsScrollNext",
+        "className": "skills-scroll-arrow skills-scroll-next is-visible",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "projectScrollPrev",
+        "className": "skills-scroll-arrow skills-scroll-prev",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill active",
+        "text": "All Projects\n                2",
+        "width": 161.5,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Full-Stack Development\n       ",
+        "width": 239.6,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Data Science & Analytics\n     ",
+        "width": 242.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Computer Vision\n              ",
+        "width": 191.1,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Natural Language Processing\n  ",
+        "width": 270.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Generative AI & LLMs\n         ",
+        "width": 220,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "AI Agents & Automation\n       ",
+        "width": 235,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "projectScrollNext",
+        "className": "skills-scroll-arrow skills-scroll-next is-visible",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn active",
+        "text": "1",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "2",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "3",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (20)",
+        "width": 136.7,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "pub-link-btn",
+        "text": "Read Publication",
+        "width": 119.2,
+        "height": 20,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "pub-link-btn",
+        "text": "Read Publication",
+        "width": 119.2,
+        "height": 20,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "pub-link-btn",
+        "text": "Read Publication",
+        "width": 119.2,
+        "height": 20,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (3)",
+        "width": 129,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (6)",
+        "width": 129,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn active",
+        "text": "1",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "2",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "3",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (21)",
+        "width": 133.9,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "certScrollPrev",
+        "className": "cert-scroll-arrow cert-scroll-prev",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill active",
+        "text": "All\n                22",
+        "width": 106.2,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Program Certificate\n          ",
+        "width": 209.3,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Course Certificate\n           ",
+        "width": 201.2,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Skill Certificate\n            ",
+        "width": 181.8,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Language Certificate\n         ",
+        "width": 217.9,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "certScrollNext",
+        "className": "cert-scroll-arrow cert-scroll-next is-visible",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn active",
+        "text": "1",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "2",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "3",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (22)",
+        "width": 136.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab active",
+        "text": "All Moments\n              32",
+        "width": 171.9,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Personal Portraits\n           ",
+        "width": 201.3,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Posters & Flyers\n             ",
+        "width": 190.4,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Certificates & Awards\n        ",
+        "width": 231.6,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Activity Documentation\n       ",
+        "width": 238.5,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "galleryMotionPill",
+        "className": "gallery-motion-pill",
+        "text": "Auto-moving",
+        "width": 152.3,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "btn btn-small btn-primary",
+        "text": "Leave Feedback",
+        "width": 166.1,
+        "height": 41.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill active",
+        "text": "All Reviews (9)",
+        "width": 123.2,
+        "height": 30,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill",
+        "text": "10 (4)",
+        "width": 81.7,
+        "height": 30,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill",
+        "text": "9 (5)",
+        "width": 75.3,
+        "height": 30,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill",
+        "text": "8 (0)",
+        "width": 75.9,
+        "height": 30,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "SELECT",
+        "id": "feedbackSortSelect",
+        "className": "feedback-sort-select",
+        "text": "Rating: High to Low (10 → 1)\n ",
+        "width": 224,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": "btnLeaveRecommendation",
+        "className": "btn btn-small btn-primary rec-leave-btn",
+        "text": "Leave Recommendation",
+        "width": 240.2,
+        "height": 41.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "btn-copy-icon",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "footer-brand-link",
+        "text": "Muhammad Haerul",
+        "width": 186.3,
+        "height": 33.3,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Profile",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Education",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Experiences",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Skills",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Projects",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Publications",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Talks",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Awards",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Certifications",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Gallery",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Feedbacks",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Contacts",
+        "width": 88.5,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "GitHub",
+        "width": 65.9,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "LinkedIn",
+        "width": 65.9,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Instagram",
+        "width": 65.9,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Email",
+        "width": 65.9,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "backToTop",
+        "className": "back-to-top",
+        "text": "↑ Top",
+        "width": 38.3,
+        "height": 16,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "mh-modal-close",
+        "text": "",
+        "width": 34.6,
+        "height": 34.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "mh-modal-close",
+        "text": "",
+        "width": 30.7,
+        "height": 30.7,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "mh-modal-close",
+        "text": "",
+        "width": 30.7,
+        "height": 30.7,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "rec-in-btn",
+        "text": "Recommend on LinkedIn ↗",
+        "width": 184.1,
+        "height": 32.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recFullName",
+        "className": "rec-input",
+        "text": "",
+        "width": 290.9,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recEmail",
+        "className": "rec-input",
+        "text": "",
+        "width": 290.9,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recRole",
+        "className": "rec-input",
+        "text": "",
+        "width": 290.9,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recCompany",
+        "className": "rec-input",
+        "text": "",
+        "width": 290.9,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "SELECT",
+        "id": "recRelationship",
+        "className": "rec-select",
+        "text": "Colleague / Team Peer\n        ",
+        "width": 290.9,
+        "height": 38.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recProject",
+        "className": "rec-input",
+        "text": "",
+        "width": 290.9,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recHeadline",
+        "className": "rec-input",
+        "text": "",
+        "width": 597.1,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "rec-open-full-btn",
+        "text": "Open Full Page ↗",
+        "width": 98.4,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "btn btn-secondary",
+        "text": "Cancel",
+        "width": 94.8,
+        "height": 43.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "recSubmitBtn",
+        "className": "btn btn-primary",
+        "text": "Submit Recommendation",
+        "width": 216.6,
+        "height": 43.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "lightbox-close-btn",
+        "text": "",
+        "width": 42,
+        "height": 42,
+        "isInlineParagraphLink": false
+      }
+    ],
+    "mobile": [
+      {
+        "tag": "A",
+        "id": null,
+        "className": "nav-brand",
+        "text": "Muhammad Haerul",
+        "width": 141.8,
+        "height": 31.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "themeToggle",
+        "className": "theme-toggle",
+        "text": "",
+        "width": 36,
+        "height": 36,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "navBurger",
+        "className": "nav-burger",
+        "text": "",
+        "width": 22,
+        "height": 14,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "",
+        "width": 20,
+        "height": 27.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": "heroScrollCue",
+        "className": "hero-scroll-cue",
+        "text": "Scroll to explore",
+        "width": 156.6,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "timeline-projects-toggle-btn",
+        "text": "Read more",
+        "width": 109.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "timeline-projects-toggle-btn",
+        "text": "Read more",
+        "width": 109.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "timeline-projects-toggle-btn",
+        "text": "Read more",
+        "width": 109.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "skillsScrollPrev",
+        "className": "skills-scroll-arrow skills-scroll-prev",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill active",
+        "text": "All\n          9",
+        "width": 102.8,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Programming\n              3",
+        "width": 170.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Data Analytics and Engineering",
+        "width": 282.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Computer Vision\n              ",
+        "width": 191.1,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Natural Language Processing\n  ",
+        "width": 270.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Generative AI\n              3",
+        "width": 171,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "AI Agents\n              3",
+        "width": 147,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Software Development\n         ",
+        "width": 229.2,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Database Management\n          ",
+        "width": 231.4,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "skills-nav-pill ",
+        "text": "Development and Operations\n   ",
+        "width": 268.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "skillsScrollNext",
+        "className": "skills-scroll-arrow skills-scroll-next is-visible",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "projectScrollPrev",
+        "className": "skills-scroll-arrow skills-scroll-prev",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill active",
+        "text": "All Projects\n                2",
+        "width": 161.5,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Full-Stack Development\n       ",
+        "width": 239.6,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Data Science & Analytics\n     ",
+        "width": 242.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Computer Vision\n              ",
+        "width": 191.1,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Natural Language Processing\n  ",
+        "width": 270.7,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "Generative AI & LLMs\n         ",
+        "width": 220,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-filter-pill",
+        "text": "AI Agents & Automation\n       ",
+        "width": 235,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "projectScrollNext",
+        "className": "skills-scroll-arrow skills-scroll-next is-visible",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action p-btn-live",
+        "text": "Live",
+        "width": 73.8,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action p-btn-demo",
+        "text": "Demo",
+        "width": 84.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action primary p-btn-details",
+        "text": "Details",
+        "width": 89.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn active",
+        "text": "1",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "2",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "3",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (20)",
+        "width": 136.7,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "pub-link-btn",
+        "text": "Read Publication",
+        "width": 124.5,
+        "height": 20.8,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "pub-link-btn",
+        "text": "Read Publication",
+        "width": 124.5,
+        "height": 20.8,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "pub-link-btn",
+        "text": "Read Publication",
+        "width": 124.5,
+        "height": 20.8,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (3)",
+        "width": 129,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "p-btn-action primary",
+        "text": "Slides",
+        "width": 83.3,
+        "height": 33.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-btn-action",
+        "text": "Details",
+        "width": 71.5,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (6)",
+        "width": 129,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn active",
+        "text": "1",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "2",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "3",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (21)",
+        "width": 133.9,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "certScrollPrev",
+        "className": "cert-scroll-arrow cert-scroll-prev",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill active",
+        "text": "All\n                22",
+        "width": 106.2,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Program Certificate\n          ",
+        "width": 209.3,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Course Certificate\n           ",
+        "width": 201.2,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Skill Certificate\n            ",
+        "width": 181.8,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "c-filter-pill",
+        "text": "Language Certificate\n         ",
+        "width": 217.9,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "certScrollNext",
+        "className": "cert-scroll-arrow cert-scroll-next is-visible",
+        "text": "",
+        "width": 34.2,
+        "height": 34.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn prev",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-media-nav-btn next",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "cert-doc-hint",
+        "text": "View Credential",
+        "width": 108.7,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn active",
+        "text": "1",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "2",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn ",
+        "text": "3",
+        "width": 34,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-btn",
+        "text": "",
+        "width": 35,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "p-page-toggle-btn",
+        "text": "Browse All (22)",
+        "width": 136.3,
+        "height": 29,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab active",
+        "text": "All Moments\n              32",
+        "width": 171.9,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Personal Portraits\n           ",
+        "width": 201.3,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Posters & Flyers\n             ",
+        "width": 190.4,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Certificates & Awards\n        ",
+        "width": 231.6,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "gallery-tab",
+        "text": "Activity Documentation\n       ",
+        "width": 238.5,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "galleryMotionPill",
+        "className": "gallery-motion-pill",
+        "text": "Auto-moving",
+        "width": 152.3,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill active",
+        "text": "All Reviews (9)",
+        "width": 110,
+        "height": 27,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill",
+        "text": "10 (4)",
+        "width": 73,
+        "height": 27,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill",
+        "text": "9 (5)",
+        "width": 67,
+        "height": 27,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "f-filter-pill",
+        "text": "8 (0)",
+        "width": 67.6,
+        "height": 27,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "SELECT",
+        "id": "feedbackSortSelect",
+        "className": "feedback-sort-select",
+        "text": "Rating: High to Low (10 → 1)\n ",
+        "width": 224,
+        "height": 34,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "t-translate-btn",
+        "text": "See original",
+        "width": 100.5,
+        "height": 22.9,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": "btnLeaveRecommendation",
+        "className": "btn btn-small btn-primary rec-leave-btn",
+        "text": "Leave Recommendation",
+        "width": 240.2,
+        "height": 41.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "card-read-more-btn",
+        "text": "Read more",
+        "width": 107.5,
+        "height": 26.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "btn-copy-icon",
+        "text": "",
+        "width": 32,
+        "height": 32,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "footer-brand-link",
+        "text": "Muhammad Haerul",
+        "width": 186.3,
+        "height": 33.3,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Profile",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Education",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Experiences",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Skills",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Projects",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Publications",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Talks",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Awards",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Certifications",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Gallery",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Feedbacks",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Contacts",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "GitHub",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "LinkedIn",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Instagram",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "",
+        "text": "Email",
+        "width": 346,
+        "height": 22.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "backToTop",
+        "className": "back-to-top",
+        "text": "↑ Top",
+        "width": 38.3,
+        "height": 16,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "mh-modal-close",
+        "text": "",
+        "width": 34.6,
+        "height": 34.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "mh-modal-close",
+        "text": "",
+        "width": 30.7,
+        "height": 30.7,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "mh-modal-close",
+        "text": "",
+        "width": 30.7,
+        "height": 30.7,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "rec-in-btn",
+        "text": "Recommend on LinkedIn ↗",
+        "width": 184.1,
+        "height": 32.6,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recFullName",
+        "className": "rec-input",
+        "text": "",
+        "width": 263.5,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recEmail",
+        "className": "rec-input",
+        "text": "",
+        "width": 263.5,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recRole",
+        "className": "rec-input",
+        "text": "",
+        "width": 263.5,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recCompany",
+        "className": "rec-input",
+        "text": "",
+        "width": 263.5,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "SELECT",
+        "id": "recRelationship",
+        "className": "rec-select",
+        "text": "Colleague / Team Peer\n        ",
+        "width": 263.5,
+        "height": 38.4,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recProject",
+        "className": "rec-input",
+        "text": "",
+        "width": 263.5,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "INPUT",
+        "id": "recHeadline",
+        "className": "rec-input",
+        "text": "",
+        "width": 263.5,
+        "height": 36.5,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "A",
+        "id": null,
+        "className": "rec-open-full-btn",
+        "text": "Open Full Page ↗",
+        "width": 98.4,
+        "height": 19.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "btn btn-secondary",
+        "text": "Cancel",
+        "width": 94.8,
+        "height": 43.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "recSubmitBtn",
+        "className": "btn btn-primary",
+        "text": "Submit Recommendation",
+        "width": 216.6,
+        "height": 43.2,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "lightbox-nav-btn prev",
+        "text": "",
+        "width": 38,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "lightbox-nav-btn next",
+        "text": "",
+        "width": 38,
+        "height": 38,
+        "isInlineParagraphLink": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": null,
+        "className": "lightbox-close-btn",
+        "text": "",
+        "width": 42,
+        "height": 42,
+        "isInlineParagraphLink": false
+      }
+    ]
+  },
+  "brokenImages": [
+    {
+      "device": "laptop",
+      "broken": [
+        {
+          "src": "https://www.muhammadhaerul.tech/",
+          "alt": "Session Poster",
+          "complete": true,
+          "naturalWidth": 0,
+          "naturalHeight": 0,
+          "displayedWidth": 129,
+          "displayedHeight": 26
+        }
+      ]
+    },
+    {
+      "device": "ipad",
+      "broken": [
+        {
+          "src": "https://www.muhammadhaerul.tech/",
+          "alt": "Session Poster",
+          "complete": true,
+          "naturalWidth": 0,
+          "naturalHeight": 0,
+          "displayedWidth": 129,
+          "displayedHeight": 26
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "broken": [
+        {
+          "src": "https://www.muhammadhaerul.tech/",
+          "alt": "Session Poster",
+          "complete": true,
+          "naturalWidth": 0,
+          "naturalHeight": 0,
+          "displayedWidth": 129,
+          "displayedHeight": 26
+        }
+      ]
+    }
+  ],
+  "layoutIssues": {
+    "laptop": {
+      "hasHorizontalScroll": false,
+      "docWidth": 1440,
+      "scrollWidth": 1440,
+      "elementsWithOverflow": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "className": "skills-nav-pill ",
+          "right": 1555.015625,
+          "docWidth": 1440
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "className": "",
+          "right": 1508.015625,
+          "docWidth": 1440
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "className": "skills-filter-count",
+          "right": 1538.015625,
+          "docWidth": 1440
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "className": "skills-nav-pill ",
+          "right": 1790.25,
+          "docWidth": 1440
+        },
+        {
+          "tag": "svg",
+          "id": "",
+          "className": {},
+          "right": 1592.015625,
+          "docWidth": 1440
+        },
+        {
+          "tag": "path",
+          "id": "",
+          "className": {},
+          "right": 1590.85107421875,
+          "docWidth": 1440
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "className": "",
+          "right": 1743.25,
+          "docWidth": 1440
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "className": "skills-filter-count",
+          "right": 1773.25,
+          "docWidth": 1440
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "className": "skills-nav-pill ",
+          "right": 2027.65625,
+          "docWidth": 1440
+        },
+        {
+          "tag": "svg",
+          "id": "",
+          "className": {},
+          "right": 1827.25,
+          "docWidth": 1440
+        }
+      ]
+    },
+    "ipad": {
+      "hasHorizontalScroll": false,
+      "docWidth": 820,
+      "scrollWidth": 820,
+      "elementsWithOverflow": [
+        {
+          "tag": "NAV",
+          "id": "navLinks",
+          "className": "nav-links",
+          "right": 1640,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "active",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 1616,
+          "docWidth": 820
+        }
+      ]
+    },
+    "mobile": {
+      "hasHorizontalScroll": false,
+      "docWidth": 390,
+      "scrollWidth": 390,
+      "elementsWithOverflow": [
+        {
+          "tag": "NAV",
+          "id": "navLinks",
+          "className": "nav-links",
+          "right": 780,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "active",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "className": "",
+          "right": 756,
+          "docWidth": 390
+        }
+      ]
+    }
+  },
+  "sectionStatus": {
+    "laptop": {
+      "#hero": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": -96,
+          "left": 0,
+          "width": 1440,
+          "height": 900
+        }
+      },
+      "#about": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 804,
+          "left": 0,
+          "width": 1440,
+          "height": 1151.453125
+        }
+      },
+      "#education": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 1955.453125,
+          "left": 0,
+          "width": 1440,
+          "height": 976.96875
+        }
+      },
+      "#experience": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 2932.421875,
+          "left": 0,
+          "width": 1440,
+          "height": 3131.328125
+        }
+      },
+      "#skills": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 6063.75,
+          "left": 0,
+          "width": 1440,
+          "height": 992
+        }
+      },
+      "#projects": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 7055.75,
+          "left": 0,
+          "width": 1440,
+          "height": 990
+        }
+      },
+      "#publications": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 8045.75,
+          "left": 0,
+          "width": 1440,
+          "height": 990
+        }
+      },
+      "#talks": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 9035.75,
+          "left": 0,
+          "width": 1440,
+          "height": 990
+        }
+      },
+      "#awards": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 10025.75,
+          "left": 0,
+          "width": 1440,
+          "height": 990
+        }
+      },
+      "#certifications": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 11015.75,
+          "left": 0,
+          "width": 1440,
+          "height": 990
+        }
+      },
+      "#blog": {
+        "found": true,
+        "visible": false,
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "#gallery": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 12005.75,
+          "left": 0,
+          "width": 1440,
+          "height": 990
+        }
+      },
+      "#testimonials": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 12995.75,
+          "left": 0,
+          "width": 1440,
+          "height": 992
+        }
+      },
+      "#contact": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 13987.75,
+          "left": 0,
+          "width": 1440,
+          "height": 991
+        }
+      }
+    },
+    "ipad": {
+      "#hero": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": -225,
+          "left": 0,
+          "width": 820,
+          "height": 1180
+        }
+      },
+      "#about": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 955,
+          "left": 0,
+          "width": 820,
+          "height": 1706.859375
+        }
+      },
+      "#education": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 2661.859375,
+          "left": 0,
+          "width": 820,
+          "height": 1106.546875
+        }
+      },
+      "#experience": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 3768.40625,
+          "left": 0,
+          "width": 820,
+          "height": 3525.078125
+        }
+      },
+      "#skills": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 7293.484375,
+          "left": 0,
+          "width": 820,
+          "height": 992
+        }
+      },
+      "#projects": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 8285.484375,
+          "left": 0,
+          "width": 820,
+          "height": 990
+        }
+      },
+      "#publications": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 9275.484375,
+          "left": 0,
+          "width": 820,
+          "height": 990
+        }
+      },
+      "#talks": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 10265.484375,
+          "left": 0,
+          "width": 820,
+          "height": 990
+        }
+      },
+      "#awards": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 11255.484375,
+          "left": 0,
+          "width": 820,
+          "height": 990
+        }
+      },
+      "#certifications": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 12245.484375,
+          "left": 0,
+          "width": 820,
+          "height": 990
+        }
+      },
+      "#blog": {
+        "found": true,
+        "visible": false,
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "#gallery": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 13235.484375,
+          "left": 0,
+          "width": 820,
+          "height": 990
+        }
+      },
+      "#testimonials": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 14225.484375,
+          "left": 0,
+          "width": 820,
+          "height": 992
+        }
+      },
+      "#contact": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 15217.484375,
+          "left": 0,
+          "width": 820,
+          "height": 991
+        }
+      }
+    },
+    "mobile": {
+      "#hero": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": -32,
+          "left": 0,
+          "width": 390,
+          "height": 844
+        }
+      },
+      "#about": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 812,
+          "left": 0,
+          "width": 390,
+          "height": 2171.09375
+        }
+      },
+      "#education": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 2983.09375,
+          "left": 0,
+          "width": 390,
+          "height": 912
+        }
+      },
+      "#experience": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 3895.09375,
+          "left": 0,
+          "width": 390,
+          "height": 910
+        }
+      },
+      "#skills": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 4805.09375,
+          "left": 0,
+          "width": 390,
+          "height": 912
+        }
+      },
+      "#projects": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 5717.09375,
+          "left": 0,
+          "width": 390,
+          "height": 910
+        }
+      },
+      "#publications": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 6627.09375,
+          "left": 0,
+          "width": 390,
+          "height": 910
+        }
+      },
+      "#talks": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 7537.09375,
+          "left": 0,
+          "width": 390,
+          "height": 910
+        }
+      },
+      "#awards": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 8447.09375,
+          "left": 0,
+          "width": 390,
+          "height": 910
+        }
+      },
+      "#certifications": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 9357.09375,
+          "left": 0,
+          "width": 390,
+          "height": 910
+        }
+      },
+      "#blog": {
+        "found": true,
+        "visible": false,
+        "rect": {
+          "top": 0,
+          "left": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "#gallery": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 10267.09375,
+          "left": 0,
+          "width": 390,
+          "height": 910
+        }
+      },
+      "#testimonials": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 11177.09375,
+          "left": 0,
+          "width": 390,
+          "height": 912
+        }
+      },
+      "#contact": {
+        "found": true,
+        "visible": true,
+        "rect": {
+          "top": 12089.09375,
+          "left": 0,
+          "width": 390,
+          "height": 911
+        }
+      }
+    }
+  }
+}

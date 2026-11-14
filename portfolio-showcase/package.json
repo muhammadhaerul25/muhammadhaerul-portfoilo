@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-showcase",
+  "version": "1.0.0",
+  "description": "High-Quality Screenshot Capture & QA Audit Suite for Muhammad Haerul Portfolio",
+  "main": "capture.js",
+  "scripts": {
+    "capture": "node capture.js"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0",
+    "sharp": "^0.33.5"
+  }
+}
+

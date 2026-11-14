@@ -77,7 +77,7 @@ export const ResearchScene: React.FC = () => {
         }}
       >
         <PhoneFrame
-          clipSrc="clips/publications.mp4"
+          imageSrc="screenshots/ipad/04-awards.png"
           width={570}
           height={1236}
           scale={phoneScale}

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Video, staticFile } from 'remotion';
+import { Video, Img, staticFile } from 'remotion';
 import { THEME } from '../content';
 
 interface PhoneFrameProps {
-  clipSrc: string; // e.g. "clips/hero.mp4"
+  clipSrc?: string; // e.g. "clips/hero.mp4"
+  imageSrc?: string; // e.g. "screenshots/mobile/01-hero.png"
   width?: number;
   height?: number;
   scale?: number;
@@ -11,10 +12,12 @@ interface PhoneFrameProps {
   translateY?: number;
   opacity?: number;
   startFromFrame?: number;
+  objectPosition?: string;
 }
 
 export const PhoneFrame: React.FC<PhoneFrameProps> = ({
   clipSrc,
+  imageSrc,
   width = 620,
   height = 1344, // 620 * (932/430) ~= 1344 (exact 430:932 mobile ratio)
   scale = 1,
@@ -22,6 +25,7 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
   translateY = 0,
   opacity = 1,
   startFromFrame = 0,
+  objectPosition = 'top center',
 }) => {
   return (
     <div
@@ -101,7 +105,7 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
             />
           </div>
 
-          {/* Website Video Recording (HTML5 Video styled with absolute cover) */}
+          {/* Website Media Display (Image or Video) */}
           <div
             style={{
               position: 'absolute',
@@ -111,19 +115,35 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
               overflow: 'hidden',
             }}
           >
-            <Video
-              src={staticFile(clipSrc)}
-              startFrom={startFromFrame}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-              }}
-            />
+            {imageSrc ? (
+              <Img
+                src={staticFile(imageSrc)}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition,
+                  display: 'block',
+                }}
+              />
+            ) : clipSrc ? (
+              <Video
+                src={staticFile(clipSrc)}
+                startFrom={startFromFrame}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            ) : null}
           </div>
 
           {/* Screen Glass Reflection Gradient Accent */}

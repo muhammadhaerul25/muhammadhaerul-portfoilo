@@ -83,7 +83,7 @@ export const WhoScene: React.FC = () => {
         </div>
       </div>
 
-      {/* Center Phone Frame displaying Hero Footage */}
+      {/* Center Phone Frame displaying Hero Screenshot */}
       <div
         style={{
           position: 'absolute',
@@ -95,7 +95,7 @@ export const WhoScene: React.FC = () => {
         }}
       >
         <PhoneFrame
-          clipSrc="clips/hero.mp4"
+          imageSrc="screenshots/mobile/01-hero.png"
           width={560}
           height={1214}
           scale={phoneScale}

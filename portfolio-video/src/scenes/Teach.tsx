@@ -150,7 +150,7 @@ export const TeachScene: React.FC = () => {
             }}
           >
             <Img
-              src={staticFile('stills/talk-01.png')}
+              src={staticFile('screenshots/laptop/05-talks.png')}
               style={{
                 width: '100%',
                 height: '100%',
@@ -173,7 +173,7 @@ export const TeachScene: React.FC = () => {
             }}
           >
             <Img
-              src={staticFile('stills/talk-02.png')}
+              src={staticFile('screenshots/ipad/03-talks.png')}
               style={{
                 width: '100%',
                 height: '100%',
@@ -196,7 +196,7 @@ export const TeachScene: React.FC = () => {
             }}
           >
             <Img
-              src={staticFile('stills/talk-03.png')}
+              src={staticFile('projects/muhammad-haerul-speaker-mindful-ai.webp')}
               style={{
                 width: '100%',
                 height: '100%',

@@ -93,7 +93,7 @@ export const BuildScene: React.FC = () => {
             }}
           >
             <PhoneFrame
-              clipSrc="clips/experiences.mp4"
+              imageSrc="screenshots/mobile/05-experience-timeline.png"
               width={570}
               height={1236}
               scale={phoneScale1}
@@ -240,7 +240,7 @@ export const BuildScene: React.FC = () => {
             }}
           >
             <PhoneFrame
-              clipSrc="clips/projects.mp4"
+              imageSrc="screenshots/mobile/03-project-card.png"
               width={570}
               height={1236}
               scale={phoneScale2}

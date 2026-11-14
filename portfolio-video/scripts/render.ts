@@ -89,6 +89,7 @@ async function render() {
     codec: 'h264',
     crf: 15,
     pixelFormat: 'yuv420p',
+    concurrency: 1,
     outputLocation: rawRenderPath,
     browserExecutable: browserPath ?? undefined,
     onProgress: ({ progress }) => {
@@ -134,6 +135,15 @@ async function render() {
     fs.unlinkSync(rawRenderPath);
   }
 
+  // Also mirror to renders/ directory
+  const rendersDir = path.resolve('renders');
+  fs.mkdirSync(rendersDir, { recursive: true });
+  fs.copyFileSync(finalMp4Out, path.join(rendersDir, 'portfolio-reels-1080x1920.mp4'));
+  if (fs.existsSync(coverOut)) {
+    fs.copyFileSync(coverOut, path.join(rendersDir, 'cover-1080x1920.png'));
+  }
+  console.log('✓ Mirrored deliverables to renders/ directory');
+
   // 6. Safe-Zone Debug Video (out/safe-zone-debug.mp4)
   console.log('\n--- [6/6] Creating Safe-Zone Debug Video (out/safe-zone-debug.mp4) ---');
   const debugVideoOut = path.join(OUT_DIR, 'safe-zone-debug.mp4');
@@ -145,6 +155,7 @@ async function render() {
       codec: 'h264',
       crf: 20,
       pixelFormat: 'yuv420p',
+      concurrency: 1,
       outputLocation: rawDebugVideo,
       browserExecutable: browserPath ?? undefined,
       frameRange: [0, 360], // First 12 seconds showing Hook & Who with overlays

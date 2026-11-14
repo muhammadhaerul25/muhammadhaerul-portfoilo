@@ -112,11 +112,11 @@ export const ProofCTAScene: React.FC = () => {
             }}
           >
             <Img
-              src={staticFile('stills/top-20-ai-talent-hub.png')}
+              src={staticFile('screenshots/laptop/06-awards.png')}
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'contain',
+                objectFit: 'cover',
                 backgroundColor: '#0A0E17',
               }}
             />
