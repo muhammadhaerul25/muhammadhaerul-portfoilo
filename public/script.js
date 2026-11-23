@@ -3588,29 +3588,17 @@
           </div>
           <div class="cert-card-bottom">
             ${cert.credential_id ? `<span class="cert-card-id font-mono">#${escapeHtml(cert.credential_id)}</span>` : '<span></span>'}
-            <div class="cert-card-actions">
-              ${cert.credential_url ? `
-                <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  ${isId ? 'Lihat Kredensial' : 'View Credential'}
-                </a>
-              ` : `
-                <span class="cert-doc-hint">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  ${isId ? 'Sertifikat Terdaftar' : 'Certificate on Record'}
-                </span>
-              `}
-              <a href="${escapeHtml(buildLinkedInCertUrl(cert))}" target="_blank" rel="noopener noreferrer" class="cert-linkedin-btn" title="${isId ? 'Tambahkan ke bagian Lisensi &amp; Sertifikasi LinkedIn' : 'Add to LinkedIn Licenses &amp; Certifications'}" aria-label="${isId ? 'Tambah ke LinkedIn' : 'Add to LinkedIn'}: ${escapeHtml(cert.title)}">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                <span>${isId ? 'Tambah ke LinkedIn' : 'Add to LinkedIn'}</span>
+            ${cert.credential_url ? `
+              <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                ${isId ? 'Lihat Kredensial' : 'View Credential'}
               </a>
-              ${hasPreview && initialPage && initialPage.url ? `
-                <button type="button" class="cert-download-btn" data-cert-url="${escapeHtml(initialPage.url)}" data-cert-title="${escapeHtml(cert.title)}" onclick="window.downloadCertificateFile(this)" title="${isId ? 'Simpan file sertifikat' : 'Save certificate file'}" aria-label="${isId ? 'Simpan sertifikat' : 'Save certificate'}: ${escapeHtml(cert.title)}">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                  <span>${isId ? 'Simpan' : 'Save'}</span>
-                </button>
-              ` : ''}
-            </div>
+            ` : `
+              <span class="cert-doc-hint">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                ${isId ? 'Sertifikat Terdaftar' : 'Certificate on Record'}
+              </span>
+            `}
           </div>
         </div>
       `;
