@@ -4415,7 +4415,7 @@
                     </div>
                 </div>
 
-                <!-- 4 Top KPI Cards -->
+                <!-- 3 Top KPI Cards -->
                 <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin-bottom:24px;">
                     <div class="stat-card blue">
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
@@ -4428,12 +4428,6 @@
                         <div class="stat-label">Unique Visitors</div>
                         <div class="stat-value" id="an-unique-visitors">—</div>
                         <div style="font-size:0.75rem; color:var(--text-tertiary); margin-top:4px;">Unique device fingerprints</div>
-                    </div>
-                    <div class="stat-card yellow">
-                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
-                        <div class="stat-label">Avg. Feedback Score</div>
-                        <div class="stat-value" id="an-avg-rating">—</div>
-                        <div style="font-size:0.75rem; color:var(--text-tertiary); margin-top:4px;" id="an-feedback-count">From verified reviews</div>
                     </div>
                     <div class="stat-card red">
                         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49"></path></svg></div>
@@ -8574,8 +8568,6 @@ function renderAnalyticsUI(data) {
 
     document.getElementById('an-total-views').textContent = totalViews.toLocaleString();
     document.getElementById('an-unique-visitors').textContent = uniqueVisitors.toLocaleString();
-    document.getElementById('an-avg-rating').textContent = Number(avgRating).toFixed(1) + ' / 10';
-    document.getElementById('an-feedback-count').textContent = feedbackCount + ' verified reviews';
     document.getElementById('an-total-conversions').textContent = totalConversions.toLocaleString();
     document.getElementById('an-conversion-rate').textContent = convRate + '% visitor conversion';
 
@@ -17757,6 +17749,53 @@ function populateCertCategoryFilter() {
     }).join('');
 }
 
+function buildLinkedInCertUrl(cert) {
+    var params = new URLSearchParams();
+    params.set('startTask', 'CERTIFICATION_NAME');
+    if (cert.title) params.set('name', cert.title);
+    if (cert.issuer) params.set('organizationName', cert.issuer);
+
+    if (cert.issue_date) {
+        var str = String(cert.issue_date).trim();
+        var yearMatch = str.match(/\b(19|20)\d{2}\b/);
+        if (yearMatch) params.set('issueYear', yearMatch[0]);
+
+        var monthMap = {
+            jan: 1, january: 1, januari: 1,
+            feb: 2, february: 2, februari: 2,
+            mar: 3, march: 3, maret: 3,
+            apr: 4, april: 4,
+            may: 5, mei: 5,
+            jun: 6, june: 6, juni: 6,
+            jul: 7, july: 7, juli: 7,
+            aug: 8, august: 8, agu: 8, agt: 8, agustus: 8,
+            sep: 9, sept: 9, september: 9,
+            oct: 10, october: 10, okt: 10, oktober: 10,
+            nov: 11, november: 11, nop: 11,
+            dec: 12, december: 12, des: 12, desember: 12
+        };
+        var tokens = str.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/);
+        for (var i = 0; i < tokens.length; i++) {
+            if (monthMap[tokens[i]]) {
+                params.set('issueMonth', String(monthMap[tokens[i]]));
+                break;
+            }
+        }
+    }
+
+    var certUrl = cert.credential_url ? String(cert.credential_url).trim() : '';
+    if (!certUrl && cert.image_url) {
+        var firstImg = String(cert.image_url).split(/[,\n]+/)[0].trim();
+        if (firstImg) {
+            certUrl = firstImg.startsWith('http') ? firstImg : (window.location.origin + firstImg);
+        }
+    }
+    if (certUrl) params.set('certUrl', certUrl);
+    if (cert.credential_id) params.set('certId', String(cert.credential_id).trim());
+
+    return 'https://www.linkedin.com/profile/add?' + params.toString();
+}
+
 function renderCertificationsGrid() {
     var grid = document.getElementById('cert-grid-dash');
     var empty = document.getElementById('cert-empty');
@@ -17805,7 +17844,13 @@ function renderCertificationsGrid() {
             '</div>' +
             (cert.image_url ? '<div style="width:100%; aspect-ratio:16/9; max-height:140px; border-radius:8px; overflow:hidden; border:1px solid var(--sidebar-border); background:#f8fafc; display:flex; align-items:center; justify-content:center; margin-top:4px;"><img src="' + esc(String(cert.image_url).split(/[,\n]+/)[0].trim()) + '" style="width:100%; height:100%; object-fit:contain; background:#ffffff; padding:4px;" alt="' + esc(cert.title) + '"></div>' : '') +
             (skillsPills ? '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;">' + skillsPills + '</div>' : '') +
-            (cert.credential_url ? '<div style="font-size:0.78rem; margin-top:4px;"><a href="' + esc(cert.credential_url) + '" target="_blank" rel="noopener" style="color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 View Credential ↗</a></div>' : '') +
+            '<div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:4px;">' +
+                (cert.credential_url ? '<a href="' + esc(cert.credential_url) + '" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--g-blue); font-weight:600; text-decoration:none;">🔗 View Credential ↗</a>' : '') +
+                '<a href="' + esc(buildLinkedInCertUrl(cert)) + '" target="_blank" rel="noopener noreferrer" style="font-size:0.76rem; color:#0a66c2; background:rgba(10,102,194,0.08); border:1px solid rgba(10,102,194,0.22); padding:3px 10px; border-radius:999px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:5px;">' +
+                    '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>' +
+                    'Add to LinkedIn ↗' +
+                '</a>' +
+            '</div>' +
             '<div style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid var(--line-soft); padding-top:12px; margin-top:auto;">' +
                 '<div>' +
                     '<button type="button" class="btn-sm-ghost" onclick="toggleItemVisibility(\'certifications\', \'' + cert.id + '\', this)" style="font-size:0.78rem; font-weight:700; padding:6px 12px; border-radius:var(--r-pill); border:1.5px solid ' + (isVis ? 'var(--line)' : 'var(--g-blue)') + '; background:var(--surface); color:' + (isVis ? 'var(--ink-2)' : 'var(--g-blue)') + '; cursor:pointer;" title="' + (isVis ? 'Hide from portfolio' : 'Show on portfolio') + '">' +

@@ -3315,6 +3315,53 @@
     }
   };
 
+  function buildLinkedInCertUrl(cert) {
+    const params = new URLSearchParams();
+    params.set('startTask', 'CERTIFICATION_NAME');
+    if (cert.title) params.set('name', cert.title);
+    if (cert.issuer) params.set('organizationName', cert.issuer);
+
+    if (cert.issue_date) {
+      const str = String(cert.issue_date).trim();
+      const yearMatch = str.match(/\b(19|20)\d{2}\b/);
+      if (yearMatch) params.set('issueYear', yearMatch[0]);
+
+      const monthMap = {
+        jan: 1, january: 1, januari: 1,
+        feb: 2, february: 2, februari: 2,
+        mar: 3, march: 3, maret: 3,
+        apr: 4, april: 4,
+        may: 5, mei: 5,
+        jun: 6, june: 6, juni: 6,
+        jul: 7, july: 7, juli: 7,
+        aug: 8, august: 8, agu: 8, agt: 8, agustus: 8,
+        sep: 9, sept: 9, september: 9,
+        oct: 10, october: 10, okt: 10, oktober: 10,
+        nov: 11, november: 11, nop: 11,
+        dec: 12, december: 12, des: 12, desember: 12
+      };
+      const tokens = str.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/);
+      for (const tok of tokens) {
+        if (monthMap[tok]) {
+          params.set('issueMonth', String(monthMap[tok]));
+          break;
+        }
+      }
+    }
+
+    let certUrl = cert.credential_url ? String(cert.credential_url).trim() : '';
+    if (!certUrl && cert.image_url) {
+      const firstImg = String(cert.image_url).split(/[,\n]+/)[0].trim();
+      if (firstImg) {
+        certUrl = firstImg.startsWith('http') ? firstImg : (window.location.origin + firstImg);
+      }
+    }
+    if (certUrl) params.set('certUrl', certUrl);
+    if (cert.credential_id) params.set('certId', String(cert.credential_id).trim());
+
+    return 'https://www.linkedin.com/profile/add?' + params.toString();
+  }
+
   function getCertIssuerLogoInfo(issuer) {
     const s = (issuer || '').toLowerCase();
     if (s.includes('british council') || s.includes('englishscore')) {
@@ -3499,17 +3546,23 @@
           </div>
           <div class="cert-card-bottom">
             ${cert.credential_id ? `<span class="cert-card-id font-mono">#${escapeHtml(cert.credential_id)}</span>` : '<span></span>'}
-            ${cert.credential_url ? `
-              <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                ${isId ? 'Lihat Kredensial' : 'View Credential'}
+            <div class="cert-card-actions">
+              ${cert.credential_url ? `
+                <a href="${escapeHtml(cert.credential_url)}" target="_blank" rel="noopener" class="cert-doc-hint" style="text-decoration:none;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  ${isId ? 'Lihat Kredensial' : 'View Credential'}
+                </a>
+              ` : `
+                <span class="cert-doc-hint">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  ${isId ? 'Sertifikat Terdaftar' : 'Certificate on Record'}
+                </span>
+              `}
+              <a href="${escapeHtml(buildLinkedInCertUrl(cert))}" target="_blank" rel="noopener noreferrer" class="cert-linkedin-btn" title="${isId ? 'Tambahkan ke bagian Lisensi &amp; Sertifikasi LinkedIn' : 'Add to LinkedIn Licenses &amp; Certifications'}" aria-label="${isId ? 'Tambah ke LinkedIn' : 'Add to LinkedIn'}: ${escapeHtml(cert.title)}">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                <span>${isId ? 'Tambah ke LinkedIn' : 'Add to LinkedIn'}</span>
               </a>
-            ` : `
-              <span class="cert-doc-hint">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                ${isId ? 'Sertifikat Terdaftar' : 'Certificate on Record'}
-              </span>
-            `}
+            </div>
           </div>
         </div>
       `;
