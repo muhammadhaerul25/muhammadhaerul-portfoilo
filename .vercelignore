@@ -1,6 +1,11 @@
 portfolio-video/
 portfolio-showcase/
 next-app/
+scripts/
 .agents/
 .claude/
 .windsurf/
+.github/
+skills-lock.json
+README.md
+*.log
