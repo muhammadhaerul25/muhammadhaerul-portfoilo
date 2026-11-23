@@ -3762,6 +3762,43 @@ img {
   color: #ffffff;
 }
 
+.cert-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--text-secondary, #475569);
+  background: rgba(100, 116, 139, 0.08);
+  border: 1px solid rgba(100, 116, 139, 0.22);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.cert-download-btn:hover {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .cert-download-btn {
+  color: #cbd5e1;
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.26);
+}
+
+[data-theme="dark"] .cert-download-btn:hover {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #ffffff;
+}
+
 .cert-doc-hint:hover {
   color: var(--blue);
 }
