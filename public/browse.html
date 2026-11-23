@@ -1167,6 +1167,12 @@
                issuer.includes('ibm') || title.includes('specialization') || title.includes('prompt engineering') ||
                title.includes('ux design') || title.includes('devops') || title.includes('belajar') || title.includes('production');
       }
+      if (filter === 'conference') {
+        return title.includes('symposium') || title.includes('conference') || title.includes('seminar') ||
+               title.includes('workshop') || title.includes('summit') || title.includes('forum') ||
+               cat.includes('conference') || cat.includes('seminar') || cat.includes('symposium') ||
+               cat.includes('workshop') || cat.includes('digital government');
+      }
       return false;
     }
 
@@ -1425,6 +1431,7 @@
           const countCourse = raw.filter(c => matchesCertClassification(c, 'course')).length;
           const countSkill = raw.filter(c => matchesCertClassification(c, 'skill')).length;
           const countLang = raw.filter(c => matchesCertClassification(c, 'language')).length;
+          const countConf = raw.filter(c => matchesCertClassification(c, 'conference')).length;
 
           filtersRow.innerHTML = `
             <button class="browse-filter-pill active" onclick="setCategoryFilter('all', this)">All (${raw.length})</button>
@@ -1432,6 +1439,7 @@
             <button class="browse-filter-pill" onclick="setCategoryFilter('course', this)">Course Certificate (${countCourse})</button>
             <button class="browse-filter-pill" onclick="setCategoryFilter('skill', this)">Skill Certificate (${countSkill})</button>
             <button class="browse-filter-pill" onclick="setCategoryFilter('language', this)">Language Certificate (${countLang})</button>
+            <button class="browse-filter-pill" onclick="setCategoryFilter('conference', this)">Conference &amp; Seminar (${countConf})</button>
           `;
           filtersRow.dataset.rendered = 'true';
           filtersRow.dataset.collection = 'certifications';

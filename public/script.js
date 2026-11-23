@@ -3264,6 +3264,12 @@
              issuer.includes('ibm') || title.includes('specialization') || title.includes('prompt engineering') ||
              title.includes('ux design') || title.includes('devops') || title.includes('belajar') || title.includes('production');
     }
+    if (filter === 'conference') {
+      return title.includes('symposium') || title.includes('conference') || title.includes('seminar') ||
+             title.includes('workshop') || title.includes('summit') || title.includes('forum') ||
+             cat.includes('conference') || cat.includes('seminar') || cat.includes('symposium') ||
+             cat.includes('workshop') || cat.includes('digital government');
+    }
     return false;
   }
 
@@ -3274,7 +3280,8 @@
       program: allCerts.filter(c => matchesCertClassification(c, 'program')).length,
       course: allCerts.filter(c => matchesCertClassification(c, 'course')).length,
       skill: allCerts.filter(c => matchesCertClassification(c, 'skill')).length,
-      language: allCerts.filter(c => matchesCertClassification(c, 'language')).length
+      language: allCerts.filter(c => matchesCertClassification(c, 'language')).length,
+      conference: allCerts.filter(c => matchesCertClassification(c, 'conference')).length
     };
     const pills = document.querySelectorAll('#certFilterNav .c-filter-pill');
     pills.forEach(pill => {
