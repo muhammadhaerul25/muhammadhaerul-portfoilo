@@ -1,13 +1,14 @@
 "use client"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, MessageSquare, FolderKanban, Presentation, Settings2, Mic2 } from 'lucide-react';
+import { LayoutDashboard, BarChart3, MessageSquare, FolderKanban, Presentation, Settings2, Mic2 } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const navItems = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Analytics', href: '/analytics', icon: BarChart3 },
     { name: 'Feedbacks', href: '/feedbacks', icon: MessageSquare },
   ];
   

@@ -36,13 +36,11 @@ function parseUserAgent(ua) {
 
 async function getStats(req, res) {
     try {
-        // Query real aggregated metrics from visitor_logs
-        const totalResult = await prisma.$queryRawUnsafe(`
-            SELECT COUNT(*)::int as total FROM visitor_logs
-        `);
-        const uniqueResult = await prisma.$queryRawUnsafe(`
-            SELECT COUNT(DISTINCT visitor_id)::int as unique_count FROM visitor_logs
-        `);
+        // Query real aggregated metrics from visitor_logs in parallel
+        const [totalResult, uniqueResult] = await Promise.all([
+            prisma.$queryRawUnsafe(`SELECT COUNT(*)::int as total FROM visitor_logs`),
+            prisma.$queryRawUnsafe(`SELECT COUNT(DISTINCT visitor_id)::int as unique_count FROM visitor_logs`)
+        ]);
 
         const totalVisitors = Number(totalResult[0]?.total || 0);
         const uniqueVisitors = Number(uniqueResult[0]?.unique_count || 0);
@@ -140,44 +138,59 @@ async function trackVisit(req, res) {
 
 async function getDetailedAnalytics(req, res) {
     try {
-        // 1. Total and Unique Stats
-        const totalResult = await prisma.$queryRawUnsafe(`SELECT COUNT(*)::int as total FROM visitor_logs`);
-        const uniqueResult = await prisma.$queryRawUnsafe(`SELECT COUNT(DISTINCT visitor_id)::int as unique_count FROM visitor_logs`);
+        // Execute all visitor_logs & conversion queries in parallel
+        const [
+            totalResult,
+            uniqueResult,
+            dailyTrend,
+            topPages,
+            uaLogs,
+            inqCount,
+            fbStats,
+            formCount,
+            formRespCount
+        ] = await Promise.all([
+            prisma.$queryRawUnsafe(`SELECT COUNT(*)::int as total FROM visitor_logs`),
+            prisma.$queryRawUnsafe(`SELECT COUNT(DISTINCT visitor_id)::int as unique_count FROM visitor_logs`),
+            prisma.$queryRawUnsafe(`
+                SELECT 
+                    TO_CHAR(created_at, 'YYYY-MM-DD') as date,
+                    COUNT(*)::int as pageviews,
+                    COUNT(DISTINCT visitor_id)::int as visitors
+                FROM visitor_logs
+                GROUP BY TO_CHAR(created_at, 'YYYY-MM-DD')
+                ORDER BY date DESC
+                LIMIT 14
+            `),
+            prisma.$queryRawUnsafe(`
+                SELECT 
+                    COALESCE(NULLIF(path, ''), '/') as page_path,
+                    COUNT(*)::int as views,
+                    COUNT(DISTINCT visitor_id)::int as unique_visitors
+                FROM visitor_logs
+                GROUP BY page_path
+                ORDER BY views DESC
+                LIMIT 10
+            `),
+            prisma.$queryRawUnsafe(`
+                SELECT user_agent, COUNT(*)::int as count 
+                FROM visitor_logs 
+                WHERE user_agent IS NOT NULL AND user_agent != ''
+                GROUP BY user_agent
+            `),
+            prisma.contactMessage.count().catch(() => 0),
+            prisma.feedbacks.aggregate({
+                _count: { id: true },
+                _avg: { rating: true }
+            }).catch(() => ({ _count: { id: 0 }, _avg: { rating: 10 } })),
+            prisma.forms.count().catch(() => 0),
+            prisma.form_responses.count().catch(() => 0)
+        ]);
+
         const totalVisitors = Number(totalResult[0]?.total || 0);
         const uniqueVisitors = Number(uniqueResult[0]?.unique_count || 0);
 
-        // 2. Daily Trend (last 14 days)
-        const dailyTrend = await prisma.$queryRawUnsafe(`
-            SELECT 
-                TO_CHAR(created_at, 'YYYY-MM-DD') as date,
-                COUNT(*)::int as pageviews,
-                COUNT(DISTINCT visitor_id)::int as visitors
-            FROM visitor_logs
-            GROUP BY TO_CHAR(created_at, 'YYYY-MM-DD')
-            ORDER BY date DESC
-            LIMIT 14
-        `);
-
-        // 3. Top Visited Pages & Sections
-        const topPages = await prisma.$queryRawUnsafe(`
-            SELECT 
-                COALESCE(NULLIF(path, ''), '/') as page_path,
-                COUNT(*)::int as views,
-                COUNT(DISTINCT visitor_id)::int as unique_visitors
-            FROM visitor_logs
-            GROUP BY page_path
-            ORDER BY views DESC
-            LIMIT 10
-        `);
-
-        // 4. Device, Browser & OS Breakdown
-        const uaLogs = await prisma.$queryRawUnsafe(`
-            SELECT user_agent, COUNT(*)::int as count 
-            FROM visitor_logs 
-            WHERE user_agent IS NOT NULL AND user_agent != ''
-            GROUP BY user_agent
-        `);
-
+        // Device, Browser & OS Breakdown
         const devices = { Desktop: 0, Mobile: 0, Tablet: 0 };
         const browsers = {};
         const operatingSystems = {};
@@ -188,15 +201,6 @@ async function getDetailedAnalytics(req, res) {
             browsers[parsed.browser] = (browsers[parsed.browser] || 0) + row.count;
             operatingSystems[parsed.os] = (operatingSystems[parsed.os] || 0) + row.count;
         });
-
-        // 5. High-Impact Conversions
-        const inqCount = await prisma.contactMessage.count().catch(() => 0);
-        const fbStats = await prisma.feedbacks.aggregate({
-            _count: { id: true },
-            _avg: { rating: true }
-        }).catch(() => ({ _count: { id: 0 }, _avg: { rating: 10 } }));
-        const formCount = await prisma.forms.count().catch(() => 0);
-        const formRespCount = await prisma.form_responses.count().catch(() => 0);
 
         return res.json({
             success: true,
